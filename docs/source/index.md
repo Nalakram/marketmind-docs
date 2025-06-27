@@ -1,7 +1,8 @@
 # MarketMind Documentation
 
-Welcome to the official documentation for **MarketMind**, an intelligent and extensible platform for market prediction, analytics, and research.  
-This site provides guides, references, and resources for both users and contributors.
+Welcome to the official documentation for **MarketMind**, an intelligent, extensible platform designed for advanced market prediction, analytics, and research. Built for institutional analysts and professional traders, MarketMind leverages deep learning, NLP, and high-performance computing to deliver actionable insights.
+
+This documentation provides comprehensive guides, detailed references, and essential resources for both users and contributors.
 
 ---
 
@@ -9,6 +10,10 @@ This site provides guides, references, and resources for both users and contribu
 
 ::::{admonition} Getting Started
 :class: dropdown
+
+
+- **[README](README.md):**  
+  High-level overview of the MarketMind project, including features, system requirements, project structure, key technologies used, and license information. Start here to understand what MarketMind is and what it offers before diving into setup or development.
 
 - **[Getting Started](getting_started.md):**  
   Learn how to install, configure, and quickly run MarketMind for the first time. Includes environment setup, basic usage, and troubleshooting tips.
@@ -23,8 +28,9 @@ This site provides guides, references, and resources for both users and contribu
 - **[System Architecture](architecture.md):**  
   Explore the overall design, modular components, and data flow within MarketMind.
 
-- **[API Reference](api_reference.md):**  
-  Technical documentation for the MarketMind APIs, including functions, classes, endpoints, and data models for developers.
+- **[API Reference](reference/index.md):**  
+  Auto-generated technical reference for all MarketMind modules, classes, functions, and services. Covers Python modules, gRPC interfaces, and Java/C++ API components.  
+  *(Powered by Sphinx AutoAPI, Javadoc, and Doxygen for full multi-language coverage.)*
 
 - **[Regulatory Compliance](regulatory_compliance.md):**  
   Details on how MarketMind meets applicable regulatory standards, reporting requirements, and audit trails.
@@ -40,7 +46,7 @@ This site provides guides, references, and resources for both users and contribu
 
 ::::
 
-::::{admonition} Tutorials & Notebooks
+::::{admonition} Tutorials & Notebooks *(Coming Soon)*
 :class: dropdown
 
 - **[Basic Prediction Tutorial](tutorials/basic_prediction.ipynb):**  
@@ -51,21 +57,21 @@ This site provides guides, references, and resources for both users and contribu
 
 ::::
 
-::::{admonition} Contributor Resources
+::::{admonition} Contributor Resources 
 :class: dropdown
 
-- **[Onboarding Guide](contributors/onboarding.md):**  
+- **[Onboarding Guide](contributors/onboarding.md):**  *(Coming Soon)*
   Get up to speed as a new contributor, including environment setup, tools, and tips.
 
 - **[Coding Standards](contributors/coding_standards.md):**  
   Reference code style guidelines, naming conventions, and documentation standards.
 
-- **[Contribution Workflow](contributors/contribution_workflow.md):**  
+- **[Contribution Workflow](contributors/contribution_workflow.md):**  *(Coming Soon)*
   Walkthrough of our Git workflow, review process, and how to submit effective pull requests.
 
 ::::
 
-::::{admonition} Images, Diagrams, and Internal Docs
+::::{admonition} Images, Diagrams, and Internal Docs *(Coming Soon)*
 :class: dropdown
 
 - **[Images directory](images/index.md):**
@@ -81,7 +87,7 @@ This site provides guides, references, and resources for both users and contribu
 
 ## Need Help?
 
-If you can’t find what you need, check the [FAQ](faq.md) or open an issue in the project repository.
+If you can’t find what you need, check the [FAQ](faq.md).
 
 ---
 ```{toctree}
@@ -89,10 +95,10 @@ If you can’t find what you need, check the [FAQ](faq.md) or open an issue in t
 :maxdepth: 2
 :caption: Full Contents
 
+README.md
 getting_started.md
 usage_guide.md
 architecture.md
-api_reference.md
 regulatory_compliance.md
 security_practices.md
 glossary.md
