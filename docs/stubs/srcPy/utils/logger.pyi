@@ -1,0 +1,19 @@
+import logging
+from _typeshed import Incomplete
+from structlog.stdlib import BoundLogger as BoundLogger
+from structlog.typing import EventDict as EventDict
+from typing import Any
+
+class InfluxDBHandler(logging.Handler):
+    client: Incomplete
+    write_api: Incomplete
+    bucket: Incomplete
+    def __init__(self, url: str, token: str, org: str, bucket: str, level: int = ...) -> None: ...
+    def emit(self, record: logging.LogRecord): ...
+
+def safe_filter_by_level(logger, method_name: str, event_dict: EventDict) -> EventDict: ...
+def redact_sensitive_info(sensitive_keys: list[str]): ...
+def configure_logger(config: dict[str, Any] | None = None) -> None: ...
+def get_logger(name: str | None = None) -> BoundLogger: ...
+
+logger: BoundLogger

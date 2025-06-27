@@ -1,0 +1,6 @@
+from _typeshed import Incomplete
+
+logger: Incomplete
+
+def load_compliance_rules(config_path: str): ...
+def mask_sensitive_data(df, columns_to_mask): ...

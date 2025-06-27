@@ -1,0 +1,76 @@
+import abc
+import pandas as pd
+from _typeshed import Incomplete
+from abc import ABC, abstractmethod
+from collections.abc import Generator
+from srcPy.utils.config import AlpacaConfig as AlpacaConfig, BloombergConfig as BloombergConfig, CSVConfig as CSVConfig, ESGConfig as ESGConfig, FREDConfig as FREDConfig, InfluxDBConfig as InfluxDBConfig, TwitterConfig as TwitterConfig, WeatherConfig as WeatherConfig, get_config as get_config
+from srcPy.utils.exceptions import IBConnectionError as IBConnectionError, NoDataError as NoDataError
+from srcPy.utils.logger import get_logger as get_logger
+from typing import Any
+
+logger: Incomplete
+
+def get_runtime_config(): ...
+
+class BaseDataLoader(ABC, metaclass=abc.ABCMeta):
+    config: Incomplete
+    def __init__(self, config: Any) -> None: ...
+    @abstractmethod
+    async def load_data(self, *args, **kwargs) -> pd.DataFrame: ...
+
+class APIDataLoader(BaseDataLoader, metaclass=abc.ABCMeta):
+    max_attempts: Incomplete
+    initial_backoff_seconds: Incomplete
+    max_backoff_seconds: Incomplete
+    retry_strategy: Incomplete
+    fallback: Incomplete
+    fallback_timeout_seconds: Incomplete
+    def __init__(self, config) -> None: ...
+
+class CSVLoader(BaseDataLoader):
+    def load_data(self) -> list[pd.DataFrame]: ...
+    async def stream_data(self) -> Generator[Incomplete]: ...
+
+class TwitterLoader(APIDataLoader):
+    base_url: Incomplete
+    endpoints: Incomplete
+    bearer_token: Incomplete
+    retry_after_header: Incomplete
+    timeout: Incomplete
+    api_key: Incomplete
+    def __init__(self, config: TwitterConfig) -> None: ...
+    async def load_data(self, query: str) -> pd.DataFrame: ...
+    async def stream_data(self) -> Generator[Incomplete]: ...
+
+class ESGLoader(APIDataLoader):
+    def __init__(self, config: ESGConfig) -> None: ...
+    async def load_data(self, identifiers: list[str]) -> pd.DataFrame: ...
+
+class FREDLoader(APIDataLoader):
+    api_key: Incomplete
+    def __init__(self, config: FREDConfig) -> None: ...
+    async def load_data(self, series_ids: list[str]) -> pd.DataFrame: ...
+
+class BloombergLoader(APIDataLoader):
+    api_key: Incomplete
+    def __init__(self, config: BloombergConfig) -> None: ...
+    async def load_data(self, topics: list[str]) -> pd.DataFrame: ...
+
+class WeatherLoader(APIDataLoader):
+    api_key: Incomplete
+    def __init__(self, config: WeatherConfig) -> None: ...
+    async def load_data(self, locations: list[str]) -> pd.DataFrame: ...
+
+class AlpacaStreamLoader(BaseDataLoader):
+    api_key: Incomplete
+    secret_key: Incomplete
+    endpoint: Incomplete
+    def __init__(self, cfg) -> None: ...
+    async def stream_data(self) -> Generator[Incomplete]: ...
+    async def load_data(self, *args, **kwargs) -> None: ...
+
+class InfluxDBLoader(BaseDataLoader):
+    def __init__(self, config: InfluxDBConfig) -> None: ...
+    async def load_data(self, query: str) -> pd.DataFrame: ...
+
+def build_loader(config_section: str): ...

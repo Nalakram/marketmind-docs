@@ -1,0 +1,649 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>srcPy.utils.logger - MarketMind 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">MarketMind 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">MarketMind 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Full Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started with MarketMind</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage_guide.html">MarketMind Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../regulatory_compliance.html">Regulatory Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security_practices.html">Security Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../images/index.html">Images Directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors/onboarding.html">Contributor Onboarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors/coding_standards.html">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors/contribution_workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/threat_model.html">Threat Model</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../reference/srcPy/index.html">srcPy</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of srcPy</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/srcPy/backtesting/index.html">srcPy.backtesting</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/data/index.html">srcPy.data</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of srcPy.data</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/alternative_data/index.html">srcPy.data.alternative_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/anonymization/index.html">srcPy.data.anonymization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/compliance_checks/index.html">srcPy.data.compliance_checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/data_cleaning/index.html">srcPy.data.data_cleaning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/data_loader/index.html">srcPy.data.data_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/ib_api/index.html">srcPy.data.ib_api</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/ib_data_collection/index.html">srcPy.data.ib_data_collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/market_data/index.html">srcPy.data.market_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/order_book/index.html">srcPy.data.order_book</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/pipeline/index.html">srcPy.data.pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/preprocessor/index.html">srcPy.data.preprocessor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/satellite_data/index.html">srcPy.data.satellite_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data/weather_data/index.html">srcPy.data.weather_data</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/data_validation/index.html">srcPy.data_validation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of srcPy.data_validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data_validation/drift_detection/index.html">srcPy.data_validation.drift_detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/data_validation/schema_checks/index.html">srcPy.data_validation.schema_checks</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/features/index.html">srcPy.features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of srcPy.features</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/features/custom_transforms/index.html">srcPy.features.custom_transforms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/features/lag_features/index.html">srcPy.features.lag_features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/features/rolling_stats/index.html">srcPy.features.rolling_stats</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/srcPy/predict/index.html">srcPy.predict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/srcPy/simulation/index.html">srcPy.simulation</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/strategies/index.html">srcPy.strategies</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of srcPy.strategies</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/strategies/baseStrategies/index.html">srcPy.strategies.baseStrategies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/strategies/momentum/index.html">srcPy.strategies.momentum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/strategies/stat_arb/index.html">srcPy.strategies.stat_arb</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/srcPy/trading/index.html">srcPy.trading</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/tuning/index.html">srcPy.tuning</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of srcPy.tuning</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/tuning/bayesian_optimization/index.html">srcPy.tuning.bayesian_optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/tuning/grid_search/index.html">srcPy.tuning.grid_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/tuning/random_search/index.html">srcPy.tuning.random_search</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../reference/srcPy/utils/index.html">srcPy.utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of srcPy.utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/backtester_bt/index.html">srcPy.utils.backtester_bt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/config/index.html">srcPy.utils.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/exceptions/index.html">srcPy.utils.exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/logger/index.html">srcPy.utils.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/portfolio/index.html">srcPy.utils.portfolio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/risk_management/index.html">srcPy.utils.risk_management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/srcPy/utils/validators/index.html">srcPy.utils.validators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for srcPy.utils.logger</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;MarketMind Logging Utilities</span>
+<span class="sd">=============================</span>
+
+<span class="sd">A **structured, multi‑sink** logging framework built on top of</span>
+<span class="sd">:pyexternal+python:`logging` and :pymod:`structlog`. It is designed for the</span>
+<span class="sd">observability needs of the *MarketMind* platform – from local notebooks to</span>
+<span class="sd">Kubernetes‑hosted micro‑services.</span>
+
+<span class="sd">Highlights</span>
+<span class="sd">----------</span>
+
+<span class="sd">* **Structured output** – Logs are enriched with key–value pairs and, when the</span>
+<span class="sd">  handler formatter is set to ``json``, rendered as JSON suitable for searching</span>
+<span class="sd">  in log aggregators (e.g. Loki, Elastic).</span>
+<span class="sd">* **Pluggable sinks** – Supports console, rotating file, Syslog, HTTP webhooks,</span>
+<span class="sd">  AWS CloudWatch, Google Cloud Logging and InfluxDB time‑series back‑ends.</span>
+<span class="sd">* **Asynchronous I/O** – The queue/listener pattern keeps the hot path free of</span>
+<span class="sd">  I/O latency by delegating heavy lifting to a background thread.</span>
+<span class="sd">* **Sensitive‑data redaction** – A configurable list of keys (``api_key``,</span>
+<span class="sd">  ``token`` …) is automatically masked before serialisation.</span>
+<span class="sd">* **Dynamic configuration** – The single entry point :py:func:`configure_logger`</span>
+<span class="sd">  accepts a self‑documenting *dict* so each deployment can tailor behaviour</span>
+<span class="sd">  without touching code.</span>
+
+<span class="sd">Quick start</span>
+<span class="sd">~~~~~~~~~~~</span>
+
+<span class="sd">&gt;&gt;&gt; from marketmind.logger import configure_logger, get_logger</span>
+<span class="sd">&gt;&gt;&gt; configure_logger({&quot;console&quot;: True, &quot;file&quot;: True})</span>
+<span class="sd">&gt;&gt;&gt; log = get_logger(__name__)</span>
+<span class="sd">&gt;&gt;&gt; log.info(&quot;Order executed&quot;, order_id=&quot;A1B2C3&quot;, filled_qty=100)</span>
+
+<span class="sd">Glossary</span>
+<span class="sd">~~~~~~~~</span>
+
+<span class="sd">``handler``</span>
+<span class="sd">    A destination for log records (e.g. ``StreamHandler`` → *stdout*).</span>
+
+<span class="sd">``processor``</span>
+<span class="sd">    A :pyterm:`structlog` callable that mutates or augments the log *event_dict*</span>
+<span class="sd">    before rendering (e.g. adds timestamps, masks secrets).</span>
+
+<span class="sd">.. note::</span>
+<span class="sd">   The defaults assume a directory called *logs/* at the project root; it is</span>
+<span class="sd">   created automatically when missing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEBUG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging.handlers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RotatingFileHandler</span><span class="p">,</span> <span class="n">TimedRotatingFileHandler</span><span class="p">,</span> <span class="n">QueueHandler</span><span class="p">,</span> <span class="n">QueueListener</span><span class="p">,</span> <span class="n">SysLogHandler</span><span class="p">,</span> <span class="n">HTTPHandler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">structlog</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.contextvars</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge_contextvars</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.stdlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundLogger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.stdlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_by_level</span> <span class="k">as</span> <span class="n">original_filter_by_level</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventDict</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">watchtower</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">watchtower</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">logging</span> <span class="k">as</span> <span class="n">google_cloud_logging</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">google_cloud_logging</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">influxdb_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfluxDBClient</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">InfluxDBClient</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="InfluxDBHandler">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.InfluxDBHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InfluxDBHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Send log records to **InfluxDB** for time‑series analysis.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    url</span>
+<span class="sd">        The InfluxDB HTTP endpoint (including scheme and port).</span>
+<span class="sd">    token</span>
+<span class="sd">        Authentication token with permissions to write to *bucket*.</span>
+<span class="sd">    org</span>
+<span class="sd">        InfluxDB organisation slug.</span>
+<span class="sd">    bucket</span>
+<span class="sd">        Target bucket where points will be written.</span>
+<span class="sd">    level</span>
+<span class="sd">        Minimum severity level for records to reach this handler (defaults to</span>
+<span class="sd">        :pydata:`logging.NOTSET`).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">org</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">InfluxDBClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="n">org</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_api</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">write_api</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span> <span class="o">=</span> <span class="n">bucket</span>
+
+<div class="viewcode-block" id="InfluxDBHandler.emit">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.InfluxDBHandler.emit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">LogRecord</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Translate *record* into an InfluxDB point and write it immediately.&quot;&quot;&quot;</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;measurement&#39;</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">levelname</span><span class="p">},</span> <span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()},</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">created</span><span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_api</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bucket</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="n">point</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handleError</span><span class="p">(</span><span class="n">record</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="safe_filter_by_level">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.safe_filter_by_level">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_filter_by_level</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">:</span> <span class="n">EventDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EventDict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper around :py:func:`structlog.stdlib.filter_by_level` resilient to *None*.</span>
+
+<span class="sd">    ``structlog`` may call **filter_by_level** during initialisation when the</span>
+<span class="sd">    *logger* instance is still ``None``. This helper guards against *Attribute</span>
+<span class="sd">    Error* by short‑circuiting in that scenario.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">logger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">event_dict</span>
+    <span class="k">return</span> <span class="n">original_filter_by_level</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="redact_sensitive_info">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.redact_sensitive_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">redact_sensitive_info</span><span class="p">(</span><span class="n">sensitive_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a processor that masks *sensitive_keys* inside *event_dict*.</span>
+
+<span class="sd">    Any key present in *sensitive_keys* is replaced with the literal</span>
+<span class="sd">    ``&quot;***REDACTED***&quot;`` **in‑place**. Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; log.info(&quot;token refreshed&quot;, token=&quot;abc123&quot;)</span>
+<span class="sd">    token=***REDACTED***</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    * The check is performed on the top‑level keys only; deeply nested secrets</span>
+<span class="sd">      should be flattened by the caller before logging.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">processor</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_method</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sensitive_keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">event_dict</span><span class="p">:</span>
+                <span class="n">event_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;***REDACTED***&#39;</span>
+        <span class="k">return</span> <span class="n">event_dict</span>
+    <span class="k">return</span> <span class="n">processor</span></div>
+
+
+<div class="viewcode-block" id="configure_logger">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.configure_logger">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">configure_logger</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise *structlog* and the standard logging system.</span>
+
+<span class="sd">    The *config* dict merges into a verbose set of defaults (see source for the</span>
+<span class="sd">    full schema). Missing keys therefore fall back to safe values. Handler</span>
+<span class="sd">    level, formatter and enable‑flags are all controlled here.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config</span>
+<span class="sd">        Optional mapping overriding the default settings. Refer to the *Quick</span>
+<span class="sd">        start* section in the module docstring for the expected structure.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; configure_logger({</span>
+<span class="sd">    ...     &quot;console&quot;: True,</span>
+<span class="sd">    ...     &quot;file&quot;: True,</span>
+<span class="sd">    ...     &quot;root_level&quot;: logging.DEBUG,</span>
+<span class="sd">    ...     &quot;sensitive_keys&quot;: [&quot;password&quot;, &quot;token&quot;],</span>
+<span class="sd">    ... })</span>
+
+<span class="sd">    After calling this function, use :py:func:`get_logger` to obtain module‑level</span>
+<span class="sd">    loggers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">default_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;root_level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;console_level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;file_level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="s1">&#39;logs/marketmind.log&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation&#39;</span><span class="p">:</span> <span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="s1">&#39;max_bytes&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="s1">&#39;backup_count&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;when&#39;</span><span class="p">:</span> <span class="s1">&#39;midnight&#39;</span><span class="p">,</span> <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;async_mode&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;sensitive_keys&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;secret&#39;</span><span class="p">,</span> <span class="s1">&#39;api_key&#39;</span><span class="p">,</span> <span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="s1">&#39;credentials&#39;</span><span class="p">],</span> <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="s1">&#39;console&#39;</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;syslog&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;cloudwatch&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;gcp&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;influxdb&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">},</span> <span class="s1">&#39;syslog&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">514</span><span class="p">),</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">},</span> <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">},</span> <span class="s1">&#39;cloudwatch&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;log_group&#39;</span><span class="p">:</span> <span class="s1">&#39;MarketMindLogs&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">},</span> <span class="s1">&#39;gcp&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">},</span> <span class="s1">&#39;influxdb&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:8086&#39;</span><span class="p">,</span> <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;org&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;bucket&#39;</span><span class="p">:</span> <span class="s1">&#39;marketmind_logs&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">}}</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">default_config</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">}</span>
+    <span class="n">sensitive_keys</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sensitive_keys&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">shared_processors</span> <span class="o">=</span> <span class="p">[</span><span class="n">merge_contextvars</span><span class="p">,</span> <span class="n">safe_filter_by_level</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_logger_name</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_log_level</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">PositionalArgumentsFormatter</span><span class="p">(),</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">TimeStamper</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">redact_sensitive_info</span><span class="p">(</span><span class="n">sensitive_keys</span><span class="p">),</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">StackInfoRenderer</span><span class="p">(),</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">format_exc_info</span><span class="p">]</span>
+    <span class="n">formatters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ProcessorFormatter</span><span class="p">(</span><span class="n">processor</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ConsoleRenderer</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">foreign_pre_chain</span><span class="o">=</span><span class="n">shared_processors</span><span class="p">),</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ProcessorFormatter</span><span class="p">(</span><span class="n">processor</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">JSONRenderer</span><span class="p">(),</span> <span class="n">foreign_pre_chain</span><span class="o">=</span><span class="n">shared_processors</span><span class="p">),</span> <span class="s1">&#39;plain&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> − </span><span class="si">%(name)s</span><span class="s1"> − </span><span class="si">%(levelname)s</span><span class="s1"> − </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_formatter</span><span class="p">(</span><span class="n">handler_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">formatter_type</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;handlers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">handler_name</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">formatters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">formatter_type</span><span class="p">,</span> <span class="n">formatters</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">])</span>
+    <span class="n">handlers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;console&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;console_level&#39;</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">))</span>
+        <span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;console&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span>
+            <span class="n">file_handler</span> <span class="o">=</span> <span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">],</span> <span class="n">when</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;when&#39;</span><span class="p">],</span> <span class="n">interval</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;interval&#39;</span><span class="p">],</span> <span class="n">backupCount</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;backup_count&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">file_handler</span> <span class="o">=</span> <span class="n">RotatingFileHandler</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">],</span> <span class="n">maxBytes</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;max_bytes&#39;</span><span class="p">],</span> <span class="n">backupCount</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;backup_count&#39;</span><span class="p">])</span>
+        <span class="n">file_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file_level&#39;</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">))</span>
+        <span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;syslog&#39;</span><span class="p">][</span><span class="s1">&#39;enabled&#39;</span><span class="p">]:</span>
+        <span class="n">sys_handler</span> <span class="o">=</span> <span class="n">SysLogHandler</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;syslog&#39;</span><span class="p">][</span><span class="s1">&#39;address&#39;</span><span class="p">])</span>
+        <span class="n">sys_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;syslog&#39;</span><span class="p">][</span><span class="s1">&#39;level&#39;</span><span class="p">])</span>
+        <span class="n">sys_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;syslog&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sys_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">][</span><span class="s1">&#39;enabled&#39;</span><span class="p">]:</span>
+        <span class="n">http_handler</span> <span class="o">=</span> <span class="n">HTTPHandler</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">],</span> <span class="s1">&#39;/logs&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">][</span><span class="s1">&#39;method&#39;</span><span class="p">])</span>
+        <span class="n">http_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">][</span><span class="s1">&#39;level&#39;</span><span class="p">])</span>
+        <span class="n">http_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">http_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">][</span><span class="s1">&#39;enabled&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">watchtower</span><span class="p">:</span>
+        <span class="n">cw_handler</span> <span class="o">=</span> <span class="n">watchtower</span><span class="o">.</span><span class="n">CloudWatchLogHandler</span><span class="p">(</span><span class="n">log_group</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">][</span><span class="s1">&#39;log_group&#39;</span><span class="p">])</span>
+        <span class="n">cw_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">][</span><span class="s1">&#39;level&#39;</span><span class="p">])</span>
+        <span class="n">cw_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cw_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gcp&#39;</span><span class="p">][</span><span class="s1">&#39;enabled&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">google_cloud_logging</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">google_cloud_logging</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+        <span class="n">gcp_handler</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_default_handler</span><span class="p">()</span>
+        <span class="n">gcp_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;gcp&#39;</span><span class="p">][</span><span class="s1">&#39;level&#39;</span><span class="p">])</span>
+        <span class="n">gcp_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">get_formatter</span><span class="p">(</span><span class="s1">&#39;gcp&#39;</span><span class="p">))</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gcp_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;enabled&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">InfluxDBClient</span><span class="p">:</span>
+        <span class="n">influx_handler</span> <span class="o">=</span> <span class="n">InfluxDBHandler</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">],</span> <span class="n">token</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;token&#39;</span><span class="p">],</span> <span class="n">org</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;org&#39;</span><span class="p">],</span> <span class="n">bucket</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;bucket&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;influxdb&#39;</span><span class="p">][</span><span class="s1">&#39;level&#39;</span><span class="p">])</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">influx_handler</span><span class="p">)</span>
+    <span class="n">root_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+    <span class="n">root_logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;root_level&#39;</span><span class="p">])</span>
+    <span class="n">root_logger</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="n">log_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;logs&#39;</span>
+        <span class="n">log_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">log_dir</span> <span class="o">/</span> <span class="s1">&#39;marketmind.log&#39;</span>
+        <span class="n">file_handler</span> <span class="o">=</span> <span class="n">RotatingFileHandler</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_bytes&#39;</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">),</span> <span class="n">backupCount</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backup_count&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">file_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file_level&#39;</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">))</span>
+        <span class="n">root_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;async_mode&#39;</span><span class="p">]:</span>
+        <span class="n">log_queue</span><span class="p">:</span> <span class="s1">&#39;queue.Queue[logging.LogRecord]&#39;</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">queue_handler</span> <span class="o">=</span> <span class="n">QueueHandler</span><span class="p">(</span><span class="n">log_queue</span><span class="p">)</span>
+        <span class="n">root_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">queue_handler</span><span class="p">)</span>
+        <span class="n">listener</span> <span class="o">=</span> <span class="n">QueueListener</span><span class="p">(</span><span class="n">log_queue</span><span class="p">,</span> <span class="o">*</span><span class="n">handlers</span><span class="p">,</span> <span class="n">respect_handler_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">listener</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">stop_logging</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Flush and stop the background listener (registered on *atexit*).&quot;&quot;&quot;</span>
+            <span class="n">listener</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">root_logger</span><span class="o">.</span><span class="n">stop_logging</span> <span class="o">=</span> <span class="n">stop_logging</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+            <span class="n">root_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">structlog</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">processors</span><span class="o">=</span><span class="p">[</span><span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">merge_contextvars</span><span class="p">,</span> <span class="n">safe_filter_by_level</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_logger_name</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_log_level</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">TimeStamper</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">),</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">format_exc_info</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ConsoleRenderer</span><span class="p">()</span> <span class="k">if</span> <span class="n">DEBUG</span> <span class="k">else</span> <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">JSONRenderer</span><span class="p">()],</span> <span class="n">context_class</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">logger_factory</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">LoggerFactory</span><span class="p">(),</span> <span class="n">wrapper_class</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">make_filtering_bound_logger</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">),</span> <span class="n">cache_logger_on_first_use</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_logger">
+<a class="viewcode-back" href="../../../reference/srcPy/utils/logger/index.html#srcPy.utils.logger.get_logger">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoundLogger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a :class:`structlog.stdlib.BoundLogger` for *name*.</span>
+
+<span class="sd">    If *name* is ``None`` the *root* logger is returned. Use this helper inside</span>
+<span class="sd">    each module instead of calling :py:func:`structlog.get_logger` directly so</span>
+<span class="sd">    the type checker can infer the correct return type.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name</span>
+<span class="sd">        The logger namespace – usually ``__name__``. When omitted, a generic</span>
+<span class="sd">        *MarketMind* logger is produced.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    structlog.stdlib.BoundLogger</span>
+<span class="sd">        A bound logger honoring the configuration established via</span>
+<span class="sd">        :py:func:`configure_logger`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">structlog</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">structlog</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">configure_logger</span><span class="p">({</span><span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;async_mode&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;sensitive_keys&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">,</span> <span class="s1">&#39;user_token&#39;</span><span class="p">]})</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;marketmind.demo&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Logger initialised&#39;</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s1">&#39;logger_demo&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Division by zero encountered&#39;</span><span class="p">)</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;user_123&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;User action&#39;</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">logger</span><span class="p">:</span> <span class="n">BoundLogger</span> <span class="o">=</span> <span class="n">structlog</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Nalakram
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    </body>
+</html>

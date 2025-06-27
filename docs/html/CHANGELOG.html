@@ -1,0 +1,1499 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="FAQ" href="faq.html" /><link rel="prev" title="Glossary" href="glossary.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Changelog - MarketMind 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">MarketMind 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">MarketMind 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Full Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with MarketMind</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_guide.html">MarketMind Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regulatory_compliance.html">Regulatory Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_practices.html">Security Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="images/index.html">Images Directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors/onboarding.html">Contributor Onboarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors/coding_standards.html">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors/contribution_workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internal/threat_model.html">Threat Model</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/srcPy/index.html">srcPy</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of srcPy</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/srcPy/backtesting/index.html">srcPy.backtesting</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/data/index.html">srcPy.data</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of srcPy.data</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/alternative_data/index.html">srcPy.data.alternative_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/anonymization/index.html">srcPy.data.anonymization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/compliance_checks/index.html">srcPy.data.compliance_checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/data_cleaning/index.html">srcPy.data.data_cleaning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/data_loader/index.html">srcPy.data.data_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/ib_api/index.html">srcPy.data.ib_api</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/ib_data_collection/index.html">srcPy.data.ib_data_collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/market_data/index.html">srcPy.data.market_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/order_book/index.html">srcPy.data.order_book</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/pipeline/index.html">srcPy.data.pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/preprocessor/index.html">srcPy.data.preprocessor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/satellite_data/index.html">srcPy.data.satellite_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data/weather_data/index.html">srcPy.data.weather_data</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/data_validation/index.html">srcPy.data_validation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of srcPy.data_validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data_validation/drift_detection/index.html">srcPy.data_validation.drift_detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/data_validation/schema_checks/index.html">srcPy.data_validation.schema_checks</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/features/index.html">srcPy.features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of srcPy.features</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/features/custom_transforms/index.html">srcPy.features.custom_transforms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/features/lag_features/index.html">srcPy.features.lag_features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/features/rolling_stats/index.html">srcPy.features.rolling_stats</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/srcPy/predict/index.html">srcPy.predict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/srcPy/simulation/index.html">srcPy.simulation</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/strategies/index.html">srcPy.strategies</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of srcPy.strategies</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/strategies/baseStrategies/index.html">srcPy.strategies.baseStrategies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/strategies/momentum/index.html">srcPy.strategies.momentum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/strategies/stat_arb/index.html">srcPy.strategies.stat_arb</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/srcPy/trading/index.html">srcPy.trading</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/tuning/index.html">srcPy.tuning</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of srcPy.tuning</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/tuning/bayesian_optimization/index.html">srcPy.tuning.bayesian_optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/tuning/grid_search/index.html">srcPy.tuning.grid_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/tuning/random_search/index.html">srcPy.tuning.random_search</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="reference/srcPy/utils/index.html">srcPy.utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of srcPy.utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/backtester_bt/index.html">srcPy.utils.backtester_bt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/config/index.html">srcPy.utils.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/exceptions/index.html">srcPy.utils.exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/logger/index.html">srcPy.utils.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/portfolio/index.html">srcPy.utils.portfolio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/risk_management/index.html">srcPy.utils.risk_management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/srcPy/utils/validators/index.html">srcPy.utils.validators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/CHANGELOG.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<p>This is auto-generated from [<a class="reference external" href="http://VERSION.md">VERSION.md</a> on GitHub](<a class="reference external" href="https://github.com/MindForgeLabs/MarketMind/blob/main/VERSION.md">https://github.com/MindForgeLabs/MarketMind/blob/main/VERSION.md</a>.</p>
+<section id="version-1-10-0-2025-06-23">
+<h2>Version 1.10.0 (2025-06-23)<a class="headerlink" href="#version-1-10-0-2025-06-23" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/risk_management_docs.py</span></code>:</p>
+<ul>
+<li><p>Stub file defining the public API for the <code class="docutils literal notranslate"><span class="pre">risk_management</span></code> module with Sphinx-compatible docstrings.</p></li>
+<li><p>Includes <code class="docutils literal notranslate"><span class="pre">RiskManager</span></code> class for Kelly criterion-based position sizing, historical data updates, and payoff retrieval, plus standalone functions (<code class="docutils literal notranslate"><span class="pre">get_trailing_stop_loss</span></code>, <code class="docutils literal notranslate"><span class="pre">check_drawdown</span></code>) for order-level risk controls.</p></li>
+<li><p>Serves as a design contract for API documentation and static type checking, with no implementation logic.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/fixtures/sample.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">sample_multi_ticker.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">sample_with_duplicates.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">sample_with_na.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">sample_with_outliers.csv</span></code>:</p>
+<ul>
+<li><p>CSV datasets for testing model and pipeline edge cases (duplicates, missing data, outliers).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/lstm_classifier.py</span></code>:</p>
+<ul>
+<li><p>PyTorch <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> for binary trend prediction in high-frequency trading, with configurable parameters (<code class="docutils literal notranslate"><span class="pre">input_size</span></code>, <code class="docutils literal notranslate"><span class="pre">sequence_length</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden_size</span></code>, <code class="docutils literal notranslate"><span class="pre">dropout</span></code>, <code class="docutils literal notranslate"><span class="pre">bidirectional</span></code>).</p></li>
+<li><p>Includes <code class="docutils literal notranslate"><span class="pre">get_probabilities()</span></code> for sigmoid conversion and detailed docstrings.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_lstm_classifier.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_lstm_classifier_upgraded.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_lstm_classifier_polished.py</span></code>:</p>
+<ul>
+<li><p>Comprehensive test suite with unit, behavioral, property-based (Hypothesis), and training loop tests, achieving &gt;90% coverage.</p></li>
+<li><p>Supports CPU/GPU testing with deterministic seeding and fixtures.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/fix_numpy_nan_imports.py</span></code>:</p>
+<ul>
+<li><p>Fixes <code class="docutils literal notranslate"><span class="pre">ImportError</span></code> by replacing <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">numpy</span> <span class="pre">import</span> <span class="pre">NaN</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> and updating assertions to <code class="docutils literal notranslate"><span class="pre">np.isnan()</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/fix_pandas_ta_numpy_imports.py</span></code>:</p>
+<ul>
+<li><p>Resolves <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas-ta</span></code> by standardizing NumPy imports to <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> and fixing invalid aliases (e.g., <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>, <code class="docutils literal notranslate"><span class="pre">npExp</span></code>).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_ib_data_collection.py</span></code>:</p>
+<ul>
+<li><p>Added five tests: <code class="docutils literal notranslate"><span class="pre">test_get_cache_path_creates_dir</span></code>, <code class="docutils literal notranslate"><span class="pre">test_bars_to_df_variants</span></code>, <code class="docutils literal notranslate"><span class="pre">test_async_fetch_returns_cached_when_up_to_date</span></code>, <code class="docutils literal notranslate"><span class="pre">test_save_cache_warning_does_not_break_flow</span></code>, <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_data_own_client_path</span></code>.</p></li>
+<li><p>Improves coverage for cache handling, DataFrame conversion, and self-managed IB connections.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/validators.py</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">validate_tensor</span></code> for TensorFlow tensor validation (type, emptiness, dimensions, NaN/infinite values).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/LSTM_model.py</span></code>:</p>
+<ul>
+<li><p>Fixed dropout wiring, exposed <code class="docutils literal notranslate"><span class="pre">attention_dense</span></code> and <code class="docutils literal notranslate"><span class="pre">gate_dense</span></code> attributes, and aligned gated pooling implementation.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_lstm_model.py</span></code>:</p>
+<ul>
+<li><p>Refactored with new tests (<code class="docutils literal notranslate"><span class="pre">test_convergence</span></code>, <code class="docutils literal notranslate"><span class="pre">test_return_sequences_with_pooling</span></code>), deterministic seeding, and &gt;90% coverage.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/strategies/baseStrategies.py</span></code>:</p>
+<ul>
+<li><p>Added OCO order linkage with Backtrader’s <code class="docutils literal notranslate"><span class="pre">buy_bracket</span></code>/<code class="docutils literal notranslate"><span class="pre">sell_bracket</span></code>.</p></li>
+<li><p>Introduced <code class="docutils literal notranslate"><span class="pre">get_signal</span></code> abstract method for consistent signal generation.</p></li>
+<li><p>Enhanced ML strategies (<code class="docutils literal notranslate"><span class="pre">LogisticRegressionStrategy</span></code>, <code class="docutils literal notranslate"><span class="pre">RandomForestStrategy</span></code>) with <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> normalization and length alignment checks.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/backtesting.py</span></code>:</p>
+<ul>
+<li><p>Refactored to use Backtrader’s <code class="docutils literal notranslate"><span class="pre">bt.Cerebro()</span></code> via <code class="docutils literal notranslate"><span class="pre">Backtester</span></code> class.</p></li>
+<li><p>Added daily returns, max drawdown, Sharpe ratio, transaction costs (0.1%), and slippage (0.05%).</p></li>
+<li><p>Enhanced ANOVA tests with 30 bootstrap seeds and custom exceptions.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/backtester_bt.py</span></code>:</p>
+<ul>
+<li><p>Implements <code class="docutils literal notranslate"><span class="pre">Backtester</span></code> class with daily returns and configurable risk-free rate.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/market_data.py</span></code>:</p>
+<ul>
+<li><p>Replaced Yahoo Finance with Alpha Vantage data source via <code class="docutils literal notranslate"><span class="pre">AlphaVantageSource</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config_schema.json</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">market_data_sources</span></code> field for configuration validation.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">alpha_vantage_api_key</span></code> in <code class="docutils literal notranslate"><span class="pre">CredentialsConfig</span></code> and <code class="docutils literal notranslate"><span class="pre">market_data_sources</span></code> in <code class="docutils literal notranslate"><span class="pre">Config</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config.yaml</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">alpha_vantage_api_key</span></code> under <code class="docutils literal notranslate"><span class="pre">security.credentials</span></code> and defined <code class="docutils literal notranslate"><span class="pre">market_data_sources</span></code> with Alpha Vantage and CoinGecko.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/portfolio.py</span></code>, <code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>, <code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>, <code class="docutils literal notranslate"><span class="pre">srcPy/utils/validators.py</span></code>, <code class="docutils literal notranslate"><span class="pre">srcPy/utils/exceptions.py</span></code>, <code class="docutils literal notranslate"><span class="pre">srcPy/utils/stat_tests.py</span></code>:</p>
+<ul>
+<li><p>Added Sphinx-compatible docstrings for functions, classes, and exceptions, improving API documentation.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
+<ul>
+<li><p>Updated version to 1.10.0.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>:</p>
+<ul>
+<li><p>Added entry for 1.10.0.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Removed Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/strategies/backtrader_signal.py</span></code>:</p>
+<ul>
+<li><p>Replaced by <code class="docutils literal notranslate"><span class="pre">baseStrategies.py</span></code> for a more robust strategy framework.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ImportError</span></code> and <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas-ta</span></code> by standardizing NumPy imports.</p></li>
+<li><p>Fixed LSTM model bugs in dropout wiring and pooling layer implementation.</p></li>
+<li><p>Addressed test failures in <code class="docutils literal notranslate"><span class="pre">test_lstm_model.py</span></code> by adding deterministic seeding and comprehensive edge case testing.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Significant feature additions include <code class="docutils literal notranslate"><span class="pre">LSTMClassifier</span></code> for trend prediction, Backtrader-based backtesting for scalability, and Alpha Vantage for robust data fetching.</p></li>
+<li><p>Enhanced risk management with <code class="docutils literal notranslate"><span class="pre">risk_management_docs.py</span></code>, providing a clear API contract for future implementation.</p></li>
+<li><p>Improved test coverage and reliability for IB data collection, LSTM models, and trading strategies.</p></li>
+<li><p>Documentation enhancements with Sphinx-ready docstrings improve maintainability and onboarding.</p></li>
+<li><p>Version incremented to 1.10.0 (MINOR) per Semantic Versioning for new backward-compatible features and enhancements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-9-0-2025-06-18">
+<h2>Version 1.9.0 (2025-06-18)<a class="headerlink" href="#version-1-9-0-2025-06-18" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/lstm_classifier.py</span></code>:</p>
+<ul>
+<li><p>Implemented a production-grade PyTorch <code class="docutils literal notranslate"><span class="pre">LSTMClassifier</span></code> for short-horizon trend-direction prediction (binary logits).</p></li>
+<li><p>Supports standalone training and integration with hybrid Transformer architecture.</p></li>
+<li><p>Configurable via <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> or constructor args (hidden units, layers, dropout, bidirectionality, sequence length).</p></li>
+<li><p>Includes <code class="docutils literal notranslate"><span class="pre">get_probabilities()</span></code> for sigmoid conversion; <code class="docutils literal notranslate"><span class="pre">forward()</span></code> returns logits for numerical stability and low latency.</p></li>
+<li><p>Supports ONNX export with static shapes for TensorRT optimization, achieving ~0.34 ms inference on A10G (FP16, batch=1, seq_len=60).</p></li>
+<li><p>Fully documented with reST-friendly docstrings, usage example, and compliance with MarketMind coding principles (clarity, modularity, input validation).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_lstm_classifier.py</span></code>:</p>
+<ul>
+<li><p>Placeholder tests for shape contract, on-device forward pass, and ONNX export sanity checks.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/preprocessor.py</span></code>:</p>
+<ul>
+<li><p>Migrated to NVIDIA RAPIDS for GPU-accelerated preprocessing, using <code class="docutils literal notranslate"><span class="pre">cuDF</span></code> for DataFrame operations, <code class="docutils literal notranslate"><span class="pre">CuPy</span></code> for sequence generation, and <code class="docutils literal notranslate"><span class="pre">cuML</span></code> for normalization.</p></li>
+<li><p>Optimized <code class="docutils literal notranslate"><span class="pre">_add_indicators</span></code> to compute RSI, MACD, ATR, VWAP, and Bollinger Bands with <code class="docutils literal notranslate"><span class="pre">cuDF</span></code>’s rolling and exponential moving window functions, replacing <code class="docutils literal notranslate"><span class="pre">pandas_ta</span></code>.</p></li>
+<li><p>Enhanced <code class="docutils literal notranslate"><span class="pre">_create_sequences</span></code> with <code class="docutils literal notranslate"><span class="pre">CuPy</span></code>’s <code class="docutils literal notranslate"><span class="pre">stride_tricks.as_strided</span></code> for efficient GPU-based sliding window sequence generation.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">_normalize_features</span></code> to use <code class="docutils literal notranslate"><span class="pre">cuML</span></code>’s <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> for GPU-accelerated scaling.</p></li>
+<li><p>Minimized CPU-GPU data transfers by keeping data on GPU until final NumPy output, improving performance for large datasets.</p></li>
+<li><p>Ensured compatibility with PyTorch pipeline by converting <code class="docutils literal notranslate"><span class="pre">CuPy</span></code> arrays to NumPy.</p></li>
+<li><p>Added support for multi-ticker processing with <code class="docutils literal notranslate"><span class="pre">cuDF</span></code> groupby operations.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">cudf</span></code>, <code class="docutils literal notranslate"><span class="pre">cupy</span></code>, and <code class="docutils literal notranslate"><span class="pre">cuml</span></code> for RAPIDS-based GPU acceleration.</p></li>
+<li><p>Verified PyTorch ≥ 2.2 satisfies <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code> requirements (no new dependencies).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
+<ul>
+<li><p>Documented GPU-accelerated preprocessing with RAPIDS and setup instructions for <code class="docutils literal notranslate"><span class="pre">cudf</span></code>, <code class="docutils literal notranslate"><span class="pre">cupy</span></code>, and <code class="docutils literal notranslate"><span class="pre">cuml</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code> overview, usage note, and ONNX/TensorRT deployment tip.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DirectoryStructure.md</span></code>:</p>
+<ul>
+<li><p>Updated to reflect <code class="docutils literal notranslate"><span class="pre">preprocessor.py</span></code>’s RAPIDS integration and addition of <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>:</p>
+<ul>
+<li><p>Fixed reST headings in <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code> docstrings to prevent Sphinx auto-build warnings.</p></li>
+<li><p>Updated auto-generated API documentation to include <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Addressed performance bottlenecks in <code class="docutils literal notranslate"><span class="pre">preprocessor.py</span></code> by offloading indicator calculations, sequence generation, and normalization to GPU, achieving potential 10x–100x speedups.</p></li>
+<li><p>Resolved memory inefficiencies in sequence generation with <code class="docutils literal notranslate"><span class="pre">CuPy</span></code>’s stride tricks, reducing overhead.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>The GPU-accelerated <code class="docutils literal notranslate"><span class="pre">preprocessor.py</span></code> and new <code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code> form an end-to-end GPU pipeline: <code class="docutils literal notranslate"><span class="pre">cuDF</span></code> → <code class="docutils literal notranslate"><span class="pre">CuPy</span></code> sliding windows → <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> → LSTM → logits → gRPC/Triton.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code> is designed for extensibility, supporting future upgrades (e.g., Informer blocks, multi-horizon heads) with minimal interface changes.</p></li>
+<li><p>Enhanced MarketMind’s modeling capabilities with a low-latency, production-ready LSTM classifier optimized for G5/A10G GPUs.</p></li>
+<li><p>Maintained compatibility with existing Python pipeline, gRPC backend, and JavaFX frontend.</p></li>
+<li><p>Version incremented to 1.9.0 (MINOR) per Semantic Versioning for new backward-compatible functionality (<code class="docutils literal notranslate"><span class="pre">lstm_classifier.py</span></code>) and performance optimizations in <code class="docutils literal notranslate"><span class="pre">preprocessor.py</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-8-1-2025-06-09">
+<h2>Version 1.8.1 (2025-06-09)<a class="headerlink" href="#version-1-8-1-2025-06-09" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/resources/views.properties</span></code>: Maps view names to FXML file paths for dynamic UI loading in JavaFX, with sections for Core Views (dashboard, login, settings), Feature-Specific Views (realtime, model), and placeholders for future views (backtesting, simulations, alerts).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/features/RootLayoutController.java</span></code>: Manages RootLayout.fxml navigation with Spring dependency injection, mimicking previous JavaFX navigation system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/data/MarketDataPoint.java</span></code>: Defines the public <code class="docutils literal notranslate"><span class="pre">MarketDataPoint</span></code> class, resolving public class declaration issues.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/AppConfiguration.java</span></code>: Provides a Spring <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> for <code class="docutils literal notranslate"><span class="pre">ResourceBundle</span></code> to resolve autowiring issues in <code class="docutils literal notranslate"><span class="pre">SceneManager</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">devcontainer.json</span></code>: Configures development container environment for consistent setup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/proto/cpp_service.proto</span></code>, <code class="docutils literal notranslate"><span class="pre">src/main/proto/python_service.proto</span></code>: Added gRPC service definitions with <code class="docutils literal notranslate"><span class="pre">java_multiple_files</span> <span class="pre">=</span> <span class="pre">true</span></code> and explicit <code class="docutils literal notranslate"><span class="pre">java_outer_classname</span></code> for cleaner Java class generation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/source/*</span></code>: Added Sphinx configuration and initial documentation scaffolding for improved project documentation.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/MainApp.java</span></code>: Integrated Spring Boot with <code class="docutils literal notranslate"><span class="pre">&#64;SpringBootApplication</span></code>, initialized Spring context in <code class="docutils literal notranslate"><span class="pre">init()</span></code> with <code class="docutils literal notranslate"><span class="pre">WebApplicationType.NONE</span></code>, and updated to use constructor injection with <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> for <code class="docutils literal notranslate"><span class="pre">InferenceJNI</span></code>, <code class="docutils literal notranslate"><span class="pre">PythonRunner</span></code>, and other dependencies. Enhanced lifecycle to load <code class="docutils literal notranslate"><span class="pre">RootLayout.fxml</span></code> via <code class="docutils literal notranslate"><span class="pre">SceneManager.setRootLayout</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/features/DashboardController.java</span></code>: Fixed <code class="docutils literal notranslate"><span class="pre">ClassCastException</span></code> by updating to use <code class="docutils literal notranslate"><span class="pre">XYChart.Series&lt;String,</span> <span class="pre">Number&gt;</span></code> for <code class="docutils literal notranslate"><span class="pre">LineChart</span></code>, binding UI to <code class="docutils literal notranslate"><span class="pre">DashboardViewModel</span></code>, and handling refresh events. Corrected button labels (e.g., “Log out”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/features/SettingsController.java</span></code>: Manages user preferences (theme, refresh rate, notifications) via <code class="docutils literal notranslate"><span class="pre">Config</span></code>, with Spring-injected dependencies and structured logging via <code class="docutils literal notranslate"><span class="pre">LogUtils</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/features/LoginController.java</span></code>: Handles authentication with <code class="docutils literal notranslate"><span class="pre">UserAuthService</span></code>, using Spring dependency injection and <code class="docutils literal notranslate"><span class="pre">LogUtils</span></code> for logging.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/services/DashboardService.java</span></code>: Updated to return <code class="docutils literal notranslate"><span class="pre">DashboardSummary</span></code> with mock data for market indices, portfolio, notifications, and S&amp;P 500 history, ready for <code class="docutils literal notranslate"><span class="pre">DataFetchService</span></code> integration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/models/DashboardSummary.java</span></code>: New model to structure market data, portfolio value, notification count, and chart data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/viewmodels/DashboardViewModel.java</span></code>: Added observable properties for market indices, portfolio, notifications, and S&amp;P 500 chart series for reactive UI updates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/services/DataFetchService.java</span></code>: Updated to return <code class="docutils literal notranslate"><span class="pre">SortedSet&lt;MarketDataPoint&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">MarketData</span></code> POJO, with Spring caching and <code class="docutils literal notranslate"><span class="pre">LogUtils</span></code> for structured logging.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/data/MarketData.java</span></code>: Removed inner <code class="docutils literal notranslate"><span class="pre">MarketDataPoint</span></code> class, referencing <code class="docutils literal notranslate"><span class="pre">com.marketmind.data.MarketDataPoint</span></code> instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/inference/InferenceJNI.java</span></code>: Added <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> annotation, constructor with TODOs for native library initialization, and <code class="docutils literal notranslate"><span class="pre">runInference</span></code> stub with TODOs for JNI implementation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/inference/PythonRunner.java</span></code>: Added <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> annotation, constructor with TODOs for Python runtime setup, and <code class="docutils literal notranslate"><span class="pre">executeScript</span></code> stub with TODOs for script execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/utils/SceneManager.java</span></code>: Removed <code class="docutils literal notranslate"><span class="pre">BorderPane</span></code> constructor dependency, added <code class="docutils literal notranslate"><span class="pre">setRootLayout</span></code> method, and integrated <code class="docutils literal notranslate"><span class="pre">ResourceBundle</span></code> bean.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/utils/Config.java</span></code>: Added <code class="docutils literal notranslate"><span class="pre">getProperty(key)</span></code> overload and verified thread-safety compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/resources/fxml/Dashboard.fxml</span></code>: Designed responsive UI with labels, <code class="docutils literal notranslate"><span class="pre">LineChart</span></code>, refresh button, and status label, with <code class="docutils literal notranslate"><span class="pre">fx:controller</span></code> set to <code class="docutils literal notranslate"><span class="pre">DashboardController</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/resources/fxml/RootLayout.fxml</span></code>, <code class="docutils literal notranslate"><span class="pre">Settings.fxml</span></code>, <code class="docutils literal notranslate"><span class="pre">Login.fxml</span></code>: Updated to reference respective Spring-managed controllers and ensure compatibility with <code class="docutils literal notranslate"><span class="pre">views.properties</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checkstyle.xml</span></code>: Enforced Google Java Style with MarketMind-specific rules, supporting Java 21, Spring Boot, and JavaFX, with checks for import order, lambdas, pattern variables, records, and documentation. Set <code class="docutils literal notranslate"><span class="pre">LineLength</span></code> to 120 and added suppression filters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code>: Configured <code class="docutils literal notranslate"><span class="pre">protobuf-maven-plugin</span></code> to auto-generate Java gRPC stubs from <code class="docutils literal notranslate"><span class="pre">.proto</span></code> files during <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">compile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/grpc/BackendClient.java</span></code>: Refactored to use generated <code class="docutils literal notranslate"><span class="pre">PythonRequest</span></code>, <code class="docutils literal notranslate"><span class="pre">PythonResponse</span></code>, <code class="docutils literal notranslate"><span class="pre">CppRequest</span></code>, and <code class="docutils literal notranslate"><span class="pre">CppResponse</span></code> classes from gRPC stubs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci.yaml</span></code>: Updated to include Sphinx documentation generation and enforce Checkstyle compliance.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ClassCastException</span></code> in <code class="docutils literal notranslate"><span class="pre">DashboardController</span></code> by using <code class="docutils literal notranslate"><span class="pre">XYChart.Series&lt;String,</span> <span class="pre">Number&gt;</span></code> for <code class="docutils literal notranslate"><span class="pre">LineChart</span></code>, converting numerical x-values to <code class="docutils literal notranslate"><span class="pre">String</span></code> for <code class="docutils literal notranslate"><span class="pre">CategoryAxis</span></code> compatibility.</p></li>
+<li><p>Fixed autowiring errors in <code class="docutils literal notranslate"><span class="pre">MainApp.java</span></code> by adding <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> to <code class="docutils literal notranslate"><span class="pre">InferenceJNI</span></code> and <code class="docutils literal notranslate"><span class="pre">PythonRunner</span></code> and using constructor injection.</p></li>
+<li><p>Addressed JavaFX root layout loading errors by verifying FXML paths, syncing references, and adding error logging.</p></li>
+<li><p>Resolved public class declaration error by moving <code class="docutils literal notranslate"><span class="pre">MarketDataPoint</span></code> to its own file (<code class="docutils literal notranslate"><span class="pre">MarketDataPoint.java</span></code>).</p></li>
+<li><p>Fixed import order issues across Java files to comply with Checkstyle rules, grouping third-party and project-specific imports before <code class="docutils literal notranslate"><span class="pre">java.*</span></code> and sorting alphabetically.</p></li>
+<li><p>Corrected SSL context initialization in <code class="docutils literal notranslate"><span class="pre">Config.java</span></code> to use proper <code class="docutils literal notranslate"><span class="pre">GrpcSslContexts.keyManager</span></code> and property getter overloads.</p></li>
+</ul>
+</li>
+<li><p><strong>Spring Boot and JavaFX Enhancements</strong>:</p>
+<ul>
+<li><p>Enhanced Spring Boot integration in <code class="docutils literal notranslate"><span class="pre">MainApp.java</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;SpringBootApplication</span></code> and custom controller factory for FXML loaders to use Spring’s <code class="docutils literal notranslate"><span class="pre">getBean</span></code>.</p></li>
+<li><p>Implemented <code class="docutils literal notranslate"><span class="pre">RootLayoutController</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span> <span class="pre">ApplicationContext</span></code> and <code class="docutils literal notranslate"><span class="pre">loader.setControllerFactory</span></code> to ensure Spring-managed controller instantiation.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">views.properties</span></code> for scalable view management, mapping view names to FXML paths.</p></li>
+<li><p>Integrated <code class="docutils literal notranslate"><span class="pre">LogUtils</span></code> for structured logging with context binding across controllers and services.</p></li>
+<li><p>Improved <code class="docutils literal notranslate"><span class="pre">DashboardController</span></code>, <code class="docutils literal notranslate"><span class="pre">SettingsController</span></code>, and <code class="docutils literal notranslate"><span class="pre">LoginController</span></code> with Spring dependency injection, input validation, and navigation via <code class="docutils literal notranslate"><span class="pre">MainApp</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>gRPC and Protobuf Enhancements</strong>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">cpp_service.proto</span></code> and <code class="docutils literal notranslate"><span class="pre">python_service.proto</span></code> with <code class="docutils literal notranslate"><span class="pre">java_multiple_files</span> <span class="pre">=</span> <span class="pre">true</span></code> and explicit <code class="docutils literal notranslate"><span class="pre">java_outer_classname</span></code> for cleaner Java class generation.</p></li>
+<li><p>Configured <code class="docutils literal notranslate"><span class="pre">protobuf-maven-plugin</span></code> to generate Java gRPC stubs in <code class="docutils literal notranslate"><span class="pre">com.marketmind.grpc</span></code> package.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">BackendClient</span></code> to use generated gRPC classes, with documented workflow for <code class="docutils literal notranslate"><span class="pre">.proto</span></code> updates.</p></li>
+</ul>
+</li>
+<li><p><strong>Code Quality and Maintainability</strong>:</p>
+<ul>
+<li><p>Enforced Google Java Style with MarketMind-specific Checkstyle rules, supporting Java 21 features (e.g., pattern matching, records).</p></li>
+<li><p>Refactored controller wiring to use pattern matching and modern <code class="docutils literal notranslate"><span class="pre">switch</span></code> statements, replacing legacy <code class="docutils literal notranslate"><span class="pre">if-else</span></code> and <code class="docutils literal notranslate"><span class="pre">instanceof</span></code>.</p></li>
+<li><p>Used Spring dependency injection via <code class="docutils literal notranslate"><span class="pre">getBean</span></code> for service initialization, removing manual instantiation.</p></li>
+<li><p>Added Javadoc and TODO comments in <code class="docutils literal notranslate"><span class="pre">InferenceJNI</span></code> and <code class="docutils literal notranslate"><span class="pre">PythonRunner</span></code> to guide future implementations.</p></li>
+<li><p>Configured IDE import layout to match Checkstyle rules, removing extra blank lines and ensuring alphabetical sorting.</p></li>
+</ul>
+</li>
+<li><p><strong>Documentation and Development Environment</strong>:</p>
+<ul>
+<li><p>Added Sphinx configuration for automated documentation generation, with initial scaffolding in <code class="docutils literal notranslate"><span class="pre">docs/source/</span></code>.</p></li>
+<li><p>Introduced <code class="docutils literal notranslate"><span class="pre">devcontainer.json</span></code> for consistent development environment setup.</p></li>
+<li><p>Documented gRPC stub generation workflow and view management in <code class="docutils literal notranslate"><span class="pre">views.properties</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Enhanced MarketMind’s JavaFX frontend with robust Spring Boot integration, responsive dashboard UI, and scalable view management.</p></li>
+<li><p>Improved code quality with Checkstyle enforcement, modern Java 21 features, and structured logging.</p></li>
+<li><p>Laid groundwork for gRPC-based backend communication with generated stubs for Python and C++ services.</p></li>
+<li><p>Maintained compatibility with existing Python pipeline, gRPC backend, and Docker Compose setup.</p></li>
+<li><p>Version incremented to 1.8.1 (PATCH) per Semantic Versioning for bug fixes, dependency injection improvements, and minor feature enhancements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-8-0-2025-05-31">
+<h2>Version 1.8.0 (2025-05-31)<a class="headerlink" href="#version-1-8-0-2025-05-31" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p>srcPy/utils/stat_tests.py: New module implementing statistical tests for time series analysis, including Granger Causality, Johansen Cointegration, Augmented Dickey-Fuller (ADF), KPSS, and Ljung-Box tests.</p></li>
+<li><p>srcPy/utils/validators.py: Added validation functions validate_series and validate_dataframe to ensure input integrity for statistical tests.</p></li>
+<li><p>srcPy/utils/exceptions.py: Introduced custom exceptions InvalidInputError for invalid inputs and StatisticalTestError for test execution failures.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>srcPy/utils/stat_tests.py: Implemented tests with structured output (test_statistic, p_value, is_significant, summary), integrated input validation using <a class="reference external" href="http://validators.py">validators.py</a>, custom exceptions from <a class="reference external" href="http://exceptions.py">exceptions.py</a>, structlog logging, and MLflow metric tracking. Optimized for feature selection in data_cleaning.py and model diagnostics in evaluate_model.py.</p></li>
+<li><p>srcPy/requirements.txt: Added statsmodels&gt;=0.14.0 to support statistical tests in stat_tests.py.</p></li>
+<li><p><a class="reference external" href="http://README.md">README.md</a>: Updated to reflect addition of stat_tests.py and its dependencies, and incremented version to 1.8.0.</p></li>
+<li><p><a class="reference external" href="http://DirectoryStructure.md">DirectoryStructure.md</a>: Updated to include stat_tests.py, <a class="reference external" href="http://validators.py">validators.py</a>, and <a class="reference external" href="http://exceptions.py">exceptions.py</a> in srcPy/utils/ with descriptions.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Ensured robust input validation in stat_tests.py to prevent errors from invalid or insufficient data (e.g., empty series, mismatched indices).</p></li>
+<li><p>Standardized error handling with custom exceptions to improve debugging and reliability.</p></li>
+<li><p>Integrated logging and MLflow to enhance observability and experiment tracking.</p></li>
+</ul>
+</li>
+<li><p><strong>Spring Boot and Frontend Enhancements</strong>:</p>
+<ul>
+<li><p>Integrated Spring Boot into MarketMind’s JavaFX frontend for real-time updates, observability, and dependency management.</p></li>
+<li><p>Added Spring Boot dependencies via Spring Initializr: Spring Web, Spring Data JPA, Spring Boot DevTools, Spring Boot Actuator, Spring Security, Docker Compose Support, Spring Configuration Processor, WebSocket Messaging, Spring Cache Abstraction, and Influx.</p></li>
+<li><p>Updated MainApp.java to bootstrap Spring Boot while maintaining JavaFX functionality.</p></li>
+<li><p>Migrated existing Spring Framework configuration (AppConfig.java) to leverage Spring Boot’s autoconfiguration and component scanning.</p></li>
+<li><p>Added WebSocketConfig.java for /market-data endpoint and MarketDataWebSocketHandler.java to broadcast updates to JavaFX clients.</p></li>
+<li><p>Implemented MarketDataWebSocketClient.java for JavaFX real-time UI updates; updated RealTimeController.java and RealTime.fxml to display live market data.</p></li>
+<li><p>Added compose.yaml in project root with InfluxDB service for development; updated application.properties for InfluxDB metrics export.</p></li>
+<li><p>Provided boilerplate caching in DataFetchService.java with Spring Cache Abstraction and Caffeine (CacheConfig.java).</p></li>
+<li><p>Kept application.properties in src/main/resources/config/ and removed redundant properties, relying on Spring Boot Actuator for version info.</p></li>
+<li><p>Updated pom.xml version to 1.8.0.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Enhanced MarketMind’s analytics and observability with new statistical tests, robust validation, and exception handling in Python pipeline.</p></li>
+<li><p>Spring Boot integration powers the JavaFX frontend with real-time WebSocket updates, improved observability, and performance optimizations.</p></li>
+<li><p>Maintained compatibility with gRPC backend and modular configuration for Docker Compose and InfluxDB.</p></li>
+<li><p>Version incremented to 1.8.0 (MINOR) per Semantic Versioning for new features and improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-7-1-2025-05-30">
+<h2>Version 1.7.1 (2025-05-30)<a class="headerlink" href="#version-1-7-1-2025-05-30" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Java Structure Update:</strong></p>
+<ul>
+<li><p>Replaced the old <code class="docutils literal notranslate"><span class="pre">java/</span></code> structure with a more modular <code class="docutils literal notranslate"><span class="pre">src/main/java/com/marketmind/</span></code> and <code class="docutils literal notranslate"><span class="pre">src/main/resources/</span></code> structure.</p></li>
+<li><p>Introduced feature-based organization with packages like <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">features</span></code>, <code class="docutils literal notranslate"><span class="pre">models</span></code>, <code class="docutils literal notranslate"><span class="pre">services</span></code>, <code class="docutils literal notranslate"><span class="pre">utils</span></code>, <code class="docutils literal notranslate"><span class="pre">ml</span></code>, and <code class="docutils literal notranslate"><span class="pre">grpc</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">features</span></code> package includes subpackages for <code class="docutils literal notranslate"><span class="pre">dashboard</span></code>, <code class="docutils literal notranslate"><span class="pre">login</span></code>, <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">realtime</span></code>, and <code class="docutils literal notranslate"><span class="pre">model</span></code>, each containing relevant ViewModel and Controller classes.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">services</span></code> package now includes interfaces and implementations for data and inference providers, enhancing flexibility and scalability.</p></li>
+<li><p>Resources are organized into <code class="docutils literal notranslate"><span class="pre">fxml</span></code>, <code class="docutils literal notranslate"><span class="pre">css</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, and <code class="docutils literal notranslate"><span class="pre">i18n</span></code> directories, supporting better UI management and internationalization.</p></li>
+</ul>
+</li>
+<li><p><strong><a class="reference external" href="http://DirectoryStructure.md">DirectoryStructure.md</a> Update:</strong></p>
+<ul>
+<li><p>Updated the <code class="docutils literal notranslate"><span class="pre">java/</span></code> section to reflect the new <code class="docutils literal notranslate"><span class="pre">src/</span></code> structure.</p></li>
+<li><p>Revised package descriptions to align with the new Java package organization.</p></li>
+<li><p>Updated recommendations to support the new structure, emphasizing modularity and maintainability.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes:</strong></p>
+<ul>
+<li><p>These changes improve the modularity and scalability of the Java codebase, making it easier to manage and extend features.</p></li>
+<li><p>The updated structure aligns with best practices for JavaFX MVVM applications and Spring DI, enhancing code quality and maintainability.</p></li>
+<li><p>Version incremented to <code class="docutils literal notranslate"><span class="pre">1.7.1</span></code> (PATCH) per Semantic Versioning for structural improvements and documentation updates.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-7-0-2025-05-25">
+<h2>Version 1.7.0 (2025-05-25)<a class="headerlink" href="#version-1-7-0-2025-05-25" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Enhanced Test Suite:</strong></p>
+<ul>
+<li><p>Refactored and expanded test suite for Interactive Brokers (IB), Alpaca, and streaming integration to ensure robust data pipeline functionality.</p></li>
+<li><p>Improved IB API configuration access to avoid global state, enabling more reliable mocking in tests.</p></li>
+<li><p>Enhanced streaming and pipeline integration tests to accurately reflect buffer and error-handling behavior.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">test_config_mock</span></code> to fully populate Interactive Brokers configuration for all IB-related tests.</p></li>
+<li><p>Improved logging test assertions for compatibility with <code class="docutils literal notranslate"><span class="pre">structlog</span></code> and standard logging output.</p></li>
+<li><p>Added robust patching for network and external dependencies in IB and Alpaca integration tests.</p></li>
+<li><p>Increased test coverage for <code class="docutils literal notranslate"><span class="pre">data_cleaning</span></code>, <code class="docutils literal notranslate"><span class="pre">data_loader</span></code>, and <code class="docutils literal notranslate"><span class="pre">ib_data_collection</span></code> modules.</p></li>
+<li><p>Fixed configuration mock structure in tests to prevent <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> on attribute-style access.</p></li>
+<li><p>Performed general cleanup of legacy test code and removed unreachable or obsolete assertions.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Integration Tests:</strong></p>
+<ul>
+<li><p>Corrected streaming pipeline test assertions to match actual DataFrame output and buffer behavior.</p></li>
+<li><p>Updated corrupted data test to expect unparsed JSON strings in DataFrame output.</p></li>
+<li><p>Improved WebSocket mocking in async streaming tests for consistency and accuracy.</p></li>
+<li><p>Cleaned up obsolete or unreachable assertions in integration tests.</p></li>
+</ul>
+</li>
+<li><p><strong>Improved Technical Indicator Handling:</strong></p>
+<ul>
+<li><p>Mocked RSI, MACD, ATR, VWAP, and Bollinger Bands in transform tests to avoid NaN values.</p></li>
+<li><p>Expanded <code class="docutils literal notranslate"><span class="pre">sample_df</span></code> to 10 rows to support sequence length and horizon requirements.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">sample_df</span></code> fixture in <code class="docutils literal notranslate"><span class="pre">test_preprocessor.py</span></code> to provide sufficient data for <code class="docutils literal notranslate"><span class="pre">test_transform_single_ticker</span></code>, preventing <code class="docutils literal notranslate"><span class="pre">DataValidationError</span></code>.</p></li>
+<li><p>Modified <code class="docutils literal notranslate"><span class="pre">test_transform_multi_ticker</span></code> to parse ‘date’ column as datetime, resolving <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> for <code class="docutils literal notranslate"><span class="pre">to_period</span></code>.</p></li>
+<li><p>Replaced <code class="docutils literal notranslate"><span class="pre">sample_multi_ticker_csv</span></code> with a dynamic fixture providing sufficient rows per ticker.</p></li>
+<li><p>Ensured mocked indicator outputs match DataFrame index lengths.</p></li>
+<li><p>Prevented <code class="docutils literal notranslate"><span class="pre">DataValidationError</span></code> due to insufficient data after <code class="docutils literal notranslate"><span class="pre">dropna()</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Streaming Cleaner Pipeline Test:</strong></p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">IncrementalRSIStep</span></code> and <code class="docutils literal notranslate"><span class="pre">IncrementalMACDStep</span></code> to the pipeline steps in <code class="docutils literal notranslate"><span class="pre">test_streaming_cleaner_pipeline</span></code>.</p></li>
+<li><p>Ensured ‘rsi’ and ‘macd’ columns are added to the DataFrame, resolving <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code>.</p></li>
+<li><p>Maintained existing <code class="docutils literal notranslate"><span class="pre">MissingImputer</span></code> step with <code class="docutils literal notranslate"><span class="pre">backward_fill=True</span></code> for handling missing values.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Test Suite Failures:</strong></p>
+<ul>
+<li><p>Corrected async WebSocket mocking for <code class="docutils literal notranslate"><span class="pre">CSVLoader</span></code> stream test.</p></li>
+<li><p>Patched <code class="docutils literal notranslate"><span class="pre">build_loader</span></code> test to include valid <code class="docutils literal notranslate"><span class="pre">InfluxDBConfig</span></code> in mock configuration.</p></li>
+<li><p>Adjusted validation test to properly catch Pydantic error on invalid token type.</p></li>
+</ul>
+</li>
+<li><p><strong>Added Privacy Policy Draft:</strong></p>
+<ul>
+<li><p>Created <code class="docutils literal notranslate"><span class="pre">PRIVACY_POLICY.md</span></code> to outline MarketMind’s privacy practices, emphasizing no personal data collection.</p></li>
+<li><p>Included a draft notice indicating the policy is under review and not yet implemented.</p></li>
+<li><p>Formatted for GitHub rendering with clear headings and consistent style.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes:</strong></p>
+<ul>
+<li><p>These changes significantly improve the reliability and coverage of the test suite, ensuring the data pipeline functions correctly under various scenarios.</p></li>
+<li><p>The addition of a draft privacy policy provides transparency regarding data handling practices.</p></li>
+<li><p>Version incremented to <code class="docutils literal notranslate"><span class="pre">1.7.0</span></code> (MINOR) per Semantic Versioning for new features and improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-5-2025-05-24">
+<h2>Version 1.6.5 (2025-05-24)<a class="headerlink" href="#version-1-6-5-2025-05-24" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/fixtures/sample_csv.py</span></code>: Pytest fixture for sample single-ticker CSV data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/fixtures/sample_multi_ticker_csv.py</span></code>: Pytest fixture for sample multi-ticker CSV data.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_loader.py</span></code>: Modified <code class="docutils literal notranslate"><span class="pre">CSVLoader.load_data()</span></code> to return <code class="docutils literal notranslate"><span class="pre">list[pd.DataFrame]</span></code> using <code class="docutils literal notranslate"><span class="pre">chunksize</span></code> for memory efficiency, added <code class="docutils literal notranslate"><span class="pre">mlflow.log_metric(&quot;csv_rows_loaded&quot;,</span> <span class="pre">...)</span></code> to track row count, and updated return type hint to <code class="docutils literal notranslate"><span class="pre">list[pd.DataFrame]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>: Switched to <code class="docutils literal notranslate"><span class="pre">Config.model_validate()</span></code> for Pydantic v2 compatibility, added <code class="docutils literal notranslate"><span class="pre">get_runtime_config()</span></code> for lazy config evaluation, and made <code class="docutils literal notranslate"><span class="pre">TwitterConfig.api_key</span></code>, <code class="docutils literal notranslate"><span class="pre">Credentials.bloomberg_api_key</span></code>, and <code class="docutils literal notranslate"><span class="pre">Credentials.weather_api_key</span></code> optional (<code class="docutils literal notranslate"><span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></code>) to prevent <code class="docutils literal notranslate"><span class="pre">ConfigValidationError</span></code>. Removed global <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">=</span> <span class="pre">get_config()</span></code> usage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config_schema.json</span></code>: Added missing properties like <code class="docutils literal notranslate"><span class="pre">per_minute</span></code> under <code class="docutils literal notranslate"><span class="pre">rate_limit</span></code> for schema validation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/updated_logger.py</span></code>: Replaced <code class="docutils literal notranslate"><span class="pre">logger.py</span></code> with <code class="docutils literal notranslate"><span class="pre">structlog</span></code>-based logging, adding <code class="docutils literal notranslate"><span class="pre">configure_logger</span></code> for console, file, network, and cloud handlers, with log rotation, async logging, and sensitive data redaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_cleaning.py</span></code>: Enhanced <code class="docutils literal notranslate"><span class="pre">MissingImputer.apply()</span></code> to use forward-fill followed by backward-fill for NaN handling, logged imputed count via <code class="docutils literal notranslate"><span class="pre">mlflow.log_metric(&quot;missing_imputed&quot;,</span> <span class="pre">count)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/preprocessor.py</span></code>: Updated <code class="docutils literal notranslate"><span class="pre">Preprocessor._fill_missing()</span></code> to apply both forward and backward fills, added ATR calculation in <code class="docutils literal notranslate"><span class="pre">_add_indicators()</span></code> using <code class="docutils literal notranslate"><span class="pre">pandas_ta</span></code> with configurable <code class="docutils literal notranslate"><span class="pre">ffill</span></code>/<code class="docutils literal notranslate"><span class="pre">zero</span></code> fillna, and fixed <code class="docutils literal notranslate"><span class="pre">StreamingAnomalyStep.apply()</span></code> to drop outliers via <code class="docutils literal notranslate"><span class="pre">IsolationForest.predict</span> <span class="pre">==</span> <span class="pre">1</span></code> with index reset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>: Updated <code class="docutils literal notranslate"><span class="pre">TechnicalIndicators</span></code> Pydantic model to include <code class="docutils literal notranslate"><span class="pre">atr</span></code>, <code class="docutils literal notranslate"><span class="pre">vwap</span></code>, and <code class="docutils literal notranslate"><span class="pre">bollinger_bands</span></code> fields, standardized config access to dot notation (e.g., <code class="docutils literal notranslate"><span class="pre">config.data_source.csv.path</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/ib_data_collection.py</span></code>: Fixed <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> in <code class="docutils literal notranslate"><span class="pre">fetch_multiple_historical_data()</span></code> by adding None checks for <code class="docutils literal notranslate"><span class="pre">config.real_time_market_data.interactive_brokers</span></code> and using <code class="docutils literal notranslate"><span class="pre">get_config()</span></code> for lazy loading.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_config.py</span></code>: Fixed failures in <code class="docutils literal notranslate"><span class="pre">test_config_missing_required</span></code> by catching <code class="docutils literal notranslate"><span class="pre">ConfigValidationError</span></code> for missing <code class="docutils literal notranslate"><span class="pre">data_source</span></code>, added conditional handling in <code class="docutils literal notranslate"><span class="pre">test_env_var_resolution</span></code> for <code class="docutils literal notranslate"><span class="pre">ALPACA_KEY</span></code>, corrected attribute access in <code class="docutils literal notranslate"><span class="pre">test_load_config_valid</span></code> to use dictionary keys, and added dummy schema files to avoid <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>. Updated <code class="docutils literal notranslate"><span class="pre">schema_uri</span></code> to match <code class="docutils literal notranslate"><span class="pre">config.py</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_data_loader.py</span></code>: Added mocking for <code class="docutils literal notranslate"><span class="pre">get_config()</span></code> to provide <code class="docutils literal notranslate"><span class="pre">Config</span></code> with fields like <code class="docutils literal notranslate"><span class="pre">alternative_data.twitter</span></code> and <code class="docutils literal notranslate"><span class="pre">real_time_market_data.alpaca</span></code>, fixed <code class="docutils literal notranslate"><span class="pre">'Config'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'api_key'</span></code> errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_pipeline_integration.py</span></code>: Replaced <code class="docutils literal notranslate"><span class="pre">config</span></code> references with <code class="docutils literal notranslate"><span class="pre">get_config()</span></code> and added mocking to fix <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'config'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_data_cleaning.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_preprocessor.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_ib_api.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_ib_data_collection.py</span></code>: Updated to use <code class="docutils literal notranslate"><span class="pre">configure_logger</span></code> and <code class="docutils literal notranslate"><span class="pre">get_logger(__name__)</span></code> from <code class="docutils literal notranslate"><span class="pre">updated_logger.py</span></code>, added <code class="docutils literal notranslate"><span class="pre">setup_logging</span></code> fixture, and adjusted mocks for new logging system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code>: Added <code class="docutils literal notranslate"><span class="pre">backoff</span></code> for retry logic in data loaders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config.yaml</span></code>: Updated <code class="docutils literal notranslate"><span class="pre">VWAPConfig</span></code> to include <code class="docutils literal notranslate"><span class="pre">reset_period</span></code> and ensured optional API keys are nullable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/conftest.py</span></code>: Made <code class="docutils literal notranslate"><span class="pre">setup_logging</span></code> fixture session-scoped for consistent logging across tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>: Monkey-patched to restore <code class="docutils literal notranslate"><span class="pre">logger.warning</span></code> method for compatibility.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ConfigValidationError</span></code> in <code class="docutils literal notranslate"><span class="pre">test_config.py</span></code> by updating schema and making optional API keys nullable.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> in <code class="docutils literal notranslate"><span class="pre">test_config.py</span></code> by using dictionary key access in <code class="docutils literal notranslate"><span class="pre">test_load_config_valid</span></code> and <code class="docutils literal notranslate"><span class="pre">Path</span></code> objects in <code class="docutils literal notranslate"><span class="pre">monkeypatch.setattr</span></code>.</p></li>
+<li><p>Addressed <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> in <code class="docutils literal notranslate"><span class="pre">test_load_config_invalid_yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">test_config_missing_required</span></code>, and <code class="docutils literal notranslate"><span class="pre">test_env_var_resolution</span></code> by adding dummy schema files in test setups.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'NoneType'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'real_time_market_data'</span></code> in <code class="docutils literal notranslate"><span class="pre">ib_data_collection.py</span></code> with configuration checks.</p></li>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'config'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code> in <code class="docutils literal notranslate"><span class="pre">test_pipeline_integration.py</span></code> by using <code class="docutils literal notranslate"><span class="pre">get_config()</span></code>.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">'Config'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'api_key'</span></code> in <code class="docutils literal notranslate"><span class="pre">test_data_loader.py</span></code> with proper config mocking.</p></li>
+<li><p>Standardized logging with <code class="docutils literal notranslate"><span class="pre">updated_logger.py</span></code>, ensuring <code class="docutils literal notranslate"><span class="pre">marketmind.log</span></code> captures all logs, including test-related logs.</p></li>
+<li><p>Fixed regex assertions in tests to match <code class="docutils literal notranslate"><span class="pre">NoDataError</span></code> messages and improved test isolation for loader classes (Twitter, FRED, ESG, etc.).</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Enhanced data pipeline with chunked CSV loading, improved missing-data handling, and standardized technical indicator configurations.</p></li>
+<li><p>Improved test reliability with proper config mocking, schema validation, and logging consistency.</p></li>
+<li><p>Updated logging to support observability integrations (e.g., InfluxDB, CloudWatch) and sensitive data redaction.</p></li>
+<li><p>Version incremented to <code class="docutils literal notranslate"><span class="pre">1.6.5</span></code> (PATCH) per Semantic Versioning for bug fixes, test improvements, and minor feature enhancements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-4-2025-05-22">
+<h2>Version 1.6.4 (2025-05-22)<a class="headerlink" href="#version-1-6-4-2025-05-22" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/services/MockDataFetchService.java</span></code>: Renamed from <code class="docutils literal notranslate"><span class="pre">DataFetchService.java</span></code> to match public class name, resolving compilation errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/services/MockUserAuthService.java</span></code>: Renamed from <code class="docutils literal notranslate"><span class="pre">UserAuthService.java</span></code> to match public class name, resolving compilation errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/RootLayout.fxml</span></code>: Added proper XML declaration (<code class="docutils literal notranslate"><span class="pre">&lt;?xml</span> <span class="pre">version=&quot;1.0&quot;</span> <span class="pre">encoding=&quot;UTF-8&quot;?&gt;</span></code>) to resolve JavaFX loading errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/Login.fxml</span></code>: Added proper XML declaration (<code class="docutils literal notranslate"><span class="pre">&lt;?xml</span> <span class="pre">version=&quot;1.0&quot;</span> <span class="pre">encoding=&quot;UTF-8&quot;?&gt;</span></code>) to resolve JavaFX loading errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/Dashboard.fxml</span></code>: Fixed <code class="docutils literal notranslate"><span class="pre">javafx.fxml.LoadException</span></code> by updating <code class="docutils literal notranslate"><span class="pre">TableColumn</span></code> attribute from <code class="docutils literal notranslate"><span class="pre">text=&quot;%</span> <span class="pre">Change&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">text=&quot;${'%</span> <span class="pre">Change'}&quot;</span></code> to treat it as a literal string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/pom.xml</span></code>: Ensured <code class="docutils literal notranslate"><span class="pre">slf4j-api</span></code> and <code class="docutils literal notranslate"><span class="pre">logback-classic</span></code> dependencies are included to resolve <code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">resolve</span> <span class="pre">symbol</span> <span class="pre">'slf4j'</span></code> error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/module-info.java</span></code>: Added <code class="docutils literal notranslate"><span class="pre">requires</span> <span class="pre">javafx.controls;</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span> <span class="pre">javafx.fxml;</span></code> for JavaFX compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>: Updated <code class="docutils literal notranslate"><span class="pre">load_config</span></code> to use <code class="docutils literal notranslate"><span class="pre">Path(config_path).exists()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">CONFIG_PATH.exists()</span></code>, fixing <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>. Set <code class="docutils literal notranslate"><span class="pre">CONFIG_PATH</span></code> to <code class="docutils literal notranslate"><span class="pre">srcPy/data/config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">SCHEMA_PATH</span></code> to consistent base directory for <code class="docutils literal notranslate"><span class="pre">config_schema.json</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Updated version to <code class="docutils literal notranslate"><span class="pre">1.6.4</span></code>, added Eclipse Temurin 21.0.7 JDK recommendation, documented JavaFX setup, SLF4J troubleshooting, and Python config fixes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Added entry for version <code class="docutils literal notranslate"><span class="pre">1.6.4</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved JavaFX compilation errors by renaming <code class="docutils literal notranslate"><span class="pre">DataFetchService.java</span></code> and <code class="docutils literal notranslate"><span class="pre">UserAuthService.java</span></code> to match public class names.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">javafx.fxml.LoadException</span></code> in <code class="docutils literal notranslate"><span class="pre">RootLayout.fxml</span></code>, <code class="docutils literal notranslate"><span class="pre">Login.fxml</span></code>, and <code class="docutils literal notranslate"><span class="pre">Dashboard.fxml</span></code> by adding proper XML declarations and escaping percent signs in <code class="docutils literal notranslate"><span class="pre">Dashboard.fxml</span></code>.</p></li>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">resolve</span> <span class="pre">symbol</span> <span class="pre">'slf4j'</span></code> by ensuring SLF4J dependencies in <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> and reloading Maven project in IntelliJ.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> in <code class="docutils literal notranslate"><span class="pre">config.py</span></code> by using <code class="docutils literal notranslate"><span class="pre">Path</span></code> for file existence checks and updating <code class="docutils literal notranslate"><span class="pre">CONFIG_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">SCHEMA_PATH</span></code> to correct paths.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Recommended Eclipse Temurin 21.0.7 JDK for stability and JavaFX compatibility with Java 21.</p></li>
+<li><p>Configured IntelliJ IDEA with JavaFX SDK and updated <code class="docutils literal notranslate"><span class="pre">module-info.java</span></code> for proper JavaFX module recognition.</p></li>
+<li><p>Version incremented to <code class="docutils literal notranslate"><span class="pre">1.6.4</span></code> (PATCH) per Semantic Versioning for bug fixes and minor configuration improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-3-2025-05-19">
+<h2>Version 1.6.3 (2025-05-19)<a class="headerlink" href="#version-1-6-3-2025-05-19" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SECURITY.md</span></code>: Outlines the proposed security policy for MarketMind, including responsible disclosure, key security features, and secure development practices (draft, not yet implemented).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/getting_started.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/usage_guide.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/tutorials/basic_prediction.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/tutorials/advanced_features.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/architecture.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/api_reference.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/regulatory_compliance.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/security_practices.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/faq.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/glossary.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/CHANGELOG.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/contributors/coding_standards.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/contributors/contribution_workflow.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/images/</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/internal/threat</span> <span class="pre">growing_model.md</span></code>: Expanded documentation for user guides, tutorials, architecture, and contributor onboarding.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>: Added <code class="docutils literal notranslate"><span class="pre">Logger</span></code> class wrapping <code class="docutils literal notranslate"><span class="pre">structlog</span></code> with <code class="docutils literal notranslate"><span class="pre">_log</span></code> method to handle keyword arguments (<code class="docutils literal notranslate"><span class="pre">error_type</span></code>, <code class="docutils literal notranslate"><span class="pre">columns</span></code>), fixing <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">Logger._log()</span> <span class="pre">unexpected</span> <span class="pre">keyword</span> <span class="pre">argument</span></code> in <code class="docutils literal notranslate"><span class="pre">test_data_cleaning.py</span></code> and <code class="docutils literal notranslate"><span class="pre">test_preprocessor.py</span></code>. Achieved 100% test coverage for <code class="docutils literal notranslate"><span class="pre">logger.py</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_cleaning.py</span></code>: Updated to use new <code class="docutils literal notranslate"><span class="pre">Logger</span></code> class for consistent logging. Test coverage at 66%.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/preprocessor.py</span></code>: Updated to use new <code class="docutils literal notranslate"><span class="pre">Logger</span></code> class and fixed import path (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">srcPy.data.preprocessor</span></code>). Test coverage at 31%.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/ib_api.py</span></code>: Fixed <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">'Config'</span> <span class="pre">object</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">subscriptable</span></code> by using Pydantic attribute access (<code class="docutils literal notranslate"><span class="pre">config.real_time_market_data.interactive_brokers</span></code>) and <code class="docutils literal notranslate"><span class="pre">get_config()</span></code> for testing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">requirementsFreeze.txt</span></code>: Added <code class="docutils literal notranslate"><span class="pre">requests-cache</span></code>, <code class="docutils literal notranslate"><span class="pre">requests-ratelimiter</span></code>, <code class="docutils literal notranslate"><span class="pre">dask</span></code>, and <code class="docutils literal notranslate"><span class="pre">vaderSentiment</span></code> for data processing and sentiment analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/conftest.py</span></code>: Removed <code class="docutils literal notranslate"><span class="pre">scope=&quot;session&quot;</span></code> from <code class="docutils literal notranslate"><span class="pre">env_api_keys</span></code> fixture to resolve <code class="docutils literal notranslate"><span class="pre">ScopeMismatch</span></code> error, aligning with <code class="docutils literal notranslate"><span class="pre">monkeypatch</span></code> function scope.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_data_cleaning.py</span></code>: Updated to use fully qualified import (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">srcPy.data.data_cleaning</span></code>) and mock <code class="docutils literal notranslate"><span class="pre">Logger.info</span></code> for compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_preprocessor.py</span></code>: Updated to mock <code class="docutils literal notranslate"><span class="pre">Logger.info</span></code> and fixed import path for <code class="docutils literal notranslate"><span class="pre">Preprocessor</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_ib_api.py</span></code>: Aligned with new <code class="docutils literal notranslate"><span class="pre">real_time_market_data.interactive_brokers</span></code> structure in <code class="docutils literal notranslate"><span class="pre">mock_config</span></code> and re-enabled in <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> with <code class="docutils literal notranslate"><span class="pre">--cov=srcPy.data.ib_api</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_config.py</span></code>: Updated imports: removed unused <code class="docutils literal notranslate"><span class="pre">jsonschema.exceptions.ConfigValidationError</span></code>, added <code class="docutils literal notranslate"><span class="pre">srcPy.utils.exceptions.ConfigValidationError</span></code>, kept <code class="docutils literal notranslate"><span class="pre">jsonschema.exceptions.ValidationError</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">patchedLibs/pandas-ta-main-local/*.py</span></code>: Fixed stray brackets in multiple files to resolve syntax issues.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config.yaml</span></code>: Added <code class="docutils literal notranslate"><span class="pre">calendar_features</span></code> to preprocessing stub to fix schema validation in <code class="docutils literal notranslate"><span class="pre">load_config()</span></code>. Added environment variable mappings for <code class="docutils literal notranslate"><span class="pre">INFLUXDB_TOKEN</span></code>, <code class="docutils literal notranslate"><span class="pre">IB_API_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">ALPACA_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">ALPACA_SECRET</span></code>, <code class="docutils literal notranslate"><span class="pre">FRED_API_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">TWITTER_BEARER_TOKEN</span></code>, <code class="docutils literal notranslate"><span class="pre">ESG_API_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">BBG_API_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">WEATHER_API_KEY</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci.yaml</span></code>: Added OS matrix (<code class="docutils literal notranslate"><span class="pre">ubuntu-latest</span></code>, <code class="docutils literal notranslate"><span class="pre">windows-latest</span></code>) for Python tests, replaced inline <code class="docutils literal notranslate"><span class="pre">pytest</span></code> calls with <code class="docutils literal notranslate"><span class="pre">run_tests.sh</span></code> (Linux) and <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> (Windows), set <code class="docutils literal notranslate"><span class="pre">shell:</span> <span class="pre">bash</span></code> (Linux) and <code class="docutils literal notranslate"><span class="pre">shell:</span> <span class="pre">cmd</span></code> (Windows). Disabled undeveloped C++ job. Added Dependabot auto-merge for PRs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/dependabot.yml</span></code>: Configured Dependabot for Python, Java, and GitHub Actions dependency updates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DirectoryStructure.md</span></code>: Updated to reflect expanded <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory with new documentation files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Updated version to <code class="docutils literal notranslate"><span class="pre">1.6.3</span></code>, added new dependencies, included API key configuration instructions, and referenced <code class="docutils literal notranslate"><span class="pre">SECURITY.md</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Added entry for version <code class="docutils literal notranslate"><span class="pre">1.6.3</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved CodeQL alerts: #9 (clear-text logging of sensitive information) and #4 (uncontrolled data used in path expression) with Copilot Autofix assistance.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> in <code class="docutils literal notranslate"><span class="pre">logger.py</span></code>, <code class="docutils literal notranslate"><span class="pre">ib_api.py</span></code>, and related tests for consistent configuration and logging.</p></li>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ScopeMismatch</span></code> in <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> for improved test isolation.</p></li>
+<li><p>Fixed pandas-ta syntax issues in <code class="docutils literal notranslate"><span class="pre">patchedLibs/pandas-ta-main-local</span></code> by removing stray brackets.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Enhanced CI with OS-specific testing and Dependabot for dependency management.</p></li>
+<li><p>Improved test reliability and coverage for <code class="docutils literal notranslate"><span class="pre">logger.py</span></code>, <code class="docutils literal notranslate"><span class="pre">data_cleaning.py</span></code>, <code class="docutils literal notranslate"><span class="pre">preprocessor.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">ib_api.py</span></code>.</p></li>
+<li><p>Added sentiment analysis support with <code class="docutils literal notranslate"><span class="pre">vaderSentiment</span></code> and optimized API requests with <code class="docutils literal notranslate"><span class="pre">requests-cache</span></code> and <code class="docutils literal notranslate"><span class="pre">requests-ratelimiter</span></code>.</p></li>
+<li><p>Expanded documentation for better user and contributor onboarding.</p></li>
+<li><p>Version incremented to <code class="docutils literal notranslate"><span class="pre">1.6.3</span></code> (PATCH) per Semantic Versioning for bug fixes, dependency updates, CI enhancements, and documentation improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-2-2025-05-17">
+<h2>Version 1.6.2 (2025-05-17)<a class="headerlink" href="#version-1-6-2-2025-05-17" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>: Configures test discovery to include patched <code class="docutils literal notranslate"><span class="pre">pandas-ta-main-local</span></code> in <code class="docutils literal notranslate"><span class="pre">patchedLibs/</span></code> for technical indicator calculations.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_cleaning.py</span></code>: Enhanced with <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> for advanced noise reduction and smoothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_loader.py</span></code>: Improved InfluxDB integration with <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code> and added FRED API support via <code class="docutils literal notranslate"><span class="pre">fredapi</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/preprocessor.py</span></code>: Updated to incorporate <code class="docutils literal notranslate"><span class="pre">pandas-ta</span></code> from <code class="docutils literal notranslate"><span class="pre">patchedLibs/pandas-ta-main-local</span></code> for technical indicators.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/pipeline.py</span></code>: Enhanced to integrate data cleaning, preprocessing, and loading with <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> and <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>: Updated to use <code class="docutils literal notranslate"><span class="pre">structlog</span></code> for structured logging.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>: Added <code class="docutils literal notranslate"><span class="pre">fred_api_key</span></code> resolution for FRED API and updated to use <code class="docutils literal notranslate"><span class="pre">FREDConfig</span></code> model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp/inference_benchmark.cpp</span></code>: Updated to use C++20 <code class="docutils literal notranslate"><span class="pre">std::span</span></code> for array handling, improving memory safety and performance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp/CMakeLists.txt</span></code>: Configured <code class="docutils literal notranslate"><span class="pre">inference_benchmark</span></code> as a separate executable with C++20 standard (<code class="docutils literal notranslate"><span class="pre">set(CMAKE_CXX_STANDARD</span> <span class="pre">20)</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/config.yaml</span></code>: Added <code class="docutils literal notranslate"><span class="pre">fred_api_key</span></code> under <code class="docutils literal notranslate"><span class="pre">security.credentials</span></code> and <code class="docutils literal notranslate"><span class="pre">alternative_data.fred</span></code> for FRED API integration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_config.py</span></code>: Updated to test <code class="docutils literal notranslate"><span class="pre">fred_api_key</span></code> resolution in <code class="docutils literal notranslate"><span class="pre">security.credentials</span></code> and <code class="docutils literal notranslate"><span class="pre">alternative_data.fred</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_data_loader.py</span></code>: Added invalid key test for <code class="docutils literal notranslate"><span class="pre">FREDLoader</span></code> and updated imports to <code class="docutils literal notranslate"><span class="pre">srcPy.data</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_pipeline_integration.py</span></code>: Consolidated streaming tests from <code class="docutils literal notranslate"><span class="pre">test_integration.py</span></code>, added <code class="docutils literal notranslate"><span class="pre">test_fred_pipeline_integration</span></code>, and optimized with <code class="docutils literal notranslate"><span class="pre">mock_mlflow</span></code> fixture and <code class="docutils literal notranslate"><span class="pre">tmp_path</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci.yaml</span></code>: Updated to inject <code class="docutils literal notranslate"><span class="pre">FRED_API_KEY</span></code> from GitHub Secrets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> and <code class="docutils literal notranslate"><span class="pre">run_tests.sh</span></code>: Added <code class="docutils literal notranslate"><span class="pre">test_data_loader.py</span></code> and updated <code class="docutils literal notranslate"><span class="pre">test_pipeline_integration.py</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Added FRED API setup instructions and updated version history for 1.6.2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Added entry for version 1.6.2.</p></li>
+</ul>
+</li>
+<li><p><strong>Renamed Files</strong>:</p>
+<ul>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">MarketMind</span> <span class="pre">Directory</span> <span class="pre">Structure.md</span></code> to <code class="docutils literal notranslate"><span class="pre">DirectoryStructure.md</span></code> for brevity and clarity.</p></li>
+</ul>
+</li>
+<li><p><strong>Removed</strong>:</p>
+<ul>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">TwitterLoader</span></code> tests from <code class="docutils literal notranslate"><span class="pre">test_pipeline_integration.py</span></code>, as not in project scope.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Consolidated streaming tests from <code class="docutils literal notranslate"><span class="pre">test_integration.py</span></code> into <code class="docutils literal notranslate"><span class="pre">test_pipeline_integration.py</span></code> using <code class="docutils literal notranslate"><span class="pre">AlpacaStreamLoader</span></code> for financial focus.</p></li>
+<li><p>Added error-handling tests (invalid CSV, API timeout, corrupted data) to <code class="docutils literal notranslate"><span class="pre">test_pipeline_integration.py</span></code>.</p></li>
+<li><p>Integrated FRED API for economic indicator fetching with <code class="docutils literal notranslate"><span class="pre">fred_api_key</span></code> resolution.</p></li>
+<li><p>Version incremented to 1.6.2 (PATCH) per Semantic Versioning for configuration updates, test enhancements, and FRED API integration.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-1-2025-05-16">
+<h2>Version 1.6.1 (2025-05-16)<a class="headerlink" href="#version-1-6-1-2025-05-16" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>: Configures test discovery to include patched <code class="docutils literal notranslate"><span class="pre">pandas-ta-main-local</span></code> in <code class="docutils literal notranslate"><span class="pre">patchedLibs/</span></code> for technical indicator calculations.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp/inference_benchmark.cpp</span></code>: Updated to use C++20 <code class="docutils literal notranslate"><span class="pre">std::span</span></code> for array handling, improving memory safety and performance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp/CMakeLists.txt</span></code>: Configured <code class="docutils literal notranslate"><span class="pre">inference_benchmark</span></code> as a separate executable with C++20 standard (<code class="docutils literal notranslate"><span class="pre">set(CMAKE_CXX_STANDARD</span> <span class="pre">20)</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci.yaml</span></code>:</p>
+<ul>
+<li><p>Enforced C++20 with <code class="docutils literal notranslate"><span class="pre">-DCMAKE_CXX_STANDARD=20</span></code> in CMake steps.</p></li>
+<li><p>Restructured C++ and Java jobs for Linux and Windows with OS-specific naming (e.g., <code class="docutils literal notranslate"><span class="pre">cpp-libs-linux</span></code>, <code class="docutils literal notranslate"><span class="pre">java-artifacts-windows</span></code>).</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">needs</span></code> for Java jobs to depend on corresponding C++ jobs for JNI integration.</p></li>
+<li><p>Combined Maven <code class="docutils literal notranslate"><span class="pre">clean</span> <span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> into a single step for Java jobs.</p></li>
+<li><p>Added C++ inference benchmark to enforce sub-millisecond latency.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">test_cpp_inference</span></code> to use self-hosted GPU runner for CUDA 12.9 testing.</p></li>
+<li><p>Updated Java version to 21.</p></li>
+<li><p>Adjusted artifact paths to use <code class="docutils literal notranslate"><span class="pre">bin/</span></code> output directory.</p></li>
+<li><p>Optimized dependency management using <code class="docutils literal notranslate"><span class="pre">requirementsFreeze.txt</span></code> for Python jobs.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/pom.xml</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">maven-jar-plugin</span></code> to specify <code class="docutils literal notranslate"><span class="pre">com.example.MainApp</span></code> as the main class and ensure JAR packaging.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">testFailureIgnore=true</span></code> in <code class="docutils literal notranslate"><span class="pre">maven-surefire-plugin</span></code> to allow JAR generation despite test failures.</p></li>
+<li><p>Explicitly specified <code class="docutils literal notranslate"><span class="pre">&lt;packaging&gt;jar&lt;/packaging&gt;</span></code> for clarity.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">structlog</span></code> for structured logging in <code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> for Kalman filtering in data cleaning.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code> for time-series storage integration.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/logger.py</span></code>: Updated to use <code class="docutils literal notranslate"><span class="pre">structlog</span></code> for structured logging, replacing basic console logging.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_cleaning.py</span></code>: Enhanced with <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> for advanced noise reduction and smoothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_loader.py</span></code>: Improved integration with <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code> for efficient time-series data retrieval.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/config.py</span></code>: Added configuration options for InfluxDB and logging levels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/preprocessor.py</span></code>: Updated to incorporate <code class="docutils literal notranslate"><span class="pre">pandas-ta</span></code> from <code class="docutils literal notranslate"><span class="pre">patchedLibs/pandas-ta-main-local</span></code> for technical indicators.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/pipeline.py</span></code>: Enhanced to integrate data cleaning, preprocessing, and loading with <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> and <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
+<ul>
+<li><p>Updated badges to reflect <code class="docutils literal notranslate"><span class="pre">requirementsFreeze.txt</span></code> usage in CI.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">pykalman</span></code>, <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code>, and <code class="docutils literal notranslate"><span class="pre">en_core_web_trf-3.7.1</span></code> wheel to prerequisites.</p></li>
+<li><p>Documented <code class="docutils literal notranslate"><span class="pre">structlog</span></code> dependency and <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> for test discovery.</p></li>
+<li><p>Updated setup instructions to include <code class="docutils literal notranslate"><span class="pre">requirementsFreeze.txt</span></code> for CI consistency.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Added entry for version 1.6.1.</p></li>
+</ul>
+</li>
+<li><p><strong>Fixed Issues</strong>:</p>
+<ul>
+<li><p>Resolved “Cannot specify include directories for target ‘inference_benchmark’” by cleaning build directory and verifying <code class="docutils literal notranslate"><span class="pre">src/inference_benchmark.cpp</span></code> existence.</p></li>
+<li><p>Fixed CI error “no JAR files found in java/target/” by adding <code class="docutils literal notranslate"><span class="pre">maven-jar-plugin</span></code> and explicit <code class="docutils literal notranslate"><span class="pre">&lt;packaging&gt;jar&lt;/packaging&gt;</span></code>.</p></li>
+<li><p>Ensured CMake configuration completes successfully for C++ builds.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Optimized CI/CD pipeline for efficiency with combined Maven steps, dependency management via <code class="docutils literal notranslate"><span class="pre">requirementsFreeze.txt</span></code>, and self-hosted GPU runner for CUDA testing.</p></li>
+<li><p>Improved C++ inference performance with C++20 features and sub-millisecond latency verified in CI.</p></li>
+<li><p>Enhanced Python data pipeline with <code class="docutils literal notranslate"><span class="pre">pykalman</span></code> for filtering, <code class="docutils literal notranslate"><span class="pre">influxdb-client</span></code> for storage, and <code class="docutils literal notranslate"><span class="pre">structlog</span></code> for logging.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> to control test discovery for <code class="docutils literal notranslate"><span class="pre">patchedLibs/pandas-ta-main-local</span></code>.</p></li>
+<li><p>Version incremented to 1.6.1 (PATCH) per Semantic Versioning for bug fixes, dependency additions, and CI improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-6-0-2025-05-11">
+<h2>Version 1.6.0 (2025-05-11)<a class="headerlink" href="#version-1-6-0-2025-05-11" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/alternative_data.py</span></code>: Fetches alternative data (social media, supply chain, ESG, insider trading).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data/data_cleaning.py</span></code>: Implements outlier detection, Kalman filtering, and normalization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/ensemble/ensemble_model.py</span></code>: Combines Transformer with XGBoost and ARIMA for ensemble predictions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/custom_models.py</span></code>: Experiments with proprietary Transformer layers for financial data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/strategies/stat_arb.py</span></code>: Implements statistical arbitrage trading strategies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/strategies/momentum.py</span></code>: Implements momentum-based trading strategies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/risk_management.py</span></code>: Adds Kelly criterion, stop-losses, and drawdown monitoring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/utils/portfolio.py</span></code>: Implements portfolio optimization and capital limits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/trading.py</span></code>: Automates trade execution via Interactive Brokers API.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/backtesting.py</span></code>: Supports extensive historical simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/simulation.py</span></code>: Manages paper and live trading simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_alternative_data.py</span></code>: Tests alternative data fetching.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_ensemble_model.py</span></code>: Tests ensemble model accuracy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_trading.py</span></code>: Tests automated trading logic.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_risk_management.py</span></code>: Tests risk management functions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/influxdb_config.yaml</span></code>: Configures InfluxDB for time-series storage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/docker-compose.yml</span></code>: Configures cloud GPU deployment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/onboarding.md</span></code>: Provides collaboration and setup guide.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/controllers/DashboardController.java</span></code>: JavaFX controller for dashboard UI events and stock data display.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/controllers/LoginController.java</span></code>: JavaFX controller for login UI and authentication.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/controllers/SettingsController.java</span></code>: JavaFX controller for user preference settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/views/CustomChartNode.java</span></code>: Optional custom JavaFX node for chart visualizations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/services/DataFetchService.java</span></code>: Service for asynchronous market data fetching.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/services/UserAuthService.java</span></code>: Service for user authentication logic.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/utils/JSONParser.java</span></code>: Utility for JSON parsing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/utils/DateUtils.java</span></code>: Utility for date formatting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/persistence/UserPrefsManager.java</span></code>: Manages user preference storage in JSON.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/models/UserPrefs.java</span></code>: Model for user preferences (e.g., theme, layout).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/models/StockData.java</span></code>: Model for stock data (e.g., ticker, price).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/MainApp.java</span></code>: JavaFX application entry point with navigation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/RootLayout.fxml</span></code>: Main JavaFX layout with BorderPane for view switching.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/Dashboard.fxml</span></code>: Dashboard view for stock data and predictions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/Login.fxml</span></code>: Login view for authentication.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/Settings.fxml</span></code>: Settings view for preferences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/css/styles.css</span></code>: Global JavaFX styling (e.g., dark theme).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/css/dashboard.css</span></code>: Dashboard-specific styling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/config/application.properties</span></code>: Application-wide settings (e.g., API endpoints).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/controllers/DashboardControllerTest.java</span></code>: Tests dashboard UI events with mocked services.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/controllers/LoginControllerTest.java</span></code>: Tests login UI with mocked authentication.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/controllers/SettingsControllerTest.java</span></code>: Tests settings UI with mocked preferences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/views/CustomChartNodeTest.java</span></code>: Tests custom chart node (if used).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/integration/PythonRunnerTest.java</span></code>: Tests Python script execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/integration/InferenceJNITest.java</span></code>: Tests C++ inference via JNI.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/integration/BackendClientTest.java</span></code>: Tests gRPC client requests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/services/DataFetchServiceTest.java</span></code>: Tests data fetching service.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/services/UserAuthServiceTest.java</span></code>: Tests authentication service.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/utils/JSONParserTest.java</span></code>: Tests JSON parsing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/utils/DateUtilsTest.java</span></code>: Tests date formatting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/persistence/UserPrefsManagerTest.java</span></code>: Tests preference storage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/models/UserPrefsTest.java</span></code>: Tests user preference model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/models/StockDataTest.java</span></code>: Tests stock data model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/MainAppTest.java</span></code>: Tests JavaFX app startup and navigation with TestFX.</p></li>
+</ul>
+</li>
+<li><p><strong>Added Directories</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/models/ensemble/</span></code>: Directory for ensemble model scripts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/strategies/</span></code>: Directory for trading strategy scripts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deployment/</span></code>: Directory for deployment configurations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Directory for team documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/controllers/</span></code>: Directory for JavaFX controllers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/ui/views/</span></code>: Directory for custom JavaFX UI components.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/services/</span></code>: Directory for business logic services.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/utils/</span></code>: Directory for utility classes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/persistence/</span></code>: Directory for preference storage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/src/com/example/models/</span></code>: Directory for domain models.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/fxml/</span></code>: Directory for FXML view files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/css/</span></code>: Directory for CSS styling files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java/resources/config/</span></code>: Directory for configuration files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/controllers/</span></code>: Directory for controller tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/ui/views/</span></code>: Directory for view component tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/services/</span></code>: Directory for service tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/utils/</span></code>: Directory for utility tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/persistence/</span></code>: Directory for persistence tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/java/models/</span></code>: Directory for model tests.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/ib_data_collection.py</span></code>: Extended to support high-frequency intraday data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/data_loader.py</span></code>: Integrated with InfluxDB for time-series storage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/train_model.py</span></code>: Added support for short-term prediction horizons and online learning.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/evaluate_model.py</span></code>: Enhanced with statistical focus using SHAP.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpp/CMakeLists.txt</span></code>: Added optimization flags for HFT inference.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code>: Added JavaFX dependencies (<code class="docutils literal notranslate"><span class="pre">javafx-controls</span></code>, <code class="docutils literal notranslate"><span class="pre">javafx-fxml</span></code>, <code class="docutils literal notranslate"><span class="pre">testfx-junit5</span></code>) and updated to Java 21.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci.yaml</span></code>: Enhanced CI/CD with Codecov for Java coverage, fixed <code class="docutils literal notranslate"><span class="pre">ccache</span></code> in C++ build step, added retries for JavaFX tests, and included <code class="docutils literal notranslate"><span class="pre">cppcheck</span></code> debug output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Updated project structure and feature descriptions. Updated to reflect JavaFX GUI, Java 21, expanded Java package structure, and added build status and Codecov badges.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarketMind</span> <span class="pre">Directory</span> <span class="pre">Structure.md</span></code>: Reflected new files and directories. Expanded Java GUI directory with controllers, FXML, and CSS, updated to Java 21.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Added entry for version 1.6.0.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Enhanced project for high-frequency trading with automated execution, risk management, and alternative data.</p></li>
+<li><p>Replaced <code class="docutils literal notranslate"><span class="pre">processed_data.bin</span></code> with InfluxDB for efficient data handling.</p></li>
+<li><p>Added ensemble modeling and proprietary layers to improve prediction accuracy.</p></li>
+<li><p>Version incremented to 1.6.0 (MINOR) per Semantic Versioning for new functionality.</p></li>
+<li><p>Transitioned GUI from Swing to JavaFX, adopting MVC architecture with FXML-based views, modular controllers, and CSS styling for a responsive, modern interface.</p></li>
+<li><p>Updated Java to 21 for compatibility with JavaFX 21 and modern features.</p></li>
+<li><p>Expanded Java package structure to include <code class="docutils literal notranslate"><span class="pre">ui/controllers</span></code>, <code class="docutils literal notranslate"><span class="pre">ui/views</span></code>, <code class="docutils literal notranslate"><span class="pre">services</span></code>, <code class="docutils literal notranslate"><span class="pre">utils</span></code>, <code class="docutils literal notranslate"><span class="pre">persistence</span></code>, and <code class="docutils literal notranslate"><span class="pre">models</span></code> for better modularity.</p></li>
+<li><p>Enhanced CI/CD pipeline with Codecov integration for Java test coverage, fixed <code class="docutils literal notranslate"><span class="pre">ccache</span></code> usage in C++ builds, and added retries for JavaFX test stability.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-5-4-2025-05-09">
+<h2>Version 1.5.4 (2025-05-09)<a class="headerlink" href="#version-1-5-4-2025-05-09" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests/python/test_ib_data_collection.py</span></code>:</p>
+<ul>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">test_no_data_no_cache</span></code> by explicitly importing <code class="docutils literal notranslate"><span class="pre">NoDataError</span></code> from <code class="docutils literal notranslate"><span class="pre">srcPy.data.ib_data_collection</span></code> to resolve type mismatch in <code class="docutils literal notranslate"><span class="pre">pytest.raises</span></code>.</p></li>
+<li><p>Moved <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_no_data</span></code> into <code class="docutils literal notranslate"><span class="pre">TestAsyncHelpers</span></code> class and corrected indentation of <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_caches_and_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_cache_update</span></code>, and <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_timeout</span></code> to ensure proper test discovery.</p></li>
+<li><p>Ensured all async tests in <code class="docutils literal notranslate"><span class="pre">TestAsyncHelpers</span></code> have <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.asyncio</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">testpaths</span> <span class="pre">=</span> <span class="pre">tests/python</span></code> to restrict test discovery to <code class="docutils literal notranslate"><span class="pre">MarketMind</span></code> tests, preventing errors from unrelated directories (e.g., <code class="docutils literal notranslate"><span class="pre">tensorflow-onnx</span></code>).</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span> <span class="pre">=</span> <span class="pre">auto</span></code> to improve async test discovery reliability.</p></li>
+</ul>
+</li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code> to include <code class="docutils literal notranslate"><span class="pre">pyarrow</span></code> for parquet file support in <code class="docutils literal notranslate"><span class="pre">ib_data_collection.py</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to reflect version 1.5.4 and document test fixes.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code> to include this version entry.</p></li>
+</ul>
+</li>
+<li><p><strong>Dependencies</strong>:</p>
+<ul>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">pytest-structlog==1.1</span></code> dependency due to potential interference with <code class="docutils literal notranslate"><span class="pre">pytest.raises</span></code> exception handling.</p></li>
+<li><p>Confirmed compatibility with <code class="docutils literal notranslate"><span class="pre">pytest==8.3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest-asyncio==0.26.0</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest-mock==3.14.0</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest-cov==6.1.1</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">pyarrow</span></code>, <code class="docutils literal notranslate"><span class="pre">ib_insync==0.9.70</span></code>, <code class="docutils literal notranslate"><span class="pre">structlog</span></code>, and existing <code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code> dependencies.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code> for <code class="docutils literal notranslate"><span class="pre">parameterized</span></code> and <code class="docutils literal notranslate"><span class="pre">timeout_decorator</span></code> by excluding <code class="docutils literal notranslate"><span class="pre">tensorflow-onnx</span></code> tests via <code class="docutils literal notranslate"><span class="pre">testpaths</span></code>.</p></li>
+<li><p>Fixed test discovery issue for <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_no_data</span></code> by placing it in <code class="docutils literal notranslate"><span class="pre">TestAsyncHelpers</span></code> and ensuring <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span> <span class="pre">=</span> <span class="pre">auto</span></code>.</p></li>
+<li><p>Addressed <code class="docutils literal notranslate"><span class="pre">NoDataError</span></code> import mismatch in <code class="docutils literal notranslate"><span class="pre">test_no_data_no_cache</span></code> and <code class="docutils literal notranslate"><span class="pre">test_fetch_historical_async_no_data</span></code>, ensuring <code class="docutils literal notranslate"><span class="pre">pytest.raises</span></code> correctly matches the exception type.</p></li>
+<li><p>Ensured all 26 tests (23 from <code class="docutils literal notranslate"><span class="pre">test_ib_data_collection.py</span></code>, 3 from <code class="docutils literal notranslate"><span class="pre">test_ib_api.py</span></code>) pass with coverage reporting.</p></li>
+<li><p>Improved test reliability by removing <code class="docutils literal notranslate"><span class="pre">pytest-structlog</span></code> and using standard <code class="docutils literal notranslate"><span class="pre">structlog</span></code> logging.</p></li>
+<li><p>Version incremented to 1.5.4 (PATCH) per Semantic Versioning for bug fixes and test configuration improvements.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-5-3-2025-05-05">
+<h2>Version 1.5.3 (2025-05-05)<a class="headerlink" href="#version-1-5-3-2025-05-05" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> to include <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span> <span class="pre">=</span> <span class="pre">function</span></code> to resolve <code class="docutils literal notranslate"><span class="pre">PytestDeprecationWarning</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests\run_tests.bat</span></code> to suppress <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> from <code class="docutils literal notranslate"><span class="pre">eventkit</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests\python\conftest.py</span></code> to use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.</span> <span class="pre">import</span> <span class="pre">path_setup</span></code> for correct import resolution.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to include <code class="docutils literal notranslate"><span class="pre">pytest-asyncio&gt;=0.26.0</span></code> dependency, reflect version 1.5.3, and document test fixes.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code> to include entries for 1.5.1–1.5.3.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">PytestDeprecationWarning</span></code> by setting <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span></code> explicitly.</p></li>
+<li><p>Suppressed <code class="docutils literal notranslate"><span class="pre">eventkit</span></code> <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> in <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> for cleaner test output.</p></li>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'path_setup'</span></code> by reverting to relative import in <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code>.</p></li>
+<li><p>Confirmed all async tests in <code class="docutils literal notranslate"><span class="pre">test_ib_data_collection.py</span></code> and <code class="docutils literal notranslate"><span class="pre">test_ib_api.py</span></code> pass.</p></li>
+<li><p>Version incremented to 1.5.3 (PATCH) per Semantic Versioning for bug fixes.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-5-2-2025-05-05">
+<h2>Version 1.5.2 (2025-05-05)<a class="headerlink" href="#version-1-5-2-2025-05-05" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests\python\conftest.py</span></code> to mock <code class="docutils literal notranslate"><span class="pre">IB</span></code> class from <code class="docutils literal notranslate"><span class="pre">ib_insync</span></code> using <code class="docutils literal notranslate"><span class="pre">monkeypatch</span></code>, fixing test failures.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests\python\test_ib_data_collection.py</span></code> and <code class="docutils literal notranslate"><span class="pre">test_ib_api.py</span></code> to use correct assertions and async tests for <code class="docutils literal notranslate"><span class="pre">ib_connection()</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> to use <code class="docutils literal notranslate"><span class="pre">pythonpath</span> <span class="pre">=</span> <span class="pre">srcPy</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python_paths</span></code> and enable <code class="docutils literal notranslate"><span class="pre">pytest-asyncio</span></code> with <code class="docutils literal notranslate"><span class="pre">markers</span> <span class="pre">=</span> <span class="pre">asyncio</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code> and <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code> to reflect test fixes and version 1.5.2.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> and <code class="docutils literal notranslate"><span class="pre">IBConnectionError</span></code> in <code class="docutils literal notranslate"><span class="pre">test_ib_connection_success</span></code> by mocking <code class="docutils literal notranslate"><span class="pre">IB</span></code> class instantiation.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">DID</span> <span class="pre">NOT</span> <span class="pre">RAISE</span> <span class="pre">IBConnectionError</span></code> in <code class="docutils literal notranslate"><span class="pre">test_ib_connection_failure</span></code> by correctly setting <code class="docutils literal notranslate"><span class="pre">connect.side_effect</span></code>.</p></li>
+<li><p>Addressed <code class="docutils literal notranslate"><span class="pre">RuntimeWarning:</span> <span class="pre">coroutine</span> <span class="pre">'mock_ib.&lt;locals&gt;.async_bars'</span> <span class="pre">was</span> <span class="pre">never</span> <span class="pre">awaited</span></code> by returning mock values directly.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">pytest-asyncio</span></code> to support async tests.</p></li>
+<li><p>Version incremented to 1.5.2 (PATCH) per Semantic Versioning for bug fixes.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-5-1-2025-05-05">
+<h2>Version 1.5.1 (2025-05-05)<a class="headerlink" href="#version-1-5-1-2025-05-05" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">tests\run_tests.bat</span></code> and <code class="docutils literal notranslate"><span class="pre">tests\run_tests.sh</span></code> to use correct test paths (<code class="docutils literal notranslate"><span class="pre">tests\python\test_ib_data_collection.py</span></code>, <code class="docutils literal notranslate"><span class="pre">tests\python\test_ib_api.py</span></code>) instead of <code class="docutils literal notranslate"><span class="pre">tests\srcPy\</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to reflect corrected test paths and increment version to 1.5.1.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code> to include version 1.5.1 entry.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span> <span class="pre">not</span> <span class="pre">found:</span> <span class="pre">tests\srcPy\test_ib_data_collection.py</span></code> by updating test paths in <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> and <code class="docutils literal notranslate"><span class="pre">run_tests.sh</span></code>.</p></li>
+<li><p>Version incremented to 1.5.1 (PATCH) per Semantic Versioning for bug fixes.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-5-0-2025-05-04">
+<h2>Version 1.5.0 (2025-05-04)<a class="headerlink" href="#version-1-5-0-2025-05-04" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">srcPy/requirements.txt</span></code> to include:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">bertopic</span></code> for NLP topic modeling of financial texts (e.g., news, earnings calls).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spacy[transformers]&gt;=3.7</span></code> and <code class="docutils literal notranslate"><span class="pre">en_core_web_trf-3.7.1</span></code> for advanced NLP processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shap</span></code> for model explainability, providing feature importance for the hybrid Transformer model.</p></li>
+</ul>
+</li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to document new NLP and explainability features, reflect <code class="docutils literal notranslate"><span class="pre">srcPy/</span></code>, and align with version 1.5.0.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code> to include this version entry and maintain Semantic Versioning.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Added NLP topic modeling to enhance stock prediction with sentiment and topic analysis from textual data.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">shap</span></code> for explainable AI, improving transparency of model predictions.</p></li>
+<li><p>Version incremented to 1.5.0 (MINOR) per Semantic Versioning for new backward-compatible functionality.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-4-0-2025-05-04">
+<h2>Version 1.4.0 (2025-05-04)<a class="headerlink" href="#version-1-4-0-2025-05-04" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">python/</span></code> folder to <code class="docutils literal notranslate"><span class="pre">srcPy/</span></code> to avoid namespace conflicts with Python interpreter and distinguish from Java source.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> to use <code class="docutils literal notranslate"><span class="pre">pythonpath</span> <span class="pre">=</span> <span class="pre">srcPy</span></code>.</p></li>
+<li><p>Updated imports in <code class="docutils literal notranslate"><span class="pre">tests\python\conftest.py</span></code> and test files to use <code class="docutils literal notranslate"><span class="pre">srcPy.</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python.</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> and <code class="docutils literal notranslate"><span class="pre">run_tests.sh</span></code> to include only existing test files (<code class="docutils literal notranslate"><span class="pre">test_ib_data_collection.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_ib_api.py</span></code>) and comment out non-existent test files.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>, and <code class="docutils literal notranslate"><span class="pre">MarketMind</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code> to document folder rename and project rename to <code class="docutils literal notranslate"><span class="pre">MarketMind</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Renaming <code class="docutils literal notranslate"><span class="pre">python/</span></code> to <code class="docutils literal notranslate"><span class="pre">srcPy/</span></code> resolves <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'python'</span></code> in <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srcPy/</span></code> aligns with project structure separating Python, Java, and C++ source code.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-3-0-2025-05-01">
+<h2>Version 1.3.0 (2025-05-01)<a class="headerlink" href="#version-1-3-0-2025-05-01" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p>Renamed project from <code class="docutils literal notranslate"><span class="pre">StockPredictionApp</span></code> to <code class="docutils literal notranslate"><span class="pre">MarketMind</span></code> for clarity and branding.</p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">StockPredictionApp</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code> to <code class="docutils literal notranslate"><span class="pre">MarketMind</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code>.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>, and <code class="docutils literal notranslate"><span class="pre">MarketMind</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code> to reflect new project name.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarketMind</span></code> emphasizes AI-driven market analysis, improving project identity.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-2-0-2025-05-01">
+<h2>Version 1.2.0 (2025-05-01)<a class="headerlink" href="#version-1-2-0-2025-05-01" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>: Added Proprietary License to define project licensing terms.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Replaced license placeholder with reference to <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StockPredictionApp</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code>: Added <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> to structure and updated version history.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file to clarify usage and distribution terms under a proprietary License.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-1-0-2025-04-30">
+<h2>Version 1.1.0 (2025-04-30)<a class="headerlink" href="#version-1-1-0-2025-04-30" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Added Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">python/__init__.py</span></code>, <code class="docutils literal notranslate"><span class="pre">python/data/__init__.py</span></code>, <code class="docutils literal notranslate"><span class="pre">python/utils/__init__.py</span></code>: Added to make directories Python packages, resolving <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'python'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python/utils/config.py</span></code>: Defines IB API settings (host, port, client_id, etc.) for <code class="docutils literal notranslate"><span class="pre">ib_api.py</span></code> and <code class="docutils literal notranslate"><span class="pre">ib_data_collection.py</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python/utils/logger.py</span></code>: Configures logging with console output, compatible with pytest <code class="docutils literal notranslate"><span class="pre">caplog</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python/utils/validators.py</span></code>: Validates ticker symbols and date formats for data fetching.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python/utils/exceptions.py</span></code>: Defines custom exceptions (<code class="docutils literal notranslate"><span class="pre">IBConnectionError</span></code>, <code class="docutils literal notranslate"><span class="pre">DataFetchError</span></code>, <code class="docutils literal notranslate"><span class="pre">NoDataError</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/conftest.py</span></code>: Provides pytest fixtures for mocking IB API and cache.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>: Configures pytest to include <code class="docutils literal notranslate"><span class="pre">python/</span></code> in module path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/run_tests.bat</span></code>: Windows batch script for running Python unit tests in Anaconda Prompt.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION.md</span></code>: Tracks directory structure changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: Project documentation with setup and testing instructions.</p></li>
+</ul>
+</li>
+<li><p><strong>Updated Files</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_ib_data_collection_2.py</span></code>: Updated imports to use <code class="docutils literal notranslate"><span class="pre">python.utils.*</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">python.utils.exceptions</span></code>), fixed tests for correct project structure.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/python/test_ib_api.py</span></code>: Updated imports to use <code class="docutils literal notranslate"><span class="pre">python.utils.config</span></code> and <code class="docutils literal notranslate"><span class="pre">python.utils.exceptions</span></code>, fixed connection tests.</p></li>
+</ul>
+</li>
+<li><p><strong>Dependencies</strong>:</p>
+<ul>
+<li><p>Installed <code class="docutils literal notranslate"><span class="pre">ib_insync==0.9.70</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest-mock&gt;=3.10</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest-cov&gt;=4.0</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy&gt;=2.0</span></code>, <code class="docutils literal notranslate"><span class="pre">nest-asyncio</span></code>, and <code class="docutils literal notranslate"><span class="pre">eventkit</span></code>, which are compatible with existing <code class="docutils literal notranslate"><span class="pre">python/requirements.txt</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Resolved <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'python'</span></code> by ensuring <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files and <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">run_tests.bat</span></code> for compatibility with Anaconda Prompt, complementing <code class="docutils literal notranslate"><span class="pre">run_tests.sh</span></code>.</p></li>
+<li><p>Clarified <code class="docutils literal notranslate"><span class="pre">utils/</span></code> placement under <code class="docutils literal notranslate"><span class="pre">python/</span></code> (not top-level), aligning imports accordingly.</p></li>
+<li><p>Confirmed <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> already includes necessary dependencies, avoiding redundant additions.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="version-1-0-0-initial">
+<h2>Version 1.0.0 (Initial)<a class="headerlink" href="#version-1-0-0-initial" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Initial project structure as defined in <code class="docutils literal notranslate"><span class="pre">StockPredictionApp</span> <span class="pre">Directory</span> <span class="pre">Structure.markdown</span></code>.</p></li>
+<li><p>Included <code class="docutils literal notranslate"><span class="pre">python/</span></code>, <code class="docutils literal notranslate"><span class="pre">cpp/</span></code>, <code class="docutils literal notranslate"><span class="pre">java/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code>, <code class="docutils literal notranslate"><span class="pre">models/</span></code>, and <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directories with core functionality for stock prediction.</p></li>
+<li><p>No <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>, <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, or utility files (<code class="docutils literal notranslate"><span class="pre">config.py</span></code>, <code class="docutils literal notranslate"><span class="pre">logger.py</span></code>, etc.) explicitly defined.</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="faq.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">FAQ</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="glossary.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Glossary</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Nalakram
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#version-1-10-0-2025-06-23">Version 1.10.0 (2025-06-23)</a></li>
+<li><a class="reference internal" href="#version-1-9-0-2025-06-18">Version 1.9.0 (2025-06-18)</a></li>
+<li><a class="reference internal" href="#version-1-8-1-2025-06-09">Version 1.8.1 (2025-06-09)</a></li>
+<li><a class="reference internal" href="#version-1-8-0-2025-05-31">Version 1.8.0 (2025-05-31)</a></li>
+<li><a class="reference internal" href="#version-1-7-1-2025-05-30">Version 1.7.1 (2025-05-30)</a></li>
+<li><a class="reference internal" href="#version-1-7-0-2025-05-25">Version 1.7.0 (2025-05-25)</a></li>
+<li><a class="reference internal" href="#version-1-6-5-2025-05-24">Version 1.6.5 (2025-05-24)</a></li>
+<li><a class="reference internal" href="#version-1-6-4-2025-05-22">Version 1.6.4 (2025-05-22)</a></li>
+<li><a class="reference internal" href="#version-1-6-3-2025-05-19">Version 1.6.3 (2025-05-19)</a></li>
+<li><a class="reference internal" href="#version-1-6-2-2025-05-17">Version 1.6.2 (2025-05-17)</a></li>
+<li><a class="reference internal" href="#version-1-6-1-2025-05-16">Version 1.6.1 (2025-05-16)</a></li>
+<li><a class="reference internal" href="#version-1-6-0-2025-05-11">Version 1.6.0 (2025-05-11)</a></li>
+<li><a class="reference internal" href="#version-1-5-4-2025-05-09">Version 1.5.4 (2025-05-09)</a></li>
+<li><a class="reference internal" href="#version-1-5-3-2025-05-05">Version 1.5.3 (2025-05-05)</a></li>
+<li><a class="reference internal" href="#version-1-5-2-2025-05-05">Version 1.5.2 (2025-05-05)</a></li>
+<li><a class="reference internal" href="#version-1-5-1-2025-05-05">Version 1.5.1 (2025-05-05)</a></li>
+<li><a class="reference internal" href="#version-1-5-0-2025-05-04">Version 1.5.0 (2025-05-04)</a></li>
+<li><a class="reference internal" href="#version-1-4-0-2025-05-04">Version 1.4.0 (2025-05-04)</a></li>
+<li><a class="reference internal" href="#version-1-3-0-2025-05-01">Version 1.3.0 (2025-05-01)</a></li>
+<li><a class="reference internal" href="#version-1-2-0-2025-05-01">Version 1.2.0 (2025-05-01)</a></li>
+<li><a class="reference internal" href="#version-1-1-0-2025-04-30">Version 1.1.0 (2025-04-30)</a></li>
+<li><a class="reference internal" href="#version-1-0-0-initial">Version 1.0.0 (Initial)</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=38b66d78"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>
