@@ -25,6 +25,3 @@ formats:
   - epub
 
 conda: null
-
-submodules:
-  include: none
