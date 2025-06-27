@@ -20,9 +20,37 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'MarketMind'
-author = 'Nalakram'
-release = '0.1.0'
-copyright = '2025, Nalakram'
+author = 'Mark Wuenschel'
+
+# 1) Locate VERSION.md in your repo root
+version_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..", "VERSION.md")
+)
+
+# 2) Read & extract the semver (X.Y.Z) after "## Version"
+release = "0.0.0"
+with open(version_path, encoding="utf-8") as f:
+    content = f.read()
+    m = re.search(
+        r"^##\s*Version\s*([0-9]+\.[0-9]+\.[0-9]+)",
+        content,
+        re.MULTILINE,
+    )
+    if m:
+        release = m.group(1)  # e.g. "1.11.0"
+
+# 3) Split into major & minor.patch
+major, minor_patch = release.split(".", 1)  # -> "1", "11.0"
+
+# 4) Tell Sphinx about your version info
+version = release   # (you could also do ".".join(release.split(".")[:2]) if you want "1.11")
+release = release   # full
+
+# 5) Override the HTML <title> and the header banner
+html_title = f"{project} v{major} {minor_patch} Project Docs"
+html_short_title = html_title
+
+copyright = '2025, Mark Wuenschel'
 
 # -- General configuration ---------------------------------------------------
 extensions = [
