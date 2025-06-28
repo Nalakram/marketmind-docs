@@ -144,15 +144,15 @@ autodoc_pydantic_model_show_validator_regex = True     # Show regex patterns for
 autodoc_pydantic_settings_show_config_member = True    # Include the Pydantic Config class as a documented member
 
 
-
-
 # -- sphinxcontrib-mermaid ---------------------------------------------------
 
-mermaid_output_format = "svg"
+mermaid_output_format = "svg"  # Output Mermaid diagrams as SVG for crisp scaling and RTD compatibility
 
 # -- AutoAPI config -----------------------------------------------
 
-autoapi_type = 'python'  # Tell AutoAPI we are documenting Python source code
+autoapi_type = 'python'             # Tell AutoAPI we are documenting Python source code
+
+autoapi_add_toctree_entry = True    # Automatically add AutoAPI-generated modules to the Sphinx TOC tree
 
 # Source directories for AutoAPI to scan (absolute path recommended)
 autoapi_dirs = [os.path.abspath(os.path.join(__file__, '..', '..', 'stubs'))]
@@ -176,10 +176,10 @@ autoapi_options = [
 ]
 
 # (Optional but Recommended) Control file layout for generated docs
-autoapi_keep_files = True  # Keeps the generated .rst/.md files for inspection/debugging (great during early setup)
+autoapi_keep_files = True           # Keeps the generated .rst/.md files for inspection/debugging (great during early setup)
 
 # (Optional) Where the generated API docs will appear in your final doc hierarchy
-autoapi_root = "reference"  # Means AutoAPI-generated pages will live under /reference/ in the built docs
+autoapi_root = "reference"          # Means AutoAPI-generated pages will live under /reference/ in the built docs
 
 
 # -- Intersphinx Mapping ------------------------------------------------------

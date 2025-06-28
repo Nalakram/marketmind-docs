@@ -1,12 +1,3 @@
-from _typeshed import Incomplete
-from datetime import datetime
-from pathlib import Path
-from pydantic import BaseModel, Field
-from srcPy.utils.exceptions import ConfigValidationError as ConfigValidationError
-from srcPy.utils.logger import configure_logger as configure_logger, get_logger as get_logger
-from typing import Any, Dict, List, Optional
-from typing_extensions import Literal
-
 """config.py — one-stop, type-safe access to every MarketMind knob
 config.py is the central nervous system of the platform’s configuration layer.
 It transforms a single config.yaml file into a deeply-nested tree of Pydantic models, 
@@ -55,6 +46,15 @@ auto-completed object to query.
 
 - Extensible: dropping a new section in YAML only requires a matching BaseModel; the loader picks it up automatically.
 """
+
+from _typeshed import Incomplete
+from datetime import datetime
+from pathlib import Path
+from pydantic import BaseModel, Field
+from srcPy.utils.exceptions import ConfigValidationError as ConfigValidationError
+from srcPy.utils.logger import configure_logger as configure_logger, get_logger as get_logger
+from typing import Any, Dict, List, Optional
+from typing_extensions import Literal
 
 logger: Incomplete
 """The configured logger instance for the MarketMind platform."""
