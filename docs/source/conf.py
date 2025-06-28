@@ -132,6 +132,20 @@ html_theme_options = {
     "navigation_with_keys": True,
 }
 
+# -- autodoc_pydantic configuration ---------------------------------------------------
+autodoc_pydantic_model_show_json = True                # Include JSON schema for models
+autodoc_pydantic_model_show_config_summary = True      # Show Pydantic config attributes
+autodoc_pydantic_model_show_field_summary = True       # Show fields in summary tables
+autodoc_pydantic_field_show_constraints = True         # Show type constraints (like max_length, etc)
+autodoc_pydantic_model_member_order = "bysource"       # Order fields/methods by source order
+autodoc_pydantic_model_show_field_type = True          # Show each field's type annotation in the field summary
+autodoc_pydantic_model_show_validator_summary = True   # Include a summary table of model validators
+autodoc_pydantic_model_show_validator_regex = True     # Show regex patterns for any fields with regex validators
+autodoc_pydantic_settings_show_config_member = True    # Include the Pydantic Config class as a documented member
+
+
+
+
 # -- sphinxcontrib-mermaid ---------------------------------------------------
 
 mermaid_output_format = "svg"
