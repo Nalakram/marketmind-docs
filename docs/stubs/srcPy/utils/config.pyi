@@ -7,6 +7,55 @@ from srcPy.utils.logger import configure_logger as configure_logger, get_logger 
 from typing import Any, Dict, List, Optional
 from typing_extensions import Literal
 
+"""config.py — one-stop, type-safe access to every MarketMind knob
+config.py is the central nervous system of the platform’s configuration layer.
+It transforms a single config.yaml file into a deeply-nested tree of Pydantic models, 
+validates that tree against a JSON-Schema, and gives the rest of the codebase an IDE-friendly, 
+auto-completed object to query.
+
+```{list-table} Configuration Highlights
+:header-rows: 1
+:widths: 20 80
+
+* - **Feature**
+  - **How it works**
+
+* - **Rich model catalogue**
+  - 90-plus `BaseModel` subclasses cover everything from **technical indicators** (`RSIConfig`,
+    `MACDConfig`, `VWAPConfig`) to **security & compliance** (`EncryptionConfig`, `ComplianceConfig`)
+    and **backtesting knobs** (`RiskManagementConfig`, `PositionSizingConfig`). These models are grouped
+    logically—e.g., `TechnicalIndicators`, `Streaming`, `Logging`—and ultimately all roll up into the
+    root `Config` model that mirrors the full YAML hierarchy.
+
+* - **Environment-variable expansion**
+  - The function `resolve_env_vars()` walks any nested dict, list, or string structure and replaces
+    `${VAR}` placeholders with their corresponding values from `os.environ`, allowing sensitive data
+    like API keys to stay outside source control.
+
+* - **Four-stage loader**
+  - The `load_config()` function runs a four-step pipeline: 1️⃣ Load YAML from disk, 2️⃣ Expand
+    environment variables, 3️⃣ Validate the raw config against a JSON Schema, and 4️⃣ Parse the result
+    into the root `Config` Pydantic model. Any failure at any step halts startup for safety.
+
+* - **Singleton accessor**
+  - Calling `get_config()` anywhere in the codebase returns the same cached instance of the loaded
+    configuration, avoiding redundant parses and ensuring consistency across modules.
+
+* - **Handy constants & logging**
+  - Constants like `BASE`, `CONFIG_PATH`, and `SCHEMA_PATH` help locate project directories and key
+    files. A pre-configured `logger` is also available, making sure logging is ready even before the
+    full app initialization completes.
+	
+*Why it matters
+- Zero magic strings: every section is a strongly-typed attribute (config.preprocess.normalization.method) instead of brittle dict["method"] look-ups.
+
+- Fail-fast: schema + Pydantic validation catch typos or missing keys before a single trade executes.
+
+- Docs-ready: each model ships NumPy-style docstrings, cross-linked to the glossary and stubbed in config.pyi, so Sphinx auto-generates polished API pages out of the box.
+
+- Extensible: dropping a new section in YAML only requires a matching BaseModel; the loader picks it up automatically.
+"""
+
 logger: Incomplete
 """The configured logger instance for the MarketMind platform."""
 
