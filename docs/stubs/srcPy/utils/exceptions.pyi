@@ -53,7 +53,7 @@ _Details = Mapping[str, Any]
 
 class IBConnectionError(Exception):
     """
-    Connection to **Interactive Brokers (IBKR)** failed.
+    Connection to **:term:`Interactive Brokers (IBKR)`** failed.
 
     Parameters
     ----------
@@ -74,6 +74,10 @@ class IBConnectionError(Exception):
     Traceback (most recent call last):
         ...
     srcPy.utils.exceptions.IBConnectionError: Failed to connect to Interactive Brokers
+
+    See Also
+    --------
+    :term:`Interactive Brokers (IBKR)`
     """
 
     details: dict[str, Any]
@@ -84,12 +88,7 @@ class IBConnectionError(Exception):
         *,
         details: _Details | None = None,
     ) -> None: ...
-	
-	"""
-    See Also
-    --------
-    :term:`Interactive Brokers (IBKR)`
-    """
+
 
 class DataFetchError(Exception):
     """
@@ -219,7 +218,7 @@ class TradingExecutionError(Exception):
 
     details: dict[str, Any]
 
-    def __init__(self, message: str, *, thedetails: _Details | None = None) -> None: ...
+    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
 
 
 class APIConnectionError(Exception):
