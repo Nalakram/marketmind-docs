@@ -85,9 +85,9 @@ class IBConnectionError(Exception):
         details: _Details | None = None,
     ) -> None: ...
 	
-	See Also
-	--------
-	:term:`Interactive Brokers (IBKR)`
+    See Also
+    --------
+    :term:`Interactive Brokers (IBKR)`
 
 
 class DataFetchError(Exception):
