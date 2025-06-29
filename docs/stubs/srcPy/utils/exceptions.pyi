@@ -53,7 +53,7 @@ _Details = Mapping[str, Any]
 
 class IBConnectionError(Exception):
     """
-    Connection to **:term:`Interactive Brokers (IBKR)`** failed.
+    Connection to **Interactive Brokers (IBKR)** failed.
 
     Parameters
     ----------
@@ -84,6 +84,10 @@ class IBConnectionError(Exception):
         *,
         details: _Details | None = None,
     ) -> None: ...
+	
+	See Also
+	--------
+	:term:`Interactive Brokers (IBKR)`
 
 
 class DataFetchError(Exception):
