@@ -4,13 +4,14 @@ config.py is the central nervous system of the platform’s configuration layer.
 `config.yaml` file into a deeply-nested tree of Pydantic models, validates that tree against a
 JSON Schema, and gives the rest of the codebase an IDE-friendly, auto-completed object to query.
 
-| Feature                       | How it works                                                                                                                                                                                                                 |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Rich model catalogue**       | 90-plus `BaseModel` subclasses cover everything from **technical indicators** (`RSIConfig`, `MACDConfig`, `VWAPConfig`) to **security & compliance** (`EncryptionConfig`, `ComplianceConfig`) and **backtesting knobs** (`RiskManagementConfig`, `PositionSizingConfig`). These models are grouped logically—e.g., `TechnicalIndicators`, `Streaming`, `Logging`—and ultimately roll up into the root `Config` model that mirrors the full YAML hierarchy. |
-| **Environment-variable expansion** | The function `resolve_env_vars()` walks any nested dict, list, or string structure and replaces `${VAR}` placeholders with values from `os.environ`, keeping sensitive data like API keys out of source control. |
-| **Four-stage loader**          | The `load_config()` function runs a four-step pipeline: 1️⃣ Load YAML, 2️⃣ Expand environment variables, 3️⃣ Validate against JSON Schema, 4️⃣ Parse into the root `Config` Pydantic model. Any failure halts startup. |
-| **Singleton accessor**         | Calling `get_config()` anywhere in the codebase returns the same cached instance, avoiding redundant parses and ensuring config consistency across modules. |
-| **Handy constants & logging**  | Constants like `BASE`, `CONFIG_PATH`, and `SCHEMA_PATH` help locate project directories and key files. A preconfigured `logger` is also available, ensuring logging works even before app startup completes. |
+| Feature                      | How it works |
+|------------------------------|--------------|
+| **Rich model catalogue**      | 90+ `BaseModel` subclasses for indicators, compliance, backtesting, all rolling into the root `Config` model. |
+| **Environment-variable expansion** | `resolve_env_vars()` replaces `${VAR}` placeholders from `os.environ`. Keeps secrets out of source control. |
+| **Four-stage loader**         | `load_config()` runs: 1️⃣ Load YAML, 2️⃣ Expand vars, 3️⃣ Validate JSON Schema, 4️⃣ Parse into `Config` Pydantic model. |
+| **Singleton accessor**        | `get_config()` returns the same cached config instance everywhere. |
+| **Constants & logging**       | Constants like `BASE`, `CONFIG_PATH`, plus a ready-to-use `logger` available from startup. |
+
 
 
 **Why it matters**

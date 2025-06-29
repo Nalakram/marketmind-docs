@@ -57,27 +57,23 @@ class IBConnectionError(Exception):
 
     Parameters
     ----------
-	
     message : str, optional
         Human-readable summary.  Default is
         ``"Failed to connect to Interactive Brokers"``.
     details : mapping[str, Any], optional
         Structured metadata such as ``{"host": "127.0.0.1", "port": 7497}``.
 
-    Attributes
-    ----------
-	
-    details : dict[str, Any]
-        A *mutable* copy of *details* (empty dict if *None* given).
-		
-	See Also
-    --------
-	
-    :term:`Interactive Brokers (IBKR)`
+	Attributes
+	----------
+	details : dict[str, Any]
+		A *mutable* copy of *details* (empty dict if *None* given).
 
-    Examples
-    --------
-	
+	See Also
+	--------
+	:term:`Interactive Brokers (IBKR)`
+
+	Examples
+	--------
     >>> raise IBConnectionError(details={"host": "localhost", "port": 7497})
     Traceback (most recent call last):
         ...
