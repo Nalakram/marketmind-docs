@@ -53,10 +53,11 @@ _Details = Mapping[str, Any]
 
 class IBConnectionError(Exception):
     """
-    Connection to **:term:`Interactive Brokers (IBKR)`** failed.
+    Connection to **Interactive Brokers (IBKR)** failed.
 
     Parameters
     ----------
+	
     message : str, optional
         Human-readable summary.  Default is
         ``"Failed to connect to Interactive Brokers"``.
@@ -65,19 +66,23 @@ class IBConnectionError(Exception):
 
     Attributes
     ----------
+	
     details : dict[str, Any]
         A *mutable* copy of *details* (empty dict if *None* given).
+		
+	See Also
+    --------
+	
+    :term:`Interactive Brokers (IBKR)`
 
     Examples
     --------
+	
     >>> raise IBConnectionError(details={"host": "localhost", "port": 7497})
     Traceback (most recent call last):
         ...
     srcPy.utils.exceptions.IBConnectionError: Failed to connect to Interactive Brokers
-
-    See Also
-    --------
-    :term:`Interactive Brokers (IBKR)`
+    
     """
 
     details: dict[str, Any]
@@ -264,10 +269,11 @@ class StatisticalTestError(Exception):
 
     See Also
     --------
-    :term:`ADF Test`
-    :term:`KPSS Test`
-    :term:`Granger Causality Test`
-    :term:`Ljung-Box Test`
+	
+	- :term:`ADF Test`
+	- :term:`KPSS Test`
+	- :term:`Granger Causality Test`
+	- :term:`Ljung-Box Test`
     """
 
     details: dict[str, Any]
