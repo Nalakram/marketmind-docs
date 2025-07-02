@@ -100,6 +100,9 @@ myst_enable_extensions = [
     "tasklist",           # GitHub-style task lists ([x], [ ])
     "dollarmath",         # Inline and block LaTeX math with $ and $$
 ]
+
+myst_heading_anchors = 3 # Enable automatic anchor links for headings (supports `{#id}` syntax in Markdown)
+
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
