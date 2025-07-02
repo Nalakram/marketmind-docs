@@ -99,6 +99,8 @@ myst_enable_extensions = [
     "substitution",       # Text substitutions / variables
     "tasklist",           # GitHub-style task lists ([x], [ ])
     "dollarmath",         # Inline and block LaTeX math with $ and $$
+    "attrs_inline",       # For inline formatting
+    "attrs_block",        # For heading IDs like {#id}
 ]
 
 myst_heading_anchors = 3 # Enable automatic anchor links for headings (supports `{#id}` syntax in Markdown)
