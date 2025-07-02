@@ -110,6 +110,7 @@ tutorials/advanced_features.ipynb
 images/index.md
 
 contributors/onboarding.md
+LICENSE.md
 contributors/coding_standards.md
 contributors/contribution_workflow.md
 
