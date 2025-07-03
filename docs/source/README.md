@@ -137,7 +137,8 @@ encouraged to consult the docs for configuration details and advanced topics.
 
 ---
 
-## Versioning & Version History {#versioning}
+## Versioning & Version History
+{: #versioning}
 
 MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
 patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
@@ -145,7 +146,8 @@ patch version, and any breaking changes would increment the major version. Each 
 
 ---
 
-## Copyright & License {#copyright}
+## Copyright & License
+{: #copyright}
 
 MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.). Its source code is not open-source. However, MarketMind relies on 
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
