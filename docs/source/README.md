@@ -1,4 +1,6 @@
-# MarketMind ![Version](https://img.shields.io/badge/version-1.11.0-blue) [![Python](https://img.shields.io/badge/Python-3.12.9-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring 3.5.0](https://img.shields.io/badge/Spring%203.5.0-6DB33F?style=flat&logo=spring&logoColor=white)](https://spring.io/) [![Windows Supported](https://custom-icon-badges.demolab.com/badge/Windows-Supported-0078D6?logo=windows11&logoColor=white)](https://www.microsoft.com/windows) [![Linux](https://img.shields.io/badge/Linux-Tested-FCC624?style=flat-square&logo=linux)](https://kernel.org/) [![Read the Docs](https://img.shields.io/badge/docs-Read_the_Docs-8CA1AF?logo=readthedocs)](https://marketmind-docs.readthedocs.io/en/latest/) ![Status](https://img.shields.io/badge/status-development-FFA500?style=flat-square)
+# MarketMind ![Version](https://img.shields.io/badge/version-1.12.0-blue) [![Python](https://img.shields.io/badge/Python-3.12.9-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/) ![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
+
+ [![Windows Supported](https://custom-icon-badges.demolab.com/badge/Windows-Supported-0078D6?logo=windows11&logoColor=white)](https://www.microsoft.com/windows) [![Linux](https://img.shields.io/badge/Linux-Tested-FCC624?style=flat-square&logo=linux)](https://kernel.org/) [![Read the Docs](https://img.shields.io/badge/docs-Read_the_Docs-8CA1AF?logo=readthedocs)](https://marketmind-docs.readthedocs.io/en/latest/) ![Status](https://img.shields.io/badge/status-development-FFA500?style=flat-square)
 
 ![MarketMind Banner](https://raw.githubusercontent.com/Nalakram/marketmind-docs/main/docs/source/images/banner1.png)
 
@@ -21,8 +23,8 @@ scores to each input feature.
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
-- [Versioning & Version History](#versioning)
-- [Copyright & License](#copyright)
+- [Versioning](#versioning)
+- [Copyright](#copyright)
 
 ---
 
@@ -121,7 +123,7 @@ MarketMind/
 
 ## Documentation
 
-Comprehensive documentation is provided in the docs/ directory and on our online docs site. 
+Comprehensive documentation is provided in ReadTheDocs online docs site.
 - Key documents include:
   - Getting Started Guide: Setup instructions, installation steps, and a quickstart walkthrough.
   - User Guide: Detailed walkthrough of the trading GUI and how to configure strategies.
@@ -130,28 +132,27 @@ Comprehensive documentation is provided in the docs/ directory and on our online
   - Architecture & Design: Explanations of system architecture, data pipelines, and model designs.
   - Changelog: Version-by-version change log.
    
-The hosted documentation site (e.g. GitHub Pages or ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
+The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
 
-<p>See <a href="https://github.com/MindForgeLabs/MarketMind/tree/main/docs">Documentation</a> for full release history.</p>
+<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/">Documentation</a> for full documentation history.</p>
 
 ---
 
-## Versioning & Version History
-{: #versioning}
+## Versioning {#versioning}
 
 MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
 patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-<p>See <a href="https://github.com/Nalakram/QuantAIvus/blob/main/VERSION.md">VERSION.md</a> for full release history.</p>
+<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html>Changelog</a> for full changelog history.</p>
 
 ---
 
-## Copyright & License
-{: #copyright}
+## Copyright {#copyright}
 
 MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.). Its source code is not open-source. However, MarketMind relies on 
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
 Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
 without prior written permission from the copyright holder.
-See the [LICENSE](LICENSE) file for full terms and [SECURITY.md](SECURITY.md) for security policies.
+See the [LICENSE](LICENSE) file for full terms and <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security 
+Practices</a> for security policies.</p>
 
