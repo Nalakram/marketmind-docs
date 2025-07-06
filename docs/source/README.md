@@ -1,4 +1,4 @@
-# MarketMind ![Version](https://img.shields.io/badge/version-1.12.0-blue) [![Python](https://img.shields.io/badge/Python-3.12.9-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/) ![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
+# MarketMind ![Version](https://img.shields.io/badge/version-1.13.0-blue) [![Python](https://img.shields.io/badge/Python-3.12.9-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/) ![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
 
  [![Windows Supported](https://custom-icon-badges.demolab.com/badge/Windows-Supported-0078D6?logo=windows11&logoColor=white)](https://www.microsoft.com/windows) [![Linux](https://img.shields.io/badge/Linux-Tested-FCC624?style=flat-square&logo=linux)](https://kernel.org/) [![Read the Docs](https://img.shields.io/badge/docs-Read_the_Docs-8CA1AF?logo=readthedocs)](https://marketmind-docs.readthedocs.io/en/latest/) ![Status](https://img.shields.io/badge/status-development-FFA500?style=flat-square)
 
@@ -9,7 +9,7 @@ controls. It ingests real-time market data and news (using NLP pipelines) and ap
 combined with LSTM or Temporal Convolutional Networks) to generate continuous price and trend forecasts. 
 Its trading engine can automatically execute buy/sell orders based on these model signals, applying configurable risk management (e.g. stop-loss, 
 take-profit) to protect capital. The system is optimized for ultra-low-latency use cases (MarketMind was originally conceived as “the first AI high 
-frequency trading application” and employs a multilingual architecture (performance-critical modules in C++, modeling and orchestration in Python, with Java 
+frequency trading application”) and employs a multilingual architecture (performance-critical modules in C++, modeling and orchestration in Python, with Java 
 components for UI and integration). 
 
 MarketMind’s upcoming and planned features now include an Informer model for efficient long-sequence forecasting, graph neural networks (GNNs) to capture 
@@ -139,15 +139,15 @@ encouraged to consult the docs for configuration details and advanced topics.
 
 ---
 
-## Versioning {#versioning}
+## Versioning
 
 MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
 patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html>Changelog</a> for full changelog history.</p>
+<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p>
 
 ---
 
-## Copyright {#copyright}
+## Copyright
 
 MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.). Its source code is not open-source. However, MarketMind relies on 
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 

@@ -1,5 +1,52 @@
 # Version History
 
+## Version 1.13.0 (2025-07-06)
+
+- **Added Files**  
+  - `srcPy/utils/torch_utils.py`:  
+    - Introduces deterministic training utilities:
+      - `seed_everything(deterministic=True)` enforces fully repeatable runs across Python, NumPy, PyTorch, and CUDA.
+      - Forces deterministic algorithms with `torch.use_deterministic_algorithms(True)` and sets `CUBLAS_WORKSPACE_CONFIG`.
+    - Adds `set_perf_flags(allow_tf32=True, matmul_precision="high")` for CUDA matmul precision tuning.
+    - Modular utilities exposed via `__all__`: `seed_everything`, `init_weights`, `autocast`, `get_device`, `set_perf_flags`.
+    - Inline comments replace docstrings and section banners.
+
+  - `srcPy/data/dataset_builders.py`:  
+    - Implements memory-efficient lazy windowing over time series tensors with single-copy storage (view slicing).
+    - Supports multi-ticker awareness (`ticker_col`) to prevent cross-ticker windows.
+    - Adds flexible `target_type` for regression, classification, or multi-horizon prediction.
+    - Enables distributed training via `DistributedSampler` (`distributed=True`, with `rank`/`world_size` overrides).
+    - Supports inline `transform` and `target_transform` callables.
+    - Enforces dtype/device control via `torch.as_tensor(..., device=..., dtype=...)`.
+    - No dependencies on external config, logger, or exceptions—fully standalone.
+    - Inline comments only; stripped all module-level docstrings.
+
+- **Updated Files**  
+  - `srcPy/models/lstm_model.py`  
+    - Introduced `LSTMConfig` dataclass for serialized hyperparameter tracking.
+    - Integrated `logger.get_logger` and `exceptions.DataValidationError`.
+    - Added `BucketBatchSampler` for efficient length-aware padding and `SharedDropout` for consistent variational dropout.
+    - Custom `NormLSTMCell`, `NormLSTM`, and `BidirectionalNormLSTM` support zone-out, layer norm, and per-sample reversal.
+    - Residual connections added between compatible layers; optional gated pooling and attention heads supported.
+    - Early-exit cell path skips compute for fully masked timesteps.
+    - `torch.compile` acceleration applied to custom cell path when CUDA is present.
+    - Modular `Model.save()` and `Model.load()` for minimal checkpoint handling.
+    - Removed all docstrings; kept inline developer-centric comments only.
+
+- **Removed**  
+  - Redundant benchmark and placeholder code from `lstm_model.py`.  
+  - Cross-imports in `dataset_builders.py` to shared `utils`.  
+  - All docstrings and banner headers across touched modules.  
+
+- **Fixed Issues**  
+  - Resolved GPU/CPU mismatch for `lengths` in `NormLSTM.step()`.  
+  - Corrected `BucketBatchSampler.__len__` and yielded partial batches.  
+  - Defensive precision logic in `torch_utils.py` guards against invalid `matmul_precision` values.  
+
+- **Notes**  
+  - These changes introduce a new foundation for efficient, reproducible, and distributed time-series training workflows.  
+  - `lstm_model.py` is now fully torch.compile-ready and import-safe.
+
 ## Version 1.12.0 (2025-07-05)
 
 - **Added Files**  
