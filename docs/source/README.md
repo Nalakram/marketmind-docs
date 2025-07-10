@@ -115,7 +115,7 @@ Comprehensive documentation is provided in ReadTheDocs online docs site.
    
 The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
-See [Documentation](https://marketmind-docs.readthedocs.io/en/latest/index.html for full documentation history.
+See [Documentation](https://marketmind-docs.readthedocs.io/en/latest/index.html) for full documentation history.
 
 ---
 

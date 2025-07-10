@@ -31,7 +31,6 @@ MarketMind maintains clear and open communication about data usage practices:
 | Financial Data | Used only for trading signals and analysis |
 | Storage        | Local-only, not uploaded  |
 
-For details, see [PRIVACY_POLICY.md](PRIVACY_POLICY.md).
 
 ---
 
@@ -54,7 +53,7 @@ MarketMind provides risk management tools (stop-loss, take-profit, etc.) to help
 
 ## Incident Response and Disclosure
 
-We follow a responsible disclosure process for security incidents (see [Security practices](SECURITY.html)) and will notify users in accordance with applicable laws if data-related incidents occur, though the local-only design minimizes this risk.
+We follow a responsible disclosure process for security incidents (see [[Security Practices](https://marketmind-docs.readthedocs.io/en/latest/security_practices.html).) and will notify users in accordance with applicable laws if data-related incidents occur, though the local-only design minimizes this risk.
 
 ---
 
