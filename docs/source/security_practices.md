@@ -42,6 +42,6 @@ MarketMind implements strong security practices to ensure the confidentiality, i
 
 ## Community Involvement
 
-We welcome community contributions toward improving security. Please report vulnerabilities via our [Responsible Disclosure Policy](SECURITY.md#responsible-disclosure-policy).
+We welcome community contributions toward improving security. Please report vulnerabilities our [Responsible Disclosure Policy](SECURITY.html#responsible-disclosure-policy).
 
 ---

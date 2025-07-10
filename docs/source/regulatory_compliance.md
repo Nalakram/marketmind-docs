@@ -54,7 +54,7 @@ MarketMind provides risk management tools (stop-loss, take-profit, etc.) to help
 
 ## Incident Response and Disclosure
 
-We follow a responsible disclosure process for security incidents (see [SECURITY.md](SECURITY.md)) and will notify users in accordance with applicable laws if data-related incidents occur, though the local-only design minimizes this risk.
+We follow a responsible disclosure process for security incidents (see [Security practices](SECURITY.html)) and will notify users in accordance with applicable laws if data-related incidents occur, though the local-only design minimizes this risk.
 
 ---
 

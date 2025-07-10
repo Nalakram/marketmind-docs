@@ -8,8 +8,7 @@ MarketMind is an advanced algorithmic trading platform that provides automated, 
 controls. It ingests real-time market data and news (using NLP pipelines) and applies hybrid deep-learning models (e.g. multi-head Transformer layers 
 combined with LSTM or Temporal Convolutional Networks) to generate continuous price and trend forecasts. 
 Its trading engine can automatically execute buy/sell orders based on these model signals, applying configurable risk management (e.g. stop-loss, 
-take-profit) to protect capital. The system is optimized for ultra-low-latency use cases (MarketMind was originally conceived as “the first AI high 
-frequency trading application”) and employs a multilingual architecture (performance-critical modules in C++, modeling and orchestration in Python, with Java 
+take-profit) to protect capital. The system is optimized for ultra-low-latency use cases and employs a multilingual architecture (performance-critical modules in C++, modeling and orchestration in Python, with Java 
 components for UI and integration). 
 
 MarketMind’s upcoming and planned features now include an Informer model for efficient long-sequence forecasting, graph neural networks (GNNs) to capture 
@@ -30,30 +29,16 @@ scores to each input feature.
 
 ## Features
 
-### Functional Features
-
-- Automated Trading Engine: Executes trades automatically using advanced models and technical analysis, supporting strategies like trend-following and 
-mean-reversion.
-- High-Frequency Mode: Enables fast, low-latency trading, perfect for high-frequency strategies.
-- Real-Time Predictions: Forecasts asset prices and volatility continuously with live market data.
-- NLP Sentiment Analysis: Analyzes news, blogs, and social media to enhance predictions with sentiment insights.
-- GUI Dashboard: Offers an interactive interface with real-time charts, predictions, and customizable alerts.
-- Risk Management Tools: Includes stop-loss, take-profit, and position-sizing options to control trading risks.
-- Multi-Asset Support: Manages stocks, ETFs, and crypto assets in one system.
-- Data Integration: Connects to market data APIs and news feeds for comprehensive analysis.
-
-### Technical Features
-
-- Hybrid Deep Learning Architecture: Combines advanced neural networks for accurate sequence modeling.
-- Informer Long-Sequence Model: Efficiently predicts far into the future using cutting-edge techniques.
-- Graph Neural Networks (GNN): Models relationships between assets for deeper insights.
-- Hidden Markov Models (HMM): Detects market trends (e.g., bullish or bearish) to adapt strategies.
-- Granger Causality Analysis: Identifies key predictors to boost forecast accuracy.
-- Ensemble Learning: Merges multiple models for more reliable predictions.
-- Model Deployment & Acceleration: Ensures fast, optimized performance across platforms.
-- SHAP Explainability: Makes predictions understandable by showing feature importance.
-- Multi-Language Codebase: Uses C++ for speed, Python for machine learning, and Java for integration.
-- TensorFlow & ONNX Integration: Supports flexible development and unified deployment.
+| **Category**     | **Feature**                  | **Summary**                                        |
+|------------------|-----------------------------|----------------------------------------------------|
+| 🟦 Functional    | Automated Trading            | Advanced models drive real-time, auto-executed trades with built-in risk controls. |
+| 🟦 Functional    | High-Frequency & Multi-Asset | Low-latency trading for stocks, ETFs, and crypto.  |
+| 🟦 Functional    | Analytics & Dashboard        | Interactive GUI with live forecasts, sentiment, and alerts. |
+| 🟦 Functional    | Data Integration             | Unified market, news, and social data ingestion.   |
+| 🟩 Technical     | Hybrid Deep Learning         | Ensemble of neural nets (e.g., Transformer, LSTM, GNN) for price and trend forecasts. |
+| 🟩 Technical     | Explainable AI               | SHAP-based interpretability and feature importance.|
+| 🟩 Technical     | Flexible Architecture        | Multi-language codebase (C++, Python, Java), supports TensorFlow & ONNX. |
+| 🟩 Technical     | Advanced Modeling            | Informer, HMM, Granger causality for deeper insights and strategy. |
 
 ---
 
@@ -108,16 +93,12 @@ MarketMind/
 
 ## Prerequisites
 
-| Requirement      | Version/Description                                                        | Notes                                   |
-|------------------|----------------------------------------------------------------------------|-----------------------------------------|
-| Python           | 3.12.9                                                                     | Tested with 3.12.9                      |
-| C++              | C++20                                                                      | Requires CUDA 12.9, CMake 3.20+         |
-| Java             | 21                                                                         | Maven, for GUI components               |
-| Operating System | Windows (recommended), Linux (supported)                                   | Linux for best performance              |
-| Hardware         | GPU: NVIDIA (recommended)                                                  | GPU for faster training/inference       |
-| Tools            | Git (required), Docker (optional), database (optional)                     | For source control, deployment, storage |
-| Dependencies     | `bertopic==0.17.0`, `spacy==3.8.5`, `shap==0.47.2`, see `requirements.txt` | For NLP and explainability              |
-| Other            | Network connectivity, broker API (optional)                                | For data access and trading             |
+| Requirement | Version | Notes |
+|:---|:---:|:---|
+| ![Python](https://img.shields.io/badge/Python-3.12.9-3776AB?logo=python) | 3.12.9 | ML pipelines & analytics |
+| ![C++](https://img.shields.io/badge/C++-20-00599C?logo=cplusplus) | C++20 (CUDA 12.9) | High-performance inference |
+| ![Java 21](https://img.shields.io/badge/Java-21-FFA500?style=flat-square&logo=openjdk) | Java 21 | User interface & integration |
+| ![NVIDIA](https://img.shields.io/badge/NVIDIA-GPU-76B900?logo=nvidia) | CUDA 12.9+ | GPU recommended for speed |
 
 ---
 
@@ -134,8 +115,7 @@ Comprehensive documentation is provided in ReadTheDocs online docs site.
    
 The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
-
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/">Documentation</a> for full documentation history.</p>
+See [Documentation](index.html) for full documentation history.
 
 ---
 
@@ -143,7 +123,7 @@ encouraged to consult the docs for configuration details and advanced topics.
 
 MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
 patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p>
+See [Changelog](CHANGELOG.html) for full changelog history.
 
 ---
 
@@ -153,6 +133,7 @@ MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
 Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
 without prior written permission from the copyright holder.
-See the [LICENSE](LICENSE) file for full terms and <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security 
-Practices</a> for security policies.</p>
+See [full license details here](license.html).
+
+See [Security Practices](security_practices.html) for security policies.
 
