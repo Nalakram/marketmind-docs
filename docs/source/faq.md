@@ -14,7 +14,7 @@ No. MarketMind features a user-friendly JavaFX GUI, allowing users without progr
 
 ## Is my data secure?
 
-Yes. All data remains local on your machine. MarketMind doesn't collect personal information or transmit sensitive data externally. For more details, refer to [SECURITY.md](SECURITY.md) and [PRIVACY_POLICY.md](PRIVACY_POLICY.md).
+Yes. All data remains local on your machine. MarketMind doesn't collect personal information or transmit sensitive data externally. For more details, refer to [Security Practices](https://marketmind-docs.readthedocs.io/en/latest/security_practices.html).
 
 ## Does MarketMind require an internet connection?
 
