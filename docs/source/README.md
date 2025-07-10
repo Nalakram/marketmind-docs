@@ -115,7 +115,7 @@ Comprehensive documentation is provided in ReadTheDocs online docs site.
    
 The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
-See [Documentation](index.html) for full documentation history.
+See [Documentation](/en/latest/index.html) for full documentation history.
 
 ---
 
@@ -123,7 +123,7 @@ See [Documentation](index.html) for full documentation history.
 
 MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
 patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-See [Changelog](CHANGELOG.html) for full changelog history.
+See [Changelog](/en/latest/CHANGELOG.html) for full changelog history.
 
 ---
 
@@ -133,7 +133,7 @@ MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
 Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
 without prior written permission from the copyright holder.
-See [full license details here](license.html).
+See full license details [here](/en/latest/LICENSE.html).
 
-See [Security Practices](security_practices.html) for security policies.
+See [Security Practices](/en/latest/security_practices.html) for security policies.
 
