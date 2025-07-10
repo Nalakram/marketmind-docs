@@ -133,7 +133,7 @@ MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
 Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
 without prior written permission from the copyright holder.
-See full license details [here](/en/latest/LICENSE.html).
+See full license details [here]([Security Practices](https://marketmind-docs.readthedocs.io/en/latest/LICENSE.html).
 
-See [Security Practices](/en/latest/security_practices.html) for security policies.
+See [Security Practices](security_practices.html) for security policies.
 
