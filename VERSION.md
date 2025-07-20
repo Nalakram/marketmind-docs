@@ -1,5 +1,102 @@
 # Version History
 
+## Version 1.15.0 (2025-07-19)
+
+### Refactor & Enhancements: Test Logging, Fixtures, and Data Generation
+
+#### **Logger Test Classes**
+- **TestBoundLogger**: 
+  - Expanded `@pytest.mark.parametrize` to cover more logging levels (debug, info, warning, error) combinatorially, improving test coverage across different log levels.
+  
+- **TestBuildConsoleHandler & TestBuildFileHandler**: 
+  - Utilized combinatorial params for levels, formats, rotations, and invalid configs, enhancing edge case testing without adding new test functions.
+  
+- **TestBuildSyslogHandler**: 
+  - Parameterized invalid addresses with a wider range of edge cases (e.g., integers, tuples with extras, lists, dicts), strengthening the validation of input handling.
+
+#### **Data Generation Function (generate_sample_data)**
+- Refactored to exclude HDF5 support due to missing dependencies, simplifying the file extension handling logic.
+- Made format handling more dynamic, introducing runtime errors for unsupported formats to prevent silent failures.
+
+#### **Data Fixtures**
+- Transformed static file-based fixtures into dynamic, code-generated ones for improved flexibility:
+  - Consolidated individual fixtures (e.g., sample_data, sample_with_na) into calls to `generate_sample_data` for backward compatibility.
+  - Added `sample_data_by_format`, parameterized by formats ('csv', 'xlsx', 'parquet', 'json'), to test specific format behaviors.
+  - Introduced `combinatorial_sample_data` using `itertools.product` for 128 combinations (5 boolean flags x 4 formats) to enhance test coverage of edge cases like NA, outliers, and duplicates.
+
+#### **Logger-Specific Fixtures**
+- Added `bound_logger` fixture, parameterized with different processor/context variations, addressing the TypeError in instantiation and improving test flexibility.
+- Created dynamic `handler_classes` list to streamline patching of common handlers, reducing boilerplate in tests.
+- Updated `patch_logging_handlers` autouse fixture to loop over handler classes, making it more efficient by avoiding hardcoded paths.
+
+#### **Mocking Optional Logging Libraries**
+- Enhanced `mock_optional_logging_libs` autouse fixture to dynamically check and mock missing libraries (`watchtower`, `google_cloud_logging`, `InfluxDBClient`), improving scalability of mocks.
+
+#### **Handler Config Fixture**
+- Introduced `handler_config` fixture, utilizing `itertools.product` to generate combinations of handler types ('http', 'syslog') and validity (True/False), ensuring comprehensive coverage of valid and invalid cases without raising `KeyError`.
+
+#### **Pytest Hooks**
+- Expanded `pytest_generate_tests` hook:
+  - Included parameterization for "dynamic_handler" (with values ['console', 'file', 'http', 'syslog']).
+  - Added runtime conditional for "dynamic_config" based on the `DEBUG_TESTS` environment variable to allow dynamic inclusion of invalid configs during debugging.
+
+#### **Dynamic Handler Patching**
+- Added a new autouse fixture `patch_logging_handlers` to safely patch the `flush` and `close` methods across all handler classes, preventing test failures due to async flush issues in teardown.
+
+#### **Combinatorial Enhancements**
+- Integrated `itertools.product` across fixtures (e.g., BoundLogger params, handler configs) to test broader edge cases without fixture explosion, ensuring more extensive validation of scenarios.
+
+#### **Fixed Issues & Robustness**
+- Addressed common issues like `TypeError` in `BoundLogger`, `KeyError` in handler builders, and async `flush` failures.
+- Improved test isolation with the inclusion of async queue cleanup and dynamic mocking strategies.
+
+### Added
+- Dynamic handler patching via `patch_logging_handlers` fixture for improved test stability and async handling.
+- Combinatorial testing enhancements via `itertools.product` to enable more exhaustive edge case coverage.
+
+### Fixed
+- **Syntax and Consistency**: Fixed naming inconsistencies and removed redundancies in test fixture definitions.
+- **Robustness**: Addressed common test failures and edge cases to prevent runtime exceptions, particularly in async and handler config scenarios.
+
+### Notes:
+- **Impact**: These changes improve test robustness, efficiency, and scalability, especially for logging handlers and dynamic fixtures.
+
+## Version 1.14.1 (2025-07-19)
+
+### Logger Refactor & Enhancements:
+- **logger.py**:
+  - Added graceful fallbacks for missing dependencies (`watchtower`, `google_cloud_logging`, `InfluxDBClient`) to prevent `ImportError` during tests.
+  - Introduced a recursive dict merge helper (`_deep_merge`) for more flexible config overrides without rewriting entire trees.
+  - Added a `redact_sensitive_info(keys)` processor to redact sensitive data (e.g., API keys).
+  - Custom timestamp processor (`timestamp_processor`) replaces deprecated `utcnow()` with `datetime.now()`, ensuring consistent timestamp formatting.
+  - Replaced `structlog`'s `ProcessorFormatter` with a built-in `JSONFormatter` to maintain raw event strings in tests.
+  - Added `InfluxDBHandler` for minimal write wrapper to handle logging to InfluxDB.
+  - Implemented `BoundLogger` override to avoid `duplicate event` errors and ensure compatibility with the logger system.
+  - Improved async logging with automatic queue handling and async logging flushes in tests.
+
+### Test Updates & Fixes:
+- **test_logger.py**:
+  - Explicitly passed all configurations to `configure_logger()` to avoid dependency on global state, ensuring more reliable tests.
+  - Ensured logging tests are deterministic by flushing and closing all handlers before assertions.
+  - Updated async test handling to ensure all background threads are properly flushed using `stop_logging()`.
+  - Added mock tests for logging to external services (InfluxDB, CloudWatch) and error paths.
+  - Removed redundant monkeypatching of paths; replaced with direct configuration in tests for reliability.
+
+### Coverage & Test Suite Improvements:
+- **Coverage Report**:
+  - Branch coverage: 46.2% (355/768)
+  - Line coverage: 67.1% (2044/3046)
+- Improved test suite stability and reliability with isolated test cases and enhanced async handling.
+
+### Bug Fixes & Enhancements:
+- Fixed issues related to duplicate `event` logging errors and added defensive measures to prevent recursion and thread issues in async environments.
+- Improved rotation validation for log handlers, immediately raising `ValueError` for invalid rotation configurations.
+- Enhanced file path handling to resolve issues with directory-based log paths, ensuring smoother test executions.
+
+### Notes:
+- **Impact**: These changes significantly improve the stability of logging in asynchronous and multi-threaded environments, ensuring smoother test executions and more reliable logging.
+- **Recommended**: Remove any debug prints or leftover temporary code before release.
+
 ## Version 1.14.0 (2025-07-15)
 
 ### Refactor & Robustness Upgrades: Market Data Pipeline, Metric Isolation, Testability
@@ -128,6 +225,8 @@
 * **Version incremented**:
   * **1.13.3 → 1.13.4** under [Semantic Versioning](https://semver.org) (bug-fix release).
 
+---
+
 ## Version 1.13.3 (2025-07-13)
 
 - **Test Infrastructure & Coverage Reporting**
@@ -158,6 +257,8 @@
 **Notes**
 - All changes are patch-level, backward-compatible, and confined to test code, infrastructure scripts, or logger/LSTM test utilities.
 - No production/model logic was modified outside of what was necessary for test coverage, error-path validation, or import safety.
+
+---
 
 ## Version 1.13.2 (2025-07-10)
 
