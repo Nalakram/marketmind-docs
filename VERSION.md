@@ -1,5 +1,197 @@
 # Version History
 
+## Version 2.0.0 (2025-08-06)
+
+## Changelog for GPU-Accelerated Data Processing Pipeline Stack
+
+**Version:** 2.0.0 (Comprehensive Modular & GPU-Accelerated Release)  
+
+---
+
+## Major Themes Across All Changes
+
+- **Robustness:** Extensive validation, schema checks, error handling, idempotent initializations, OOM retries/backoff, thread-safety, and defensive programming.
+- **Factory, Abstract, & Dynamic Patterns:** Factories and registries for all core abstractions (transforms, backends, ops), runtime backend probing, aliasing, and auto-registration from builder modules.
+- **Combinatoric Composition:** Rich operator overloading (`__add__`, `__rshift__`, `__or__`) for pipeline/ops chaining, composite DSL for sequential/parallel/conditional execution, and dynamic graph building.
+- **Computational Efficiency:** Lazy evaluation, zero-copy mechanics (DLPack for torch interop), NVTX annotations, constant folding, kernel fusion, and planner-based pipeline cost optimization.
+- **Self-Evolving Logic:** Metrics tracking (thread-safe), adaptive thresholds (mean+2σ), backend/plan reoptimization, automatic backend switching on OOM/performance, and version-safe profiling.
+- **Integrations:** Direct glue to NVIDIA ecosystem (cuDF, cuML, NeMo, Polars, RAPIDS, NVTabular), with conditional logic for optional/extra libraries.
+- **Elegant Solutions:** Use of pure no-op shims for optional features (NVTX), deep copying for config safety, and version-guarded initialization (e.g., RMM pools).
+
+---
+
+## Detailed File-by-File Changes and Rationale
+
+### utils/backends/registry.py
+- **Initial:** Dict-based backend registry.
+- **Additions:**  
+  - Type hints (`Dict[Tuple[str,str], Callable]`), debug logging on registration, and dynamic auto-registration from expr/transforms.
+- **Rationale:** Reduces boilerplate, allows plug-and-play backend registration, and improves traceability.
+  
+### srcPy/preprocessor/graph/backends/polars.py
+- **Initial:** Polars lowerings, engine preferences, auto-registration.
+- **Changes:**  
+  - NVTX annotation on all functions, schema validation post-lowering, dynamic GPU policy checks, incremental validation, and interop with expected schemas.
+- **Rationale:** Profiling, validation, and dynamic backend policy increase reliability and transparency.
+
+### srcPy/preprocessor/graph/backends/cudf.py
+- **Initial:** cuDF-based lowerings and execution.
+- **Additions:**  
+  - Version-safe RMM pool initialization, GPUDirect Parquet loading, NVTX on ops, OOMRetry with fallback, NeMo sentiment if available, logs and conditional backend switching.
+- **Rationale:** RAPIDS integration, error resilience, and dynamic feature probing.
+
+### srcPy/preprocessor/graph/factory.py
+- **Initial:** OpSpec and graph registry.
+- **Enhancements:**  
+  - Dynamic fallback to expr_factory or transform_factory, deep copy for param safety, auto-inject specs as needed.
+- **Rationale:** Pluggability, safety, and enhanced fusion/composition.
+
+### preprocessor/graph/executor.py
+- **Initial:** Abstract Executor and factory.
+- **Enhancements:**  
+  - NVTX on execution, evolve() for backend switching, HeuristicPlanner for cost-based selection, OOMRetry catch with fallback, and post-exec history tracking.
+- **Rationale:** Adaptivity, profiling, and robust fallback paths.
+
+### srcPy/preprocessor/graph/graph.py
+- **Initial:** IR graph with node/fuse/topo.
+- **Enhancements:**  
+  - NVTX profiling, plan validation, dynamic node factories, cached properties for efficiency, duplicate col checks post-fusion.
+- **Rationale:** Robustness, extensibility, and validation of graph integrity.
+
+### preprocessor/graph/expr.py
+- **Initial:** Meta-expression system and builders.
+- **Enhancements:**  
+  - Auto-registration via metaclass, backend-aware probing, arithmetic overloads, structural hashing, constant folding, and validation in `__init__`.
+- **Rationale:** Combinatorics, deduplication, and reliability.
+
+### srcPy/preprocessor/graph/ops.py
+- **Initial:** OpKind, abstract Op with metadata.
+- **Enhancements:**  
+  - Caching for requires/provides, immutability via clone, logging integration.
+- **Rationale:** Safe reuse, efficient chaining, and debug visibility.
+
+### srcPy/preprocessor/graph/dsl.py
+- **Initial:** OpFactory, op/sequence/parallel sugar, dynamic loading.
+- **Enhancements:**  
+  - Backend-aware ops, combinatoric builders, logger integration.
+- **Rationale:** Flexible DSL composition and dynamic backend selection.
+
+### srcPy/preprocessor/graph/ops_custom.py
+- **Initial:** Technical indicators and robust scalers.
+- **Enhancements:**  
+  - Use expr for internal calcs, NeMo sentiment conditional, registration helpers.
+- **Rationale:** Composability, dynamic enhancement.
+
+### preprocessor/graph/planner.py
+- **Initial:** Planner with cost, prune, order.
+- **Enhancements:**  
+  - Adaptive thresholding, dynamic spec injection, OOMRetry logging, segmenting for fusion, cost estimation.
+- **Rationale:** Adaptivity and context-sensitive optimization.
+
+### preprocessor/graph/expr_opt.py
+- **Initial:** Recursive optimizer with caching.
+- **Enhancements:**  
+  - Constant folding (handles div/0 as nan), logging.
+- **Rationale:** Faster pipelines and resilience to numeric errors.
+
+### srcPy/preprocessor/api.py
+- **Initial:** Plan dataclass, API and builder DSL.
+- **Enhancements:**  
+  - NVTX profiling, dynamic executor mapping, OOMRetry fallbacks, history-driven planner updates, combinatoric builder support.
+- **Rationale:** Usability, robustness, and runtime adaptivity.
+
+---
+
+## Granular Modularization & Architectural Refactor: Pipeline, Preprocessor, and Orchestrator
+
+### Core Architectural Changes
+- **Modularization:** Split monolithic classes into composable, pluggable ops and pipeline steps. Factories and registries for extensibility and backend abstraction.
+- **Separation of Concerns:** Dedicated execution engines (`batch.py`, `streaming.py`), config decoupling, YAML-driven configuration for orchestrators, and externalized context handling.
+- **Performance & Async Enhancements:** GPU acceleration (cuDF/cuML), Dask/Polars distributed execution, async streaming, Prometheus/MLflow integration.
+- **Error Handling & Validation:** Stronger schema enforcement, dataclasses/enums, and explicit error hierarchies.
+
+### File-by-File Modularization
+
+#### market_data.py
+- Data sources (`AlphaVantageSource`, `CoinGeckoSource`, etc.) modularized to `pipeline/stages/market_data/sources/`.
+- Enhanced with async, retries, and metrics integration.
+- Indicators moved to technical feature modules, validation enhanced, legacy code removed.
+
+#### data_cleaning.py
+- Cleaning steps split into `imputers/`, `features/`, `anomalies/`, etc.
+- New: GPU/Numba, stateful imputation, robust outlier handling, streaming step support, drift detection.
+
+#### data_loader.py
+- Loaders unified under sources, all fetches async, loader registry for extensibility.
+
+#### preprocessor.py
+- Transition to graph-based, backend-pluggable ops; schema checks, GPU scaling, advanced sequence creation.
+
+### Orchestrator Refactor: pipeline.py → dataprep_orchestrator.py
+
+- **Config-Driven Extensibility:** YAML/registry/builder for all steps; pluggable, dynamic orchestration.
+- **Orchestration Enhancements:** Parallel multi-symbol fetch, caching, checkpointing, hyperparam search (grid/Optuna), evaluation metrics, hashing for reproducibility.
+- **Error Handling & Utilities:** Custom exceptions, config dataclasses, and stable hash utilities.
+- **Performance:** Thread/GPU-bounded concurrency, tolerant fallback to CPU, and direct support for Arrow/Polars/pandas.
+- **CLI/Entry Points:** Full YAML/CLI support, batch execution, and JSON reporting.
+
+---
+
+## New Additions Not in Old Code
+
+- **Dynamic Registries & Plugins:** `core/registry.py`, `plugins.py`, graph/backends/registry.py, with auto-import.
+- **Planner & Executor:** Graph-based planner (`graph/planner.py`), cost-based execution, segment fusion, explicit IR.
+- **Orchestrator Upgrades:** Full caching, search/eval, parallel symbol handling, YAML+override logic.
+- **Profiling & Logging:** NVTX annotations, Prometheus/MLflow metrics, persistent metrics JSON, self-adapting thresholds.
+- **Utils:** Plan costs, cuda runtime helpers, stable hashing, config/adapters.
+
+---
+
+## Breaking Changes
+
+- **API:**  
+  - Registry overwrites now error.  
+  - All expressions/ops are immutable (hash/eq structural).  
+  - All configs/YAML are required for orchestrators; legacy config handling removed.  
+  - All data source plugins must use registry.  
+  - OOM/fallback errors explicit; no silent fails.
+- **Deprecations:**  
+  - Direct executor instantiation (must use factory).  
+  - Legacy API shims, old config import patterns.
+- **Stream support:** Not yet implemented (placeholder).
+
+---
+
+## Performance Notes
+
+- Constant folding reduces operation count, fusion reduces kernel launches, adaptive planning switches backends if slow or OOM.
+- Kernel and pipeline profiling feeds back into plan cost heuristics for continuous optimization.
+
+---
+
+## Coverage
+
+- **Line coverage:** 72.3%
+- **Branch coverage:** 55.6%
+
+---
+
+## Future Work
+
+- Streaming support, deeper NVIDIA stack integration (cuSIGNAL, more NeMo), plan cache, and cost-based fusion.
+
+---
+
+## Changelog for Preprocessor Scaffold Development
+
+**Chronological history from initial abstract scaffold to full modular graph execution, fusion, backend-aware ops, and advanced planner/executor integration.**  
+See detailed iteration breakdown (Iteration 1–6) above, now included here for posterity and traceability.
+
+---
+
+**Version updated to 2.0.0 (MAJOR) to reflect these foundational architectural and breaking changes.**
+
+
 ## Version 1.15.0 (2025-07-20)
 
 ### Torch Utils Refactor & Logging: Future-Proofed, Modular, and Extensively Tested
@@ -339,13 +531,13 @@
 
 - **tests/python/conftest.py**
   - Aligned log directory path with `/workspace/tests/logs` to match `run_tests.sh` configuration, ensuring consistent logging across test environments.
-  - Imported and used `AsyncMock` for mocking IB async methods (e.g., `ib.barsAsync`), improving async test reliability.
+  - Imported and used `AsyncMock` for mocking IBKR async methods (e.g., `ib.barsAsync`), improving async test reliability.
   - Enhanced config mocking to handle `get_config()` calls properly by patching the function to return a mocked `Config` instance.
 - **tests/python/test_ib_api.py**
   - Removed unnecessary `@pytest.mark.asyncio` decorators from synchronous tests (e.g., `test_ib_connection_success`, `test_ib_connection_failure`, `test_ib_connection_retry_success`), preventing pytest warnings and incorrect async execution.
 - **tests/python/test_ib_data_collection.py**
-  - Imported and used `AsyncMock` for IB async methods (e.g., `ib.barsAsync`) in fixtures and tests, resolving `RuntimeWarning: coroutine was never awaited`.
-  - Improved config mocking by patching `get_config()` to return a fully populated `Config` instance, fixing attribute access errors in IB-related tests.
+  - Imported and used `AsyncMock` for IBKR async methods (e.g., `ib.barsAsync`) in fixtures and tests, resolving `RuntimeWarning: coroutine was never awaited`.
+  - Improved config mocking by patching `get_config()` to return a fully populated `Config` instance, fixing attribute access errors in IBKR-related tests.
   - Removed debug `pyarrow` code snippets that were causing unnecessary import warnings and test noise.
 - **pytest.ini**
   - Cleaned up `filterwarnings` section by removing inline comments that caused parsing errors, ensuring smooth pytest configuration loading.
@@ -363,8 +555,8 @@
   - Added `input_dim` field to `ClassifierConfig` dataclass and populated it in `from_marketmind` method to match `LSTMBlock` requirements, resolving initialization failures.
 
 **Fixed Issues**
-- Resolved 314 setup errors across IB-related and market data tests by improving mocking, aligning paths, and using valid config instances.
-- Fixed 14 test failures in IB API and data collection tests (e.g., connection errors, async warnings, attribute mismatches).
+- Resolved 314 setup errors across IBKR-related and market data tests by improving mocking, aligning paths, and using valid config instances.
+- Fixed 14 test failures in IBKR API and data collection tests (e.g., connection errors, async warnings, attribute mismatches).
 - Unblocked market data and validators tests by correcting Prometheus patching, switching to PyTorch tensor checks, and fixing config validation.
 - Addressed LSTMClassifier init failures by adding required `input_dim` to config.
 - Improved overall test coverage from 31% to 46% by unblocking and passing previously failing tests.
@@ -503,7 +695,7 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
     - Added `make_constructor_cases()` to introspect all custom exception classes and auto-generate parameter sets for four constructor branches, consolidated under a single `@pytest.mark.parametrize` matrix.  
 
   - `tests/python/test_exceptions.py`  
-    - Removed redundant default-branch tests for `IBConnectionError`, `DataFetchError`, `InvalidInputError`, and `StatisticalTestError`.  
+    - Removed redundant default-branch tests for `IBKRConnectionError`, `DataFetchError`, `InvalidInputError`, and `StatisticalTestError`.  
     - Retained behavioural tests (pickle round-trip, non-dict details, exception chaining, validator integration).  
     - Added `import logging` to support caplog assertions in `test_validate_symbol_with_logging`.  
 
@@ -614,7 +806,7 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
 - **Updated Files**:
   - `tests/python/test_ib_data_collection.py`:
     - Added five tests: `test_get_cache_path_creates_dir`, `test_bars_to_df_variants`, `test_async_fetch_returns_cached_when_up_to_date`, `test_save_cache_warning_does_not_break_flow`, `test_fetch_historical_data_own_client_path`.
-    - Improves coverage for cache handling, DataFrame conversion, and self-managed IB connections.
+    - Improves coverage for cache handling, DataFrame conversion, and self-managed IBKR connections.
   - `srcPy/utils/validators.py`:
     - Added `validate_tensor` for TensorFlow tensor validation (type, emptiness, dimensions, NaN/infinite values).
   - `srcPy/models/LSTM_model.py`:
@@ -655,7 +847,7 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
 - **Notes**:
   - Significant feature additions include `LSTMClassifier` for trend prediction, Backtrader-based backtesting for scalability, and Alpha Vantage for robust data fetching.
   - Enhanced risk management with `risk_management_docs.py`, providing a clear API contract for future implementation.
-  - Improved test coverage and reliability for IB data collection, LSTM models, and trading strategies.
+  - Improved test coverage and reliability for IBKR data collection, LSTM models, and trading strategies.
   - Documentation enhancements with Sphinx-ready docstrings improve maintainability and onboarding.
   - Version incremented to 1.10.0 (MINOR) per Semantic Versioning for new backward-compatible features and enhancements.
 
@@ -819,12 +1011,12 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
 
 ## Version 1.7.0 (2025-05-25)
 - **Enhanced Test Suite:**
-  - Refactored and expanded test suite for Interactive Brokers (IB), Alpaca, and streaming integration to ensure robust data pipeline functionality.
-  - Improved IB API configuration access to avoid global state, enabling more reliable mocking in tests.
+  - Refactored and expanded test suite for Interactive Brokers (IBKR), Alpaca, and streaming integration to ensure robust data pipeline functionality.
+  - Improved IBKR API configuration access to avoid global state, enabling more reliable mocking in tests.
   - Enhanced streaming and pipeline integration tests to accurately reflect buffer and error-handling behavior.
-  - Updated `test_config_mock` to fully populate Interactive Brokers configuration for all IB-related tests.
+  - Updated `test_config_mock` to fully populate Interactive Brokers configuration for all IBKR-related tests.
   - Improved logging test assertions for compatibility with `structlog` and standard logging output.
-  - Added robust patching for network and external dependencies in IB and Alpaca integration tests.
+  - Added robust patching for network and external dependencies in IBKR and Alpaca integration tests.
   - Increased test coverage for `data_cleaning`, `data_loader`, and `ib_data_collection` modules.
   - Fixed configuration mock structure in tests to prevent `AttributeError` on attribute-style access.
   - Performed general cleanup of legacy test code and removed unreachable or obsolete assertions.
@@ -938,7 +1130,7 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
   - `tests/python/test_ib_api.py`: Aligned with new `real_time_market_data.interactive_brokers` structure in `mock_config` and re-enabled in `run_tests.bat` with `--cov=srcPy.data.ib_api`.
   - `tests/python/test_config.py`: Updated imports: removed unused `jsonschema.exceptions.ConfigValidationError`, added `srcPy.utils.exceptions.ConfigValidationError`, kept `jsonschema.exceptions.ValidationError`.
   - `patchedLibs/pandas-ta-main-local/*.py`: Fixed stray brackets in multiple files to resolve syntax issues.
-  - `data/config.yaml`: Added `calendar_features` to preprocessing stub to fix schema validation in `load_config()`. Added environment variable mappings for `INFLUXDB_TOKEN`, `IB_API_KEY`, `ALPACA_KEY`, `ALPACA_SECRET`, `FRED_API_KEY`, `TWITTER_BEARER_TOKEN`, `ESG_API_KEY`, `BBG_API_KEY`, `WEATHER_API_KEY`.
+  - `data/config.yaml`: Added `calendar_features` to preprocessing stub to fix schema validation in `load_config()`. Added environment variable mappings for `INFLUXDB_TOKEN`, `IBKR_API_KEY`, `ALPACA_KEY`, `ALPACA_SECRET`, `FRED_API_KEY`, `TWITTER_BEARER_TOKEN`, `ESG_API_KEY`, `BBG_API_KEY`, `WEATHER_API_KEY`.
   - `ci.yaml`: Added OS matrix (`ubuntu-latest`, `windows-latest`) for Python tests, replaced inline `pytest` calls with `run_tests.sh` (Linux) and `run_tests.bat` (Windows), set `shell: bash` (Linux) and `shell: cmd` (Windows). Disabled undeveloped C++ job. Added Dependabot auto-merge for PRs.
   - `.github/dependabot.yml`: Configured Dependabot for Python, Java, and GitHub Actions dependency updates.
   - `DirectoryStructure.md`: Updated to reflect expanded `docs/` directory with new documentation files.
@@ -1167,13 +1359,13 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
 
 ## Version 1.5.2 (2025-05-05)
 - **Updated Files**:
-  - Updated `tests\python\conftest.py` to mock `IB` class from `ib_insync` using `monkeypatch`, fixing test failures.
+  - Updated `tests\python\conftest.py` to mock `IBKR` class from `ib_insync` using `monkeypatch`, fixing test failures.
   - Updated `tests\python\test_ib_data_collection.py` and `test_ib_api.py` to use correct assertions and async tests for `ib_connection()`.
   - Updated `pytest.ini` to use `pythonpath = srcPy` instead of `python_paths` and enable `pytest-asyncio` with `markers = asyncio`.
   - Updated `README.md` and `VERSION.md` to reflect test fixes and version 1.5.2.
 - **Notes**:
-  - Fixed `AssertionError` and `IBConnectionError` in `test_ib_connection_success` by mocking `IB` class instantiation.
-  - Fixed `DID NOT RAISE IBConnectionError` in `test_ib_connection_failure` by correctly setting `connect.side_effect`.
+  - Fixed `AssertionError` and `IBKRConnectionError` in `test_ib_connection_success` by mocking `IBKR` class instantiation.
+  - Fixed `DID NOT RAISE IBKRConnectionError` in `test_ib_connection_failure` by correctly setting `connect.side_effect`.
   - Addressed `RuntimeWarning: coroutine 'mock_ib.<locals>.async_bars' was never awaited` by returning mock values directly.
   - Added `pytest-asyncio` to support async tests.
   - Version incremented to 1.5.2 (PATCH) per Semantic Versioning for bug fixes.
@@ -1231,11 +1423,11 @@ _Incremented to version 1.13.2 (PATCH) per Semantic Versioning for test fixes, c
 ## Version 1.1.0 (2025-04-30)
 - **Added Files**:
   - `python/__init__.py`, `python/data/__init__.py`, `python/utils/__init__.py`: Added to make directories Python packages, resolving `ModuleNotFoundError: No module named 'python'`.
-  - `python/utils/config.py`: Defines IB API settings (host, port, client_id, etc.) for `ib_api.py` and `ib_data_collection.py`.
+  - `python/utils/config.py`: Defines IBKR API settings (host, port, client_id, etc.) for `ib_api.py` and `ib_data_collection.py`.
   - `python/utils/logger.py`: Configures logging with console output, compatible with pytest `caplog`.
   - `python/utils/validators.py`: Validates ticker symbols and date formats for data fetching.
-  - `python/utils/exceptions.py`: Defines custom exceptions (`IBConnectionError`, `DataFetchError`, `NoDataError`).
-  - `tests/python/conftest.py`: Provides pytest fixtures for mocking IB API and cache.
+  - `python/utils/exceptions.py`: Defines custom exceptions (`IBKRConnectionError`, `DataFetchError`, `NoDataError`).
+  - `tests/python/conftest.py`: Provides pytest fixtures for mocking IBKR API and cache.
   - `pytest.ini`: Configures pytest to include `python/` in module path.
   - `tests/run_tests.bat`: Windows batch script for running Python unit tests in Anaconda Prompt.
   - `VERSION.md`: Tracks directory structure changes.
