@@ -22,3 +22,5 @@ sphinxcontrib-serializinghtml==2.0.0
 autodoc_pydantic>=2.2.0
 erdantic>=1.1.0.post1
 furo>=2024.8.6
+astroid==3.3.8
+
