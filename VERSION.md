@@ -1,5 +1,338 @@
 # Version History
 
+## Version 3.1.1 (2025-11-05)
+
+Changelog for GPU-Accelerated Data Processing Pipeline Stack
+Version: 3.1.1 (Executor routing, skip policy, ENV passthrough, guardrails) 
+
+### Major Themes Across All Changes
+
+* **Unified executor path:** All migrated-strategy tests now flow through `adaptive_executor.run()` to exercise **registry**, **classification**, and **dispatch** consistently.
+* **Targeted skip policy:** Phase-1A introduces a **surgical** execute/skip gate (negative-space only) to maximize coverage without masking real failures.
+* **ENV override passthrough:** Centralized normalization maps `DISABLE_*` flags to `ENV.*` and exposes safe module attributes for controlled patching.
+* **Guardrails & contracts:** Meta-registry contract test ensures every registered handler is exercised; unknown kinds classified as **unknown** and handled predictably.
+
+---
+
+### Detailed Changes
+
+#### `tests/python/test_adaptive_strategies/migrated_strategies/test_system_migrated_strategies.py`
+
+* **Executor routing (Phase 0):**
+
+  * All scenarios coerced via `coerce_scenario(...)` then executed with `exec_scenario(...)`.
+  * Added scoped logging via `caplog.at_level(..., logger=LOGGER_NAME)`.
+  * Introduced `seeded_engine` fixture (`scope="module"`) for xdist safety and no state bleed.
+* **Expectation processing:**
+
+  * Structured handling of `expectations.assert` including `raises`, `message_contains`, `logs_levels`, and `returns_like`.
+* **Unknown-type handling:**
+
+  * New tests: classification to `"unknown"` and executor xfail behavior.
+* **Result:** Registry/classification/dispatch coverage rises from ~0% → **~90%** on executor infra.
+
+#### `tests/python/infra/scenario_policy.py` (new)
+
+* **Skip policy:** `should_execute_scenario(...)` flips prior logic—skip only negative-space.
+* **Override normalization:** `OverrideNormalizer` maps `DISABLE_CACHE` → `ENV.DISABLE_CACHE` etc.
+* **ENV passthrough:** `interpret_override_with_env_passthrough(...)` centralizes mapping.
+* **Patching safety:** `get_safe_module_attrs_for_migrated_strategies()` enumerates allowlisted attributes.
+* **Debugging aid:** `format_override_plan_summary(...)` emits concise plan/ignore summaries.
+
+#### `tests/python/infra/override_engine.py`
+
+* **Delegation:** `interpret_override(...)` now delegates to scenario_policy for **ENV.* passthrough**.
+* **Impact:** Schema “unknown selector” errors reduced substantially; `NUMBA_AVAILABLE`/`DISABLE_CACHE` apply correctly.
+
+#### `tests/python/test_adaptive_strategies/migrated_strategies/test_migrated_strategies_auto.py`
+
+* **Adapter hardening:** Safe attrs now sourced from scenario_policy.
+* **Pre-normalization:** Early `NORMALIZER.normalize_dict(...)` improves plan building.
+* **Skip gate:** Replaced legacy `should_skip_scenario` with **surgical** execute/skip.
+* **Logging cleanup:** Consolidated plan+error debug output; removed duplicate assignments.
+* **Visibility:** Temporary `FILTER_DEBUG`/`PERSIST_DEBUG` prints quantify expansion effects.
+
+#### `tests/python/test_adaptive_strategies/migrated_strategies/harness.py`
+
+* **Override logging:** Emits expected info/warning records for `DISABLE_NUMBA` / `DISABLE_CACHE`.
+* **Guardrails:** `_enforce_override_exceptions_and_normalize(...)` raises precise `RuntimeError`/`ValueError` for error-testing overrides; handlers return standardized `HandlerResult` on exceptions.
+
+#### `tests/python/test_adaptive_strategies/migrated_strategies/test_meta_registry_contract.py` (new)
+
+* **Contract test:** Asserts every registered handler (except temporary `engine`) is exercised by at least one scenario, preventing silent coverage regressions.
+
+---
+
+### Coverage Impact
+
+* **Executor infrastructure:** **0% → 85–90%**
+* **Registry/classification/dispatch:** **0% → ~90%**
+* **Harness (strategy/ensemble/module):** **+40%**
+* **SUT (migrated strategies):** **+10%**
+* **Override engine:** **+20%**
+* **Overall project coverage (tests focus):** **+14%** (e.g., 27% → 41% in representative runs)
+
+---
+
+### Behavioral Changes
+
+* **Tests route through executor:** No direct calls to `build_ensemble_for_scenario` or engine internals.
+* **Skip policy narrowed:** Only true negative-space scenarios skip; ~+91 scenarios now execute.
+* **Unknown kinds:** Classified as `"unknown"` and surfaced via executor with explicit xfail path.
+* **Engine-shaped scenarios:** Temporarily **skip** via registered handler (to be implemented in Phase 2).
+
+---
+
+### Breaking Changes
+
+* **Test signatures:** `test_behavior` now requires `seeded_engine, caplog`.
+* **Skip semantics:** Legacy “broad skip” removed; scenarios with schema warnings now execute (stricter CI signal).
+* **Executor contract reliance:** Per-scenario assertions must inspect standardized `HandlerResult`.
+
+---
+
+### Action Required
+
+* **Test authors:**
+
+  * Ensure tests import `should_execute_scenario`, `NORMALIZER`, and `get_safe_module_attrs_for_migrated_strategies` from `scenario_policy`.
+  * Update any direct-engine test paths to the executor route.
+* **CI/CD:**
+
+  * Expect a higher pass+skip ratio with fewer silent skips and clearer failures.
+  * Refresh coverage baselines (approx. **+15–20%** increase anticipated).
+
+---
+
+### Robustness & Observability
+
+* **Scoped logging:** `caplog` blocks prevent cross-test pollution.
+* **Engine isolation:** Module-scoped seeded engine is xdist-safe.
+* **Input validation:** Pydantic coercion before execution.
+* **ENV knobs:** `ENV.DISABLE_CACHE`, `ENV.NUMBA_AVAILABLE` reliably applied.
+* **Clear failures:** Guardrails raise precise exceptions for error-testing scenarios.
+
+---
+
+### Known Issues & Next Steps
+
+* **Override interpreter breadth:** Many patterns still map to “unknown”; expand in a future phase.
+* **Module handler depth:** Minimal exercising; replace with multi-strategy toggle sweep to hit caching/numba branches (**+5–7%**).
+* **Engine handler:** Implement real execution for `parallel_threshold_*`, `high_risk_pattern`, `optimal_sequence` (**+15–20%**).
+* **Happy-path scenarios:** Add 10–15 functional cases to rebalance from error-heavy mix (**+3–5%**).
+
+---
+
+### Files Changed Summary
+
+* **New:**
+
+  * `tests/python/infra/scenario_policy.py`
+  * `tests/python/test_adaptive_strategies/migrated_strategies/test_meta_registry_contract.py`
+* **Modified:**
+
+  * `tests/python/infra/override_engine.py`
+  * `tests/python/test_adaptive_strategies/migrated_strategies/test_migrated_strategies_auto.py`
+  * `tests/python/test_adaptive_strategies/migrated_strategies/test_system_migrated_strategies.py`
+  * `tests/python/test_adaptive_strategies/migrated_strategies/harness.py`
+  * `tests/python/test_adaptive_strategies/migrated_strategies/scenario.py` (indirect expansion logic)
+
+---
+
+### Performance & CI Notes
+
+* **No perf regression:** Test runtime comparable; improved determinism via isolation and scoped logging.
+* **Signal quality:** Executor-standardized failures reduce flaky infrastructure errors and increase actionable failures.
+
+---
+
+
+## Version 3.1.0 (2025-10-29)
+
+Changelog for GPU-Accelerated Data Processing Pipeline Stack
+Version: 3.1.0 (Param matrix upgrades, structured engine scenarios, dataframe helpers refactor, test infra unification)
+
+### Major Themes Across All Changes
+- **Smarter parametrization:** `matrix.py` gains scoped, backward-compatible knobs via a single `opts={...}` bundle, lazy grids, and per-case `pytest.param(...)` so marks/ids travel with cases.
+- **Structured engine signals:** `self_evolving_engine.py` switches high-risk keys to tuples and exposes `generate_scenarios_for_testing()` for clean, assertable test inputs.
+- **Dataframe helpers refactor:** Contract-compliant capability flags, hardened exception taxonomy, hybrid parallelism, instrumentation, and tunable env knobs.
+- **Scenario model contract:** Typed metadata, expectations, fuzz support, JSON schema export, and CLI validation.
+- **Adaptive test executor:** Central dispatcher/registry for module harnesses; consistent result shape and capability gating; slim per-module tests.
+
+---
+
+### Detailed Changes
+
+#### Matrix (matrix.py)
+- New capabilities (scoped + backward-compatible) via `opts={...}`:
+    - `cases`, `idfn`, `skip_if`, `xfail_if`, `marks`, `indirect` (no new reserved kwargs).
+- **Lazy evaluation:** Callable `grid` and callable grid values.
+- **IDs & marks:** Per-case `pytest.param(...)`; auto IDs still work; `idfn` wins; explicit `ids` still honored.
+- **Ergonomics/robustness:**
+    - Optional `pytest` import typed as `Any`; only used when available.
+    - Learning wrapper uses safe `getattr` for `__module__`/`__qualname__`.
+    - Probe execution remains concurrent; env filter unchanged.
+- **Exception policy tightening:**
+    - Use `except ImportError` for `pytest` import.
+    - Narrow catches—no blanket `except Exception`:
+        - Constraints: (`AssertionError`, `TypeError`, `ValueError`)
+        - Probe/collection: (`AssertionError`, `RuntimeError`, `TypeError`, `ValueError`, `OSError`) plus explicit `TimeoutError`
+        - User callbacks (`probe(c)`, `skip_if`, `xfail_if`, `marks`, `idfn`): (`TypeError`, `ValueError`) (`KeyError` also for `probe(c)`)
+    - Learning wrapper counts only `AssertionError` as a test failure (skips/infra bubble up).
+
+#### Adaptive Engine (self_evolving_engine.py)
+- **Key structural change:** `high_risk_patterns` now keyed by `tuple (data_shape: tuple[int, ...], num_ops: int)` instead of formatted string.
+- **Updated logic:**
+    - `_identify_failure_patterns()` builds and preserves tuple keys (≥3 failures → high risk).
+    - `should_parallelize(...)` checks `(data_shape, len(operations))` against `high_risk_patterns` and still applies learned size threshold and per-op failure heuristics.
+- **New test-facing API:** `generate_scenarios_for_testing()` returns structured scenarios:
+    - **Parallel threshold edge:** `parallel_threshold_minus/plus` with rows and `expect_parallel`.
+    - **High-risk:** each with `shape`, `num_ops`, `risk_count`, `expect_stability=False`.
+    - **Optimal op sequences:** `ops` with `expect_reorder=True`.
+    - Optional lock wrap for snapshot consistency.
+- **Why it matters:** Tests consume scenarios directly via `@matrix(opts={"cases": ...})`—no string parsing; assertions can target semantic equivalence (seq vs parallel, reorder) and learned boundaries.
+
+#### dataframe_helpers.py Refactor
+- **Standardization & contracts:**
+    - Replace ad-hoc imports with `HAS.<capability>` flags + `deps.get()` service locator.
+    - Zero-tolerance on fatal signals; remove `except BaseException`.
+    - **Error taxonomy:** runtime data issues → `DataValidationError`; env/deps issues → `ConfigValidationError`; map awaitable timeouts to `DataValidationError`.
+    - Metrics compatibility shims (`_metrics_inc`, `_metrics_hist`) tolerate `.increment`/`.histogram` vs `.counter().inc()`.
+- **Performance & concurrency:**
+    - **Hybrid path in `normalize_fetched`:** Polars `LazyFrame` via `pl.collect_all()`; concrete frames via `ThreadPoolExecutor` (size by `NORMALIZE_MAX_WORKERS`).
+    - Backend handles (`pl`, `pd`) resolved once and cached.
+- **Observability & adaptiveness:**
+    - `@instrument` on public APIs; granular counters/histograms.
+    - **Env knobs:** `ASYNC_RESOLVE_TIMEOUT`, `MAX_CONCAT_FRAMES`, `DATETIME_PARSE_STRICT`, `NORMALIZE_MAX_WORKERS`, `TO_POLARS_CONVERSION_POLICY`, `TICKER_PRIORITY`.
+- **Invariant enforcement:**
+    - `ensure_datetime_col` raises `DataValidationError` on `NaT` post-coercion (strict).
+    - `to_polars` consistently strips/resets index; robust fallback wrapping.
+    - `normalize_fetched` enforces awaitable resolution, `LazyFrame` collection, ticker injection, skips `Exception` values in `dict` inputs.
+
+#### Scenario Contract (scenario_models.py and friends)
+- **Unified metadata base** across scenarios (`schema_version`, `deprecated`, `author`, `rationale`, `seed`, `expectations`).
+- `ScenarioExpectations` with `must_not_fail`, `max_latency_ms`, and invariant descriptions.
+- **Type-safe kinds:** Subclasses declare `kind: Literal[...]`; exported `StrictScenarioKind`.
+- **Fuzz hooks:** `fuzz(seed)` yields canonical + boundary variants.
+- **Typed raw views:** `TypedDict` overloads for `scenario_to_raw(...)`; `mypy` catches key typos.
+- **Validation semantics:** Unknown strict kind now raises `ValueError`.
+- **Schema export & CLI:** `get_scenario_schema()`, `export_scenario_schema(path)`, `scenario_fingerprint(...)`, `check_contribution_rules()`, and a CLI with `--schema`, `--validate`, `--check`.
+
+#### Adaptive Test Infra
+- **New executor (adaptive_executor.py):**
+    - **Central registry:** `register(module_key, scenario_type, requires=..., version=...)`.
+    - **Classification pipeline** (plugin-extensible) → "engine", "module", "strategy", "ensemble", or staged pipeline kinds.
+    - **Capability gating** with `requires={...}` and compat lookups; standardized `HandlerResult` shape (`raised`, `exc_type`, `exc_msg`, `logs`).
+    - Strict result validation; handler crashes fail infra, not product code.
+- **Per-module harnesses:** Minimal `harness.py` registering handlers; return `HandlerResult`-shaped `dict`s.
+- **Slim tests:** `test_<module>_auto.py` delegates to executor and asserts against `scenario.expectations.assert`.
+
+---
+
+### Breaking Changes
+- **Matrix:** Narrower exception handling may surface previously swallowed errors.
+- **Scenario parsing:** `coerce_scenario({...})` raises `ValueError` (not `ValidationError`) for unknown strict kinds.
+- **Scenario dicts:** `.dict()`/`scenario_to_raw()` include metadata; update snapshots or filter fields if you rely on legacy minimal shapes.
+
+---
+
+### Action Required
+- Update any tests that were asserting `ValidationError` for unknown kinds to expect `ValueError`.
+- If you snapshot raw scenarios, refresh snapshots (or filter metadata keys).
+- For dataframe helpers, align to new error classes and ensure env knobs (if used) are set in CI.
+- For modules under adaptive testing, add or update `harness.py` to register handlers and return `HandlerResult`-shaped results.
+
+---
+
+### Performance & Coverage Notes
+- **Param matrix:** Faster collection via lazy grids and tighter exception paths.
+- **Helpers:** Parallel `LazyFrame` collection and threaded concrete-frame handling improve wall time on mixed inputs.
+- **Infra:** Central executor reduces per-test boilerplate; clearer skip/xfail semantics increase CI signal quality.
+
+## Version 3.0.0 (2025-10-22)
+
+**Version:** 3.0.0 (Plugins, Core pipeline split, consolidated testing/coverage)
+
+### Major Themes Across All Changes
+- **Core pipeline split & namespacing:** Introduced `srcPy/pipeline/core/*` with explicit **builder**, **context**, **metrics**, and **registry** modules; renamed `core/base.py` → `core/pipeline_core_base.py` and added new first-class primitives.
+- **Pluginized backends:** Added entry-point plugin packages for **cuML**, **CuPy**, **Polars**, **Torch**, and **XGBoost** with their own `pyproject.toml` and capability registration.
+- **Devtools & API scans:** New scanners to surface missing helpers/imports, propose shims, and run import smoke tests.
+- **Pytest consolidation:** Removed root `pytest.ini`; all config now under `[tool.pytest.ini_options]` in `pyproject.toml` with strict markers/config and `pytest-asyncio`.
+- **Coverage hardening & path normalization:** Raised threshold, expanded `omit`, and mapped installed paths back to `srcPy`.
+- **Lint config tighten-up:** Streamlined Ruff rule set (removed docstring rules from `select`, cleared `ignores`) targeting `py312`.
+- **Docs/wording polish in vendored libs:** Unified on term **pipeline_config** in `pandas-ta` and Keras docstrings.
+
+---
+
+### Detailed File-by-File Changes and Rationale
+
+#### Devtools
+- **devtools/scan_helpers.sh (new)** Static helper scan + optional `pylint` presence check; includes import smoke test targeting pipeline metrics.
+- **devtools/scan_test_api.py (new)** Walks test suite AST, resolves missing modules/symbols, prints a **report** and **shim templates**; includes safe `sys.path` handling.
+
+#### Plugins (entry-point backends)
+- **New plugin packages** (each with its own `pyproject.toml` and entry-point in `project.entry-points."marketmind.capabilities"`):
+    - `marketmind_cuml_backend` (cuML ML engine)
+    - `marketmind_cupy_backend` (CuPy GPU array backend; `cupy-cuda12x>=13.0`)
+    - `marketmind_polars_backend` (Polars DataFrame backend)
+    - `marketmind_torch_backend` (PyTorch)
+    - `marketmind_xgboost_backend` (`xgboost>=2.0`)
+- Capability registrars ensure discovery and sensible preference ordering (e.g., GPU-first where applicable).
+
+#### Core pipeline refactor
+- **Renamed & added modules under srcPy/pipeline/core:**
+    - `core/base.py` → **core/pipeline_core_base.py** (rename)
+    - **core/pipeline_core_builder.py** (new) – graph construction & rule evaluation
+    - **core/pipeline_core_context.py** (new) – runtime context (freq inference, flags)
+    - **core/pipeline_core_metrics.py** (new) – metrics/instrumentation with graceful fallbacks
+    - **core/pipeline_core_registry.py** (new) – typed step registry and discovery
+- **devtools/create_cleaning_structure.py** updated to emit new core file names for generated structures.
+
+#### Testing/CI (pytest moved into pyproject.toml)
+- **Removed:** `pytest.ini`.
+- **Added/changed ([tool.pytest.ini_options]):**
+    - `-p pytest_asyncio`, `--strict-config`, `--strict-markers`, branch coverage, XML + concise terminal reports
+    - `asyncio_mode = "auto"`
+    - Normalized ignore-glob patterns; trimmed `norecursedirs`
+    - Expanded marker taxonomy (`gpu`/`slow`/`streaming`/`benchmark`/etc.)
+
+#### Coverage & paths ([tool.coverage.*])
+- **fail_under = 90**; `branch = true`.
+- Enlarged `omit` set (models, brokers, market-data sources, CLI/entrypoints).
+- **[tool.coverage.paths]**: `srcPy = ["srcPy", "*/site-packages/srcPy"]` to map installed paths back to sources.
+
+#### Linting (Ruff)
+- `select` drops `D` docstring rules; `ignore` cleared; `target-version = "py312"` retained.
+
+#### Vendored/doc polish
+- **pandas-ta / Keras** strings: “config” → **“pipeline_config”** for consistency with project terminology.
+
+---
+
+### Breaking Changes
+- **Import paths (core):**
+    - `srcPy/pipeline/core/base.py` → **srcPy/pipeline/core/pipeline_core_base.py**
+    - New public modules under `srcPy/pipeline/core`:
+        - `pipeline_core_builder`, `pipeline_core_context`, `pipeline_core_metrics`, `pipeline_core_registry`
+- **Action required:** Update any imports referring to `...pipeline.core.base` and begin using the new `pipeline_core_*` modules. If you have direct references to old registry/metrics hooks, align with the new split.
+
+---
+
+### Performance Notes
+- GPU-first capability ordering where relevant (e.g., CuPy for array ops, cuML for ML engine) is now explicit in plugin registrars; fallbacks remain intact when GPU deps are unavailable.
+
+---
+
+### Coverage
+- Gate raised to **90%**; broadened `omit` minimizes noise from CLI/entrypoints, external brokers, and source fetchers while keeping core logic under test.
+
+---
+
+### Future Work
+- Migrate remaining legacy references in cleaning/feature steps to the new `pipeline_core_*` APIs.
+- Extend devtools scanners with auto-fix mode for common shim patterns.
+
+
 ## Version 2.0.0 (2025-08-06)
 
 ## Changelog for GPU-Accelerated Data Processing Pipeline Stack
