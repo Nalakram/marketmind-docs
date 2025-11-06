@@ -227,8 +227,8 @@ Comprehensive documentation is provided in ReadTheDocs online docs site.
    
 The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
-- [Infographics Gallery](https://marketmind-docs.readthedocs.io/en/latest/infographics_gallery.html)
-
+<p>See <a href=https://marketmind-docs.readthedocs.io/en/latest/infographics_gallery.html)>Infographics Gallery</a> for interactive research documentation</p>
+ 
 <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
 
 
