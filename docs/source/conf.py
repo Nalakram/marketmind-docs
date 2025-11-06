@@ -131,6 +131,7 @@ html_theme = 'furo'  # Clean, minimal, responsive theme with light/dark mode sup
 
 # Where Sphinx will look for custom static files (e.g., CSS, images)
 html_static_path = ['_static']
+html_extra_path  = ['_extra']            # add this for raw HTML
 
 # Customize Furo color palette or other theme options
 html_theme_options = {

@@ -108,6 +108,7 @@ tutorials/index.md
 tutorials/basic_prediction.ipynb
 tutorials/advanced_features.ipynb
 images/index.md
+infographics_gallery.md
 
 contributors/onboarding.md
 LICENSE.md
