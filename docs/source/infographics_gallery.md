@@ -1,4 +1,4 @@
-Research Infographics Gallery
+# Research Infographics Gallery
 
 Curated visuals from the project — static diagrams, data flow maps, and fully interactive pages.Thumbnails live in /_static/infographics/…; interactive minisites are served from /_extra/interactive/….
 

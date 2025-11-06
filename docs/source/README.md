@@ -206,7 +206,7 @@ Measured latencies vary by hardware and configuration. Replace the example numbe
 ---
 
 ## Security & Privacy (summary)
-**Draft — <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security Practices</a> for security policies</p> and <p> <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Privacy Policy</a> for full (draft) details.**
+**Draft — <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security Practices</a> for security policies</p> and <p> <a href="https://marketmind-docs.readthedocs.io/en/latest/privaccy_practices.html">Privacy Policy</a> for full (draft) details.**
 - gRPC‑TLS by default for all inter‑process communication.
 - Local‑first processing: models and PII (not collected by default) are processed locally unless explicitly configured.
 - No PII/telemetry shipped by default; opt‑in telemetry is gated and auditable.
@@ -227,9 +227,9 @@ Comprehensive documentation is provided in ReadTheDocs online docs site.
    
 The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
 encouraged to consult the docs for configuration details and advanced topics.
+- [Infographics Gallery](https://marketmind-docs.readthedocs.io/en/latest/infographics_gallery.html)
 
-and <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security 
-Practices</a> for security policies.</p>
+<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
 
 
 ## Public Interfaces (at a glance)
@@ -269,9 +269,8 @@ MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.
 several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
 Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
 without prior written permission from the copyright holder.
-See the [LICENSE](LICENSE) file for full terms and <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security 
-Practices</a> for security policies.</p>
+See the [LICENSE](LICENSE) file for full terms.
 
 ---
 
-_Last updated: 3.1.1._
+_Last updated: 3.1.1._ 11/05/2025
