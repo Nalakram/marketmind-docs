@@ -10,11 +10,11 @@ Curated visuals from the project — static diagrams, data flow maps, and fully 
 Architectural Paradigms for Self-Evolving FinTech Engines  
 A zoomable, interactive map of architecture archetypes, adaptation layers, and feedback loops powering self-optimizing market systems.
 
-[Open interactive →][Open interactive →](Architectural%20Paradigms%20for%20Self-Evolving%20FinTech%20Engines.html){target="_blank" rel="noopener"}
+[Open interactive →](architectural-paradigms.html){target="_blank" rel="noopener"}
 
 <div style="aspect-ratio:16/9; border-radius:8px; overflow:hidden;">
-  <iframe src="/_extra/Architectural%20Paradigms%20for%20Self-Evolving%20FinTech%20Engines.html"
-          width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <iframe src="architectural-paradigms.html"
+          width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
 </div>
 :::
 
@@ -23,14 +23,12 @@ A zoomable, interactive map of architecture archetypes, adaptation layers, and f
 FinTech System Design Webpage  
 An overview and interactive examples demonstrating system design patterns for resilient, low-latency FinTech platforms.
 
-[Open interactive →][Open interactive →](../Architectural%20Paradigms%20for%20Self-Evolving%20FinTech%20Engines.html){target="_blank" rel="noopener"}
+[Open interactive →](fintech-system-design.html){target="_blank" rel="noopener"}
 
 <div style="aspect-ratio:16/9; border-radius:8px; overflow:hidden;">
-  <iframe src="Architectural%20Paradigms%20for%20Self-Evolving%20FinTech%20Engines.html"
-        width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
-		
-  <iframe src="/Architectural%20Paradigms%20for%20Self-Evolving%20FinTech%20Engines.html"
-        width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
+  <iframe src="fintech-system-design.html"
+          width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
 </div>
+
 :::
 ::::
