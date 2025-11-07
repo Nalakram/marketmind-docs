@@ -30,6 +30,7 @@ scores to each input feature.
 - [Testing & Gates](#testing--gates)
 - [Performance (SLOs)](#performance-slos)
 - [Security & Privacy (summary)](#security--privacy-summary)
+- [Documentation](#documentation)
 - [Public Interfaces (at a glance)](#public-interfaces-at-a-glance)
 - [Contributing](#contributing)
 - [Versioning & Changelog](#versioning--changelog)
