@@ -217,13 +217,17 @@ html[data-theme='high-contrast'] {
 
 .infographics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--mm-space-lg);
   align-items: stretch;
   margin: var(--mm-space-xl) 0;
 }
 
-.infographic-card {
+/* Base card styling for any card used inside the grid:
+   - supports sphinx-design (.sd-card), theme .card, or custom .infographic-card */
+.infographics-grid .sd-card,
+.infographics-grid .card,
+.infographics-grid .infographic-card {
   background: var(--mm-bg-elevated);
   border: 1px solid var(--mm-border);
   border-radius: 0.75rem;
@@ -232,12 +236,17 @@ html[data-theme='high-contrast'] {
   transition: all 0.3s var(--mm-ease-smooth);
   position: relative;
   overflow: hidden;
-  /* Performance optimization for many cards */
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-sm);
   contain: layout style paint;
   content-visibility: auto;
 }
 
-.infographic-card::before {
+/* Gradient accent bar on hover */
+.infographics-grid .sd-card::before,
+.infographics-grid .card::before,
+.infographics-grid .infographic-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -250,21 +259,75 @@ html[data-theme='high-contrast'] {
   transition: transform 0.4s var(--mm-ease-smooth);
 }
 
-.infographic-card:hover {
+.infographics-grid .sd-card:hover,
+.infographics-grid .card:hover,
+.infographics-grid .infographic-card:hover {
   border-color: var(--mm-primary);
   box-shadow: var(--mm-shadow-lg);
   transform: translateY(-4px);
 }
 
-.infographic-card:hover::before {
+.infographics-grid .sd-card:hover::before,
+.infographics-grid .card:hover::before,
+.infographics-grid .infographic-card:hover::before {
   transform: scaleX(1);
 }
 
+/* Thumbnail image at top of card (if present via :img-top) */
+.infographics-grid .sd-card > img,
+.infographics-grid .card > img,
+.infographics-grid .infographic-card > img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: var(--mm-space-md);
+}
+
+/* “Open interactive →” link */
+.infographics-grid .interactive-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  color: var(--mm-primary);
+  text-decoration: none;
+}
+
+.infographics-grid .interactive-link:hover {
+  text-decoration: underline;
+}
+
+/* Embedded interactive preview:
+   - fixed aspect ratio so iframes are not tall/narrow
+   - sits at bottom of the card for a consistent layout */
+.infographics-grid .interactive-frame {
+  margin-top: auto;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* ≈ 16:10; use 56.25% for 16:9 if preferred */
+  background: #000;
+}
+
+.infographics-grid .interactive-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Responsive: single-column on smaller screens */
 @media (max-width: 768px) {
   .infographics-grid {
     grid-template-columns: 1fr;
     gap: var(--mm-space-md);
   }
+}
+
 }
 
 /* ============================================================================
