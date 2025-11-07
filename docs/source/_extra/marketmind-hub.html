@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketMind Interactive Technical Hub</title>
+
+  <meta name="description" content="Interactive technical hub for the MarketMind system: architecture, pipelines, schemas, observability, SLOs, and AI-assisted code/schema generation." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!--
+    Palette: Calm, product-grade (slate/gray/white with indigo accent).
+    Layout: Two-column SPA. Sticky left nav, content on the right. Sections toggled via JS.
+    Visuals: All diagrams built with HTML + Tailwind. No Mermaid. No SVG.
+    AI: Gemini integration for schema explanations, Pydantic stubs, and code walkthroughs.
+    CONFIRMATION: NO Mermaid JS used. NO SVG used.
+  -->
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    .content-section {
+      display: none;
+    }
+    .content-section.active {
+      display: block;
+    }
+
+    /* Sidebar active link */
+    #sidebar-nav a.active {
+      background-color: #eef2ff;
+      color: #4f46e5;
+      border-left-color: #4f46e5;
+      font-weight: 600;
+    }
+
+    /* Diagram cards */
+    .diagram-card {
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      text-align: center;
+      font-size: 0.875rem;
+      color: #111827;
+    }
+    .diagram-arrow-vertical {
+      font-size: 1.5rem;
+      color: #9ca3af;
+      line-height: 1;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+    }
+    .styled-table {
+      min-width: 100%;
+      border-collapse: collapse;
+    }
+    .styled-table th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .styled-table td {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      color: #374151;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+    .styled-table tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    /* Code block */
+    .code-block {
+      background-color: #020817;
+      color: #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .code-block pre {
+      margin: 0;
+    }
+
+    /* Gemini buttons */
+    .gemini-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background-color: #eef2ff;
+      color: #4f46e5;
+      transition: all 0.15s ease-in-out;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .gemini-button:hover {
+      background-color: #e0e7ff;
+      border-color: #c7d2fe;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 18px rgba(79, 70, 229, 0.18);
+    }
+
+    /* Chart container */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      max-height: 250px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-in-out;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background-color: #ffffff;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      width: 91.666667%;
+      max-width: 42rem;
+      max-height: 80vh;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+      overflow-y: auto;
+    }
+    .spinner {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      border: 4px solid #e5e7eb;
+      border-top-color: #4f46e5;
+      animation: spin 0.9s linear infinite;
+      margin: 2rem auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 767px) {
+      #sidebar {
+        position: relative;
+        top: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+  <div class="flex flex-col md:flex-row">
+    <!-- Sidebar -->
+    <nav
+      id="sidebar"
+      class="w-full md:w-64 bg-white md:h-screen md:sticky top-0 border-b md:border-b-0 md:border-r border-gray-200 flex-shrink-0"
+      aria-label="MarketMind navigation"
+    >
+      <div class="p-4 border-b border-gray-100">
+        <h1 class="text-xl font-bold text-slate-900">MarketMind Hub</h1>
+        <p class="text-xs text-gray-500 mt-1">Interactive Technical Reference</p>
+      </div>
+      <ul
+        id="sidebar-nav"
+        class="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible whitespace-nowrap md:whitespace-normal"
+      >
+        <li><a href="#system-overview" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">System Overview</a></li>
+        <li><a href="#e2e-flow" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">E2E Flow</a></li>
+        <li><a href="#architecture" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Architecture</a></li>
+        <li><a href="#data-schemas" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Data Schemas</a></li>
+        <li><a href="#pipelines" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Pipelines</a></li>
+        <li><a href="#caching" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Caching &amp; Hashing</a></li>
+        <li><a href="#observability" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Observability</a></li>
+        <li><a href="#performance" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Performance (SLOs)</a></li>
+        <li><a href="#config" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Environment</a></li>
+        <li><a href="#proactive-frameworks" class="block py-3 px-4 text-sm text-gray-600 hover:bg-gray-50 border-l-4 border-transparent">Proactive Frameworks</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="content-area" class="flex-1 p-6 md:p-10 space-y-10">
+      <!-- System Overview -->
+      <section id="system-overview" class="content-section">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <div>
+            <h2 class="text-3xl font-bold text-slate-900">System Overview</h2>
+            <p class="text-sm text-slate-500 mt-1">
+              High-level component map for MarketMind from ingestion to inference.
+            </p>
+          </div>
+          <button class="gemini-button" data-context="overview-summary">
+            <span>✨</span><span>AI: Exec Summary</span>
+          </button>
+        </div>
+        <p class="text-lg text-slate-600 mb-6">
+          This view highlights the core services: ingestion, feature generation, training,
+          model registry, GPU-optimized inference, caching layers, and observability stack.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-6 text-center">System Component Map</h3>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            <!-- Left -->
+            <div class="flex flex-col gap-4 lg:items-end lg:mt-16">
+              <div class="diagram-card">Caching (Redis / Dragonfly)</div>
+              <div class="diagram-card">Orchestration (Prefect / Airflow)</div>
+            </div>
+            <!-- Center -->
+            <div class="flex flex-col items-center gap-2">
+              <div class="diagram-card bg-indigo-50 border-indigo-200">
+                Data / NLP Pipelines (Python, spaCy)
+              </div>
+              <span class="diagram-arrow-vertical">↓</span>
+              <div class="diagram-card bg-emerald-50 border-emerald-200">
+                Training Pipeline (PyTorch, GPU)
+              </div>
+              <span class="diagram-arrow-vertical">↓</span>
+              <div class="diagram-card bg-purple-50 border-purple-200">
+                Model Registry (ONNX / TensorRT)
+              </div>
+              <span class="diagram-arrow-vertical">↓</span>
+              <div class="diagram-card bg-rose-50 border-rose-200">
+                Inference Service (C++ / ONNX Runtime)
+              </div>
+              <span class="diagram-arrow-vertical">↓</span>
+              <div class="diagram-card bg-gray-50 border-gray-200">
+                API Gateway (gRPC / HTTP)
+              </div>
+            </div>
+            <!-- Right -->
+            <div class="flex flex-col gap-4 lg:items-start lg:mt-16">
+              <div class="diagram-card">Observability (Prometheus, Grafana)</div>
+              <div class="diagram-card">Tracing / Logs (OTel, Loki)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- End-to-End Flow -->
+      <section id="e2e-flow" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">End-to-End Flow</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          From trigger to deployed model: a resilient DAG managing ingestion, validation, training,
+          export, deployment, and monitoring.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-6 text-center">Orchestration DAG</h3>
+          <div class="flex flex-col items-center gap-2">
+            <div class="diagram-card bg-cyan-50 border-cyan-200 w-64">Cron / Event Trigger</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">Fetch Data</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">Clean &amp; Validate</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">Preprocess (CPU → GPU)</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">Train / Refit</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card bg-emerald-50 border-emerald-200 w-64">Export ONNX</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">TensorRT Build</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card bg-rose-50 border-rose-200 w-64">Deploy Service</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card w-64">Warmup / Engine Cache</div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card bg-gray-50 border-gray-200 w-64">Monitor: SLOs, Drift</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section id="architecture" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Model Architecture</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          Hybrid ensemble: Transformer core + optional temporal models + classical learners,
+          stacked through a meta-learner for robustness.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-6 text-center">Ensemble / Stacking Architecture</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex flex-col items-center gap-3">
+              <h4 class="font-semibold text-slate-700">Base Learners</h4>
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">Transformer</div>
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">LSTM / TCN</div>
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">ARIMA</div>
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">XGBoost</div>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+              <h4 class="font-semibold text-slate-700">Meta-Learner</h4>
+              <div class="diagram-card bg-purple-50 border-purple-200 p-6">
+                Ridge / Logistic / LightGBM
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+              <h4 class="font-semibold text-slate-700">Output</h4>
+              <div class="diagram-card bg-gray-50 border-gray-200 p-6">
+                Final Prediction / Policy Signal
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Schemas -->
+      <section id="data-schemas" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Data Schemas</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          Canonical contracts from ingestion → features → models to keep all components aligned.
+        </p>
+
+        <!-- Market Bars -->
+        <div class="flex items-center justify-between mb-3 gap-3">
+          <h3 class="text-xl font-semibold text-slate-800">Canonical Market Bars</h3>
+          <div class="flex gap-2">
+            <button class="gemini-button" data-context="schema-market-bars-explain">✨ Explain</button>
+            <button class="gemini-button" data-context="schema-market-bars-python">✨ Pydantic</button>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border border-gray-100 mb-6 table-responsive">
+          <table class="styled-table" id="schema-market-bars">
+            <thead>
+              <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>ts</td><td>ns UTC timestamp</td><td>normalized to UTC</td></tr>
+              <tr><td>open, high, low, close</td><td>float64</td><td>close forward-filled for joins</td></tr>
+              <tr><td>volume</td><td>float64</td><td>&gt;= 0</td></tr>
+              <tr><td>symbol</td><td>string</td><td>UPPER; exchange-normalized</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- NLP Events -->
+        <div class="flex items-center justify-between mb-3 gap-3">
+          <h3 class="text-xl font-semibold text-slate-800">NLP Events</h3>
+          <div class="flex gap-2">
+            <button class="gemini-button" data-context="schema-nlp-explain">✨ Explain</button>
+            <button class="gemini-button" data-context="schema-nlp-python">✨ Pydantic</button>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border border-gray-100 mb-6 table-responsive">
+          <table class="styled-table" id="schema-nlp">
+            <thead>
+              <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>ts</td><td>ns UTC</td><td>floored to bar interval</td></tr>
+              <tr><td>symbol</td><td>string</td><td>ticker → symbol map</td></tr>
+              <tr><td>topic_id</td><td>int</td><td>BERTopic cluster id</td></tr>
+              <tr><td>sentiment</td><td>float32</td><td>-1 .. +1</td></tr>
+              <tr><td>confidence</td><td>float32</td><td>0 .. 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Feature Table -->
+        <div class="flex items-center justify-between mb-3 gap-3">
+          <h3 class="text-xl font-semibold text-slate-800">Feature Table (PK: symbol, ts)</h3>
+          <div class="flex gap-2">
+            <button class="gemini-button" data-context="schema-feature-explain">✨ Explain</button>
+            <button class="gemini-button" data-context="schema-feature-python">✨ Pydantic</button>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border border-gray-100 table-responsive">
+          <table class="styled-table" id="schema-feature">
+            <thead>
+              <tr><th>Column</th><th>Type</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>sma_20, sma_50</td><td>float32</td><td>indicators</td></tr>
+              <tr><td>zscore_spread</td><td>float32</td><td>stat-arb</td></tr>
+              <tr><td>nlp_sentiment</td><td>float32</td><td>NLP join</td></tr>
+              <tr><td>regime</td><td>int8</td><td>regime detector</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Pipelines -->
+      <section id="pipelines" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Pipelines</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          CPU-bound sanitation and enrichment feed GPU-bound feature generation and sequence construction.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-6 text-center">CPU → GPU Preprocessing Pipeline</h3>
+          <div class="flex flex-col md:flex-row justify-around gap-6">
+            <div class="flex-1">
+              <h4 class="font-semibold text-slate-700 mb-3 text-center">CPU Steps</h4>
+              <div class="flex flex-col items-center gap-2">
+                <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">Clean / Validate</div>
+                <span class="diagram-arrow-vertical">↓</span>
+                <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">Align Calendars</div>
+                <span class="diagram-arrow-vertical">↓</span>
+                <div class="diagram-card bg-indigo-50 border-indigo-200 w-full">Text → Embeddings</div>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-slate-700 mb-3 text-center">GPU Steps</h4>
+              <div class="flex flex-col items-center gap-2">
+                <div class="diagram-card bg-emerald-50 border-emerald-200 w-full">Indicators (SMA/EMA, Vol)</div>
+                <span class="diagram-arrow-vertical">↓</span>
+                <div class="diagram-card bg-emerald-50 border-emerald-200 w-full">Feature Fusion &amp; Scaling</div>
+                <span class="diagram-arrow-vertical">↓</span>
+                <div class="diagram-card bg-emerald-50 border-emerald-200 w-full">Windowed Sequences</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Caching & Hashing -->
+      <section id="caching" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Caching &amp; Hashing</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          Multi-tier cache with pub/sub invalidation to keep inference and features hot, coherent, and cheap.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-6 text-center">Multi-Tier Cache &amp; Coherency</h3>
+          <div class="flex flex-col items-center gap-2">
+            <div class="diagram-card bg-purple-50 border-purple-200 w-72">
+              Invalidation Bus (Pub/Sub)
+            </div>
+            <div class="flex justify-center gap-6 -my-1 text-2xl text-rose-400">
+              <span>↙</span><span>↘</span>
+            </div>
+            <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full md:w-72">
+                L1 In-Process Cache
+              </div>
+              <div class="diagram-card bg-indigo-50 border-indigo-200 w-full md:w-72">
+                L2 Shared Memory
+              </div>
+            </div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card bg-indigo-50 border-indigo-200 w-full md:w-72">
+              L3 Redis / Dragonfly Cluster
+            </div>
+            <span class="diagram-arrow-vertical">↓</span>
+            <div class="diagram-card bg-indigo-50 border-indigo-200 w-full md:w-72">
+              L4 Persistent Store (Parquet)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Observability -->
+      <section id="observability" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Observability</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          First-class metrics, traces, and logs for model, infra, and strategy behavior.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-800 mb-3">Core Metrics</h3>
+            <ul class="list-disc list-inside text-slate-700 text-sm space-y-2">
+              <li><code>inference_latency_ms{model,strategy}</code></li>
+              <li><code>cache_hit_ratio{tier}</code></li>
+              <li><code>errors_total{type}</code></li>
+              <li><code>queue_depth{name}</code></li>
+              <li><code>drift_score{model}</code></li>
+            </ul>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2 gap-3">
+              <h3 class="text-xl font-semibold text-slate-800">Observability Code Stub</h3>
+              <button class="gemini-button" data-context="code-observability-explain">
+                ✨ Explain
+              </button>
+            </div>
+            <div class="code-block" id="code-observability">
+<pre><code>from typing import Callable, TypeVar
+T = TypeVar("T")
+
+def time_it(name: str):
+    def deco(fn: Callable[..., T]) -> Callable[..., T]:
+        def wrap(*a, **k):
+            # 1. Start timer & trace span
+            # 2. Increment "in_progress" gauge
+            # 3. Execute function
+            # 4. Observe latency in histogram
+            # 5. Decrement "in_progress" gauge
+            # 6. End span & return
+            return fn(*a, **k)
+        return wrap
+    return deco</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Performance (SLOs) -->
+      <section id="performance" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Performance (SLOs)</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          Latency budgets for critical path components to keep MarketMind execution-grade.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-semibold text-slate-800 mb-4">Component Latency SLOs (ms)</h3>
+          <div class="chart-container">
+            <canvas id="sloChart" aria-label="Latency SLO comparison" role="img"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Environment & Configuration -->
+      <section id="config" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Environment &amp; Configuration</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          YAML for defaults, env vars for overrides. Designed for reproducible deployment across backtest, paper, and live.
+        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+            <h3 class="text-xl font-semibold text-slate-800 mb-3">Example <code>config.yaml</code></h3>
+            <div class="code-block">
+<pre><code>env: live
+strategy:
+  name: momentum
+  params: { short: 20, long: 50 }
+preprocessor:
+  steps:
+    - { name: TechnicalIndicatorStep, enabled: true }
+cache:
+  l3: { host: redis:6379, db: 3 }
+observability:
+  prometheus_port: 9464</code></pre>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+            <h3 class="text-xl font-semibold text-slate-800 mb-3">Environment Variables</h3>
+            <div class="table-responsive">
+              <table class="styled-table">
+                <thead>
+                  <tr><th>Variable</th><th>Purpose</th><th>Default</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>MM_ENV</td><td>live / backtest</td><td>backtest</td></tr>
+                  <tr><td>MM_REDIS_URL</td><td>L3 cache endpoint</td><td>redis://redis:6379/3</td></tr>
+                  <tr><td>MM_MODEL_PATH</td><td>ONNX / TRT path</td><td>models/</td></tr>
+                  <tr><td>MM_PROM_PORT</td><td>Prometheus endpoint</td><td>9464</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Proactive Frameworks: contextual extension from your previous doc -->
+      <section id="proactive-frameworks" class="content-section">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Proactive Frameworks Addendum</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          How MarketMind can evolve beyond reactive MAPE-K using Agent-Based Models, Deep RL, and Digital Twins.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 space-y-4">
+          <p class="text-sm text-slate-700">
+            Summary:
+            <strong>ABM</strong> for emergent market stress-testing,
+            <strong>DRL</strong> for policy learning over long horizons,
+            <strong>Digital Twins</strong> for continuous what-if simulation of system + market.
+          </p>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+            <li>Start with <strong>DRL</strong> in a constrained environment: re-use observability as state, use existing models as features.</li>
+            <li>Introduce lightweight <strong>ABM</strong> scenarios to test DRL/strategy robustness against adversarial regimes.</li>
+            <li>Iterate toward a partial <strong>Digital Twin</strong> for high-value strategies and venues.</li>
+          </ul>
+          <button class="gemini-button" data-context="proactive-summary">
+            ✨ AI: Recommend Proactive Path
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- AI Modal -->
+  <div
+    id="ai-modal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-content">
+      <div class="flex justify-between items-center mb-3">
+        <h3 id="modal-title" class="text-xl font-bold text-slate-900">✨ AI Assistant</h3>
+        <button
+          id="modal-close"
+          class="text-2xl text-gray-500 hover:text-gray-800 leading-none"
+          aria-label="Close dialog"
+        >
+          &times;
+        </button>
+      </div>
+      <div
+        id="modal-body"
+        class="prose prose-slate max-w-none text-sm"
+      >
+        <div class="spinner" aria-label="Loading"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const navLinks = document.querySelectorAll('#sidebar-nav a');
+      const sections = document.querySelectorAll('.content-section');
+
+      function showSection(targetHash) {
+        let hash = targetHash || window.location.hash || '#system-overview';
+        const match = document.querySelector(hash);
+        if (!match) hash = '#system-overview';
+
+        sections.forEach(sec => {
+          sec.classList.toggle('active', '#' + sec.id === hash);
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === hash);
+        });
+      }
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = this.getAttribute('href');
+          history.pushState(null, '', target);
+          showSection(target);
+          if (window.innerWidth < 768) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+
+      window.addEventListener('hashchange', () => showSection(window.location.hash));
+      showSection(window.location.hash);
+
+      // --- SLO Chart ---
+      function createSloChart() {
+        const ctx = document.getElementById('sloChart');
+        if (!ctx || !window.Chart) return;
+
+        const data = {
+          labels: ['C++ Inference (GPU)', 'Feature Materialize (CPU)', 'Cache L3 Get'],
+          datasets: [
+            {
+              label: 'P50 (ms)',
+              data: [0.8, 20, 0.5],
+              backgroundColor: 'rgba(79, 70, 229, 0.8)'
+            },
+            {
+              label: 'P95 (ms)',
+              data: [3, 45, 1.5],
+              backgroundColor: 'rgba(249, 115, 22, 0.85)'
+            },
+            {
+              label: 'P99 (ms)',
+              data: [10, 80, 4],
+              backgroundColor: 'rgba(239, 68, 68, 0.9)'
+            }
+          ]
+        };
+
+        new Chart(ctx, {
+          type: 'bar',
+          data,
+          options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+              x: {
+                beginAtZero: true,
+                title: { display: true, text: 'Latency (ms)' },
+                ticks: { color: '#6b7280' },
+                grid: { color: 'rgba(148,163,253,0.12)' }
+              },
+              y: {
+                ticks: { color: '#111827' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { font: { size: 10 } }
+              },
+              tooltip: {
+                callbacks: {
+                  title(items) { return items[0]?.label || ''; }
+                }
+              }
+            }
+          }
+        });
+      }
+      createSloChart();
+
+      // --- Modal helpers ---
+      const modal = document.getElementById('ai-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const modalClose = document.getElementById('modal-close');
+
+      function openModal(title, html) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = html || '<div class="spinner" aria-label="Loading"></div>';
+        modal.classList.add('active');
+      }
+      function closeModal() {
+        modal.classList.remove('active');
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+
+      // --- Gemini integration (safe-ish formatting) ---
+      const systemPrompts = {
+        explainSchema:
+          'You are a senior staff engineer explaining a data contract in a trading system. Be concise and practical.',
+        generatePython:
+          'You are a senior staff engineer. Generate a complete Python Pydantic model for the schema. Use precise types, include brief comments. No extra prose.',
+        explainCode:
+          'You are a senior staff engineer. Explain what this observability decorator does and how to use it.',
+        overviewSummary:
+          'You are a chief architect. Summarize this MarketMind system overview in 1–2 concise paragraphs for technical leadership.',
+        proactiveSummary:
+          'You are a chief architect. Based only on the provided context, recommend whether to start with ABM, DRL, or Digital Twins to make MarketMind proactive, and justify in 1–2 concise paragraphs.'
+      };
+
+      const userSchemas = {
+        'schema-market-bars': `
+- ts: ns UTC timestamp, normalized
+- open/high/low/close: float64, close forward-filled for joins
+- volume: float64 >= 0
+- symbol: uppercase string, exchange-normalized`,
+        'schema-nlp': `
+- ts: ns UTC, floored to bar
+- symbol: string, ticker→symbol map
+- topic_id: int, BERTopic cluster
+- sentiment: float32 -1..+1
+- confidence: float32 0..1`,
+        'schema-feature': `
+- sma_20, sma_50: float32, technical indicators
+- zscore_spread: float32, stat-arb signal
+- nlp_sentiment: float32, from NLP events
+- regime: int8, regime classifier output`
+      };
+
+      const prompts = {
+        overviewSummary:
+          'Summarize the MarketMind architecture: ingestion, pipelines, registry, GPU inference, caching, and observability.',
+        proactiveSummary:
+          'Compare ABM, DRL, and Digital Twins for MarketMind. Recommend a starting point for proactive behavior.',
+        codeObservability:
+          (document.getElementById('code-observability')?.textContent || '').trim()
+      };
+
+      async function callGeminiAPI(userQuery, systemPrompt, title) {
+        const apiKey = ''; // Inject Gemini API key here.
+        if (!apiKey) {
+          openModal(
+            'API Configuration Required',
+            '<p class="text-sm text-slate-700">Add your <strong>Gemini API key</strong> inside <code>callGeminiAPI()</code> to enable AI-generated explanations and stubs.</p>'
+          );
+          return;
+        }
+
+        openModal(title, '<div class="spinner" aria-label="Loading"></div>');
+
+        const apiUrl =
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=' +
+          encodeURIComponent(apiKey);
+
+        const payload = {
+          contents: [{ parts: [{ text: userQuery }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] }
+        };
+
+        try {
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error('API Error: ' + res.status + ' ' + res.statusText);
+
+          const json = await res.json();
+          const candidate = json.candidates && json.candidates[0];
+          const parts = candidate && candidate.content && candidate.content.parts;
+          const text = (parts || []).map(p => p.text || '').join('\n').trim();
+
+          if (!text) throw new Error('Empty response from Gemini API.');
+          modalBody.innerHTML = formatModelTextAsHtml(text);
+        } catch (err) {
+          modalBody.innerHTML =
+            '<p class="text-sm text-red-600"><strong>Error:</strong> ' + escapeHtml(err.message) + '</p>' +
+            '<p class="text-xs text-slate-600 mt-2">Check network, quota, and API key configuration.</p>';
+        }
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+
+      function formatModelTextAsHtml(text) {
+        let safe = escapeHtml(text);
+
+        // **bold**
+        safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        // `inline`
+        safe = safe.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 bg-slate-100 rounded text-[0.7rem]">$1</code>');
+
+        const lines = safe.split(/\r?\n/);
+        let html = '';
+        let inList = false;
+
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (!line) {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            continue;
+          }
+
+          if (/^[-*]\s+/.test(line)) {
+            if (!inList) {
+              html += '<ul class="list-disc pl-5 mb-2 text-sm text-slate-800">';
+              inList = true;
+            }
+            html += '<li>' + line.replace(/^[-*]\s+/, '') + '</li>';
+          } else {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            // Code fences (very lightweight)
+            if (line.startsWith('```')) {
+              // Skip explicit markers; assume code already formatted if model sent it
+              continue;
+            } else {
+              html += '<p class="mb-2 text-sm text-slate-800">' + line + '</p>';
+            }
+          }
+        }
+
+        if (inList) html += '</ul>';
+        return html || '<p class="text-sm text-slate-700">No content returned.</p>';
+      }
+
+      // Bind Gemini buttons
+      document.querySelectorAll('.gemini-button').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const ctx = this.dataset.context;
+          if (!ctx) return;
+
+          if (ctx === 'overview-summary') {
+            callGeminiAPI(prompts.overviewSummary, systemPrompts.overviewSummary, '✨ System Overview (AI)');
+            return;
+          }
+
+          if (ctx === 'proactive-summary') {
+            callGeminiAPI(prompts.proactiveSummary, systemPrompts.proactiveSummary, '✨ Proactive Frameworks (AI)');
+            return;
+          }
+
+          if (ctx === 'code-observability-explain') {
+            callGeminiAPI(prompts.codeObservability, systemPrompts.explainCode, '✨ Observability Code (AI)');
+            return;
+          }
+
+          // Schema explain / Pydantic
+          if (ctx.endsWith('-explain')) {
+            const key = ctx.replace('-explain', '');
+            const schema = userSchemas[key];
+            if (!schema) return;
+            callGeminiAPI(schema, systemPrompts.explainSchema, '✨ Schema Explanation');
+            return;
+          }
+
+          if (ctx.endsWith('-python')) {
+            const key = ctx.replace('-python', '');
+            const schema = userSchemas[key];
+            if (!schema) return;
+            callGeminiAPI(schema, systemPrompts.generatePython, '✨ Pydantic Model');
+            return;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
