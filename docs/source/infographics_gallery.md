@@ -50,7 +50,7 @@ An overview and interactive examples demonstrating system design patterns for re
           loading="lazy"></iframe>
 </div>
 :::
-`
+
 :::{card}
 :img-top: /_static/infographics/marketmind_hub_thumb.png
 
@@ -63,7 +63,7 @@ A unified command center for live signals, model performance, and deployment hea
      target="_blank"
      rel="noopener"
      class="interactive-link">
-    Open interactive
+    Open interactive →
   </a>
 </p>
 
@@ -72,7 +72,6 @@ A unified command center for live signals, model performance, and deployment hea
           loading="lazy"></iframe>
 </div>
 :::
-
 
 :::{card}
 :img-top: /_static/infographics/proactive_framework_thumb.png
@@ -86,7 +85,7 @@ Scenario-driven diagnostics that map signals, risk controls, and automation hook
      target="_blank"
      rel="noopener"
      class="interactive-link">
-    Open interactive
+    Open interactive →
   </a>
 </p>
 
@@ -94,12 +93,28 @@ Scenario-driven diagnostics that map signals, risk controls, and automation hook
   <iframe src="proactive-framework-analysis.html"
           loading="lazy"></iframe>
 </div>
+:::
+
+:::{card}
+:img-top: /_static/infographics/architectural_resilience_thumb.png
 
 **Architectural Resilience: Policy-Guided LLM Error Handling**
 
 An interactive research infographic showing how executable exception policies, linters, and policy-conditioned generation close the gap between benchmark success and real-world production readiness.
 
-<p> <a href="architectural-resilience.html" target="_blank" rel="noopener" class="interactive-link"> Open interactive → </a> </p> <div class="interactive-frame"> <iframe src="architectural-resilience.html" loading="lazy"></iframe> </div> :::
+<p>
+  <a href="architectural-resilience.html"
+     target="_blank"
+     rel="noopener"
+     class="interactive-link">
+    Open interactive →
+  </a>
+</p>
+
+<div class="interactive-frame">
+  <iframe src="architectural-resilience.html"
+          loading="lazy"></iframe>
+</div>
 :::
 
 ::::
