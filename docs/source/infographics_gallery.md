@@ -3,7 +3,7 @@
 Curated visuals from the project — static diagrams, data flow maps, and fully interactive pages.
 Thumbnails live in /_static/infographics/…; interactive minisites are served from /_extra/….
 
-::::{grid} 4
+::::{grid} 
 :gutter: 2
 :class-container: infographics-grid
 
