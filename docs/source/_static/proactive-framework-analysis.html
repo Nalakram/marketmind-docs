@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketMind: Proactive Framework Analysis</title>
+  <meta name="description" content="Comparative analysis of proactive frameworks to evolve MarketMind beyond reactive MAPE-K architecture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #111827;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 350px;
+      max-height: 400px;
+    }
+    @media (max-width: 768px) {
+      .chart-container {
+        height: 300px;
+        max-height: 350px;
+      }
+    }
+    .flow-card {
+      background-color: #1F2937;
+      border: 1px solid #374151;
+      color: #E5E7EB;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      flex-grow: 1;
+      min-width: 100px;
+    }
+    .flow-arrow {
+      color: #3B82F6;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+    }
+    .gemini-button,
+    .gemini-button-secondary {
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      transition: background-color 0.2s, transform 0.1s, box-shadow 0.1s;
+    }
+    .gemini-button {
+      background-color: #3B82F6;
+      color: #ffffff;
+    }
+    .gemini-button:hover {
+      background-color: #2563EB;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+    }
+    .gemini-button-secondary {
+      background-color: #374151;
+      color: #D1D5DB;
+      margin-top: 1rem;
+    }
+    .gemini-button-secondary:hover {
+      background-color: #4B5563;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background-color: #1F2937;
+      color: #E5E7EB;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      width: 90%;
+      max-width: 48rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.95);
+      transition: transform 0.3s;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65);
+    }
+    .modal-overlay.visible .modal-content {
+      transform: scale(1);
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #4B5563;
+      border-top-color: #3B82F6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+  <header class="bg-gray-900/80 backdrop-blur border-b border-gray-800">
+    <div class="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8 text-center">
+      <p class="text-xs uppercase tracking-[0.25em] text-blue-400/80 mb-3">MarketMind Architecture Brief</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-white">
+        Beyond Reactivity: Self-Adaptive Frameworks for MarketMind
+      </h1>
+      <p class="text-base md:text-lg text-gray-400 mt-3 max-w-3xl mx-auto">
+        Comparative analysis of proactive architectures to surpass traditional MAPE-K limitations in volatile markets.
+      </p>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 md:px-6 pb-12">
+    <!-- AI CTA -->
+    <section class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 md:p-8 mt-8 text-center">
+      <h2 class="text-2xl font-semibold text-white mb-3">AI-Powered Architecture Companion</h2>
+      <p class="text-gray-300 mb-6 max-w-3xl mx-auto">
+        Plug this view into the Gemini API to generate concise explanations, trade-offs, and an executive recommendation
+        tailored to your environment.
+      </p>
+      <button id="ai-summary-button" class="gemini-button inline-flex items-center gap-2">
+        <span>✨</span><span>Get AI Summary &amp; Recommendation</span>
+      </button>
+      <p class="mt-3 text-xs text-gray-500">
+        Configure your API key in <code class="px-1 py-0.5 bg-gray-900/80 rounded text-[0.7rem]">callGeminiAPI()</code>.
+      </p>
+    </section>
+
+    <!-- MAPE-K -->
+    <section class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 md:p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-white mb-4 text-center">
+        The Current Challenge: MarketMind's Reactive MAPE-K Loop
+      </h2>
+      <p class="text-gray-300 mb-6 text-center max-w-3xl mx-auto">
+        MarketMind's current architecture follows the MAPE-K
+        (Monitor, Analyze, Plan, Execute &mdash; Knowledge) loop. While robust for stable regimes,
+        it is fundamentally reactive: it responds to observed events instead of anticipating future states.
+        This constrains proactive behavior in high-volatility markets
+        <span class="text-gray-500 text-xs align-baseline">[cite: 468-471]</span>.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center items-center my-6 gap-4">
+        <div class="flow-card">Monitor</div>
+        <div class="flow-arrow md:flex hidden" aria-hidden="true">→</div>
+        <div class="flow-arrow md:hidden flex" aria-hidden="true">↓</div>
+        <div class="flow-card">Analyze</div>
+        <div class="flow-arrow md:flex hidden" aria-hidden="true">→</div>
+        <div class="flow-arrow md:hidden flex" aria-hidden="true">↓</div>
+        <div class="flow-card">Plan</div>
+        <div class="flow-arrow md:flex hidden" aria-hidden="true">→</div>
+        <div class="flow-arrow md:hidden flex" aria-hidden="true">↓</div>
+        <div class="flow-card">Execute</div>
+      </div>
+      <p class="text-center text-gray-400 mt-4">
+        All phases share a Knowledge base, but decisions remain tethered to past and present signals.
+      </p>
+      <div class="text-center mt-6">
+        <button class="gemini-button-secondary inline-flex items-center gap-2" data-prompt-type="mapek">
+          <span>✨</span><span>Explain this loop for trading</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Proactive Goal -->
+    <section class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 md:p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-white mb-4 text-center">
+        The Proactive Goal: Operationalizing Rich System Data
+      </h2>
+      <p class="text-gray-300 mb-6 text-center max-w-3xl mx-auto">
+        The target state is a proactive MarketMind: an adaptive decision layer that continuously anticipates,
+        stress-tests, and optimizes actions before committing capital. Two core assets must be fully leveraged:
+        ultra-high-volume observability and an existing mesh of ML-driven components.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-gray-900/80 border border-gray-700/70 p-6 rounded-xl text-center shadow-lg">
+          <h3 class="text-lg font-semibold text-gray-100 mb-2">Observability Fabric</h3>
+          <p class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">10TB/day</p>
+          <p class="text-gray-400 text-sm">
+            High-fidelity, real-time telemetry and market microstructure feeds
+            <span class="text-gray-500 text-[0.6rem] align-baseline">[cite: 300-307]</span>.
+          </p>
+        </div>
+        <div class="bg-gray-900/80 border border-gray-700/70 p-6 rounded-xl text-center shadow-lg">
+          <h3 class="text-lg font-semibold text-gray-100 mb-2">ML Components</h3>
+          <p class="text-4xl md:text-5xl font-bold text-pink-400 mb-2">150+</p>
+          <p class="text-gray-400 text-sm">
+            Live predictive, ranking, and risk models composing MarketMind's decision surface
+            <span class="text-gray-500 text-[0.6rem] align-baseline">[cite: 147-152]</span>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Candidate Frameworks -->
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold text-white text-center mb-8">
+        Candidate Frameworks for Proactive Adaptation
+      </h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- ABM -->
+        <article class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 flex flex-col">
+          <h3 class="text-xl font-semibold text-white mb-3 text-center">
+            1. Agent-Based Models (ABM)
+          </h3>
+          <p class="text-gray-300 mb-4 flex-grow">
+            ABMs simulate heterogeneous agents (e.g., liquidity takers, makers, latency arb) and their interactions.
+            They expose emergent regimes and stress the strategy stack against non-linear, adversarial dynamics.
+          </p>
+          <div class="chart-container">
+            <canvas id="abmChart" aria-label="ABM capability radar" role="img"></canvas>
+          </div>
+          <div class="text-center mt-6">
+            <button class="gemini-button-secondary inline-flex items-center gap-2" data-prompt-type="abm">
+              <span>✨</span><span>Explain ABM trade-offs</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- DRL -->
+        <article class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 flex flex-col">
+          <h3 class="text-xl font-semibold text-white mb-3 text-center">
+            2. Deep Reinforcement Learning (DRL)
+          </h3>
+          <p class="text-gray-300 mb-4 flex-grow">
+            DRL agents learn execution, hedging, and allocation policies by optimizing long-horizon reward under
+            simulated or historical environments&mdash;an inherently proactive objective.
+          </p>
+          <div class="chart-container">
+            <canvas id="drlChart" aria-label="DRL learning curve" role="img"></canvas>
+          </div>
+          <div class="text-center mt-6">
+            <button class="gemini-button-secondary inline-flex items-center gap-2" data-prompt-type="drl">
+              <span>✨</span><span>Explain DRL trade-offs</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Digital Twins -->
+        <article class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 flex flex-col">
+          <h3 class="text-xl font-semibold text-white mb-3 text-center">
+            3. Digital Twins (DT)
+          </h3>
+          <p class="text-gray-300 mb-4 flex-grow">
+            A Digital Twin is a continuously synchronized, high-fidelity virtual replica of MarketMind and its venues.
+            It enables always-on &ldquo;what-if&rdquo; analysis to pre-flight interventions before deployment.
+          </p>
+          <div class="chart-container">
+            <canvas id="dtChart" aria-label="Digital Twin data utilization" role="img"></canvas>
+          </div>
+          <div class="text-center mt-6">
+            <button class="gemini-button-secondary inline-flex items-center gap-2" data-prompt-type="dt">
+              <span>✨</span><span>Explain DT trade-offs</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Comparative Table -->
+    <section class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 md:p-8 mt-12">
+      <h2 class="text-2xl font-semibold text-white mb-6 text-center">
+        Comparative Analysis of Frameworks
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-gray-300 border-collapse">
+          <thead class="bg-gray-900/90 text-gray-100">
+            <tr>
+              <th class="p-3 rounded-tl-xl font-semibold">Framework</th>
+              <th class="p-3 font-semibold">Proactivity Level</th>
+              <th class="p-3 font-semibold">Observability Leverage</th>
+              <th class="p-3 font-semibold">ML Integration</th>
+              <th class="p-3 rounded-tr-xl font-semibold">Implementation Complexity</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800/90">
+            <tr class="bg-gray-900/70">
+              <td class="p-3 font-medium text-white/90">MAPE-K (Baseline)</td>
+              <td class="p-3">Reactive</td>
+              <td class="p-3">Moderate (Monitoring-centric)</td>
+              <td class="p-3">High (in Analyze phase)</td>
+              <td class="p-3">Low (already deployed)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium text-white">Agent-Based Models</td>
+              <td class="p-3">Simulative</td>
+              <td class="p-3">High (agent calibration)</td>
+              <td class="p-3">Moderate (ML-driven agents)</td>
+              <td class="p-3 text-red-400">Very High</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium text-white">Deep Reinforcement Learning</td>
+              <td class="p-3">Predictive / Learned</td>
+              <td class="p-3">Very High (state encoding)</td>
+              <td class="p-3">Inherent (policy is ML)</td>
+              <td class="p-3 text-red-400">High</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium text-white">Digital Twins</td>
+              <td class="p-3">Parallel / Simulative</td>
+              <td class="p-3">Very High (real-time sync)</td>
+              <td class="p-3">Very High (model consumers)</td>
+              <td class="p-3 text-red-400">Very High</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Synthesis Chart -->
+    <section class="bg-gray-800/70 border border-gray-700/70 rounded-2xl shadow-2xl p-6 md:p-8 mt-12">
+      <h2 class="text-2xl font-semibold text-white mb-4 text-center">
+        Synthesis: Proactive Potential vs. Implementation Cost
+      </h2>
+      <p class="text-gray-300 mb-6 text-center max-w-3xl mx-auto">
+        Each framework is plotted by proactive potential (vertical) against implementation complexity (horizontal).
+        Bubble size indicates strategic leverage for MarketMind given existing data and ML assets.
+      </p>
+      <div class="chart-container" style="height: 380px; max-height: 420px;">
+        <canvas id="synthesisChart" aria-label="Frameworks synthesis bubble chart" role="img"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gray-800/80 text-center py-6 text-gray-500 text-xs">
+    MarketMind System Architecture Analysis &mdash; Confidential &amp; Proprietary
+  </footer>
+
+  <!-- AI Modal -->
+  <div id="ai-modal" class="modal-overlay" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <div id="modal-header" class="flex justify-between items-center mb-4">
+        <h3 id="modal-title" class="text-2xl font-bold text-white">
+          AI Assistant
+        </h3>
+        <button id="modal-close" class="text-gray-400 hover:text-white text-3xl leading-none" aria-label="Close dialog">
+          &times;
+        </button>
+      </div>
+      <div id="modal-body" class="prose prose-invert max-w-none text-sm">
+        <div class="spinner" aria-label="Loading"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize charts and interactions after page load
+    window.addEventListener('load', function () {
+      const chartColors = {
+        blue: '#3B82F6',
+        red: '#EF4444',
+        orange: '#F97316',
+        yellow: '#F59E0B',
+        gray: '#9CA3AF',
+        grid: 'rgba(156, 163, 175, 0.2)',
+        text: '#E5E7EB',
+        textMuted: '#9CA3AF'
+      };
+
+      function processLabels(labels, maxWidth = 16) {
+        return labels.map(function (label) {
+          if (typeof label !== 'string' || label.length <= maxWidth) return label;
+          const words = label.split(' ');
+          const lines = [];
+          let current = '';
+          for (let i = 0; i < words.length; i++) {
+            const word = words[i];
+            if (!current.length) {
+              current = word;
+            } else if ((current + ' ' + word).length <= maxWidth) {
+              current += ' ' + word;
+            } else {
+              lines.push(current);
+              current = word;
+            }
+          }
+          if (current) lines.push(current);
+          return lines;
+        });
+      }
+
+      function createTooltipPlugin() {
+        return {
+          tooltip: {
+            callbacks: {
+              title: function (tooltipItems) {
+                if (!tooltipItems || !tooltipItems.length) return '';
+                const item = tooltipItems[0];
+                const rawLabel = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(rawLabel) ? rawLabel.join(' ') : rawLabel;
+              }
+            }
+          }
+        };
+      }
+
+      function commonChartOptions(extra) {
+        const base = {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            ...createTooltipPlugin(),
+            legend: {
+              labels: { color: chartColors.text }
+            }
+          },
+          scales: {}
+        };
+        if (extra && extra.plugins) {
+          base.plugins = {
+            ...base.plugins,
+            ...extra.plugins
+          };
+        }
+        if (extra && extra.scales) {
+          base.scales = extra.scales;
+        }
+        return { ...base, ...extra, plugins: base.plugins };
+      }
+
+      // ABM Radar Chart
+      const abmCtx = document.getElementById('abmChart');
+      if (abmCtx && window.Chart) {
+        const labels = processLabels([
+          'Proactive Simulation',
+          'Emergent Behavior',
+          'Observability Leverage',
+          'ML Integration',
+          'Scalability',
+          'Implementation Complexity'
+        ]);
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'ABM Capability Profile (1-10)',
+            data: [8, 9, 7, 6, 8, 9],
+            fill: true,
+            backgroundColor: 'rgba(59, 130, 246, 0.16)',
+            borderColor: chartColors.blue,
+            pointBackgroundColor: chartColors.blue,
+            pointBorderColor: '#111827'
+          }]
+        };
+        new Chart(abmCtx, {
+          type: 'radar',
+          data: data,
+          options: commonChartOptions({
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 10,
+                grid: { color: chartColors.grid },
+                angleLines: { color: chartColors.grid },
+                pointLabels: {
+                  color: chartColors.text,
+                  font: { size: 10 }
+                },
+                ticks: {
+                  display: false
+                }
+              }
+            }
+          })
+        });
+      }
+
+      // DRL Line Chart
+      const drlCtx = document.getElementById('drlChart');
+      if (drlCtx && window.Chart) {
+        const labels = processLabels(['Epoch 0', 'Epoch 10k', 'Epoch 20k', 'Epoch 30k', 'Epoch 40k', 'Epoch 50k']);
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Proactive Decision Quality',
+            data: [0.2, 0.45, 0.6, 0.75, 0.85, 0.9],
+            borderColor: chartColors.red,
+            backgroundColor: 'rgba(239, 68, 68, 0.14)',
+            fill: true,
+            tension: 0.3
+          }]
+        };
+        new Chart(drlCtx, {
+          type: 'line',
+          data: data,
+          options: commonChartOptions({
+            scales: {
+              x: {
+                grid: { color: chartColors.grid },
+                ticks: { color: chartColors.textMuted }
+              },
+              y: {
+                beginAtZero: true,
+                max: 1,
+                grid: { color: chartColors.grid },
+                ticks: { color: chartColors.textMuted }
+              }
+            }
+          })
+        });
+      }
+
+      // DT Doughnut Chart
+      const dtCtx = document.getElementById('dtChart');
+      if (dtCtx && window.Chart) {
+        const labels = processLabels([
+          'Observability Data [300-307]',
+          'ML Model Feeds [147-152]',
+          'Simulation-Generated Data'
+        ]);
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Digital Twin Data Utilization (%)',
+            data: [60, 25, 15],
+            backgroundColor: [
+              chartColors.blue,
+              chartColors.red,
+              chartColors.orange
+            ],
+            hoverOffset: 4
+          }]
+        };
+        new Chart(dtCtx, {
+          type: 'doughnut',
+          data: data,
+          options: commonChartOptions({})
+        });
+      }
+
+      // Synthesis Bubble Chart
+      const synthesisCtx = document.getElementById('synthesisChart');
+      if (synthesisCtx && window.Chart) {
+        const labels = processLabels([
+          'Current MAPE-K',
+          'Agent-Based Models',
+          'Deep Reinforcement Learning',
+          'Digital Twins'
+        ]);
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Frameworks',
+            data: [
+              { x: 2, y: 3, r: 14 },
+              { x: 9, y: 8, r: 20 },
+              { x: 8, y: 9, r: 24 },
+              { x: 7, y: 7, r: 18 }
+            ],
+            backgroundColor: [
+              chartColors.gray,
+              chartColors.blue,
+              chartColors.red,
+              chartColors.orange
+            ],
+            borderColor: '#111827',
+            borderWidth: 1
+          }]
+        };
+        new Chart(synthesisCtx, {
+          type: 'bubble',
+          data: data,
+          options: commonChartOptions({
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Implementation Complexity →',
+                  color: chartColors.text
+                },
+                grid: { color: chartColors.grid },
+                ticks: { color: chartColors.textMuted },
+                min: 0,
+                max: 10
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Proactive Potential →',
+                  color: chartColors.text
+                },
+                grid: { color: chartColors.grid },
+                ticks: { color: chartColors.textMuted },
+                min: 0,
+                max: 10
+              }
+            }
+          })
+        });
+      }
+
+      // Modal behavior
+      const modal = document.getElementById('ai-modal');
+      const modalClose = document.getElementById('modal-close');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+
+      function showModal(title, html) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = html;
+        modal.classList.add('visible');
+      }
+
+      function hideModal() {
+        modal.classList.remove('visible');
+      }
+
+      if (modalClose) {
+        modalClose.addEventListener('click', hideModal);
+      }
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) hideModal();
+        });
+      }
+
+      const systemPrompts = {
+        default:
+          'You are an expert in financial engineering and complex adaptive systems. Explain the concept clearly for a technical audience (software engineers, data scientists) who are not specialists in this specific subfield. Use short paragraphs and bullets.',
+        architect:
+          'You are the chief architect of a high-frequency trading platform. Based on the provided analysis, synthesize the trade-offs and recommend a pragmatic starting framework for evolving MarketMind into a proactive system.'
+      };
+
+      const userPrompts = {
+        mapek:
+          'Explain the MAPE-K loop in the context of an algorithmic trading system. Focus on its limitations for proactive decisions in highly volatile markets.',
+        abm:
+          'Explain Agent-Based Models (ABMs) for an algorithmic trading platform. How can they capture emergent behavior, and what are the key pros/cons for proactive decision-making?',
+        drl:
+          'Explain Deep Reinforcement Learning (DRL) for trading. How does an agent learn an optimal policy and what are the key pros/cons for proactive, risk-aware execution?',
+        dt:
+          'Explain Digital Twins (DTs) for MarketMind. How do they differ from static simulations, and what are the main pros/cons for real-time what-if testing?',
+        summary:
+`Here is an analysis of frameworks for our 'MarketMind' system:
+
+- Current System: Reactive MAPE-K loop that responds to observations but cannot act proactively.
+- Goal: Evolve to a proactive system by fully leveraging ~10TB/day observability and 150+ ML models.
+
+- Agent-Based Models (ABM): Simulate heterogeneous agents and emergent behavior for scenario testing.
+- Deep Reinforcement Learning (DRL): Learn policies that optimize long-horizon reward.
+- Digital Twins (DT): High-fidelity, real-time replica of system + markets for continuous what-if analysis.
+
+Comparative Summary:
+- MAPE-K: Reactive, moderate observability leverage, high ML integration, low complexity.
+- ABM: High proactivity via simulation, high observability leverage, very high complexity.
+- DRL: High proactivity, very high observability leverage, inherent ML, high complexity.
+- DT: High proactivity, very high observability + ML leverage, very high complexity.
+
+Task:
+1) Provide a one-paragraph executive summary of these findings.
+2) Recommend which framework (ABM, DRL, or DT) MarketMind should explore first to reach proactive behavior fastest, and explain why in one paragraph.`
+      };
+
+      function getGeminiExplanation(promptType) {
+        const isSummary = promptType === 'summary';
+        const userPrompt = userPrompts[promptType] || userPrompts.summary;
+        const systemPrompt = isSummary ? systemPrompts.architect : systemPrompts.default;
+
+        const titleMap = {
+          mapek: 'MAPE-K Loop for Trading',
+          abm: 'Agent-Based Models (ABM)',
+          drl: 'Deep Reinforcement Learning (DRL)',
+          dt: 'Digital Twins (DT)',
+          summary: 'AI Summary & Recommendation'
+        };
+
+        const title = '✨ ' + (titleMap[promptType] || titleMap.summary);
+        showModal(title, '<div class="spinner" aria-label="Loading AI explanation"></div>');
+        callGeminiAPI(userPrompt, systemPrompt);
+      }
+
+      const aiSummaryBtn = document.getElementById('ai-summary-button');
+      if (aiSummaryBtn) {
+        aiSummaryBtn.addEventListener('click', function () {
+          getGeminiExplanation('summary');
+        });
+      }
+
+      document.querySelectorAll('.gemini-button-secondary').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          const promptType = e.currentTarget.dataset.promptType;
+          if (promptType) getGeminiExplanation(promptType);
+        });
+      });
+
+      async function callGeminiAPI(userQuery, systemPrompt, retries = 2, delay = 900) {
+        const apiKey = ''; // Inject your Gemini API key here.
+        if (!apiKey) {
+          showModal(
+            'API Configuration Needed',
+            '<p class="text-sm text-gray-300">Add your <span class="font-semibold">Gemini API key</span> in <code class="px-1 py-0.5 bg-gray-900/80 rounded text-[0.7rem]">callGeminiAPI()</code> to enable live AI explanations.</p>'
+          );
+          return;
+        }
+
+        const apiUrl =
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=' +
+          encodeURIComponent(apiKey);
+
+        const payload = {
+          contents: [{ parts: [{ text: userQuery }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] }
+        };
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            if (response.status === 429 && retries > 0) {
+              await new Promise(function (res) { setTimeout(res, delay); });
+              return callGeminiAPI(userQuery, systemPrompt, retries - 1, delay * 2);
+            }
+            throw new Error('API Error: ' + response.status + ' ' + response.statusText);
+          }
+
+          const result = await response.json();
+          const candidate = result.candidates && result.candidates[0];
+          const parts = candidate && candidate.content && candidate.content.parts;
+          const text = parts && parts.map(function (p) { return p.text || ''; }).join('\n').trim();
+
+          if (!text) {
+            throw new Error('Empty response from Gemini API.');
+          }
+
+          const html = formatModelTextAsHtml(text);
+          modalBody.innerHTML = html;
+        } catch (err) {
+          modalBody.innerHTML =
+            '<p class="text-red-400 text-sm"><strong>Error:</strong> ' + escapeHtml(err.message) + '</p>' +
+            '<p class="text-gray-400 text-xs mt-2">Check network connectivity, quota, and API configuration, then try again.</p>';
+        }
+      }
+
+      function formatModelTextAsHtml(text) {
+        // Basic sanitization + lightweight markdown support for bold + bullets
+        let safe = escapeHtml(text);
+
+        // Bold: **text**
+        safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+        const lines = safe.split(/[\r\n]+/);
+        let html = '';
+        let inList = false;
+
+        lines.forEach(function (line) {
+          const trimmed = line.trim();
+          if (!trimmed) {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            return;
+          }
+
+          if (/^[-*]\s+/.test(trimmed)) {
+            if (!inList) {
+              html += '<ul class="list-disc pl-5 mb-3 text-sm">';
+              inList = true;
+            }
+            const item = trimmed.replace(/^[-*]\s+/, '');
+            html += '<li>' + item + '</li>';
+          } else {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            html += '<p class="mb-3 text-sm">' + trimmed + '</p>';
+          }
+        });
+
+        if (inList) {
+          html += '</ul>';
+        }
+
+        return html || '<p class="text-sm text-gray-300">No content returned.</p>';
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -49,4 +49,49 @@ An overview and interactive examples demonstrating system design patterns for re
           loading="lazy"></iframe>
 </div>
 :::
+
+:::{card}
+:img-top: /_static/infographics/marketmind_hub_thumb.png
+
+**MarketMind Hub**
+
+A unified command center for live signals, model performance, and deployment health across your trading stack.
+
+<p>
+  <a href="marketmind-hub.html"
+     target="_blank"
+     rel="noopener"
+     class="interactive-link">
+    Open interactive
+  </a>
+</p>
+
+<div class="interactive-frame">
+  <iframe src="marketmind-hub.html"
+          loading="lazy"></iframe>
+</div>
+:::
+
+:::{card}
+:img-top: /_static/infographics/proactive_framework_thumb.png
+
+**Proactive Framework Analysis**
+
+Scenario-driven diagnostics that map signals, risk controls, and automation hooks to a proactive FinTech governance framework.
+
+<p>
+  <a href="proactive-framework-analysis.html"
+     target="_blank"
+     rel="noopener"
+     class="interactive-link">
+    Open interactive
+  </a>
+</p>
+
+<div class="interactive-frame">
+  <iframe src="proactive-framework-analysis.html"
+          loading="lazy"></iframe>
+</div>
+:::
+
 ::::
