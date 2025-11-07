@@ -3,8 +3,9 @@
 Curated visuals from the project — static diagrams, data flow maps, and fully interactive pages.
 Thumbnails live in /_static/infographics/…; interactive minisites are served from /_extra/….
 
-::::{grid} 2
+::::{grid} 4
 :gutter: 2
+:class-container: infographics-grid
 
 :::{card}
 :img-top: /_static/infographics/architecture_thumb.png
@@ -71,6 +72,7 @@ A unified command center for live signals, model performance, and deployment hea
           loading="lazy"></iframe>
 </div>
 :::
+
 
 :::{card}
 :img-top: /_static/infographics/proactive_framework_thumb.png
