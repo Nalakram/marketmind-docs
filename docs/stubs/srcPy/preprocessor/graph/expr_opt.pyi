@@ -1,0 +1,3 @@
+from .expr import Expr as Expr, Literal as Literal, OpExpr as OpExpr
+
+def optimise(expr: Expr) -> Expr: ...

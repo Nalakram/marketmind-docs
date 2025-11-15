@@ -1,0 +1,12 @@
+from ..utils.specs import SpecFactory as SpecFactory
+from .graph import FusedNode as FusedNode, Graph as Graph, Node as Node
+from .ops import OpKind as OpKind
+from srcPy.preprocessor.utils.plan_costs import HeuristicPlanner as BasePlanner
+from srcPy.utils.exceptions import UnsupportedPlan as UnsupportedPlan
+from typing import Any
+
+class Planner(BasePlanner):
+    history: dict[str, dict[str, float]]
+    def __init__(self) -> None: ...
+    def plan(self, graph: Graph, group_by: list[str]) -> list[dict[str, Any]]: ...
+    def update_from_history(self, records: list[dict[str, Any]]) -> None: ...

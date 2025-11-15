@@ -1,282 +1,148 @@
-"""
-srcPy.utils.exceptions
-======================
+import abc
+from _typeshed import Incomplete
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any
 
-Defines MarketMind’s full custom exception hierarchy for data, config, modeling, and trading failures.
+class ErrorCodeEnum(str, Enum):
+    GENERIC = 'GENERIC_ERROR'
+    DATA_FETCH = 'DATA_FETCH_ERROR'
+    API_CONNECTION = 'API_CONNECTION_ERROR'
+    STREAM_CONNECTION = 'STREAM_CONNECTION_ERROR'
+    DATA_TIMEOUT = 'DATA_TIMEOUT_ERROR'
+    DATA_VALIDATION = 'DATA_VALIDATION_ERROR'
+    SCHEMA_VALIDATION = 'SCHEMA_VALIDATION_ERROR'
+    FILE_FORMAT = 'FILE_FORMAT_ERROR'
+    STATISTICAL_TEST = 'STATISTICAL_TEST_ERROR'
+    DATA_DRIFT = 'DATA_DRIFT_ERROR'
+    NO_DATA = 'NO_DATA_ERROR'
+    CONFIG_VALIDATION = 'CONFIG_VALIDATION_ERROR'
+    PREPROCESSING = 'PREPROCESSING_ERROR'
+    MODEL_TRAINING = 'MODEL_TRAINING_ERROR'
+    TRADING_EXECUTION = 'TRADING_EXECUTION_ERROR'
+    INVALID_INPUT = 'INVALID_INPUT_ERROR'
+    MODEL_CHECKPOINT = 'MODEL_CHECKPOINT_ERROR'
+    MODEL_INFERENCE = 'MODEL_INFERENCE_ERROR'
+    UNSUPPORTED_PLAN = 'UNSUPPORTED_PLAN'
 
-Purpose
--------
-To make failures **semantic, catchable, and machine-readable** across the entire platform.
+@dataclass
+class _ErrorStorm:
+    timestamps: list[float] = field(default_factory=list)
+    suppressed: int = ...
 
-Each exception targets a specific operational failure mode:  
-**data ingestion**, **preprocessing**, **config validation**, **model training**, **broker execution**, or **statistical analysis**.
+class _RateLimiter:
+    def __init__(self, window_sec: float, threshold: int) -> None: ...
+    def should_log(self, code: str) -> bool: ...
+    def suppressed_count(self, code: str) -> int: ...
 
-Every exception includes:
-- A human-readable message for logs.
-- A structured `details` dictionary for monitoring systems, dashboards, and error tracking.
+class BaseError(RuntimeError):
+    msg: Incomplete
+    code: Incomplete
+    details: Incomplete
+    __cause__: Incomplete
+    def __init__(self, msg: str, *, code: str | None = None, details: dict[str, Any] | None = None, cause: BaseException | None = None) -> None: ...
+    def to_dict(self) -> dict[str, Any]: ...
 
-Design Goals
-------------
-- **Recoverability:** Callers can catch specific exceptions they know how to handle.
-- **Context-first:** Diagnostic metadata lives in `details`, not buried in strings.
-- **Minimal inheritance:** Only shared where recovery patterns dictate.
+class UnsupportedPlan(BaseError):
+    def __init__(self, msg: str = 'Unsupported execution plan', **kwargs: Any) -> None: ...
 
-Usage Patterns
---------------
-Raise these exceptions inside internal pipelines, API layers, or streaming workers  
-anywhere a failure needs to propagate with context.
+class DataError(BaseError, ABC, metaclass=abc.ABCMeta):
+    def __init__(self, message: str, details: dict[str, Any] | None = None) -> None: ...
+    @abstractmethod
+    def get_error_code(self) -> str: ...
 
-External consumers (notebooks, services, etc.) should catch by type—not string-matching error messages.
+class GenericDataError(DataError):
+    def __init__(self, message: str = 'An error occurred', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-"""
+class ExceptionRegistry:
+    @classmethod
+    def register(cls, error_type: str, exception_class: type[DataError]) -> None: ...
+    @classmethod
+    def get_exception(cls, error_type: str, message: str, details: dict[str, Any] | None = None) -> DataError: ...
 
-from __future__ import annotations
+class AggregateError(DataError):
+    errors: Incomplete
+    def __init__(self, message: str = 'Multiple errors occurred', errors: list[DataError] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
+    def add_error(self, error: DataError) -> None: ...
 
-from typing import Any, Mapping
+class DataFetchError(DataError):
+    def __init__(self, message: str = 'Data fetch failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-__all__ = [
-    "IBConnectionError",
-    "DataFetchError",
-    "NoDataError",
-    "DataValidationError",
-    "ConfigValidationError",
-    "PreprocessingError",
-    "ModelTrainingError",
-    "TradingExecutionError",
-    "APIConnectionError",
-    "InvalidInputError",
-    "StatisticalTestError",
-]
+class APIConnectionError(DataFetchError):
+    def __init__(self, message: str = 'Failed to connect to API', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-_Details = Mapping[str, Any]
+class StreamConnectionError(DataFetchError):
+    def __init__(self, message: str = 'Failed to connect to streaming source', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
+class DataTimeoutError(DataFetchError):
+    def __init__(self, message: str = 'Data fetch timed out', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-class IBConnectionError(Exception):
-    """
-    Connection to **Interactive Brokers (IBKR)** failed.
+class DataValidationError(DataError):
+    class Code(str, Enum):
+        MISSING_COLUMNS = 'MISSING_COLUMNS'
+        INVALID_TYPE = 'INVALID_TYPE'
+        EMPTY_DATA = 'EMPTY_DATA'
+        SCHEMA_MISMATCH = 'SCHEMA_MISMATCH'
+        FILE_FORMAT = 'FILE_FORMAT'
+    codes: Incomplete
+    def __init__(self, message: str = 'Data validation failed', codes: list['DataValidationError.Code'] | None = None, details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    Parameters
-    ----------
-    message : str, optional
-        Human-readable summary.  Default is
-        ``"Failed to connect to Interactive Brokers"``.
-    details : mapping[str, Any], optional
-        Structured metadata such as ``{"host": "127.0.0.1", "port": 7497}``.
+class SchemaValidationError(DataValidationError):
+    def __init__(self, message: str = 'Schema validation failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-	Attributes
-	----------
-	details : dict[str, Any]
-		A *mutable* copy of *details* (empty dict if *None* given).
+class FileFormatError(DataValidationError):
+    def __init__(self, message: str = 'Invalid/unsupported file format', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-	See Also
-	--------
-	:term:`Interactive Brokers (IBKR)`
+class StatisticalTestError(DataError):
+    def __init__(self, message: str = 'Statistical test failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-	Examples
-	--------
-    >>> raise IBConnectionError(details={"host": "localhost", "port": 7497})
-    Traceback (most recent call last):
-        ...
-    srcPy.utils.exceptions.IBConnectionError: Failed to connect to Interactive Brokers
-    
-    """
+class DataDriftError(StatisticalTestError):
+    def __init__(self, message: str = 'Data drift detected', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    details: dict[str, Any]
-
-    def __init__(
-        self,
-        message: str = "Failed to connect to Interactive Brokers",
-        *,
-        details: _Details | None = None,
-    ) -> None: ...
-
-
-class DataFetchError(Exception):
-    """
-    Generic parent for **data-acquisition** failures.
-
-    Parameters
-    ----------
-    message : str, optional
-        Summary of the failure.  Default ``"Error fetching data"``.
-    details : mapping[str, Any], optional
-        Provider name, :term:`HTTP status`, :term:`retry count`, etc.
-
-    Attributes
-    ----------
-    details : dict[str, Any]
-        Structured diagnostic information.
-
-    See Also
-    --------
-    NoDataError
-    """
-
-    details: dict[str, Any]
-
-    def __init__(
-        self,
-        message: str = "Error fetching data",
-        *,
-        details: _Details | None = None,
-    ) -> None: ...
-
+class IBKRConnectionError(StreamConnectionError):
+    def __init__(self, message: str = 'Failed to connect to Interactive Brokers', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
 class NoDataError(DataFetchError):
-    """
-    Request succeeded but returned **zero rows**.
+    def __init__(self, symbol: str, details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    Parameters
-    ----------
-    symbol : str
-        :term:`Ticker` / identifier for which no data was returned.
-    details : mapping[str, Any], optional
-        Extra context.  If *None*, a mapping ``{"symbol": symbol}`` is created.
+class ConfigValidationError(DataError):
+    def __init__(self, message: str = 'Configuration validation failed', validation_errors: list[str] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    Attributes
-    ----------
-    details : dict[str, Any]
-        Must contain at least ``"symbol"``.
-    """
+class PreprocessingError(DataError):
+    def __init__(self, message: str = 'Data preprocessing failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    def __init__(
-        self,
-        symbol: str,
-        *,
-        details: _Details | None = None,
-    ) -> None: ...
+class ModelTrainingError(DataError):
+    def __init__(self, message: str = 'Model training failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
+class TradingExecutionError(DataError):
+    def __init__(self, message: str = 'Trading execution failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-class DataValidationError(Exception):
-    """
-    Fetched data failed :term:`schema <Schema>` or sanity checks during :term:`Validation`.
+class InvalidInputError(DataError):
+    def __init__(self, message: str = 'Invalid input data', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    Parameters
-    ----------
-    message : str
-        Explanation of the validation failure.
-    details : mapping[str, Any], optional
-        Offending column, expected :term:`dtype`, etc.
+class ModelCheckpointError(DataError):
+    def __init__(self, message: str = 'Model checkpointing failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...
 
-    Attributes
-    ----------
-    details : dict[str, Any]
-    """
-
-    details: dict[str, Any]
-
-    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
-
-
-class ConfigValidationError(Exception):
-    """
-    ``config.yaml`` violates its :term:`JSON-Schema` / :term:`Pydantic` model.
-
-    Parameters
-    ----------
-    message : str
-        Human-readable summary.
-    validation_errors : list[Any], optional
-        Raw errors emitted by the validator.
-
-    Attributes
-    ----------
-    validation_errors : list[Any]
-    """
-
-    validation_errors: list[Any]
-
-    def __init__(
-        self,
-        message: str,
-        *,
-        validation_errors: list[Any] | None = None,
-    ) -> None: ...
-
-
-class PreprocessingError(Exception):
-    """
-    Failure during :term:`feature engineering <Feature Engineering>` / preprocessing.
-
-    Same signature pattern as other *details*-carrying exceptions.
-    """
-
-    details: dict[str, Any]
-
-    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
-
-
-class ModelTrainingError(Exception):
-    """Model training or :term:`fine-tuning <Fine-tuning>` failed."""
-
-    details: dict[str, Any]
-
-    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
-
-
-class TradingExecutionError(Exception):
-    """Order rejected or failed to execute."""
-
-    details: dict[str, Any]
-
-    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
-
-
-class APIConnectionError(Exception):
-    """External :term:`REST <REST API>` / :term:`streaming API <Streaming API>` :term:`API Endpoint` unreachable."""
-
-    details: dict[str, Any]
-
-    def __init__(self, message: str, *, details: _Details | None = None) -> None: ...
-
-
-class InvalidInputError(Exception):
-    """
-    Input data or parameters invalid **before** running a statistical test. See :term:`InvalidInputError`.
-
-    Parameters
-    ----------
-    message : str, optional
-        Default ``"Invalid input provided"``.
-    details : mapping[str, Any], optional
-        Array shapes, parameter values, etc.
-    """
-
-    details: dict[str, Any]
-
-    def __init__(
-        self,
-        message: str = "Invalid input provided",
-        *,
-        details: _Details | None = None,
-    ) -> None: ...
-
-
-class StatisticalTestError(Exception):
-    """
-    Statistical test failed to execute or returned invalid results.
-
-    Parameters
-    ----------
-    message : str, optional
-        Default ``"Statistical test execution failed"``.
-    details : mapping[str, Any], optional
-        Test name, :term:`\`*p*\`-value <p-value>`, etc.
-
-    See Also
-    --------
-	
-	- :term:`ADF Test`
-	- :term:`KPSS Test`
-	- :term:`Granger Causality Test`
-	- :term:`Ljung-Box Test`
-    """
-
-    details: dict[str, Any]
-
-    def __init__(
-        self,
-        message: str = "Statistical test execution failed",
-        *,
-        details: _Details | None = None,
-    ) -> None: ...
+class ModelInferenceError(DataError):
+    def __init__(self, message: str = 'Model inference failed', details: dict[str, Any] | None = None) -> None: ...
+    def get_error_code(self) -> str: ...

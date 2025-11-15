@@ -1,0 +1,9 @@
+from typing import Any
+
+__all__ = ['register_source', 'get_registry', 'DataSource']
+
+def register_source(name: str): ...
+def get_registry() -> dict[str, Any]: ...
+
+class DataSource:
+    async def get_historical(self, *args, **kwargs) -> None: ...

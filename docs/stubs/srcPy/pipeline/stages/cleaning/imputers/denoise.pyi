@@ -1,0 +1,19 @@
+import polars as pl
+from _typeshed import Incomplete
+from srcPy.pipeline.core.pipeline_core_base import CleaningStep
+from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
+
+logger: Incomplete
+
+class _NullLogger:
+    def log_metric(self, key, value) -> None: ...
+    def close(self) -> None: ...
+
+class DenoiseNormalizerStep(CleaningStep):
+    mlflow_logger: Incomplete
+    method: Incomplete
+    params: Incomplete
+    supported_methods: Incomplete
+    def __init__(self, method: str = 'ewm', params: dict | None = None, mlflow_logger: AsyncMLflowLogger | None = None, **_) -> None: ...
+    def apply(self, df: pl.DataFrame) -> pl.DataFrame: ...
+    def __del__(self) -> None: ...

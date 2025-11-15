@@ -1,0 +1,37 @@
+from .transforms import build_steps as build_steps
+from _typeshed import Incomplete
+from polars import LazyFrame as LazyFrame
+from pydantic import BaseModel
+from srcPy.pipeline.core.pipeline_core_base import PipelineStep
+from typing import Callable
+
+logger: Incomplete
+
+class AnonymizationConfig(BaseModel):
+    enabled: bool
+    sensitive_columns: list[str]
+    hash_algorithm: str
+    salt: str | None
+
+def get_hash_func(algo: str, salt: str | None = None) -> Callable[[str], str]: ...
+
+class DataAnonymizationStep(PipelineStep):
+    config: Incomplete
+    hasher: Incomplete
+    def __init__(self, config: AnonymizationConfig) -> None: ...
+    def apply(self, lf: LazyFrame) -> LazyFrame: ...
+
+class RegulatoryFilterConfig(BaseModel):
+    enabled: bool
+    restricted_symbols: list[str]
+    min_volume_threshold: float | None
+
+class RegulatoryFilterStep(PipelineStep):
+    config: Incomplete
+    def __init__(self, config: RegulatoryFilterConfig) -> None: ...
+    def apply(self, lf: LazyFrame) -> LazyFrame: ...
+
+COMPLIANCE_STEPS: dict[str, type[PipelineStep]]
+COMPLIANCE_CONFIGS: dict[str, type[BaseModel]]
+
+def build_compliance_steps(configs: list[dict]) -> list[PipelineStep]: ...

@@ -1,0 +1,13 @@
+from _typeshed import Incomplete
+from srcPy.preprocessor.graph.executor import Executor
+from srcPy.preprocessor.utils.nvtx import nvtx_range as nvtx_range
+
+logger: Incomplete
+
+def robust_scaler_cudf(ir, gdf, group_by=None, **_): ...
+
+class CuDFExecutor(Executor):
+    to_torch: Incomplete
+    def __init__(self, *, pool_size: str = '4GB', to_torch: bool = False) -> None: ...
+    def read_parquet(self, path, columns=None, byte_range=None): ...
+    def execute(self, compiled_plan, df): ...

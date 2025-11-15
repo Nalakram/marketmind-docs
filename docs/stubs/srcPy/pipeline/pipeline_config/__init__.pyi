@@ -1,0 +1,10 @@
+import os
+from pathlib import Path
+from typing import Any
+
+CONFIG_PATH: Path
+SCHEMA_PATH: Path
+
+def load_config(path: str | os.PathLike[str] | None = None) -> dict[str, Any]: ...
+def get_config(key: str | None = None, default: Any = None) -> Any: ...
+def reset_config_cache() -> None: ...

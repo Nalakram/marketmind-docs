@@ -1,16 +1,22 @@
-import pandas as pd
 from _typeshed import Incomplete
-from ib_insync import BarData, IB as IB
-from srcPy.utils.config import get_config as get_config
-from srcPy.utils.exceptions import DataFetchError as DataFetchError, IBConnectionError as IBConnectionError
-from srcPy.utils.logger import configure_logger as configure_logger, get_logger as get_logger
-from srcPy.utils.validators import validate_date as validate_date, validate_symbol as validate_symbol
+from collections.abc import Generator
+from contextlib import contextmanager
+from dataclasses import dataclass
+from datetime import datetime
 
-logger: Incomplete
+@dataclass
+class _Bar:
+    date: datetime
+    open: float
+    high: float
+    low: float
+    close: float
+    volume: int
 
-class NoDataError(DataFetchError):
-    def __init__(self, symbol: str) -> None: ...
+def create_mock_bars(n: int, start_date: str = '2025-01-01'): ...
 
-def create_mock_bars(n: int, start_date: str = '2025-01-01') -> list[BarData]: ...
-def fetch_historical_data(symbol: str, end_date: str = '', duration: str = '1 Y', bar_size: str = '1 day', ib_client: IB | None = None, use_cache: bool = True, what_to_show: str = 'TRADES', use_rth: bool = True, format_date: int = 1) -> pd.DataFrame: ...
-async def fetch_multiple_historical_data(symbols: list[str], end_date: str = '', duration: str = '1 Y', bar_size: str = '1 day', use_cache: bool = True, what_to_show: str = 'TRADES', use_rth: bool = True, format_date: int = 1) -> dict[str, pd.DataFrame]: ...
+class NoDataError(RuntimeError): ...
+
+@contextmanager
+def ib_connection(*args, **kwargs) -> Generator[Incomplete, None, Incomplete]: ...
+def fetch_historical_data(symbol: str, end_datetime: str, *, duration: str = '1 D', bar_size: str = '1 min', what_to_show: str = 'TRADES', use_cache: bool = True, ib_client: object | None = None): ...

@@ -1,0 +1,23 @@
+import pandas as pd
+import torch
+from _typeshed import Incomplete
+from torch.utils.data import DataLoader, Dataset
+from typing import Callable
+
+TargetType: Incomplete
+
+class TimeSeriesDataset(Dataset):
+    data: Incomplete
+    target: Incomplete
+    seq_len: Incomplete
+    horizon: Incomplete
+    target_type: Incomplete
+    transform: Incomplete
+    target_transform: Incomplete
+    starts: list[int]
+    def __init__(self, df: pd.DataFrame, *, seq_len: int, horizon: int, target_col: str = 'close', ticker_col: str | None = 'ticker', target_type: TargetType = 'regression', transform: Callable | None = None, target_transform: Callable | None = None, dtype: torch.dtype = ..., device: torch.device | str | None = None) -> None: ...
+    def __len__(self) -> int: ...
+    def __getitem__(self, idx: int) -> tuple[torch.Tensor, torch.Tensor]: ...
+
+def build_loader(df: pd.DataFrame, *, seq_len: int, horizon: int, batch_size: int = 128, shuffle: bool = True, num_workers: int = 4, pin_memory: bool = True, drop_last: bool = True, target_col: str = 'close', ticker_col: str | None = 'ticker', target_type: TargetType = 'regression', distributed: bool = False, rank: int | None = None, world_size: int | None = None, transform: Callable | None = None, target_transform: Callable | None = None, dtype: torch.dtype = ..., device: torch.device | str | None = None, **loader_kwargs) -> DataLoader: ...
+def build_train_val_loaders(train_df: pd.DataFrame, val_df: pd.DataFrame, *, seq_len: int, horizon: int, batch_size: int = 128, num_workers: int = 4, **common_kwargs) -> tuple[DataLoader, DataLoader]: ...
