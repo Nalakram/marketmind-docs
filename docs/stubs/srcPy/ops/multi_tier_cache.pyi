@@ -1,7 +1,9 @@
 import asyncio
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from concurrent.futures import Future
 from dataclasses import dataclass
+from srcPy.ops.caching import EnhancedCacheManager as EnhancedCacheManager, HashAlgorithm as HashAlgorithm, PersistentCache as PersistentCache, hash_bytes as hash_bytes, versioned_key as versioned_key
+from srcPy.utils.dependency_manager import deps as deps
 from typing import Any, Callable, TypeVar
 
 PYARROW_AVAILABLE: bool
@@ -13,21 +15,25 @@ def version_to_int(version_str: str) -> int: ...
 
 @dataclass
 class Call:
+    """call class."""
     future: Future | asyncio.Future
     start_time: float
     is_async: bool = ...
 
 class Singleflight:
+    """singleflight class."""
     def __init__(self) -> None: ...
     def do(self, key: Any, fn: Callable[[], T]) -> tuple[T, bool]: ...
     async def do_async(self, key: Any, fn: Callable) -> tuple[T, bool]: ...
 
 class L2Cache:
+    """l2cache class."""
     def get(self, key: str) -> Any | None: ...
     def set(self, key: str, value: Any, ttl: float | None = None): ...
     def invalidate(self, key: str): ...
 
 class PlasmaL2Cache(L2Cache):
+    """plasma l2cache class."""
     client: Incomplete
     def __init__(self, plasma_path: str = '/tmp/plasma') -> None: ...
     def get(self, key: str) -> Any | None: ...
@@ -35,6 +41,7 @@ class PlasmaL2Cache(L2Cache):
     def invalidate(self, key: str): ...
 
 class MemfdL2Cache(L2Cache):
+    """memfd l2cache class."""
     cache_dir: Incomplete
     def __init__(self, cache_dir: str = '/dev/shm/l2_cache') -> None: ...
     def get(self, key: str) -> Any | None: ...
@@ -42,6 +49,7 @@ class MemfdL2Cache(L2Cache):
     def invalidate(self, key: str): ...
 
 class L3Cache:
+    """l3cache class."""
     redis: Incomplete
     key_prefix: Incomplete
     def __init__(self, redis_client=None, key_prefix: str = 'l3:') -> None: ...
@@ -52,6 +60,7 @@ class L3Cache:
 
 @dataclass
 class TierMetrics:
+    """tier metrics class."""
     tier_name: str
     hits: int = ...
     misses: int = ...
@@ -64,6 +73,7 @@ class TierMetrics:
     def avg_latency_us(self) -> float: ...
 
 class MultiTierMetrics:
+    """multi tier metrics class."""
     l1: Incomplete
     l2: Incomplete
     l3: Incomplete
@@ -73,6 +83,7 @@ class MultiTierMetrics:
     def summary(self) -> dict[str, Any]: ...
 
 class InvalidationListener:
+    """invalidation listener class."""
     redis: Incomplete
     channel: Incomplete
     callback: Incomplete
@@ -81,6 +92,7 @@ class InvalidationListener:
     def stop(self) -> None: ...
 
 class MultiTierClient:
+    """Client for interacting with multi tier service."""
     l1: Incomplete
     l2: Incomplete
     l3: Incomplete
@@ -101,6 +113,7 @@ class MultiTierClient:
 def multi_tier_cache(ttl: float | None = 60, version: str = 'v1', persist_large_objects: bool = False, key_fn: Callable[[Callable[..., Any], tuple[Any, ...], dict[str, Any]], str] | None = None, redis_client=None, l2_type: str = 'memfd', check_l4_on_miss: bool = False): ...
 
 class PrometheusExporter:
+    """prometheus exporter class."""
     client: Incomplete
     def __init__(self, client: MultiTierClient) -> None: ...
     def export(self) -> str: ...

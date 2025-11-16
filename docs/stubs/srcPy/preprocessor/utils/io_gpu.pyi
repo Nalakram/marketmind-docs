@@ -1,6 +1,10 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from dataclasses import dataclass
-from srcPy.utils.optional_imports import cudf, pl as polars
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.preprocessor.utils.cuda_runtime import capabilities as capabilities
+from srcPy.preprocessor.utils.errors import OOMRetry as OOMRetry
+from srcPy.preprocessor.utils.nvtx import nvtx_range as nvtx_range
+from srcPy.utils.optional_imports import cudf as cudf, pl as polars
 from typing import Any, Literal
 
 logger: Incomplete
@@ -9,6 +13,7 @@ Frame = Any
 
 @dataclass
 class ParquetOptions:
+    """parquet options class."""
     columns: list[str] | None = ...
     compression: Literal['snappy', 'zstd', 'lz4', 'none'] | None = ...
     filters: Any | None = ...

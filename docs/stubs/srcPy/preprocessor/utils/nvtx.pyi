@@ -1,6 +1,7 @@
 import contextlib
 import types
-from _typeshed import Incomplete
+from typing import Any as Incomplete
+from srcPy.ops.mm_logkit import get_logger as get_logger
 
 logger: Incomplete
 NVTX_ENABLED: Incomplete
@@ -10,6 +11,7 @@ def range_ctx(message: str, color: int | None = None): ...
 def nvtx_range(message: str, color: int | None = None): ...
 
 class nvtx_plan:
+    """nvtx plan class."""
     name: Incomplete
     color: Incomplete
     def __init__(self, name: str, color: int | None = None) -> None: ...

@@ -1,8 +1,10 @@
 import abc
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from functools import singledispatch
-from srcPy.utils.optional_imports import pl
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.utils.optional_imports import np as np, pl as pl
+from srcPy.utils.validators import validate_dataframe as validate_dataframe
 from typing import Any
 
 logger: Incomplete
@@ -11,10 +13,12 @@ ANONYMIZERS: dict[str, type['Anonymizer']]
 def register_anonymizer(anon_type: str): ...
 
 class Anonymizer(ABC, metaclass=abc.ABCMeta):
+    """anonymizer class."""
     @abstractmethod
     def apply(self, df: pl.DataFrame | pl.LazyFrame, columns: list[str]) -> pl.DataFrame | pl.LazyFrame: ...
 
 class AnonymizationManager:
+    """Manages anonymization resources and operations."""
     config: Incomplete
     anonymizers: dict[str, Anonymizer]
     max_workers: Incomplete
@@ -30,16 +34,19 @@ class AnonymizationManager:
     def _(self, dfs: dict, columns: dict[str, list[str]] | None = None, eager: bool = False) -> dict: ...
 
 class MaskingAnonymizer(Anonymizer):
+    """masking anonymizer class."""
     mask_char: Incomplete
     def __init__(self, config: dict | None = None) -> None: ...
     def apply(self, df: pl.DataFrame | pl.LazyFrame, columns: list[str]) -> pl.DataFrame | pl.LazyFrame: ...
 
 class HashingAnonymizer(Anonymizer):
+    """hashing anonymizer class."""
     algorithm: Incomplete
     def __init__(self, config: dict | None = None) -> None: ...
     def apply(self, df: pl.DataFrame | pl.LazyFrame, columns: list[str]) -> pl.DataFrame | pl.LazyFrame: ...
 
 class DPAnonymizer(Anonymizer):
+    """dp anonymizer class."""
     epsilon: Incomplete
     def __init__(self, config: dict | None = None) -> None: ...
     def apply(self, df: pl.DataFrame | pl.LazyFrame, columns: list[str]) -> pl.DataFrame | pl.LazyFrame: ...

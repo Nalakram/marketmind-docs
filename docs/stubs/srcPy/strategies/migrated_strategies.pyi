@@ -1,5 +1,5 @@
 import pandas as pd
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from dataclasses import dataclass
 from srcPy.strategies.pipeline_strategy import FeaturePlan, PipelineStrategy
 from typing import Any, Final, Literal, Protocol
@@ -7,11 +7,13 @@ from typing import Any, Final, Literal, Protocol
 __all__ = ['RSIStrategy', 'MACDStrategy', 'BollingerBandsStrategy', 'MeanReversionStrategy', 'MovingAverageCrossoverStrategy', 'EnsemblePipelineStrategy', 'clear_strategy_cache']
 
 class _SupportsToPandas(Protocol):
+    """supports to pandas class."""
     def to_pandas(self) -> pd.DataFrame: ...
 
 def clear_strategy_cache() -> None: ...
 
 class RSIStrategy(PipelineStrategy):
+    """Strategy for rsi behavior."""
     rsi_window: Incomplete
     upper: Incomplete
     lower: Incomplete
@@ -23,6 +25,7 @@ class RSIStrategy(PipelineStrategy):
     def generate_signal(self, features: pd.DataFrame) -> pd.Series: ...
 
 class MACDStrategy(PipelineStrategy):
+    """Strategy for macd behavior."""
     fast: Incomplete
     slow: Incomplete
     signal: Incomplete
@@ -33,6 +36,7 @@ class MACDStrategy(PipelineStrategy):
     def generate_signal(self, features: pd.DataFrame) -> pd.Series: ...
 
 class BollingerBandsStrategy(PipelineStrategy):
+    """Strategy for bollinger bands behavior."""
     period: Incomplete
     num_std: Incomplete
     mode: Literal['reversion', 'breakout']
@@ -42,6 +46,7 @@ class BollingerBandsStrategy(PipelineStrategy):
     def generate_signal(self, features: pd.DataFrame) -> pd.Series: ...
 
 class MeanReversionStrategy(PipelineStrategy):
+    """Strategy for mean reversion behavior."""
     period: Incomplete
     entry_threshold: Incomplete
     exit_threshold: Incomplete
@@ -51,6 +56,7 @@ class MeanReversionStrategy(PipelineStrategy):
     def generate_signal(self, features: pd.DataFrame) -> pd.Series: ...
 
 class MovingAverageCrossoverStrategy(PipelineStrategy):
+    """Strategy for moving average crossover behavior."""
     short: Incomplete
     long: Incomplete
     ma_type: Literal['sma', 'ema']
@@ -63,6 +69,7 @@ class MovingAverageCrossoverStrategy(PipelineStrategy):
 
 @dataclass
 class _SubStrategyState:
+    """sub strategy state class."""
     strategy: PipelineStrategy
     params: dict[str, Any]
     failure_count: int = ...
@@ -70,6 +77,7 @@ class _SubStrategyState:
     open: bool = ...
 
 class EnsemblePipelineStrategy(PipelineStrategy):
+    """Strategy for ensemble pipeline behavior."""
     ADAPTIVE_UPDATE_INTERVAL: Final[int]
     MAX_FAILURES: Final[int]
     MIN_WEIGHT_FLOOR: Final[float]

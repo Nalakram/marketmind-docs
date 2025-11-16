@@ -1,7 +1,8 @@
 import tensorflow as tf
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 
 class ProbSparseAttention(tf.keras.layers.Layer):
+    """prob sparse attention class."""
     d_model: Incomplete
     n_heads: Incomplete
     d_k: Incomplete
@@ -13,6 +14,7 @@ class ProbSparseAttention(tf.keras.layers.Layer):
     def call(self, inputs): ...
 
 class InformerModel(tf.keras.Model):
+    """informer model class."""
     encoder: Incomplete
     dense: Incomplete
     input_embedding: Incomplete

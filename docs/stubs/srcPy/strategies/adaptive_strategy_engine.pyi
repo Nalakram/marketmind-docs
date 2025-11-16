@@ -1,13 +1,15 @@
 import pandas as pd
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from collections import deque
 from dataclasses import dataclass, dataclass as _dataclass, field
 from pathlib import Path
-from srcPy.strategies.pipeline_strategy import BacktestConfig, ChampionChallenger, PipelineStrategy, StrategyContext, TradeIntent
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.strategies.pipeline_strategy import BacktestConfig as BacktestConfig, ChampionChallenger as ChampionChallenger, PipelineStrategy as PipelineStrategy, StrategyContext as StrategyContext, StrategyRegistry as StrategyRegistry, TradeIntent as TradeIntent, detect_drift as detect_drift, optuna_tune as optuna_tune, parameter_sweep as parameter_sweep
 from typing import Any, Protocol
 
 @_dataclass
 class DriftState:
+    """drift state class."""
     ref_mean: float = ...
     ref_std: float = ...
 
@@ -15,6 +17,7 @@ LOG: Incomplete
 
 @dataclass
 class EvolutionEvent:
+    """evolution event class."""
     timestamp: pd.Timestamp
     event_type: str
     strategy_name: str
@@ -24,9 +27,11 @@ class EvolutionEvent:
     metadata: dict[str, Any] = field(default_factory=dict)
 
 class EvolutionCallback(Protocol):
+    """evolution callback class."""
     def on_evolution_event(self, event: EvolutionEvent) -> None: ...
 
 class AdaptiveParameterSpace:
+    """adaptive parameter space class."""
     base_space: Incomplete
     adaptation_rate: Incomplete
     memory_length: Incomplete
@@ -38,11 +43,13 @@ class AdaptiveParameterSpace:
 
 @dataclass
 class MultiFrameDriftState:
+    """multi frame drift state class."""
     short_term: DriftState | None = ...
     medium_term: DriftState | None = ...
     long_term: DriftState | None = ...
 
 class MultiTimeframeDriftMonitor:
+    """multi timeframe drift monitor class."""
     short_window: Incomplete
     medium_window: Incomplete
     long_window: Incomplete
@@ -52,6 +59,7 @@ class MultiTimeframeDriftMonitor:
     def check_drift(self, returns: pd.Series) -> tuple[bool, dict[str, bool]]: ...
 
 class StrategyEnsemble:
+    """strategy ensemble class."""
     strategy_specs: Incomplete
     rebalance_frequency: Incomplete
     blend_weights: dict[str, float]
@@ -63,6 +71,7 @@ class StrategyEnsemble:
     def rebalance_weights(self) -> dict[str, float]: ...
 
 class SelfEvolvingAdapter:
+    """Adapter for self evolving interface."""
     strategies: Incomplete
     ctx: Incomplete
     prices: Incomplete
@@ -86,9 +95,11 @@ class SelfEvolvingAdapter:
     def force_evolution(self, strategy_name: str | None = None) -> None: ...
 
 class LoggingEvolutionCallback:
+    """logging evolution callback class."""
     def on_evolution_event(self, event: EvolutionEvent) -> None: ...
 
 class FileEvolutionCallback:
+    """file evolution callback class."""
     filepath: Incomplete
     def __init__(self, filepath: str | Path) -> None: ...
     def on_evolution_event(self, event: EvolutionEvent) -> None: ...

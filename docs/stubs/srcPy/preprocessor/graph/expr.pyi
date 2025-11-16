@@ -1,4 +1,4 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, ABCMeta, abstractmethod
 from dataclasses import dataclass
 from typing import Any, Callable, Sequence
@@ -8,9 +8,11 @@ __all__ = ['Expr', 'Column', 'Literal', 'OpExpr', 'expr_factory', 'register_expr
 def register_expr(op: str, builder: Callable[..., Expr]) -> None: ...
 
 class ExprMeta(ABCMeta):
+    """expr meta class."""
     def __new__(cls, name, bases, dct): ...
 
 class Expr(ABC, metaclass=ExprMeta):
+    """expr class."""
     op: str | None
     args: Sequence['Expr']
     params: dict[str, Any]
@@ -35,6 +37,7 @@ class Expr(ABC, metaclass=ExprMeta):
 
 @dataclass(frozen=True)
 class Column(Expr):
+    """column class."""
     op = ...
     name: str
     def __init__(self, name: str) -> None: ...
@@ -43,12 +46,14 @@ class Column(Expr):
 
 @dataclass(frozen=True)
 class Literal(Expr):
+    """literal class."""
     op = ...
     value: Any
     def __init__(self, value: Any) -> None: ...
     def to_ir(self) -> dict[str, Any]: ...
 
 class OpExpr(Expr):
+    """op expr class."""
     op: Incomplete
     def __init__(self, op: str, args: Sequence[Expr | Any], params: dict[str, Any] = None) -> None: ...
     def to_ir(self) -> dict[str, Any]: ...

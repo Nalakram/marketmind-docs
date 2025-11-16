@@ -2,11 +2,12 @@ import polars as pl
 from . import register_source as register_source
 from ..exceptions import DataFetchError as DataFetchError
 from .base import DataSource as DataSource
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from influxdb_client.client.query_api import QueryApi as QueryApi
 from typing import AsyncIterator
 
 class InfluxDBSource(DataSource):
+    """influx db source class."""
     client: Incomplete
     query_api: QueryApi
     bucket: Incomplete

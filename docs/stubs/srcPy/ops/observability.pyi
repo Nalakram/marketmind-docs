@@ -1,10 +1,12 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from contextlib import contextmanager
 from dataclasses import dataclass
 from enum import Enum
 from opentelemetry import context
 from opentelemetry.sdk.trace.sampling import Sampler
 from opentelemetry.trace import Link, Span
+from srcPy.utils.capability_manager import HAS as HAS
+from srcPy.utils.dependency_manager import deps as deps
 from typing import Any, Callable, Iterable, TypeVar
 
 class GrpcError(Exception): ...
@@ -16,6 +18,7 @@ class PiiRedactionError(ObservabilityError): ...
 class TracingInitError(ObservabilityError): ...
 
 class _DummySpanKind(Enum):
+    """dummy span kind class."""
     INTERNAL = 'INTERNAL'
     SERVER = 'SERVER'
     CLIENT = 'CLIENT'
@@ -23,21 +26,25 @@ class _DummySpanKind(Enum):
     CONSUMER = 'CONSUMER'
 
 class _DummyStatusCode:
+    """dummy status code class."""
     UNSET: int
     OK: int
     ERROR: int
 
 class _DummyStatus:
+    """dummy status class."""
     status_code: Incomplete
     description: Incomplete
     def __init__(self, status_code: int | None = None, description: str | None = None) -> None: ...
 
 class _DummySpanContext:
+    """dummy span context class."""
     trace_id: int
     span_id: int
     def __init__(self) -> None: ...
 
 class _DummySpan:
+    """dummy span class."""
     attributes: Incomplete
     def __init__(self) -> None: ...
     def get_span_context(self) -> _DummySpanContext: ...
@@ -46,15 +53,18 @@ class _DummySpan:
     def set_attribute(self, *_args, **_kw) -> None: ...
 
 class _DummyLink:
+    """dummy link class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyContext: ...
 
 class _DummySampler:
+    """dummy sampler class."""
     def should_sample(self, *_a, **_k): ...
     def get_description(self) -> str: ...
 
 class _DummyTraceModule:
+    """dummy trace module class."""
     SpanProcessor = object
     def __init__(self) -> None: ...
     def set_tracer_provider(self, *_a, **_k) -> None: ...
@@ -64,10 +74,13 @@ class _DummyTraceModule:
     def use_span(self, _span, end_on_exit: bool = True): ...
 
 class _DummyTracer:
+    """dummy tracer class."""
     def start_span(self, *_a, **_k) -> _DummySpan: ...
 
 class _DummyMetricsModule:
+    """dummy metrics module class."""
     class Observation:
+        """observation class."""
         value: Incomplete
         attributes: Incomplete
         def __init__(self, value: float, attributes: dict[str, str] | None = None) -> None: ...
@@ -76,48 +89,60 @@ class _DummyMetricsModule:
     def get_meter(self, *_a, **_k): ...
 
 class _DummyMeter:
+    """dummy meter class."""
     def __init__(self, *args, **kwargs) -> None: ...
     def create_counter(self, *_a, **_k): ...
     def create_histogram(self, *_a, **_k): ...
     def create_observable_gauge(self, *_a, **_k) -> None: ...
 
 class _DummyPrometheusMetricReader:
+    """dummy prometheus metric reader class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyPeriodicExportingMetricReader:
+    """dummy periodic exporting metric reader class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyAggregationTemporality:
+    """dummy aggregation temporality class."""
     DELTA: int
     CUMULATIVE: int
 
 class _DummyView:
+    """dummy view class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyResource:
+    """dummy resource class."""
     @classmethod
     def create(cls, *args, **kwargs): ...
 
 class _DummyTracerProvider:
+    """dummy tracer provider class."""
     def __init__(self, *args, **kwargs) -> None: ...
     def add_span_processor(self, *_a, **_k) -> None: ...
 
 class _DummyBatchSpanProcessor:
+    """Processes dummy batch span data."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyConsoleSpanExporter:
+    """dummy console span exporter class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class _DummyParentBased(_DummySampler):
+    """dummy parent based class."""
     def __init__(self, *_a, **_k) -> None: ...
 
 class _DummyTraceIdRatioBased(_DummySampler):
+    """dummy trace id ratio based class."""
     def __init__(self, *_a, **_k) -> None: ...
 OTLPMetricExporter = object
 OTLPSpanExporter = object
 SamplingResult = object
 
 class TraceContextTextMapPropagator:
+    """trace context text map propagator class."""
     def inject(self, _) -> None: ...
     def extract(self, _) -> None: ...
 
@@ -126,17 +151,21 @@ ExponentialBucketHistogramAggregation: Incomplete
 ExplicitBucketHistogramAggregation: Incomplete
 
 class _NoOpCounter:
+    """no op counter class."""
     def add(self, *_args, **_kw) -> None: ...
 
 class _NoOpHistogram:
+    """no op histogram class."""
     def record(self, *_args, **_kw) -> None: ...
 
 class _NoOpMeter:
+    """no op meter class."""
     def create_counter(self, *_a, **_k): ...
     def create_histogram(self, *_a, **_k): ...
     def create_observable_gauge(self, *_a, **_k) -> None: ...
 
 class NoOpMetricsManager:
+    """Manages no op metrics resources and operations."""
     meter: Incomplete
     def __init__(self, *_a, **_k) -> None: ...
     def counter(self, *_a, **_k): ...
@@ -146,6 +175,7 @@ class NoOpMetricsManager:
     def shutdown(self) -> None: ...
 
 class NoOpTracingManager:
+    """Manages no op tracing resources and operations."""
     def __init__(self, *_a, **_k) -> None: ...
     def set_sample_rate(self, *_a, **_k) -> None: ...
     def start_span(self, *_a, **_k) -> None: ...
@@ -161,6 +191,7 @@ def set_strategy(strategy_id: str) -> None: ...
 def get_strategy() -> str: ...
 
 class CircuitBreaker:
+    """circuit breaker class."""
     fail_threshold: Incomplete
     reset_after_sec: Incomplete
     fail_count: int
@@ -171,6 +202,7 @@ class CircuitBreaker:
     def is_open(self) -> bool: ...
 
 class CardinalityLimiter:
+    """cardinality limiter class."""
     max_keys: Incomplete
     def __init__(self, max_keys_per_label: int = 1000) -> None: ...
     def sanitize(self, label_key: str, label_value: str) -> str: ...
@@ -178,6 +210,7 @@ class CardinalityLimiter:
     def stats(self) -> dict[str, Any]: ...
 
 class PIIRedactor:
+    """pii redactor class."""
     DEFAULT_PATTERNS: Incomplete
     patterns: Incomplete
     def __init__(self, patterns: dict[str, str] | None = None, fast_keys_allowlist: Iterable[str] | None = None) -> None: ...
@@ -185,6 +218,7 @@ class PIIRedactor:
     def redact_dict(self, data: dict[str, Any]) -> dict[str, Any]: ...
 
 class _Event:
+    """event class."""
     kind: Incomplete
     instrument: Incomplete
     value: Incomplete
@@ -192,6 +226,7 @@ class _Event:
     def __init__(self, kind: str, instrument: Any, value: float, labels: dict[str, str]) -> None: ...
 
 class BoundedEventQueue:
+    """bounded event queue class."""
     def __init__(self, maxsize: int = 65536) -> None: ...
     def put_nowait(self, ev: _Event) -> bool: ...
     def get_batch(self, n: int = 2048) -> list[_Event]: ...
@@ -200,6 +235,7 @@ class BoundedEventQueue:
 
 @dataclass
 class MetricConfig:
+    """Configuration for metric."""
     prometheus_port: int = ...
     otlp_endpoint: str | None = ...
     export_interval_millis: int = ...
@@ -215,10 +251,12 @@ class MetricConfig:
     breaker_reset_seconds: int = ...
 
 class SafeOTLPMetricExporter:
+    """safe otlp metric exporter class."""
     def __init__(self, allowlist: tuple[str, ...], breaker: CircuitBreaker, timeout: float, *args, **kwargs) -> None: ...
     def export(self, metrics_data) -> None: ...
 
 class MetricsManager:
+    """Manages metrics resources and operations."""
     service_name: Incomplete
     config: Incomplete
     card: Incomplete
@@ -234,6 +272,7 @@ class MetricsManager:
 
 @dataclass
 class TracingConfig:
+    """Configuration for tracing."""
     otlp_endpoint: str | None = ...
     sample_rate: float = ...
     max_queue_size: int = ...
@@ -244,16 +283,19 @@ class TracingConfig:
     exporter_timeout_sec: float = ...
 
 class SafeOTLPSpanExporter:
+    """safe otlp span exporter class."""
     def __init__(self, allowlist: tuple[str, ...], breaker: CircuitBreaker, timeout: float, *args, **kwargs) -> None: ...
     def export(self, spans) -> None: ...
 
 class AdaptiveRatioSampler(Sampler):
+    """adaptive ratio sampler class."""
     def __init__(self, initial_rate: float) -> None: ...
     def should_sample(self, parent_context, trace_id, name, kind, attributes, links): ...
     def get_description(self) -> str: ...
     def set_rate(self, new_rate: float) -> None: ...
 
 class PiiRedactionSpanProcessor(_SpanProcessorBase):
+    """Processes pii redaction span data."""
     redactor: Incomplete
     def __init__(self) -> None: ...
     def on_start(self, span: Span, parent_context: context.Context | None = None) -> None: ...
@@ -262,6 +304,7 @@ class PiiRedactionSpanProcessor(_SpanProcessorBase):
     def force_flush(self, timeout_millis: int = 30000) -> bool: ...
 
 class TracingManager:
+    """Manages tracing resources and operations."""
     service_name: Incomplete
     config: Incomplete
     provider: Incomplete
@@ -274,6 +317,7 @@ class TracingManager:
     def extract_context(self, carrier: dict[str, str]): ...
 
 class TraceEnrichedLogger:
+    """trace enriched logger class."""
     def __init__(self, base_logger, service_name: str) -> None: ...
     def info(self, msg: str, **kwargs): ...
     def error(self, msg: str, **kwargs): ...
@@ -281,11 +325,13 @@ class TraceEnrichedLogger:
     def debug(self, msg: str, **kwargs): ...
 
 class LoggingManager:
+    """Manages logging resources and operations."""
     service_name: Incomplete
     def __init__(self, service_name: str = 'financial-ml', mm_config: dict[str, Any] | None = None) -> None: ...
     def get_logger(self): ...
 
 class AdaptiveThreshold:
+    """adaptive threshold class."""
     alpha: Incomplete
     sensitivity: Incomplete
     def __init__(self, alpha: float = 0.1, sensitivity: float = 3.0, window_size: int = 1024) -> None: ...
@@ -293,6 +339,7 @@ class AdaptiveThreshold:
     def threshold(self) -> float: ...
 
 class SLOBurnRate:
+    """slo burn rate class."""
     windows: Incomplete
     def __init__(self, minutes: Iterable[int] = (1, 5, 30)) -> None: ...
     def record(self, ok: bool) -> None: ...
@@ -301,12 +348,14 @@ class SLOBurnRate:
 def instrument(name: str | None = None, labels: dict[str, str] | None = None, record_exceptions: bool = True, measure_latency: bool = True) -> Callable[[F], F]: ...
 
 class FastAPIMiddleware:
+    """fast api middleware class."""
     app: Incomplete
     service_name: Incomplete
     def __init__(self, app, service_name: str = 'api', slo_error_budget: float = 0.01) -> None: ...
     async def __call__(self, scope, receive, send): ...
 
 class KafkaInstrumentor:
+    """kafka instrumentor class."""
     propagator: Incomplete
     def __init__(self) -> None: ...
     def inject_context(self, headers: dict[str, bytes]) -> dict[str, bytes]: ...

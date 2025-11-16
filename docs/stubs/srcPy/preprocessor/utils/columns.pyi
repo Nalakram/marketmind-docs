@@ -1,13 +1,15 @@
 import abc
 from .cuda_runtime import capabilities as capabilities
 from .errors import SchemaMismatch as SchemaMismatch, UnsupportedAST as UnsupportedAST
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
+from srcPy.ops.mm_logkit import get_logger as get_logger
 from typing import Callable, Iterable
 
 logger: Incomplete
 
 class ColumnOp(ABC, metaclass=abc.ABCMeta):
+    """column op class."""
     @abstractmethod
     def apply(self, df, cols: Iterable[str], **kwargs): ...
     def validate(self, df, cols: Iterable[str]) -> None: ...
@@ -15,14 +17,17 @@ class ColumnOp(ABC, metaclass=abc.ABCMeta):
 def profile_op(func: Callable) -> Callable: ...
 
 class CastNumeric(ColumnOp):
+    """cast numeric class."""
     @profile_op
     def apply(self, df, cols: Iterable[str], dtype: str = 'float32'): ...
 
 class PromoteCategorical(ColumnOp):
+    """promote categorical class."""
     @profile_op
     def apply(self, df, cols: Iterable[str], ordered: bool = False, **kwargs): ...
 
 class ColumnOpFactory:
+    """Factory for creating column op instances."""
     registry: dict[str, Callable[..., ColumnOp]]
     @classmethod
     def register(cls, name: str, op_class: Callable[..., ColumnOp]): ...

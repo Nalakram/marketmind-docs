@@ -1,11 +1,13 @@
 import polars as pl
-from _typeshed import Incomplete
-from srcPy.pipeline.core.pipeline_core_base import CleaningStep
+from typing import Any as Incomplete
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.pipeline.core.pipeline_core_base import CleaningStep as CleaningStep
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
 
 logger: Incomplete
 
 class AlternativeDataNormalizerStep(CleaningStep):
+    """alternative data normalizer step class."""
     mlflow_logger: Incomplete
     enabled: Incomplete
     esg_enabled: Incomplete

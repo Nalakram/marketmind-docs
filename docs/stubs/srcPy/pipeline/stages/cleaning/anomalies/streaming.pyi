@@ -1,11 +1,13 @@
 import numpy as np
 from . import BaseAnomalyNormalizerStep as BaseAnomalyNormalizerStep
-from _typeshed import Incomplete
+from typing import Any as Incomplete
+from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_metrics import streaming_step_latency as streaming_step_latency
 
 logger: Incomplete
 
 class StreamingIsolationForest:
+    """streaming isolation forest class."""
     contamination: Incomplete
     refit_every: Incomplete
     window_size: Incomplete
@@ -16,6 +18,7 @@ class StreamingIsolationForest:
     def predict(self, df) -> np.ndarray: ...
 
 class StreamingAnomalyNormalizerStep(BaseAnomalyNormalizerStep):
+    """streaming anomaly normalizer step class."""
     contamination: Incomplete
     refit_every: Incomplete
     window_size: Incomplete

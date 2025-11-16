@@ -1,14 +1,16 @@
 import abc
 from .errors import UnsupportedAST as UnsupportedAST
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from srcPy.ops.mm_logkit import get_logger as get_logger
 from typing import Any, Callable, Hashable
 
 logger: Incomplete
 
 @dataclass(frozen=True)
 class Spec(ABC, Hashable, metaclass=abc.ABCMeta):
+    """spec class."""
     def __post_init__(self) -> None: ...
     def __hash__(self) -> int: ...
     @abstractmethod
@@ -17,6 +19,7 @@ class Spec(ABC, Hashable, metaclass=abc.ABCMeta):
 
 @dataclass(frozen=True)
 class WindowSpec(Spec):
+    """window spec class."""
     partition_by: list[str] | None = ...
     order_by: list[str] | None = ...
     preceding: int | None = ...
@@ -28,6 +31,7 @@ class WindowSpec(Spec):
 
 @dataclass(frozen=True)
 class GroupSpec(Spec, metaclass=abc.ABCMeta):
+    """group spec class."""
     by: list[str]
     as_index: bool = ...
     sort: bool = ...
@@ -35,6 +39,7 @@ class GroupSpec(Spec, metaclass=abc.ABCMeta):
     def __add__(self, other: GroupSpec) -> GroupSpec: ...
 
 class SpecFactory:
+    """Factory for creating spec instances."""
     registry: dict[str, Callable[..., Spec]]
     @classmethod
     def register(cls, name: str, builder: Callable[..., Spec]): ...

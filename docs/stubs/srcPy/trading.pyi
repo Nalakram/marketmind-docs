@@ -1,7 +1,8 @@
-from _typeshed import Incomplete
-from srcPy.domain.interfaces import MarketDataProvider as MarketDataProvider, OrderExecutor as OrderExecutor, PositionSizer as PositionSizer, RiskManager as RiskManager
+from typing import Any as Incomplete
+from srcPy.domain.interfaces import MarketDataProvider as MarketDataProvider, Order as Order, OrderExecutor as OrderExecutor, PositionSizer as PositionSizer, RiskManager as RiskManager
 
 class TradingService:
+    """trading service implementation."""
     executor: Incomplete
     mkt: Incomplete
     risk: Incomplete

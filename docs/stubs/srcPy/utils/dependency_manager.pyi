@@ -1,5 +1,5 @@
 import types
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from dataclasses import dataclass
 from typing import Any, ContextManager, TypeVar
 
@@ -15,6 +15,7 @@ pydantic_dataclass: Incomplete
 ConfigDict: Incomplete
 
 class _NoopMetric:
+    """noop metric class."""
     def __init__(self, *args: Any, **kwargs: Any) -> None: ...
     def labels(self, *args: Any, **kwargs: Any) -> _NoopMetric: ...
     def inc(self, *args: Any, **kwargs: Any) -> None: ...
@@ -27,12 +28,14 @@ class _NoopMetric:
     def time(self) -> ContextManager[None]: ...
 
 class _NoopPydantic:
+    """noop pydantic class."""
     @staticmethod
     def dataclass(*args: Any, **kwargs: Any): ...
     ConfigDict = dict
 
 @dataclass(frozen=True)
 class _Dependency:
+    """dependency class."""
     module_path: str
     pip_name: str
     purpose: str
@@ -40,6 +43,7 @@ class _Dependency:
     min_version: str | None = ...
 
 class DependencyManager:
+    """Manages dependency resources and operations."""
     def __new__(cls, *a: Any, **k: Any) -> DependencyManager: ...
     def __init__(self, config: dict[str, _Dependency]) -> None: ...
     def has(self, key: str) -> bool: ...

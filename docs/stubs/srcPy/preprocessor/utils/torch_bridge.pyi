@@ -1,26 +1,31 @@
 import abc
 import torch
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from srcPy.ops.mm_logkit import get_logger as get_logger
 from typing import Any, Sequence
 
 logger: Incomplete
 
 @dataclass
 class TorchBatch:
+    """torch batch class."""
     tensors: dict[str, 'torch.Tensor']
     lengths: torch.Tensor | None = ...
     meta: dict[str, Any] = ...
 
 class BackendBridge(ABC, metaclass=abc.ABCMeta):
+    """backend bridge class."""
     @abstractmethod
     def to_torch(self, df, cols: Sequence[str], dtypes: dict[str, 'torch.dtype'] | None, include_lengths: bool) -> TorchBatch: ...
 
 class CuDFBridge(BackendBridge):
+    """cu df bridge class."""
     def to_torch(self, df, cols: Sequence[str], dtypes: dict[str, 'torch.dtype'] | None, include_lengths: bool) -> TorchBatch: ...
 
 class PolarsBridge(BackendBridge):
+    """polars bridge class."""
     def to_torch(self, df, cols: Sequence[str], dtypes: dict[str, 'torch.dtype'] | None, include_lengths: bool) -> TorchBatch: ...
 
 def bridge_factory(df) -> BackendBridge: ...

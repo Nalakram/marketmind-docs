@@ -1,10 +1,11 @@
-from _typeshed import Incomplete
-from srcPy.utils.optional_imports import pd as pd, pl
+from typing import Any as Incomplete
+from srcPy.utils.optional_imports import pd as pd, pl as pl
 from typing import Literal
 
 TimeFreq: Incomplete
 
 class PipelineContext:
+    """pipeline context class."""
     frequency: TimeFreq
     asset_class: str
     latency: Literal['ultra', 'low', 'batch']

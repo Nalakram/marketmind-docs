@@ -1,8 +1,9 @@
 import pandas as pd
-from _typeshed import Incomplete
-from srcPy.pipeline.stages.cleaning.core.base import CleaningStep
+from typing import Any as Incomplete
+from srcPy.pipeline.stages.cleaning.core.base import CleaningStep as CleaningStep
 
 class BacktestingSplitNormalizerStep(CleaningStep):
+    """backtesting split normalizer step class."""
     is_fast: bool
     enabled: Incomplete
     split_ratio: Incomplete

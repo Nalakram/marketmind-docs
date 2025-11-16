@@ -6,6 +6,7 @@ from typing import Any, Callable
 __all__ = ['Graph', 'Node', 'SimpleNode', 'FusedNode', 'register_node_factory', 'serialize', 'deserialize']
 
 class Node(ABC, metaclass=abc.ABCMeta):
+    """node class."""
     op: Op
     inputs: list[Node]
     outputs: list[Node]
@@ -16,9 +17,11 @@ class Node(ABC, metaclass=abc.ABCMeta):
     def to_ir(self) -> dict[str, Any]: ...
 
 class SimpleNode(Node):
+    """simple node class."""
     def to_ir(self) -> dict[str, Any]: ...
 
 class FusedNode(Node):
+    """fused node class."""
     sub_ops: list[Op]
     def __init__(self, sub_ops: list[Op], fused_kind: OpKind) -> None: ...
     def to_ir(self) -> dict[str, Any]: ...
@@ -26,6 +29,7 @@ class FusedNode(Node):
 def register_node_factory(key: str, factory: Callable[[Op], Node]) -> None: ...
 
 class Graph:
+    """graph class."""
     nodes: list[Node]
     col_providers: dict[str, list[Node]]
     input_requires: set[str]

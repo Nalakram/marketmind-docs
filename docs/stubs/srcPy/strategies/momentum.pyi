@@ -1,11 +1,12 @@
 import pandas as pd
 from .pipeline_strategy import FeaturePlan, PipelineStrategy
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from typing import Any
 
 __all__ = ['MomentumStrategy']
 
 class MomentumStrategy(PipelineStrategy):
+    """Strategy for momentum behavior."""
     short: Incomplete
     long: Incomplete
     rsi_window: Incomplete

@@ -1,12 +1,16 @@
 import abc
 import polars as pl
-from _typeshed import Incomplete
-from srcPy.pipeline.core.pipeline_core_base import CleaningStep
+from typing import Any as Incomplete
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.pipeline.core.pipeline_core_base import CleaningStep as CleaningStep
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
+from srcPy.utils.exceptions import DataValidationError as DataValidationError
+from srcPy.utils.validators import validate_dataframe as validate_dataframe
 
 logger: Incomplete
 
 class BaseTechnicalIndicatorStep(CleaningStep, metaclass=abc.ABCMeta):
+    """base technical indicator step class."""
     mlflow_logger: Incomplete
     enabled: Incomplete
     window: Incomplete
@@ -17,9 +21,11 @@ class BaseTechnicalIndicatorStep(CleaningStep, metaclass=abc.ABCMeta):
     def __del__(self) -> None: ...
 
 class RSINormalizerStep(BaseTechnicalIndicatorStep):
+    """rsi normalizer step class."""
     def __init__(self, mlflow_logger: AsyncMLflowLogger, enabled: bool, window: int, fillna_method: str = 'ffill') -> None: ...
 
 class MACDNormalizerStep(BaseTechnicalIndicatorStep):
+    """macd normalizer step class."""
     fast: Incomplete
     slow: Incomplete
     signal: Incomplete
@@ -27,12 +33,15 @@ class MACDNormalizerStep(BaseTechnicalIndicatorStep):
     def apply(self, df: pl.DataFrame) -> pl.DataFrame: ...
 
 class ATRNormalizerStep(BaseTechnicalIndicatorStep):
+    """atr normalizer step class."""
     def __init__(self, mlflow_logger: AsyncMLflowLogger, enabled: bool, window: int, fillna_method: str = 'ffill') -> None: ...
 
 class VWAPNormalizerStep(BaseTechnicalIndicatorStep):
+    """vwap normalizer step class."""
     def __init__(self, mlflow_logger: AsyncMLflowLogger, enabled: bool, window: int, fillna_method: str = 'ffill') -> None: ...
 
 class IncrementalRSI:
+    """incremental rsi class."""
     window: Incomplete
     gains: Incomplete
     losses: Incomplete
@@ -41,6 +50,7 @@ class IncrementalRSI:
     def update(self, price: float) -> float: ...
 
 class IncrementalRSIStep(CleaningStep):
+    """incremental rsi step class."""
     mlflow_logger: Incomplete
     rsi: Incomplete
     def __init__(self, mlflow_logger: AsyncMLflowLogger, window: int) -> None: ...
@@ -48,6 +58,7 @@ class IncrementalRSIStep(CleaningStep):
     def __del__(self) -> None: ...
 
 class IncrementalMACD:
+    """incremental macd class."""
     fast: Incomplete
     slow: Incomplete
     signal: Incomplete
@@ -59,6 +70,7 @@ class IncrementalMACD:
     def update(self, price: float) -> tuple[float, float]: ...
 
 class IncrementalMACDStep(CleaningStep):
+    """incremental macd step class."""
     mlflow_logger: Incomplete
     macd: Incomplete
     def __init__(self, mlflow_logger: AsyncMLflowLogger, fast: int = 12, slow: int = 26, signal: int = 9) -> None: ...

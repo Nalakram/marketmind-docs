@@ -1,10 +1,15 @@
 from dataclasses import dataclass
-from srcPy.preprocessor.graph.graph import Graph
+from srcPy.preprocessor.graph.graph import Graph as Graph
 from srcPy.preprocessor.graph.ops import Op as Op
+from srcPy.preprocessor.utils.errors import UnsupportedAST as UnsupportedAST
+from srcPy.preprocessor.utils.expr_builders import ExprFactory as ExprFactory
+from srcPy.preprocessor.utils.transforms import TransformFactory as TransformFactory
+from srcPy.utils.exceptions import UnsupportedPlan as UnsupportedPlan
 from typing import Any
 
 @dataclass(frozen=True)
 class OpSpec:
+    """op spec class."""
     name: str
     params: dict[str, Any]
 

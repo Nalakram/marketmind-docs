@@ -1,4 +1,4 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 
 logger: Incomplete
 

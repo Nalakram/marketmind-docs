@@ -6,6 +6,7 @@ __all__ = ['Bar', 'Tick', 'MarketDataFrameSchema']
 
 @dataclass(frozen=True)
 class Bar:
+    """bar class."""
     timestamp: pl.Datetime
     open: float
     high: float
@@ -16,6 +17,7 @@ class Bar:
 
 @dataclass(frozen=True)
 class Tick:
+    """tick class."""
     timestamp: pl.Datetime
     price: float
     size: float
@@ -24,6 +26,7 @@ class Tick:
 
 @dataclass
 class MarketDataFrameSchema:
+    """market data frame schema class."""
     required_columns: dict[str, pl.DataType] = field(default_factory=dict)
     optional_columns: dict[str, pl.DataType] = field(default_factory=dict)
     strict: bool = ...

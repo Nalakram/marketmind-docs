@@ -1,13 +1,18 @@
 import torch
 import torch.nn as nn
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from dataclasses import dataclass
+from srcPy.ops.mm_logkit import get_logger as get_logger
+from srcPy.utils.exceptions import DataValidationError as DataValidationError, ModelInferenceError as ModelInferenceError, ModelTrainingError as ModelTrainingError
+from srcPy.utils.torch_utils import seed_everything as seed_everything
+from srcPy.utils.validators import validate_tensor as validate_tensor
 from torch.utils.data import Sampler
 
 log: Incomplete
 
 @dataclass(kw_only=True)
 class LSTMConfig:
+    """Configuration for lstm."""
     input_dim: int
     units: int = ...
     num_layers: int = ...
@@ -23,6 +28,7 @@ class LSTMConfig:
     def to_dict(self): ...
 
 class BucketBatchSampler(Sampler[list[int]]):
+    """bucket batch sampler class."""
     batch_size: Incomplete
     buckets: list[list[int]]
     def __init__(self, dataset: list[tuple[torch.Tensor, torch.Tensor]], batch_size: int, boundaries: list[int]) -> None: ...
@@ -32,12 +38,14 @@ class BucketBatchSampler(Sampler[list[int]]):
 def collate_fn(batch): ...
 
 class SharedDropout(nn.Module):
+    """shared dropout class."""
     p: Incomplete
     def __init__(self, p: float) -> None: ...
     def train(self, mode: bool = True): ...
     def forward(self, x: torch.Tensor) -> torch.Tensor: ...
 
 class NormLSTMCell(nn.Module):
+    """norm lstm cell class."""
     W: Incomplete
     U: Incomplete
     b: Incomplete
@@ -49,12 +57,14 @@ class NormLSTMCell(nn.Module):
     def forward(self, x: torch.Tensor, state: tuple[torch.Tensor, torch.Tensor]) -> tuple[torch.Tensor, tuple[torch.Tensor, torch.Tensor]]: ...
 
 class NormLSTM(nn.Module):
+    """norm lstm class."""
     cell: Incomplete
     return_seq: Incomplete
     def __init__(self, inp: int, hid: int, zoneout: float, *, return_seq: bool) -> None: ...
     def forward(self, x: torch.Tensor, lengths: torch.Tensor | None = None): ...
 
 class BidirectionalNormLSTM(nn.Module):
+    """bidirectional norm lstm class."""
     fwd: Incomplete
     bwd: Incomplete
     return_seq: Incomplete
@@ -62,6 +72,7 @@ class BidirectionalNormLSTM(nn.Module):
     def forward(self, x: torch.Tensor, lengths: torch.Tensor | None = None): ...
 
 class LSTMBlock(nn.Module):
+    """lstm block class."""
     cfg: Incomplete
     layers: Incomplete
     dropouts: Incomplete
@@ -75,6 +86,7 @@ class LSTMBlock(nn.Module):
     def from_config(cls, config): ...
 
 class Model(nn.Module):
+    """model class."""
     cfg: Incomplete
     backbone: Incomplete
     head: Incomplete

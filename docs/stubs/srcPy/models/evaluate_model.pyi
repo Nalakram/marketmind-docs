@@ -1,7 +1,8 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from srcPy.data.data_loader import build_loader as build_loader
 
 class DataLoader:
+    """Loads data data from storage."""
     @staticmethod
     def fetch_alpha(symbol, **kwargs): ...
 
@@ -15,6 +16,7 @@ class MACDStrategy: ...
 class BollingerStrategy: ...
 
 class Backtester:
+    """backtester class."""
     def __init__(self, *_a, **_k) -> None: ...
     def run(self, *_a, **_k): ...
 

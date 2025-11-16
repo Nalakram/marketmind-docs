@@ -1,4 +1,4 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
@@ -7,12 +7,14 @@ __all__ = ['Backend', 'ModelRegistry', 'Plan', 'PlanSpec', 'Preprocessor', 'Prep
 Backend: Incomplete
 
 class Preprocessor:
+    """preprocessor class."""
     backend: Incomplete
     def __init__(self, backend: str = 'polars') -> None: ...
     def materialize(self, df, spec) -> tuple: ...
 
 @dataclass
 class PlanSpec:
+    """plan spec class."""
     ops: list[dict[str, Any]] = field(default_factory=list)
     target: dict[str, Any] | None = ...
     sequence: dict[str, Any] | None = ...
@@ -22,6 +24,7 @@ class PlanSpec:
 def merge_specs(*specs: PlanSpec) -> PlanSpec: ...
 
 class ModelRegistry:
+    """model registry class."""
     @classmethod
     def register(cls, name: str, obj: Any): ...
     @classmethod
@@ -31,6 +34,7 @@ def resolve_models_in_ops(ops: list[dict[str, Any]]) -> list[dict[str, Any]]: ..
 
 @dataclass(frozen=True)
 class Plan:
+    """plan class."""
     ops: list[str]
     params: dict[str, list[dict[str, Any]]]
     group_by: list[str]
@@ -41,6 +45,7 @@ def run(df: Any, plan: Plan | dict[str, Any], *, backend: Backend = 'auto', opti
 def stream(plan: Plan, *, backend: Backend = 'auto'): ...
 
 class PreprocessorBuilder:
+    """Builder for constructing preprocessor objects."""
     def __init__(self, backend: Backend = 'auto') -> None: ...
     def add_op(self, op_symbol: str, **params) -> PreprocessorBuilder: ...
     def set_group_by(self, cols: list[str]) -> PreprocessorBuilder: ...

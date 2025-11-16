@@ -1,10 +1,11 @@
 import abc
 import polars as pl
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from typing import Any, AsyncIterator
 
 class DataSource(ABC, metaclass=abc.ABCMeta):
+    """data source class."""
     config: Incomplete
     def __init__(self, config: dict[str, Any]) -> None: ...
     @abstractmethod
@@ -16,6 +17,7 @@ class DataSource(ABC, metaclass=abc.ABCMeta):
     async def close(self) -> None: ...
 
 class APIDataSource(DataSource, metaclass=abc.ABCMeta):
+    """api data source class."""
     session: Incomplete
     def __init__(self, config: dict[str, Any]) -> None: ...
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None: ...

@@ -1,11 +1,13 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime
+from srcPy.utils.optional_imports import pd as pd
 
 @dataclass
 class _Bar:
+    """bar class."""
     date: datetime
     open: float
     high: float
