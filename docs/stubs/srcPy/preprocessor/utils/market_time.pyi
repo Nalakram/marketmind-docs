@@ -1,5 +1,5 @@
 import abc
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from abc import ABC, abstractmethod
 from datetime import datetime
 from srcPy.ops.mm_logkit import get_logger as get_logger
@@ -8,7 +8,6 @@ from typing import Callable
 logger: Incomplete
 
 class MarketCalendar(ABC, metaclass=abc.ABCMeta):
-    """market calendar class."""
     @abstractmethod
     def is_open_at(self, ts: datetime) -> bool: ...
     @abstractmethod
@@ -17,7 +16,6 @@ class MarketCalendar(ABC, metaclass=abc.ABCMeta):
     def next_close(self, ts: datetime) -> datetime: ...
 
 class FallbackCalendar(MarketCalendar):
-    """fallback calendar class."""
     def is_open_at(self, ts: datetime) -> bool: ...
     def next_open(self, ts: datetime) -> datetime: ...
     def next_close(self, ts: datetime) -> datetime: ...
@@ -25,7 +23,6 @@ class FallbackCalendar(MarketCalendar):
 def profile_calendar(func: Callable) -> Callable: ...
 
 class MarketCalendarFactory:
-    """Factory for creating market calendar instances."""
     cal: Incomplete
     @staticmethod
     def get_calendar(exchange: str = 'NYSE') -> MarketCalendar: ...

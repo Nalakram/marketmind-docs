@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from contextlib import contextmanager
 from ib_insync import IB as IBKR
 from pydantic import BaseModel
@@ -12,7 +12,6 @@ class IBKR: ...
 log: Incomplete
 
 class IBKRConfig(BaseModel):
-    """Configuration for ibkr."""
     host: str
     port: int
     client_id: int

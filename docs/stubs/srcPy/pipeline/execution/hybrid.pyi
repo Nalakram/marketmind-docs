@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_base import StepRegistry as StepRegistry
 from srcPy.pipeline.core.pipeline_core_context import PipelineContext as PipelineContext
@@ -14,7 +14,6 @@ from typing import AsyncGenerator
 logger: Incomplete
 
 class HybridCleanerPipeline(BatchPipeline):
-    """hybrid cleaner pipeline class."""
     config: dict
     streaming: Incomplete
     mlflow_logger: Incomplete

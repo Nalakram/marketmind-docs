@@ -1,5 +1,5 @@
 import time
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass, field
 from enum import Enum
 from pandas.util import hash_pandas_object as hash_pandas_object
@@ -10,7 +10,6 @@ from typing import Any, Callable, TypeVar
 T = TypeVar('T')
 
 class HashAlgorithm(Enum):
-    """hash algorithm class."""
     XXHASH = 'xxhash'
     BLAKE3 = 'blake3'
     SIPHASH = 'siphash'
@@ -22,14 +21,12 @@ def hash_dataframe_deterministic(df, cols=None, algo: HashAlgorithm = ...) -> st
 def versioned_key(*parts: str, version: str = 'v1') -> str: ...
 
 class CompressionLevel(Enum):
-    """compression level class."""
     NONE = 0
     FAST = 1
     HIGH = 2
 
 @dataclass
 class CompressionStrategy:
-    """Strategy for compression behavior."""
     small_threshold: int = ...
     fast_threshold: int = ...
     def compress(self, data: bytes, level: CompressionLevel = None) -> tuple[bytes, CompressionLevel]: ...
@@ -37,7 +34,6 @@ class CompressionStrategy:
 
 @dataclass
 class CacheEntry:
-    """cache entry class."""
     value: Any
     expiry: float
     version: int = ...
@@ -47,7 +43,6 @@ class CacheEntry:
 
 @dataclass
 class CacheMetrics:
-    """cache metrics class."""
     hits: int = ...
     misses: int = ...
     evictions: int = ...
@@ -59,7 +54,6 @@ class CacheMetrics:
     def avg_latency_us(self) -> float: ...
 
 class AdaptiveTTLManager:
-    """Manages adaptive ttl resources and operations."""
     base_ttl: Incomplete
     volatility_multiplier: float
     def __init__(self, base_ttl: float = 300) -> None: ...
@@ -67,7 +61,6 @@ class AdaptiveTTLManager:
     def update_volatility(self, volatility: float): ...
 
 class EnhancedCacheManager:
-    """Manages enhanced cache resources and operations."""
     max_size: Incomplete
     base_ttl: Incomplete
     eviction_policy: Incomplete
@@ -84,7 +77,6 @@ class EnhancedCacheManager:
     async def set_async(self, key: Any, value: Any, **kwargs): ...
 
 class DistributedCacheCoordinator:
-    """distributed cache coordinator class."""
     CAS_SCRIPT: str
     redis: Incomplete
     def __init__(self, redis_client=None) -> None: ...
@@ -94,7 +86,6 @@ class DistributedCacheCoordinator:
 def enhanced_cache(max_size: int = 128, ttl: float | None = None, key_fn: Callable | None = None, version: str = 'v1', enable_metrics: bool = True): ...
 
 class PersistentCache:
-    """persistent cache class."""
     cache_dir: Incomplete
     compression: Incomplete
     def __init__(self, cache_dir: str = '.cache', enable_compression: bool = True) -> None: ...

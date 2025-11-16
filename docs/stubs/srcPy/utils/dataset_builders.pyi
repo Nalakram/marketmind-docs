@@ -1,13 +1,12 @@
 import pandas as pd
 import torch
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from torch.utils.data import DataLoader, Dataset
 from typing import Callable
 
 TargetType: Incomplete
 
 class TimeSeriesDataset(Dataset):
-    """time series dataset class."""
     data: Incomplete
     target: Incomplete
     seq_len: Incomplete

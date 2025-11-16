@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import Any
 
 __all__ = ['pd', 'pl', 'dd', 'IsolationForest', 'ParameterGrid', 'cudf', 'cp', 'cuml', 'RobustScaler', 'mlflow', 'Counter', 'Gauge', 'Histogram', 'Summary', 'InfluxDBClient', 'watchtower', 'google_cloud_logging', 'pydantic', 'pydantic_dataclass', 'ConfigDict', 'aiohttp', 'HAS_PANDAS', 'HAS_POLARS', 'HAS_DASK', 'HAS_SKLEARN', 'HAS_CUDF', 'HAS_CUPY', 'HAS_CUML', 'HAS_PROMETHEUS', 'HAS_MLFLOW', 'HAS_INFLUX', 'HAS_CLOUDWATCH', 'HAS_GCLOUD_LOGGING', 'HAS_PYDANTIC', 'HAS_AIOHTTP', 'ensure_pandas', 'ensure_polars', 'ensure_dask', 'ensure_sklearn_for_streaming', 'ensure_parameter_grid', 'ensure_cudf_stack', 'ensure_prometheus_counter', 'ensure_mlflow', 'ensure_influxdb', 'ensure_cloudwatch', 'ensure_gcloud_logging', 'ensure_pydantic', 'ensure_aiohttp', 'np', 'HAS_NUMPY', 'ensure_numpy', 'ensure_sklearn']
@@ -20,7 +20,6 @@ Histogram: Incomplete
 Summary: Incomplete
 
 class _NoopMetric:
-    """noop metric class."""
     def __init__(self, *a, **k) -> None: ...
     def labels(self, **kw): ...
     def inc(self, *a, **k): ...

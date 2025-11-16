@@ -1,18 +1,16 @@
 from .cuda_runtime import capabilities as capabilities
 from .errors import UnsupportedAST as UnsupportedAST
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import Any, Callable
 
 def register_expr(name: str, builder: Callable[..., Any]) -> None: ...
 
 class Expr:
-    """expr class."""
     func: Incomplete
     def __init__(self, func: Callable[[Any], Any]) -> None: ...
     def __add__(self, other: Expr) -> Expr: ...
 
 class ExprFactory:
-    """Factory for creating expr instances."""
     registry: dict[str, Callable[..., Any]]
     @classmethod
     def register(cls, name: str, builder: Callable[..., Any]) -> None: ...

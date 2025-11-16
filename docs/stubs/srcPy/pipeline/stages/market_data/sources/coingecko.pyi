@@ -2,11 +2,10 @@ import polars as pl
 from . import register_source as register_source
 from ..exceptions import DataFetchError as DataFetchError
 from .base import APIDataSource as APIDataSource
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import AsyncIterator
 
 class CoinGeckoSource(APIDataSource):
-    """coin gecko source class."""
     base_url: str
     vs_currency: Incomplete
     coin_map: Incomplete

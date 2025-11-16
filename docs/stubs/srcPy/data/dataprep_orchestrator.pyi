@@ -1,5 +1,5 @@
 import polars as pl
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass
 from pathlib import Path
 from srcPy.data.market_data import MarketDataManager as MarketDataManager
@@ -25,7 +25,6 @@ psutil: Incomplete
 BackendLiteral: Incomplete
 
 class _OrchestrationCache:
-    """orchestration cache class."""
     def __init__(self) -> None: ...
     def exists(self, key: str) -> bool: ...
     def save_npz(self, key: str, data: Any) -> None: ...
@@ -39,7 +38,6 @@ def expand_grid(base: Mapping[str, Iterable[Any]], constraints: list[Callable[[d
 def stage(name: str | None = None, timeout_s: int | None = None): ...
 
 class DataFrameAdapter:
-    """Adapter for data frame interface."""
     df: Incomplete
     is_polars: Incomplete
     is_pandas: Incomplete
@@ -51,13 +49,11 @@ class DataFrameAdapter:
     def hash(self): ...
 
 class ConfigProxy:
-    """config proxy class."""
     def __init__(self, data) -> None: ...
     def __getattr__(self, key): ...
     def get(self, path, default=None): ...
 
 class BackendManager:
-    """Manages backend resources and operations."""
     HAS_POLARS: Incomplete
     HAS_PANDAS: Incomplete
     HAS_DASK: Incomplete
@@ -65,7 +61,6 @@ class BackendManager:
     def require_polars(cls) -> None: ...
 
 class Evolver:
-    """evolver class."""
     cache: Incomplete
     version_tag: Incomplete
     code_id: Incomplete
@@ -83,7 +78,6 @@ class DataValidationError(DataPrepError): ...
 
 @dataclass(frozen=True)
 class OrchestratorConfig:
-    """Configuration for orchestrator."""
     per_symbol_parallelism: int | str = ...
     gpu_slots: int | str = ...
     lazy: bool = ...
@@ -95,7 +89,6 @@ class OrchestratorConfig:
     metric_name: str = ...
 
 class DataPrepOrchestrator:
-    """data prep orchestrator class."""
     run_id: str | None
     cfg: dict[str, Any]
     run_cfg: dict[str, Any]
@@ -114,5 +107,4 @@ def run_dataprep(run_cfg: Mapping[str, Any] | Any, backtest_metric: Callable[[An
 def run_dataprep_from_path(run_cfg_path: str | Path, backtest_metric: Callable[[Any, Any, Mapping[str, Any], Mapping[str, Any]], float]) -> dict[str, Any]: ...
 
 class Cache:
-    """cache class."""
     def save_df(self, key: str, df) -> None: ...

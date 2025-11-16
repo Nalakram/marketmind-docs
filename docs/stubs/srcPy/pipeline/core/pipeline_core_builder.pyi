@@ -1,13 +1,12 @@
 from .pipeline_core_base import PipelineGraphError as PipelineGraphError, PipelineStep as PipelineStep
 from .pipeline_core_context import PipelineContext as PipelineContext
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import Any
 
 def choose_combo(cfg, ctx, name: str = None): ...
 def topo_order(steps: list[str], order_cfg: dict[str, dict[str, list[str]]]) -> list[str]: ...
 
 class PipelineBuilder:
-    """Builder for constructing pipeline objects."""
     stage: Incomplete
     config: Incomplete
     steps: list[Any]
@@ -20,7 +19,6 @@ class PipelineBuilder:
     def validate_contracts(self) -> PipelineBuilder: ...
 
 class Pipeline:
-    """pipeline class."""
     steps: Incomplete
     config: Incomplete
     def __init__(self, steps: list[PipelineStep], config: dict[str, Any]) -> None: ...

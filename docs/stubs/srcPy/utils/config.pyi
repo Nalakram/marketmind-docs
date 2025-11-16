@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from pathlib import Path
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.utils.dependency_manager import ensure_influxdb_client as ensure_influxdb_client, ensure_polars as ensure_polars, ensure_pydantic as ensure_pydantic
@@ -18,12 +18,10 @@ CONFIG_PATH: Path | None
 SCHEMA_PATH: Path | None
 
 class Section(BaseModel):
-    """section class."""
     model_config: Incomplete
     def validate_section(self) -> None: ...
 
 class _CSVSourceModel(Section):
-    """csv source model class."""
     type: Literal['csv']
     path: str
     chunksize: int
@@ -32,7 +30,6 @@ class _CSVSourceModel(Section):
     data_format: str
 
 class _InfluxSourceModel(Section):
-    """influx source model class."""
     type: Literal['influxdb']
     host: str
     port: int
@@ -42,28 +39,23 @@ class _InfluxSourceModel(Section):
     query: str
 
 class _PolarsMixin:
-    """polars mixin class."""
     def to_polars(self, **read_kwargs) -> Any: ...
 
 class CSVSource(_PolarsMixin, _CSVSourceModel):
-    """csv source class."""
     def to_polars(self, **read_kwargs) -> Any: ...
 
 class InfluxSource(_PolarsMixin, _InfluxSourceModel):
-    """influx source class."""
     def to_polars(self, **read_kwargs) -> Any: ...
 
 DataSource: Incomplete
 
 class RSI(Section):
-    """rsi class."""
     enabled: bool
     window: int
     fillna_method: str
     def validate_section(self) -> None: ...
 
 class MACD(Section):
-    """macd class."""
     enabled: bool
     fast_period: int
     slow_period: int
@@ -72,26 +64,22 @@ class MACD(Section):
     def validate_section(self) -> None: ...
 
 class ATR(Section):
-    """atr class."""
     enabled: bool
     window: int
     fillna_method: str
 
 class Bollinger(Section):
-    """bollinger class."""
     enabled: bool
     window: int
     std_dev: float
     fillna_method: str
 
 class VWAP(Section):
-    """vwap class."""
     enabled: bool
     reset_period: str
     fillna_method: str
 
 class TechnicalIndicators(Section):
-    """technical indicators class."""
     rsi: RSI | None
     macd: MACD | None
     atr: ATR | None
@@ -101,19 +89,16 @@ class TechnicalIndicators(Section):
     def validate_section(self) -> None: ...
 
 class Clip(Section):
-    """clip class."""
     min: float
     max: float
 
 class Normalization(Section):
-    """normalization class."""
     method: str
     rolling_window: int
     clip_extremes: Clip
     def validate_section(self) -> None: ...
 
 class Calendar(Section):
-    """calendar class."""
     enabled: bool
     day_of_week: bool
     holidays: list[str]
@@ -121,23 +106,19 @@ class Calendar(Section):
     def is_holiday(self, dt) -> bool: ...
 
 class Sentiment(Section):
-    """sentiment class."""
     enabled: bool
     source: str
     sentiment_model: str
 
 class ESGNormalized(Section):
-    """esg normalized class."""
     enabled: bool
     method: str
 
 class CustomFeatures(Section):
-    """custom features class."""
     sentiment: Sentiment | None
     esg_normalized: ESGNormalized | None
 
 class Preprocessing(Section):
-    """preprocessing class."""
     technical_indicators: TechnicalIndicators
     normalization: Normalization
     custom_features: CustomFeatures
@@ -148,19 +129,16 @@ class Preprocessing(Section):
     def expand_macros(self) -> None: ...
 
 class CleaningCombo(Section):
-    """cleaning combo class."""
     name: str
     when: dict[str, Any] | None
 
 class Cleaning(Section):
-    """cleaning class."""
     combos: list[CleaningCombo]
     missing_values: dict[str, Any]
     outliers: dict[str, Any]
     denoising: dict[str, Any]
 
 class Streaming(Section):
-    """streaming class."""
     batch_size: int
     update_interval_seconds: int
     buffer_size: int
@@ -172,32 +150,27 @@ class Streaming(Section):
     sync_interval_seconds: int
 
 class RetryPolicy(Section):
-    """retry policy class."""
     max_attempts: int
     initial_backoff_seconds: int
     max_backoff_seconds: int
     retry_strategy: str
 
 class ValidationThresholds(Section):
-    """validation thresholds class."""
     max_missing_ratio: float
     max_outlier_ratio: float
 
 class Fallback(Section):
-    """fallback class."""
     twitter: str
     esg: str
     data_source: str
 
 class Alerting(Section):
-    """alerting class."""
     enabled: bool
     channel: str
     critical_failures: list[str]
     alert_severity: list[str]
 
 class ErrorHandling(Section):
-    """error handling class."""
     retry_policy: RetryPolicy
     validation_thresholds: ValidationThresholds
     fallback: Fallback
@@ -205,13 +178,11 @@ class ErrorHandling(Section):
     fallback_timeout_seconds: int
 
 class ModelArchitecture(Section):
-    """model architecture class."""
     num_layers: int
     hidden_size: int
     dropout: float
 
 class Model(Section):
-    """model class."""
     model_type: str
     architecture: ModelArchitecture
     sequence_length: int
@@ -223,13 +194,11 @@ class Model(Section):
     onnx_export: dict[str, Any]
 
 class FileOutput(Section):
-    """file output class."""
     enabled: bool
     path: str
     rotation: str
 
 class InfluxDBOutput(Section):
-    """influx db output class."""
     enabled: bool
     host: str
     port: int
@@ -238,21 +207,17 @@ class InfluxDBOutput(Section):
     bucket: str
 
 class Outputs(Section):
-    """outputs class."""
     console: bool
     file: FileOutput
     influxdb: InfluxDBOutput
 
 class MetricAggregation(Section):
-    """metric aggregation class."""
     aggregation_window_seconds: int
 
 class DashboardConfig(Section):
-    """Configuration for dashboard."""
     grafana_url: str
 
 class Logging(Section):
-    """logging class."""
     level: str
     outputs: Outputs
     metrics_report_interval_seconds: int
@@ -263,13 +228,11 @@ class Logging(Section):
     dashboard_config: DashboardConfig
 
 class Encryption(Section):
-    """encryption class."""
     at_rest: bool
     in_transit: bool
     encryption_algorithm: str
 
 class Credentials(Section):
-    """credentials class."""
     twitter_api_key: str | None
     esg_api_key: str | None
     fred_api_key: str | None
@@ -279,39 +242,32 @@ class Credentials(Section):
     def validate_secrets(self) -> Credentials: ...
 
 class DataAnonymization(Section):
-    """data anonymization class."""
     anonymize_pii: bool
 
 class Compliance(Section):
-    """compliance class."""
     audit_log: bool
     retention_days: int
     audit_frequency_days: int
     data_anonymization: DataAnonymization
 
 class Security(Section):
-    """security class."""
     encryption: Encryption
     key_management: str
     credentials: Credentials
     compliance: Compliance
 
 class RiskManagement(Section):
-    """risk management class."""
     stop_loss: float
     max_drawdown: float
 
 class DateRange(Section):
-    """date range class."""
     start: str
     end: str
 
 class PositionSizing(Section):
-    """position sizing class."""
     method: str
 
 class Backtesting(Section):
-    """backtesting class."""
     initial_capital: float
     transaction_cost_rate: float
     slippage_rate: float
@@ -324,7 +280,6 @@ class Backtesting(Section):
     backtest_frequency: str
 
 class DistributedProcessing(Section):
-    """distributed processing class."""
     framework: str
     num_workers: int
     memory_per_worker: str
@@ -332,7 +287,6 @@ class DistributedProcessing(Section):
     min_rows_for_distributed: int
 
 class InteractiveBrokers(Section):
-    """interactive brokers class."""
     host: str
     port: int
     client_id: int
@@ -346,24 +300,20 @@ class InteractiveBrokers(Section):
     format_date: int
 
 class Alpaca(Section):
-    """alpaca class."""
     api_key: str | None
     secret_key: str
     endpoint: str
 
 class RealTimeMarketData(Section):
-    """real time market data class."""
     interactive_brokers: InteractiveBrokers | None
     alpaca: Alpaca | None
 
 class RateLimit(Section):
-    """rate limit class."""
     per_minute: int | None
     max_calls_per_window: int | None
     window_seconds: int | None
 
 class ExternalAPISource(Section):
-    """external api source class."""
     base_url: str
     api_key: str | None
     authentication_type: str | None
@@ -376,7 +326,6 @@ class ExternalAPISource(Section):
     def validate_section(self) -> None: ...
 
 class Twitter(Section):
-    """twitter class."""
     base_url: str
     bearer_token: str
     authentication_type: str
@@ -390,7 +339,6 @@ class Twitter(Section):
     api_key: str | None
 
 class ESG(Section):
-    """esg class."""
     base_url: str
     api_key: str
     authentication_type: str
@@ -405,7 +353,6 @@ class Bloomberg(ExternalAPISource): ...
 class Weather(ExternalAPISource): ...
 
 class AlternativeData(Section):
-    """alternative data class."""
     twitter: Twitter | None
     alpaca: Alpaca | None
     esg: ESG | None
@@ -414,13 +361,11 @@ class AlternativeData(Section):
     weather: Weather | None
 
 class AnomalyDetection(Section):
-    """anomaly detection class."""
     enabled: bool
     method: str | None
     params: dict[str, Any] | None
 
 class PipelineConfig(BaseModel):
-    """Configuration for pipeline."""
     model_config: Incomplete
     version: str
     schema_uri: str

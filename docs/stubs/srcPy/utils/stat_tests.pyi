@@ -7,7 +7,6 @@ from typing import Any, Callable, Mapping, Sequence
 __all__ = ['StatTest', 'register_test', 'StatTestFactory', 'run_tests', 'granger_causality_test', 'johansen_cointegration_test', 'adf_test', 'kpss_test', 'ljung_box_test']
 
 class _MLFStub:
-    """mlf stub class."""
     @staticmethod
     def active_run() -> bool: ...
     @staticmethod
@@ -22,35 +21,28 @@ class StatisticalBackendError(StatisticalTestError): ...
 def register_test(name: str | None = None) -> Callable[[type['StatTest']], type['StatTest']]: ...
 
 class StatTest(ABC, metaclass=abc.ABCMeta):
-    """stat test class."""
     @abstractmethod
     def run(self, data: Any, **kwargs) -> dict[str, Any]: ...
 
 class StatTestFactory:
-    """Factory for creating stat test instances."""
     @classmethod
     def get_test(cls, test_name: str) -> StatTest: ...
     @classmethod
     def run_test(cls, test_name: str, data: Any, **kwargs) -> dict[str, Any]: ...
 
 class GrangercausalityTest(StatTest):
-    """grangercausality test class."""
     def run(self, data: pd.DataFrame | Mapping[str, Any], *, maxlag: int | str = 5, significance_level: float = 0.05, verbose: bool = False) -> dict[str, Any]: ...
 
 class JohansencointegrationTest(StatTest):
-    """johansencointegration test class."""
     def run(self, data: Any, *, det_order: int = 0, k_ar_diff: int | str = 1, significance_level: float = 0.05) -> dict[str, Any]: ...
 
 class AdfTest(StatTest):
-    """adf test class."""
     def run(self, data: Any, *, significance_level: float = 0.05, regression: str = 'c', autolag: str | None = 'AIC', maxlag: int | None = None) -> dict[str, Any]: ...
 
 class KpssTest(StatTest):
-    """kpss test class."""
     def run(self, data: Any, *, significance_level: float = 0.05, nlags: int | str = 'auto', regression: str = 'c') -> dict[str, Any]: ...
 
 class LjungboxTest(StatTest):
-    """ljungbox test class."""
     def run(self, data: Any, *, lags: int | Sequence[int] | str | None = None, significance_level: float = 0.05, model_df: int = 0) -> dict[str, Any]: ...
 
 def run_tests(tests: list[str | Mapping[str, Any]], data: Any, parallel: bool = False, max_workers: int | None = None) -> dict[str, dict[str, Any]]: ...

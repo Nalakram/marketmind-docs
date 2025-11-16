@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from collections import OrderedDict as OrderedDict
 from functools import singledispatch
 from srcPy.ops.mm_logkit import get_logger as get_logger
@@ -10,7 +10,6 @@ from srcPy.utils.validators import lazy_validate_ohlcv as lazy_validate_ohlcv
 logger: Incomplete
 
 class AbstractAPIDataManager:
-    """Manages abstract api data resources and operations."""
     registry: dict[str, type[APIDataSource]]
     def __init_subclass__(cls, **kwargs) -> None: ...
     @classmethod

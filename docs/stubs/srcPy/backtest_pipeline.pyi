@@ -1,6 +1,6 @@
 import pandas as pd
 import types
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass
 from srcPy.data.data_cleaning import DataCleaner as DataCleaner
 from srcPy.data.data_loader import build_loader as build_loader
@@ -19,7 +19,6 @@ tracing: Incomplete
 logger: Incomplete
 
 class ObsTimer:
-    """obs timer class."""
     name: Incomplete
     labels: Incomplete
     t0: float
@@ -33,7 +32,6 @@ CACHE: Incomplete
 
 @dataclass(frozen=True)
 class RunSpec:
-    """run spec class."""
     strategy_key: str
     params: Mapping[str, Any]
     regime: str
@@ -46,7 +44,6 @@ class RunSpec:
 
 @dataclass(frozen=True)
 class RunResult:
-    """run result class."""
     ok: bool
     regime: str
     seed: int
@@ -55,7 +52,6 @@ class RunResult:
 DataSplit: TypeAlias
 
 class SupportsClean(Protocol):
-    """supports clean class."""
     def clean(self, df: pd.DataFrame) -> pd.DataFrame: ...
 
 def load_data(start_date: str, end_date: str, cleaner: SupportsClean | None = None) -> DataSplit: ...

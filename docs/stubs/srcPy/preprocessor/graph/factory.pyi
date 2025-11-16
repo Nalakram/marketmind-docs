@@ -9,7 +9,6 @@ from typing import Any
 
 @dataclass(frozen=True)
 class OpSpec:
-    """op spec class."""
     name: str
     params: dict[str, Any]
 

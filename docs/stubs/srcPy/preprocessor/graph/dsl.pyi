@@ -4,13 +4,11 @@ from .ops import Op as Op, OpKind as OpKind
 from typing import Any, Callable
 
 class BackendAwareOp(Op):
-    """backend aware op class."""
     backend_hint: str | None
     def __init__(self, **params: Any) -> None: ...
     def to_ir(self) -> dict[str, Any]: ...
 
 class OpFactory:
-    """Factory for creating op instances."""
     @staticmethod
     def create(op_symbol: str, **params: Any) -> Op: ...
 

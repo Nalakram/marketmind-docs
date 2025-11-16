@@ -6,7 +6,6 @@ from srcPy.utils.exceptions import UnsupportedPlan as UnsupportedPlan
 from typing import Any
 
 class Planner(BasePlanner):
-    """planner class."""
     history: dict[str, dict[str, float]]
     def __init__(self) -> None: ...
     def plan(self, graph: Graph, group_by: list[str]) -> list[dict[str, Any]]: ...

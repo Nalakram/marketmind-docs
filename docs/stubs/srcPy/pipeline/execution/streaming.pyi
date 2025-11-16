@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass
 from srcPy.utils.optional_imports import pl
 from typing import Any, AsyncIterator, Final, Sequence
@@ -11,7 +11,6 @@ class _Sentinel: ...
 _SENTINEL: Final[Incomplete]
 
 class StreamingIsolationForest:
-    """streaming isolation forest class."""
     contamination: Incomplete
     refit_every: Incomplete
     window_size: Incomplete
@@ -32,21 +31,18 @@ class StreamingIsolationForest:
 
 @dataclass
 class _Config:
-    """Configuration for ."""
     engine: str = ...
     queue_size: int = ...
     batch_size: int = ...
     batch_timeout_s: float = ...
 
 class StreamingPipeline:
-    """streaming pipeline class."""
     steps: Incomplete
     config: Incomplete
     def __init__(self, steps: Sequence[Any], config: dict[str, Any] | None = None) -> None: ...
     async def run(self, data_stream: AsyncIterator[Any], context: Any) -> AsyncIterator[Any]: ...
 
 class StreamingCleanerPipeline(StreamingPipeline):
-    """streaming cleaner pipeline class."""
     enable_anomaly: Incomplete
     anomaly_detector: StreamingIsolationForest | None
     incremental_steps: list[Any]

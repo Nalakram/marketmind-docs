@@ -1,5 +1,5 @@
 import abc
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from abc import ABC, abstractmethod
 from enum import Enum
 from functools import cached_property
@@ -8,7 +8,6 @@ from typing import Any
 __all__ = ['OpKind', 'Op', 'ElementwiseOp', 'RollingOp', 'SequenceOp', 'ScalingOp', 'ExternalOp']
 
 class OpKind(str, Enum):
-    """op kind class."""
     elementwise = 'elementwise'
     rolling = 'rolling'
     sequence = 'sequence'
@@ -16,7 +15,6 @@ class OpKind(str, Enum):
     external = 'external'
 
 class Op(ABC, metaclass=abc.ABCMeta):
-    """op class."""
     NAME: str | None
     KIND: OpKind
     params: dict[str, Any]
@@ -36,27 +34,22 @@ class Op(ABC, metaclass=abc.ABCMeta):
     def to_ir(self) -> dict[str, Any]: ...
 
 class ElementwiseOp(Op):
-    """elementwise op class."""
     KIND: Incomplete
     def to_ir(self) -> dict[str, Any]: ...
 
 class RollingOp(Op):
-    """rolling op class."""
     KIND: Incomplete
     def to_ir(self) -> dict[str, Any]: ...
 
 class SequenceOp(Op):
-    """sequence op class."""
     KIND: Incomplete
     def to_ir(self) -> dict[str, Any]: ...
 
 class ScalingOp(Op):
-    """scaling op class."""
     KIND: Incomplete
     def is_fittable(self) -> bool: ...
     def to_ir(self) -> dict[str, Any]: ...
 
 class ExternalOp(Op):
-    """external op class."""
     KIND: Incomplete
     def to_ir(self) -> dict[str, Any]: ...

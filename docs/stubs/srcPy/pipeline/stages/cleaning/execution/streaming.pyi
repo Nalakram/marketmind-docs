@@ -1,5 +1,5 @@
 import polars as pl
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger, buffer_length as buffer_length, data_volume as data_volume, streaming_step_latency as streaming_step_latency
 from srcPy.pipeline.stages.cleaning.core.base import CleaningStep as CleaningStep
@@ -11,7 +11,6 @@ from typing import AsyncGenerator
 logger: Incomplete
 
 class StreamingCleanerPipeline:
-    """streaming cleaner pipeline class."""
     steps: Incomplete
     mlflow_logger: Incomplete
     buffer: Incomplete

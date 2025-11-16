@@ -1,6 +1,6 @@
 import abc
 import polars as pl
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from abc import abstractmethod
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
@@ -11,16 +11,13 @@ from srcPy.utils.validators import validate_dataframe as validate_dataframe, val
 logger: Incomplete
 
 class FSInterface(metaclass=abc.ABCMeta):
-    """fs interface class."""
     @abstractmethod
     def get_size(self, path: str) -> int: ...
 
 class LocalFS(FSInterface):
-    """local fs class."""
     def get_size(self, path: str) -> int: ...
 
 class IOValidationStep(CleaningStep):
-    """io validation step class."""
     mlflow_logger: Incomplete
     file_path: Incomplete
     format: Incomplete

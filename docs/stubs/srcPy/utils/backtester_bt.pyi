@@ -1,10 +1,9 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 
 logger: Incomplete
 
 class Backtester:
-    """backtester class."""
     df: Incomplete
     strategy_cls: Incomplete
     strat_kwargs: Incomplete

@@ -1,8 +1,7 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.domain.interfaces import Order as Order, OrderExecutor as OrderExecutor
 
 class IBKROrderExecutor(OrderExecutor):
-    """ibkr order executor class."""
     cfg: Incomplete
     def __init__(self, conn_cfg) -> None: ...
     def submit(self, order: Order) -> str: ...

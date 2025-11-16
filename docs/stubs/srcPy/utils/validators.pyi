@@ -1,6 +1,6 @@
 import abc
 import pandas as pd
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from abc import ABC, abstractmethod
 from functools import singledispatch
 from typing import Any, Callable, Protocol, Sequence
@@ -8,7 +8,6 @@ from typing import Any, Callable, Protocol, Sequence
 __all__ = ['validate_series', 'validate_dataframe', 'validate_ohlcv', 'validate_stream_chunk', 'validate_data_for_training', 'validate_symbol', 'validate_date', 'validate_tensor', 'Validator', 'compose_validators', 'all_of', 'any_of', 'register_validator', 'validate_file_data', 'lazy_validate_ohlcv']
 
 class _NS:
-    """ns class."""
     pd: Incomplete
     pl: Incomplete
     cudf: Incomplete
@@ -18,13 +17,11 @@ def validate_dataframe(df: Any, *, required_cols: Sequence[str] | None = None, a
 def lazy_validate_ohlcv(df) -> bool: ...
 
 class SeriesLike(Protocol):
-    """series like class."""
     def is_empty(self) -> bool: ...
     def null_count(self) -> int: ...
     def len(self) -> int: ...
 
 class DataFrameLike(Protocol):
-    """data frame like class."""
     def is_empty(self) -> bool: ...
     @property
     def columns(self) -> list[str]: ...
@@ -32,7 +29,6 @@ class DataFrameLike(Protocol):
     def schema(self) -> dict: ...
 
 class TensorLike(Protocol):
-    """tensor like class."""
     @property
     def ndim(self) -> int: ...
     def numel(self) -> int: ...
@@ -43,7 +39,6 @@ class TensorLike(Protocol):
     def any(self) -> bool: ...
 
 class Validator(ABC, metaclass=abc.ABCMeta):
-    """Validates  data and constraints."""
     @abstractmethod
     def validate(self, data: Any) -> None: ...
 
@@ -66,7 +61,6 @@ def validate_date(date: Any) -> None: ...
 def validate_tensor(tensor: Any, *, ndim: int | None = None, name: str = 'tensor') -> None: ...
 
 class CustomSeriesValidator(Validator):
-    """Validates custom series data and constraints."""
     min_length: Incomplete
     def __init__(self, min_length: int = 0) -> None: ...
     def validate(self, data: pd.Series) -> None: ...

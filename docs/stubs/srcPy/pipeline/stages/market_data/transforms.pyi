@@ -1,5 +1,5 @@
 import polars as pl
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from polars import LazyFrame as LazyFrame
 from pydantic import BaseModel
 from srcPy.ops.caching import ttl_cache as ttl_cache
@@ -10,22 +10,18 @@ from srcPy.utils.exceptions import DataValidationError as DataValidationError
 logger: Incomplete
 
 class ColumnRenameConfig(BaseModel):
-    """Configuration for column rename."""
     mapping: dict[str, str]
 
 class ColumnRenameStep(PipelineStep):
-    """column rename step class."""
     mapping: Incomplete
     def __init__(self, config: ColumnRenameConfig) -> None: ...
     def apply(self, lf: LazyFrame) -> LazyFrame: ...
 
 class TypeCastConfig(BaseModel):
-    """Configuration for type cast."""
     model_config: Incomplete
     dtypes: dict[str, pl.DataType]
 
 class TypeCastStep(PipelineStep):
-    """type cast step class."""
     dtypes: Incomplete
     def __init__(self, config: TypeCastConfig) -> None: ...
     def apply(self, lf: LazyFrame) -> LazyFrame: ...

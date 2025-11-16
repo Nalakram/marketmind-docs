@@ -1,5 +1,5 @@
 import abc
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.preprocessor.graph.expr import get_polars_lowering as get_polars_lowering
 from srcPy.preprocessor.utils.cuda_runtime import capabilities as capabilities
@@ -13,7 +13,6 @@ logger: Incomplete
 Engine: Incomplete
 
 class Executor(abc.ABC, metaclass=abc.ABCMeta):
-    """executor class."""
     backend: Incomplete
     cache: dict[str, Any]
     lru_cache: Incomplete
@@ -25,18 +24,15 @@ class Executor(abc.ABC, metaclass=abc.ABCMeta):
     def evolve(self, threshold: float = 1.0) -> str | None: ...
 
 class PolarsExecutor(Executor):
-    """polars executor class."""
     engine_pref: Incomplete
     def __init__(self, engine_pref: Engine = 'auto') -> None: ...
     def execute(self, plan: list[dict[str, Any]], data: Any, group_by: list[str]) -> Any: ...
 
 class CuDFExecutor(Executor):
-    """cu df executor class."""
     def __init__(self, pool_size: str = '4GB') -> None: ...
     def execute(self, plan: list[dict[str, Any]], data: Any, group_by: list[str]) -> Any: ...
 
 class ExecutorFactory:
-    """Factory for creating executor instances."""
     @classmethod
     def register(cls, backend: str, executor_cls: type[Executor]): ...
     @classmethod

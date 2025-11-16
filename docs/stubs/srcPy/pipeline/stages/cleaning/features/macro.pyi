@@ -1,5 +1,5 @@
 import polars as pl
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from datetime import datetime
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_base import CleaningStep as CleaningStep
@@ -12,7 +12,6 @@ logger: Incomplete
 def fetch_fred_data(indicator: str, start: datetime, end: datetime) -> pl.Series: ...
 
 class EconomicIndicatorNormalizerStep(CleaningStep):
-    """economic indicator normalizer step class."""
     mlflow_logger: Incomplete
     enabled: Incomplete
     indicators: Incomplete

@@ -2,11 +2,10 @@ import polars as pl
 from . import register_source as register_source
 from ..exceptions import DataFetchError as DataFetchError
 from .base import DataSource as DataSource
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import AsyncIterator
 
 class IBKRSource(DataSource):
-    """ibkr source class."""
     host: Incomplete
     port: Incomplete
     client_id: Incomplete

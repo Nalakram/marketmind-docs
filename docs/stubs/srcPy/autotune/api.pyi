@@ -1,10 +1,9 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import Any, Mapping
 
 def autotune(objective_fn, search_space: Mapping[str, Any], *, budget: int = 10, seed: int | None = None) -> dict[str, Any]: ...
 
 class AutoTuner:
-    """auto tuner class."""
     search_space: Incomplete
     metric: Incomplete
     budget: Incomplete

@@ -2,14 +2,13 @@ import abc
 import polars as pl
 from .batch import AnomalyNormalizerStep as AnomalyNormalizerStep
 from .streaming import StreamingAnomalyNormalizerStep as StreamingAnomalyNormalizerStep
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.pipeline.core.pipeline_core_base import CleaningStep
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger
 
 __all__ = ['AnomalyNormalizerStep', 'StreamingAnomalyNormalizerStep']
 
 class BaseAnomalyNormalizerStep(CleaningStep, metaclass=abc.ABCMeta):
-    """base anomaly normalizer step class."""
     mlflow_logger: Incomplete
     enabled: Incomplete
     params: Incomplete

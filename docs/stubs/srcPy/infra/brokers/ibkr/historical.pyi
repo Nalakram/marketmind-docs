@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from ibkr_insync import BarData, IBKR as IBKR
 from srcPy.ops.mm_logkit import configure_logger as configure_logger, get_logger as get_logger
 from srcPy.utils.config import get_config as get_config
@@ -7,29 +7,24 @@ from srcPy.utils.exceptions import DataFetchError as DataFetchError, IBKRConnect
 from srcPy.utils.validators import validate_date as validate_date, validate_symbol as validate_symbol
 
 class IBKR:
-    """ibkr class."""
     def __init__(self, *args, **kwargs) -> None: ...
     def connect(self, *args, **kwargs) -> None: ...
     def reqHistoricalData(self, *args, **kwargs): ...
     def disconnect(self) -> None: ...
 
 class BarData:
-    """bar data class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class Stock:
-    """stock class."""
     def __init__(self, *args, **kwargs) -> None: ...
 
 class util:
-    """util class."""
     @staticmethod
     def df(*args, **kwargs): ...
 
 logger: Incomplete
 
 class NoDataError(DataFetchError):
-    """Exception raised when no data occurs."""
     def __init__(self, symbol: str) -> None: ...
 
 def create_mock_bars(n: int, start_date: str = '2025-01-01') -> list[BarData]: ...

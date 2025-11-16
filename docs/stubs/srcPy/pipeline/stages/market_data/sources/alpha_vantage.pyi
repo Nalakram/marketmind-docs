@@ -2,11 +2,10 @@ import polars as pl
 from . import register_source as register_source
 from ..exceptions import DataFetchError as DataFetchError
 from .base import APIDataSource as APIDataSource
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from typing import AsyncIterator
 
 class AlphaVantageSource(APIDataSource):
-    """alpha vantage source class."""
     api_key: Incomplete
     base_url: str
     rate_limit: Incomplete

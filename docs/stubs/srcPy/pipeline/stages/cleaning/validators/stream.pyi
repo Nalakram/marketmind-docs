@@ -1,6 +1,6 @@
 import polars as pl
 from .contracts import MarketDataFrameSchema as MarketDataFrameSchema
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
 from srcPy.pipeline.stages.cleaning.core.base import CleaningStep as CleaningStep
@@ -10,7 +10,6 @@ from srcPy.utils.validators import validate_stream_chunk as validate_stream_chun
 logger: Incomplete
 
 class StreamValidationStep(CleaningStep):
-    """stream validation step class."""
     mlflow_logger: Incomplete
     schema: Incomplete
     strict: Incomplete

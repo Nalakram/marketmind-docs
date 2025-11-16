@@ -1,11 +1,10 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from collections.abc import Generator
 from contextlib import contextmanager
 
 class IBKRConnectionError(Exception): ...
 
 class IBAPI:
-    """ibapi class."""
     args: Incomplete
     kwargs: Incomplete
     def __init__(self, *args, **kwargs) -> None: ...

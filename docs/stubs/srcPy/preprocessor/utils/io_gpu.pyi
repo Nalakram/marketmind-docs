@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.preprocessor.utils.cuda_runtime import capabilities as capabilities
@@ -13,7 +13,6 @@ Frame = Any
 
 @dataclass
 class ParquetOptions:
-    """parquet options class."""
     columns: list[str] | None = ...
     compression: Literal['snappy', 'zstd', 'lz4', 'none'] | None = ...
     filters: Any | None = ...

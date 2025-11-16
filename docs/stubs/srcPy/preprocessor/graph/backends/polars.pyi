@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.preprocessor.graph.executor import Executor
 from typing import Any
 
@@ -11,7 +11,6 @@ def register(*args, **kwargs): ...
 def list_ops(*args): ...
 
 class PolarsExecutor(Executor):
-    """polars executor class."""
     engine_pref: Incomplete
     to_torch: Incomplete
     def __init__(self, engine_pref: Engine = 'auto', to_torch: bool = False) -> None: ...

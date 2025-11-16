@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.preprocessor.graph.backends.registry import register as register
 from srcPy.preprocessor.graph.executor import Executor as Executor
@@ -18,7 +18,6 @@ logger: Incomplete
 def robust_scaler_cudf(ir, gdf, group_by=None, **_): ...
 
 class CuDFExecutor(Executor):
-    """cu df executor class."""
     to_torch: Incomplete
     def __init__(self, *, pool_size: str = '4GB', to_torch: bool = False) -> None: ...
     def read_parquet(self, path, columns=None, byte_range=None): ...

@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from srcPy.ops.observability import get_metrics as get_metrics, instrument as instrument
 from srcPy.utils.capability_manager import HAS as HAS
 from srcPy.utils.dependency_manager import deps as deps
@@ -12,7 +12,6 @@ STEP_EXECUTION_TIME: Incomplete
 mlflow: Incomplete
 
 class AsyncMLflowLogger:
-    """async m lflow logger class."""
     def __init__(self) -> None: ...
     async def log_metrics(self, metrics: dict[str, float], *, step: int | None = None) -> None: ...
     async def log_params(self, params: dict[str, Any]) -> None: ...

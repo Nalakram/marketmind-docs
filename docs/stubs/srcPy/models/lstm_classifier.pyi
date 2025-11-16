@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from dataclasses import dataclass
 from srcPy.models.LSTM_model import LSTMBlock as LSTMBlock, LSTMConfig as LSTMConfig
 from srcPy.ops.mm_logkit import get_logger as get_logger
@@ -14,7 +14,6 @@ log: Incomplete
 
 @dataclass
 class ClassifierConfig(LSTMConfig):
-    """Configuration for classifier."""
     num_classes: int = ...
     projection_dim: int | None = ...
     pooling_type: str | None = ...
@@ -22,7 +21,6 @@ class ClassifierConfig(LSTMConfig):
     def from_marketmind(cls, overrides: Mapping[str, Any] | None = None) -> ClassifierConfig: ...
 
 class LSTMClassifier(nn.Module):
-    """lstm classifier class."""
     config: Incomplete
     lstm_block: Incomplete
     projection: Incomplete

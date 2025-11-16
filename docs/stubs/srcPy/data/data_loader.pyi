@@ -1,4 +1,4 @@
-from typing import Any as Incomplete
+from _typeshed import Incomplete
 from collections.abc import Generator
 from functools import singledispatch
 from srcPy.utils.optional_imports import pl
@@ -13,7 +13,6 @@ async def fetch_raw(cfg: Any, *, symbols: str | list[str], start: str, end: str,
 def build_loader(cfg: Any) -> Any: ...
 
 class _LoaderBase:
-    """loader base class."""
     config: Incomplete
     max_attempts: Incomplete
     retry_strategy: Incomplete
