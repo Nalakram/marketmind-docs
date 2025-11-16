@@ -1,9 +1,10 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from srcPy.pipeline.core.pipeline_core_base import PipelineStep as PipelineStep
 from srcPy.preprocessor.api import PlanSpec as PlanSpec, Preprocessor as Preprocessor
 
 class PlanStep(PipelineStep):
-    STEP_VERSION: str
-    cfg: Incomplete
+    """plan step class."""
+    STEP_VERSION: str = ...
+    cfg: Incomplete = ...
     def __init__(self, *, backend: str | None = 'auto', device: int = 0, nvtx: bool = False, **cfg) -> None: ...
     def fit_transform(self, df, ctx): ...

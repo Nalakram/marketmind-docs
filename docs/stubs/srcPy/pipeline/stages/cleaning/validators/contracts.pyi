@@ -6,24 +6,27 @@ __all__ = ['Bar', 'Tick', 'MarketDataFrameSchema']
 
 @dataclass(frozen=True)
 class Bar:
-    timestamp: pl.Datetime
-    open: float
-    high: float
-    low: float
-    close: float
-    volume: float
+    """bar class."""
+    timestamp: pl.Datetime = ...
+    open: float = ...
+    high: float = ...
+    low: float = ...
+    close: float = ...
+    volume: float = ...
     metadata: dict[str, Any] | None = field(default_factory=dict)
 
 @dataclass(frozen=True)
 class Tick:
-    timestamp: pl.Datetime
-    price: float
-    size: float
-    side: str
+    """tick class."""
+    timestamp: pl.Datetime = ...
+    price: float = ...
+    size: float = ...
+    side: str = ...
     metadata: dict[str, Any] | None = field(default_factory=dict)
 
 @dataclass
 class MarketDataFrameSchema:
+    """market data frame schema class."""
     required_columns: dict[str, pl.DataType] = field(default_factory=dict)
     optional_columns: dict[str, pl.DataType] = field(default_factory=dict)
     strict: bool = ...

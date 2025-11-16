@@ -1,27 +1,31 @@
 import abc
 from .cuda_runtime import capabilities as capabilities
 from .errors import SchemaMismatch as SchemaMismatch
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from typing import Any, Mapping, Sequence
 
-logger: Incomplete
+logger: Incomplete = ...
 
 class Validator(ABC, metaclass=abc.ABCMeta):
+    """Validates  data and constraints."""
     @abstractmethod
     def validate(self, obj: Any) -> None: ...
 
 class SchemaValidator(Validator):
-    expected: Incomplete
-    strict: Incomplete
+    """Validates schema data and constraints."""
+    expected: Incomplete = ...
+    strict: Incomplete = ...
     def __init__(self, expected: Mapping[str, str], strict: bool = False) -> None: ...
     def validate(self, df: Any) -> None: ...
 
 class PlanValidator(Validator):
+    """Validates plan data and constraints."""
     def validate(self, graph: dict[Any, Sequence[Any]]) -> None: ...
 
 class ValidatorFactory:
+    """Factory for creating validator instances."""
     @staticmethod
     def schema(expected: Mapping[str, str], strict: bool = False) -> Validator: ...
     @staticmethod

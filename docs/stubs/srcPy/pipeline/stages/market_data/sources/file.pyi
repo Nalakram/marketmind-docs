@@ -2,14 +2,15 @@ import os
 import polars as pl
 from ..exceptions import DataFetchError as DataFetchError
 from .base import DataSource as DataSource
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from srcPy.pipeline.core.pipeline_core_registry import register_source as register_source
 from typing import AsyncIterator
 
 class FileSource(DataSource):
-    file_path: Incomplete
-    format: Incomplete
-    tail: bool
+    """file source class."""
+    file_path: Incomplete = ...
+    format: Incomplete = ...
+    tail: bool = ...
     def __init__(self, config: str | os.PathLike | dict) -> None: ...
     def get_historical(self, symbol: str, start: str, end: str, *, eager: bool = False) -> pl.LazyFrame | pl.DataFrame: ...
     async def get_realtime(self, symbol: str, *, interval: float = 60.0) -> AsyncIterator[pl.DataFrame]: ...

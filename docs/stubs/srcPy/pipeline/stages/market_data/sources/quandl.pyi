@@ -1,12 +1,13 @@
 import polars as pl
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from srcPy.pipeline.stages.market_data.exceptions import DataFetchError as DataFetchError
 from srcPy.pipeline.stages.market_data.sources.base import DataSource as DataSource, register_source as register_source
 from typing import AsyncIterator
 
 class QuandlSource(DataSource):
-    api_key: Incomplete
-    base_url: str
+    """quandl source class."""
+    api_key: Incomplete = ...
+    base_url: str = ...
     def __init__(self, config: dict) -> None: ...
     async def get_historical(self, symbol: str, start: str, end: str, *, eager: bool = False) -> pl.LazyFrame | pl.DataFrame: ...
     async def get_realtime(self, symbol: str, *, interval: float = 300.0) -> AsyncIterator[pl.DataFrame]: ...

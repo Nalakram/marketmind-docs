@@ -1,4 +1,4 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from collections.abc import Generator
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -7,12 +7,13 @@ from srcPy.utils.optional_imports import pd as pd
 
 @dataclass
 class _Bar:
-    date: datetime
-    open: float
-    high: float
-    low: float
-    close: float
-    volume: int
+    """bar class."""
+    date: datetime = ...
+    open: float = ...
+    high: float = ...
+    low: float = ...
+    close: float = ...
+    volume: int = ...
 
 def create_mock_bars(n: int, start_date: str = '2025-01-01'): ...
 

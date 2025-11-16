@@ -1,8 +1,8 @@
-from _typeshed import Incomplete
+from typing import Any as Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.utils.exceptions import PreprocessingError as PreprocessingError
 
-logger: Incomplete
+logger: Incomplete = ...
 
 def register(backend: str, op: str, fn): ...
 def get(backend: str, op: str): ...
