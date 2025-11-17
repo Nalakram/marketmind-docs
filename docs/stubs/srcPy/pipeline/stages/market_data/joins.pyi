@@ -1,4 +1,4 @@
-from .transforms import build_steps as build_steps
+# from .transforms import build_steps as build_steps  # stripped for AutoAPI
 from typing import Any as Incomplete
 from polars import LazyFrame as LazyFrame
 from pydantic import BaseModel

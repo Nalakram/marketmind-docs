@@ -1,5 +1,5 @@
 import polars as pl
-from .registry import register_source as register_source
+# from .registry import register_source as register_source  # stripped for AutoAPI
 from typing import Any as Incomplete
 from srcPy.pipeline.stages.market_data.exceptions import DataFetchError as DataFetchError
 from srcPy.pipeline.stages.market_data.sources.base import DataSource as DataSource

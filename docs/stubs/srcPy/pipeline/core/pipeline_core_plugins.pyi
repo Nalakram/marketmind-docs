@@ -1,4 +1,4 @@
-from .pipeline_core_registry import StepRegistry as StepRegistry
+# from .pipeline_core_registry import StepRegistry as StepRegistry  # stripped for AutoAPI
 from typing import Iterable
 
 def load_stage_plugins(stage: str, group_prefix: str = 'marketmind'): ...

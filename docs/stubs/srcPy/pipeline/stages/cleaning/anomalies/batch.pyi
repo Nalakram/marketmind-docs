@@ -1,4 +1,4 @@
-from . import BaseAnomalyNormalizerStep as BaseAnomalyNormalizerStep
+# from . import BaseAnomalyNormalizerStep as BaseAnomalyNormalizerStep  # stripped for AutoAPI
 from typing import Any as Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.utils.exceptions import DataValidationError as DataValidationError

@@ -1,7 +1,7 @@
 import polars as pl
-from . import register_source as register_source
-from ..exceptions import DataFetchError as DataFetchError
-from .base import DataSource as DataSource
+# from . import register_source as register_source  # stripped for AutoAPI
+# from ..exceptions import DataFetchError as DataFetchError  # stripped for AutoAPI
+# from .base import DataSource as DataSource  # stripped for AutoAPI
 from typing import Any as Incomplete
 from typing import AsyncIterator
 

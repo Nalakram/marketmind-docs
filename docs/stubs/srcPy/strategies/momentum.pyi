@@ -1,5 +1,5 @@
 import pandas as pd
-from .pipeline_strategy import FeaturePlan, PipelineStrategy
+# from .pipeline_strategy import FeaturePlan, PipelineStrategy  # stripped for AutoAPI
 from typing import Any as Incomplete
 from typing import Any
 

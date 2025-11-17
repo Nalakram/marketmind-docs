@@ -1,7 +1,7 @@
 import abc
 import polars as pl
-from .batch import AnomalyNormalizerStep as AnomalyNormalizerStep
-from .streaming import StreamingAnomalyNormalizerStep as StreamingAnomalyNormalizerStep
+# from .batch import AnomalyNormalizerStep as AnomalyNormalizerStep  # stripped for AutoAPI
+# from .streaming import StreamingAnomalyNormalizerStep as StreamingAnomalyNormalizerStep  # stripped for AutoAPI
 from typing import Any as Incomplete
 from srcPy.pipeline.core.pipeline_core_base import CleaningStep
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger

@@ -1,6 +1,6 @@
-from .cuda_runtime import capabilities as capabilities
-from .errors import OOMRetry as OOMRetry
-from .specs import Spec as Spec
+# from .cuda_runtime import capabilities as capabilities  # stripped for AutoAPI
+# from .errors import OOMRetry as OOMRetry  # stripped for AutoAPI
+# from .specs import Spec as Spec  # stripped for AutoAPI
 from typing import Any as Incomplete
 from dataclasses import dataclass
 from srcPy.ops.mm_logkit import get_logger as get_logger

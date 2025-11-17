@@ -1,5 +1,5 @@
-from .cuda_runtime import capabilities as capabilities
-from .errors import UnsupportedAST as UnsupportedAST
+# from .cuda_runtime import capabilities as capabilities  # stripped for AutoAPI
+# from .errors import UnsupportedAST as UnsupportedAST  # stripped for AutoAPI
 from typing import Any as Incomplete
 from typing import Any, Callable
 

@@ -1,5 +1,5 @@
-from .pipeline_core_base import PipelineGraphError as PipelineGraphError, PipelineStep as PipelineStep
-from .pipeline_core_context import PipelineContext as PipelineContext
+# from .pipeline_core_base import PipelineGraphError as PipelineGraphError, PipelineStep as PipelineStep  # stripped for AutoAPI
+# from .pipeline_core_context import PipelineContext as PipelineContext  # stripped for AutoAPI
 from typing import Any as Incomplete
 from typing import Any
 

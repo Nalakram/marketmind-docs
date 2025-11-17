@@ -1,6 +1,6 @@
-from .batch import BatchPipeline as BatchPipeline
-from .hybrid import HybridCleanerPipeline as HybridCleanerPipeline
-from .streaming import StreamingCleanerPipeline as StreamingCleanerPipeline
+# from .batch import BatchPipeline as BatchPipeline  # stripped for AutoAPI
+# from .hybrid import HybridCleanerPipeline as HybridCleanerPipeline  # stripped for AutoAPI
+# from .streaming import StreamingCleanerPipeline as StreamingCleanerPipeline  # stripped for AutoAPI
 from typing import Callable, TypeVar
 
 __all__ = ['run_blocking', 'run_cpu', 'BatchPipeline', 'StreamingCleanerPipeline', 'HybridCleanerPipeline']

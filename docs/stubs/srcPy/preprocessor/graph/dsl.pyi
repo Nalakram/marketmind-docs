@@ -1,6 +1,6 @@
-from .factory import resolve_name as resolve_name
-from .graph import Graph as Graph
-from .ops import Op as Op, OpKind as OpKind
+# from .factory import resolve_name as resolve_name  # stripped for AutoAPI
+# from .graph import Graph as Graph  # stripped for AutoAPI
+# from .ops import Op as Op, OpKind as OpKind  # stripped for AutoAPI
 from typing import Any, Callable
 
 class BackendAwareOp(Op):

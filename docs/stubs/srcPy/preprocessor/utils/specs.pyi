@@ -1,5 +1,5 @@
 import abc
-from .errors import UnsupportedAST as UnsupportedAST
+# from .errors import UnsupportedAST as UnsupportedAST  # stripped for AutoAPI
 from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from dataclasses import dataclass

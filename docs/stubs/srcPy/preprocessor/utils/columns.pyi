@@ -1,6 +1,6 @@
 import abc
-from .cuda_runtime import capabilities as capabilities
-from .errors import SchemaMismatch as SchemaMismatch, UnsupportedAST as UnsupportedAST
+# from .cuda_runtime import capabilities as capabilities  # stripped for AutoAPI
+# from .errors import SchemaMismatch as SchemaMismatch, UnsupportedAST as UnsupportedAST  # stripped for AutoAPI
 from typing import Any as Incomplete
 from abc import ABC, abstractmethod
 from srcPy.ops.mm_logkit import get_logger as get_logger

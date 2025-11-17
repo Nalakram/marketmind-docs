@@ -1,6 +1,6 @@
-from ..utils.specs import SpecFactory as SpecFactory
-from .graph import FusedNode as FusedNode, Graph as Graph, Node as Node
-from .ops import OpKind as OpKind
+# from ..utils.specs import SpecFactory as SpecFactory  # stripped for AutoAPI
+# from .graph import FusedNode as FusedNode, Graph as Graph, Node as Node  # stripped for AutoAPI
+# from .ops import OpKind as OpKind  # stripped for AutoAPI
 from srcPy.preprocessor.utils.plan_costs import HeuristicPlanner as BasePlanner, PlanSegment as PlanSegment, score_segment as score_segment
 from srcPy.utils.exceptions import UnsupportedPlan as UnsupportedPlan
 from typing import Any

@@ -1,5 +1,5 @@
 import polars as pl
-from .contracts import MarketDataFrameSchema as MarketDataFrameSchema
+# from .contracts import MarketDataFrameSchema as MarketDataFrameSchema  # stripped for AutoAPI
 from typing import Any as Incomplete
 from srcPy.ops.mm_logkit import get_logger as get_logger
 from srcPy.pipeline.core.pipeline_core_metrics import AsyncMLflowLogger as AsyncMLflowLogger
