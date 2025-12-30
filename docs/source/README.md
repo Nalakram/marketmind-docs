@@ -1,277 +1,322 @@
-# MarketMind ![Version](https://img.shields.io/badge/Version-2.0.0-8A2BE2) [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/) ![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
- [![Windows Supported](https://custom-icon-badges.demolab.com/badge/Windows-Supported-0078D6?logo=windows11&logoColor=white)](https://www.microsoft.com/windows) [![Linux](https://img.shields.io/badge/Linux-Tested-FCC624?style=flat-square&logo=linux)](https://kernel.org/) [![Read the Docs](https://img.shields.io/badge/docs-Read_the_Docs-8CA1AF?logo=readthedocs)](https://marketmind-docs.readthedocs.io/en/latest/) ![Status](https://img.shields.io/badge/status-development-FFA500?style=flat-square)
+# MarketMind 
 
-![MarketMind Banner](https://raw.githubusercontent.com/Nalakram/marketmind-docs/main/docs/source/images/banner1.png)
+![Status](https://img.shields.io/badge/status-early_development-orange)
+![Version](https://img.shields.io/badge/version-3.1.1-blue)
+[![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python)](https://www.python.org/)
+[![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/)
+![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
+![License](https://img.shields.io/badge/license-Proprietary-red)
 
-MarketMind is an advanced algorithmic trading platform that provides automated, high-frequency trading capabilities with built-in analytics and risk 
-controls. It ingests real-time market data and news (using NLP pipelines) and applies hybrid deep-learning models (e.g. multi-head Transformer layers 
-combined with LSTM or Temporal Convolutional Networks) to generate continuous price and trend forecasts. 
-Its trading engine can automatically execute buy/sell orders based on these model signals, applying configurable risk management (e.g. stop-loss, 
-take-profit) to protect capital. The system is optimized for ultra-low-latency use cases (MarketMind was originally conceived as “the first AI high 
-frequency trading application”) and employs a multilingual architecture (performance-critical modules in C++, modeling and orchestration in Python, with Java 
-components for UI and integration). 
+**Algorithmic trading platform — under active development**
 
-MarketMind’s upcoming and planned features now include an Informer model for efficient long-sequence forecasting, graph neural networks (GNNs) to capture 
-dynamic relationships among assets, hidden Markov models (HMMs) for identifying latent market regimes, and Granger causality tests to find predictive 
-leading indicators in time series. The platform also emphasizes interpretability: it computes SHAP values to explain model predictions, assigning importance 
-scores to each input feature.
+> ⚠️ **Early Development**: MarketMind is building toward a production trading platform.
+> Many capabilities described in the [Vision](#vision) section are planned but not yet implemented.
+> See [Current Status](#current-status) for what works today.
 
 ---
 
 ## Table of Contents
-- [What’s New in 3.1.1](#whats-new-in-311)
-- [Architecture Overview](#architecture-overview)
-- [Desktop UI & Services (JavaFX + Spring Boot)](#desktop-ui--services-javafx--spring-boot)
+- [Current Status](#current-status)
+- [What Works Today](#what-works-today)
+- [Vision](#vision)
+- [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
-- [Installation & Support Matrix](#installation--support-matrix)
-- [3-step End-to-end Quickstart](#3-step-end-to-end-quickstart)
+- [Roadmap](#roadmap)
 - [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Testing & Gates](#testing--gates)
-- [Performance (SLOs)](#performance-slos)
-- [Security & Privacy (summary)](#security--privacy-summary)
-- [Documentation](#documentation)
-- [Public Interfaces (at a glance)](#public-interfaces-at-a-glance)
+- [Testing](#testing)
 - [Contributing](#contributing)
-- [Versioning & Changelog](#versioning--changelog)
 - [License](#license)
 
 ---
 
-## What’s New in 3.1.1
-**3.1.1** hardens the adaptive executor and test infra:
-- Unified executor routing via `adaptive_executor.run(...)` (registry → classifier → dispatch).
-- Surgical execute/skip policy with ENV passthrough and meta‑registry contract tests.
-- Coverage/quality gates tightened and noise control for CI jobs.
+## Current Status
 
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
+**Version 3.1.1** — December 2025
 
----
+| Component | Status | Notes |
+|-----------|:------:|-------|
+| JavaFX Desktop UI | ✅ | Spring Boot services integrated |
+| Python Pipeline Framework | 🚧 | ~50% test coverage, preprocessing in progress |
+| Gate Runner (Validation) | 🚧 | Framework implemented, test coverage in progress |
+| Backtesting Engine | 🚧 | Design complete, Lane A/B architecture defined |
+| C++ Inference Runtime | ❌ | Planned for Phase 3 |
+| ML Model Training | ❌ | Planned for Phase 3 |
+| Live Data Feeds | ❌ | Planned for Phase 3 |
+| Automated Trading | ❌ | Planned for Phase 3 |
 
-## Architecture Overview
-
-```
-         ┌──────────────────────────┐         ┌──────────────────────────┐
-         │        JavaFX UI         │◄──────► │      Python Orchestrator │
-         │  (desktop client)        │   gRPC  │  (pipelines/engines)     │
-         └────────────┬─────────────┘         └───────────┬──────────────┘
-                      │ JNI/gRPC                         Registries/Plugins
-                      ▼                                         │
-         ┌──────────────────────────┐                           ▼
-         │      C++ Inference       │◄────────────►  GPU/CPU Backends
-         │ (ultra‑low latency)      │              (cuDF/CuPy/Polars/Torch)
-         └──────────────────────────┘
-```
-
-<details>
-<summary><strong>Mermaid: detailed pipeline (click to expand)</strong></summary>
-
-```mermaid
-flowchart LR
-  Training[Training (PyTorch/TensorFlow)] -->|export| ONNX[Export ONNX]
-  ONNX -->|optimize| TensorRT[TensorRT / TRT]
-  TensorRT -->|bundle| ORT[ORT / TensorRT EP]
-  ORT -->|serve| CppInf[C++ Inference (Triton/gRPC/ORT)]
-  CppInf -->|gRPC/JNI| Python[Python Orchestrator]
-  Python -->|gRPC| JavaFX[JavaFX UI & Spring Services]
-```
-
-</details>
-
-**Key ideas**
-- **Registry‑driven pipelines:** All cleaning/preprocessing steps are plug‑ins (e.g., `rename`, `cast`, `resample`, technical features, embeddings, topic modeling, explainability). Registries enable runtime composition and safe fallbacks.
-- **Self‑evolving engine:** Adaptive strategies learn when to parallelize, reorder, or switch backends based on risk/telemetry.
-- **GPU acceleration end‑to‑end:** cuDF → CuPy sliding windows → Torch tensors → model → TensorRT/ORT → C++ inference.
-- **Explainable modeling:** SHAP/feature importance and statistical tools for transparent decisions.
+**Legend:** ✅ Working | 🚧 In Progress | ❌ Not Started
 
 ---
 
-## Desktop UI & Services (JavaFX + Spring Boot)
-MarketMind ships a first‑class Java desktop and local service layer:
-- The JavaFX desktop is bundled with Spring Boot services for local APIs and controller wiring.
-- Spring uses a controller factory wired to FXML controllers (FXML → Spring controller factory → beans), enabling Spring-managed services inside the UI controller lifecycle.
+## What Works Today
 
-Run the service + UI in development:
+### Prerequisites
+- Python 3.12 with Poetry
+- Java 21 (JDK) with Maven 3.8+
+- (Optional) NVIDIA drivers + CUDA 12.x for GPU features
+
+### Quick Start
+
 ```bash
-# start Spring Boot services (local dev)
-mvn spring-boot:run
+# Clone the repository
+git clone https://github.com/MindForgeLabs/MarketMind.git
+cd MarketMind
 
-# build the desktop artifact (CI / release)
-mvn -q -DskipTests package
+# Install Python dependencies
+poetry install
+
+# Run tests
+poetry run pytest -q
+
+# Start Java UI (separate terminal)
+mvn spring-boot:run
 ```
 
-Generated gRPC stubs and the Java service layer are produced during `mvn compile` / build — see `cpp/` and `src/main/java` for wiring.
+### What You Can Do
+- **Run the test suite** to verify the codebase
+- **Launch the JavaFX UI** for the desktop interface
+- **Explore the pipeline framework** in `srcPy/pipeline/`
+- **Review artifact validation** in `marketmind_gate/`
+
+### What Doesn't Work Yet
+- Model training and inference (no trained models exist)
+- C++ runtime (not implemented)
+- Live data feeds (not connected)
+- Automated trade execution (not implemented)
+
+---
+
+## Vision
+
+MarketMind aims to be a production-grade algorithmic trading platform combining:
+
+- **Multi-fidelity backtesting** — Lane A (fast prototyping) and Lane B (production-realistic validation) with transfer gap analysis
+- **Artifact governance** — Deterministic hashing, content-addressable storage, and fail-closed promotion gates
+- **GPU-accelerated inference** — ONNX/TensorRT optimization with C++ serving for ultra-low latency
+- **NLP pipelines** — News sentiment analysis using spaCy and BERTopic
+- **Hybrid deep learning** — Multi-head Transformers combined with LSTM/TCN for time-series forecasting
+- **Explainable AI** — SHAP values and feature importance for transparent decisions
+
+*These capabilities are on the roadmap. See [Roadmap](#roadmap) for timeline.*
+
+---
+
+## Architecture
+
+### Current State (v3.1.1)
+
+```
+┌──────────────────────────────┐
+│      JavaFX Desktop UI       │  ✅ Implemented
+│   (Spring Boot services)     │
+└──────────────┬───────────────┘
+               │ Local calls
+               ▼
+┌──────────────────────────────┐
+│    Python Infrastructure     │  🚧 In Progress
+│  • Pipeline framework        │
+│  • Preprocessing steps       │
+│  • Gate runner (validation)  │
+└──────────────────────────────┘
+```
+
+### Target State (Phase 3+)
+
+```
+┌─────────────────┐        gRPC         ┌─────────────────────┐
+│   JavaFX UI     │◄──────────────────►│  Python Orchestrator │
+│ (Spring Boot)   │                     │  (pipelines/ML)      │
+└─────────────────┘                     └──────────┬──────────┘
+                                                   │
+                                                   ▼
+                                        ┌─────────────────────┐
+                                        │   C++ Inference     │
+                                        │  (ONNX/TensorRT)    │◄──► GPU
+                                        └─────────────────────┘
+```
 
 ---
 
 ## Tech Stack
-**Languages:** Python 3.12 · C++20 · Java 21/JavaFX 21 · Maven/Spring Boot
 
-**ML & Infra:** PyTorch, TensorFlow/Keras, ONNX, TensorRT, ORT, Triton (optional), cuDF/CuPy, Polars
+### Currently Used
 
-**Data & I/O:** pandas, Polars, PyArrow, yfinance, FRED, InfluxDB, Redis
+| Category | Technologies |
+|----------|-------------|
+| **Languages** | Python 3.12, Java 21 |
+| **Frameworks** | Spring Boot 3.5.0, JavaFX 21, Poetry |
+| **Data** | Polars, pandas |
+| **Testing** | pytest, mypy --strict |
+| **Build** | Maven, Poetry, CMake (stub) |
 
-**Orchestration & QA:** structlog, pytest + coverage (branch), CodeQL/Dependabot (internal)
+### Planned (Phase 3)
+
+| Category | Technologies |
+|----------|-------------|
+| **ML Training** | PyTorch, TensorFlow/Keras |
+| **Inference** | ONNX, TensorRT, ONNX Runtime |
+| **GPU** | CUDA 12.x, cuDF, CuPy |
+| **Serving** | C++20, Triton (optional) |
+| **Data Stores** | InfluxDB, Redis |
+| **Communication** | gRPC, protobuf |
 
 ---
 
-## Installation & Support Matrix
-### Quick prerequisites
-- Python 3.12, Poetry, CMake, Ninja, Maven 3.8+, JDK 21
-- For GPU: NVIDIA drivers + CUDA 12.9, Conda (recommended for RAPIDS/cuDF)
+## Roadmap
 
-| Mode | OS | Install path |
-|---|---:|---|
-| CPU-only | Linux / Windows | `poetry install` (recommended) |
-| GPU (CUDA + RAPIDS) | Linux (native Conda) | Create Conda env → use Poetry venv inside conda → `poetry install -E gpu` |
+### Phase 0: Trust Foundation (Current)
+*Target: Q1 2026*
 
-**Notes:** RAPIDS/cuDF are best installed in a Conda environment and paired with Poetry by pointing Poetry at the Conda venv. Windows GPU/RAPIDS support is limited — prefer Linux for GPU workloads.
+- [ ] Gate framework test coverage → 70%+
+- [ ] Preprocessing branch coverage → 85% line / 70% branch
+- [ ] Integration canary (end-to-end pipeline test)
+- [ ] Time-series splits with purge/embargo validation
+- [ ] Deterministic artifact hashing
 
----
+### Phase 1: Infrastructure
+*Target: Q1-Q2 2026*
 
-## 3-step End-to-end Quickstart (lands the plane)
-This minimal path produces a tiny ONNX model, builds the C++ runtime, and runs a minimal Python pipeline that exercises inference.
+- [ ] Multi-fidelity backtesting (Lane A/B)
+- [ ] Point-in-time data contracts
+- [ ] Artifact registry with CAS deduplication
+- [ ] Statistical validity gates
 
-1. **Export a tiny model to ONNX**
-```bash
-# example stub; this script exports a small model to models/tiny.onnx
-poetry run python -m srcPy.models.export_tiny_onnx --out models/tiny.onnx
-```
+### Phase 2: Strategy Ecosystem
+*Target: Q2 2026*
 
-2. **Build the C++ runtime**
-```bash
-cmake -S cpp -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
-```
+- [ ] Registry-driven strategy plugins (signal, sizing, risk, cost)
+- [ ] Multi-strategy portfolio management
+- [ ] Paper trading integration
+- [ ] Performance attribution
 
-3. **Run the minimal Python pipeline (hello-pipeline → hello-inference)**
-```bash
-poetry run python -m srcPy.pipeline.examples.minimal --model models/tiny.onnx
-```
+### Phase 3: ML & Inference
+*Target: Q3 2026*
 
-If you want to run the full Java UI against the local services, start Step 2 (runtime) then run `mvn spring-boot:run` and start the packaged JavaFX client.
+- [ ] Model training pipeline
+- [ ] ONNX export and TensorRT optimization
+- [ ] C++ inference runtime
+- [ ] GPU acceleration (cuDF → TensorRT)
+- [ ] Live data feed integration
+
+### Phase 4: Production
+*Target: Q4 2026*
+
+- [ ] Live trading with risk controls
+- [ ] Meta-learning and strategy discovery
+- [ ] NLP pipeline for news/sentiment
+- [ ] Full observability and monitoring
 
 ---
 
 ## Project Structure
-<details>
-<summary><strong>View Directory Tree</strong></summary>
 
 ```
 MarketMind/
-├── srcPy/                 # Python: pipelines, ML, trading logic
-├── cpp/                   # C++ backend (JNI/gRPC)
-├── src/                   # Java: JavaFX + Spring Boot services
-├── data/                  # Datasets & configs
-├── models/                # Saved/trained models (include ONNX)
-├── tests/                 # Python/C++/Java + integration
-├── deployment/            # Docker, InfluxDB, etc.
-├── docs/                  # canonical docs (point to ./docs)
-├── scripts/               # build & helper scripts
-├── pyproject.toml         # Poetry config & plugin registries
-├── CMakeLists.txt         # C++ build config
-├── pom.xml                # Maven config
-└── README.md, LICENSE, .gitignore
+├── srcPy/                  # Python: pipelines, preprocessing, validation
+│   ├── pipeline/           # Pipeline framework and stages
+│   ├── preprocessor/       # Feature engineering
+│   ├── strategies/         # Strategy implementations (in progress)
+│   ├── ops/                # Caching, logging, observability
+│   └── data/               # Data loading and orchestration
+├── marketmind_gate/        # Gate runner CLI (artifact validation)
+├── src/                    # Java: JavaFX UI + Spring Boot services
+├── cpp/                    # C++ backend (planned, stub only)
+├── tests/                  # Test suites (Python, Java)
+├── schemas/                # JSON Schema definitions
+├── policies/               # Gating policies (YAML)
+├── docs/                   # Documentation
+├── pyproject.toml          # Poetry configuration
+├── pom.xml                 # Maven configuration
+└── CMakeLists.txt          # CMake configuration (stub)
 ```
-</details>
+
+---
+
+## Testing
+
+```bash
+# Run all tests
+poetry run pytest -q
+
+# Run with coverage
+poetry run pytest --cov=srcPy --cov=marketmind_gate --cov-branch
+
+# Run specific markers
+poetry run pytest -m "not slow"        # Skip slow tests
+poetry run pytest -m integration       # Integration tests only
+```
+
+### Current Coverage
+
+| Module | Line Coverage | Status |
+|--------|:-------------:|--------|
+| `srcPy/ops/` | ~75-80% | ✅ Good |
+| `srcPy/strategies/` | ~77-92% | ✅ Good |
+| `srcPy/preprocessor/graph/` | ~70-94% | ✅ Good |
+| `srcPy/pipeline/` | ~30-70% | 🚧 Improving |
+| `marketmind_gate/` | ~0% | ❌ Needs work |
+| **Overall** | **~50%** | 🚧 Target: 85%+ |
+
+### Test Markers
+- `integration` — End-to-end tests
+- `property` — Property-based tests (Hypothesis)
+- `slow` — Long-running tests
+- `gpu` — Requires GPU
 
 ---
 
 ## Configuration
-- Store local secrets and settings in `data/config.yaml` or environment variables.
-- Pipelines are assembled from **plugin steps** registered via entry points; you can add custom steps in your own package and expose them via the registry.
 
----
+Configuration files live in `data/` and environment variables:
 
-## Testing & Gates
-```bash
-poetry run pytest -q
+```yaml
+# data/config.yaml (example)
+pipeline:
+  cache_enabled: true
+  parallelism: auto
+
+logging:
+  level: INFO
+  format: structured
 ```
-- Coverage threshold: **90%** (branch coverage enabled) with targeted `omit` patterns.
-- Markers: `gpu`, `integration`, `perf`, `contract`, `executor`, `streaming`, `benchmark`, `smoke`, `regression`.
-- CI jobs avoid noisy tests via `executor` contract/registry tests introduced in 3.1.1.
 
----
-
-## Performance (SLOs)
-Measured latencies vary by hardware and configuration. Replace the example numbers below with your telemetry snapshots from `telemetry/` or monitoring.
-
-| Component | p50 | p95 | p99 |
-|---|---:|---:|---:|
-| GPU inference (single request) | 2 ms | 6 ms | 12 ms |
-| Feature materialization (in-memory, polars/cuDF) | 5 ms | 25 ms | 80 ms |
-| Cache hit (local redis) | 0.5 ms | 2 ms | 8 ms |
-
-> These are illustrative — please update with measured values from your perf runs or telemetry.
-
----
-
-## Security & Privacy (summary)
-**Draft — <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security Practices</a> for security policies</p> and <p> <a href="https://marketmind-docs.readthedocs.io/en/latest/privaccy_practices.html">Privacy Policy</a> for full (draft) details.**
-- gRPC‑TLS by default for all inter‑process communication.
-- Local‑first processing: models and PII (not collected by default) are processed locally unless explicitly configured.
-- No PII/telemetry shipped by default; opt‑in telemetry is gated and auditable.
-
-**Important:** Security and privacy docs are marked **Draft**. This README intentionally avoids language implying public open‑source auditability because the project is proprietary.
-
-
-## Documentation
-
-Comprehensive documentation is provided in ReadTheDocs online docs site.
-- Key documents include:
-  - Getting Started Guide: Setup instructions, installation steps, and a quickstart walkthrough.
-  - User Guide: Detailed walkthrough of the trading GUI and how to configure strategies.
-  - Developer Guide: Information on project structure, coding standards, and how to extend modules.
-  - API Reference: Auto-generated reference pages for all classes, methods, and configuration options (found under docs/api/).
-  - Architecture & Design: Explanations of system architecture, data pipelines, and model designs.
-  - Changelog: Version-by-version change log.
-   
-The hosted documentation site (ReadTheDocs) mirrors these files and provides search and navigation features. Users and developers are 
-encouraged to consult the docs for configuration details and advanced topics.
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/infographics_gallery.html">Infographics Gallery</a> for interactive research documentation</p>
- 
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
-
-
-## Public Interfaces (at a glance)
-**gRPC** endpoints (generated from `.proto` during `mvn compile`)
-- `PredictService.Predict` — single request inference
-- `IngestService.Stream` — streaming ingestion for market ticks
-- `ModelAdmin.Export` — export/prepare models (ONNX/TensorRT bundles)
-
-**C++ / ORT inference contract (essential fields)**
-- `input`: float32 tensor, shape `[B, T, F]` (batch, timesteps, features)
-- `output`: float32 tensor, shape `[B, O]` (batch, outputs/probabilities)
-- `dtype`: float32; model expects normalized inputs (zscore per feature)
-- `warmup`: recommended warmup runs (N=5) before steady SLOs; keep EPs (TensorRT/ORT) warmed for latency stability
-
-> Copy the exact contract fields from your generated stubs or `docs/protos` when locking APIs for integration.
+See `docs/configuration.md` for full reference.
 
 ---
 
 ## Contributing
-This project is **proprietary**. Contributions are accepted from internal contributors or by arrangement only. For contribution workflows, code style, and coverage gates, see `Programming Guidelines` in the repo. Pull requests are subject to mandatory review, security review, and must meet coverage & contract tests.
+
+MarketMind is **proprietary software**. Contributions are accepted from internal contributors or by prior arrangement only.
+
+For contribution workflows:
+1. Review `Programming Guidelines` in the repo
+2. Ensure tests pass and coverage doesn't regress
+3. Submit PR for mandatory review
 
 ---
 
-## Versioning & Changelog
-MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
-patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
+## Versioning
 
+MarketMind follows [Semantic Versioning](https://semver.org/):
+- **MAJOR**: Breaking changes
+- **MINOR**: New features (backward-compatible)
+- **PATCH**: Bug fixes
 
-Current release: **3.1.1**.
+Current release: **3.1.1**
 
----
-
-## Copyright
-
-MarketMind is proprietary software (© 2025 Mark Wuenschel. All rights reserved.). Its source code is not open-source. However, MarketMind relies on 
-several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
-Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
-without prior written permission from the copyright holder.
-See the [LICENSE](LICENSE) file for full terms.
+See [Changelog](https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html) for history.
 
 ---
 
-_Last updated: 3.1.1._ 11/05/2025
+## License
+
+MarketMind is proprietary software.
+
+© 2025 Mark Wuenschel. All rights reserved.
+
+This software relies on third-party open-source libraries distributed under permissive licenses (MIT, BSD, Apache 2.0). See [LICENSE](LICENSE) for full terms.
+
+---
+
+*Last updated: December 2025 — v3.1.1*
