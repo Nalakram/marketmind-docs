@@ -1,5 +1,204 @@
 # Version History
 
+## Version 3.2.0 (2026-01-12)
+
+Changelog for Time-Series Splits Implementation (Phase 0 Leakage Prevention)
+Version: 3.2.0 (splits.py module, purge/embargo, Appendix C manifest alignment)
+
+### Major Themes Across All Changes
+
+* **Leakage prevention primitives:** Implemented `TimeSeriesSplitter` (walk-forward) and `PurgedKFold` (k-fold with purge/embargo) following López de Prado methodology.
+* **Appendix C alignment:** Manifest schema matches specification (`purge_window`, `embargo_window`), with schema version validation and legacy field migration.
+* **Audit-grade provenance:** `SplitsManifest` provides cryptographically verifiable split boundaries with separate `purged_count` and `embargoed_count` for each fold.
+* **Multi-asset readiness:** `validate_no_leakage()` supports composite key validation (`key_cols`) to prevent false positives on multi-symbol datasets.
+
+---
+
+### Detailed Changes
+
+#### `srcPy/preprocessor/splits.py` (new)
+
+* **TimeSeriesSplitter class:**
+  * Walk-forward expanding-window validation with configurable `purge_window_days`.
+  * Removed embargo parameter (N/A for walk-forward where train always precedes test).
+  * Docstring clarifies embargo semantics: only applicable to k-fold splitters.
+  * Generates `SplitsManifest` with `embargo_window=0` explicitly.
+
+* **PurgedKFold class:**
+  * K-fold cross-validation with both purge and embargo windows.
+  * Separate computation of `purged_count` vs `embargoed_count` (not conflated).
+  * Sets `non_contiguous_train=True` flag in boundary for audit clarity.
+  * Training data can exist on both sides of test period.
+
+* **SplitBoundary dataclass:**
+  * Added `non_contiguous_train: bool` field to indicate k-fold non-contiguous training.
+  * `to_dict()` serializes all fields including new flag.
+
+* **SplitResult dataclass:**
+  * Explicit `_train_indices` / `_test_indices` storage (survives column drops).
+  * `assert_no_leakage()` method supports `key_cols` for multi-asset validation.
+
+* **SplitsManifest dataclass:**
+  * Renamed fields to match Appendix C: `purge_window`, `embargo_window` (not `*_days`).
+  * `from_json()` validates schema version (rejects unknown major versions with `UNKNOWN_SCHEMA_VERSION`).
+  * Backwards compatibility: migrates legacy `purge_window_days` fields automatically.
+  * `time_range_start/end` now populated for both walk-forward and k-fold.
+
+* **validate_no_leakage() function:**
+  * Added `embargo_window_days` parameter for k-fold embargo validation.
+  * Added `key_cols` parameter for multi-asset composite key checking.
+  * Uses `total_seconds()` for sub-day precision in gap calculations.
+  * Validates purge gap, embargo gap, timestamp monotonicity, and key overlap.
+
+* **create_splits_manifest() function:**
+  * Sets `time_range_start/end` for PurgedKFold (was null before).
+  * Uses Appendix C field names consistently.
+
+#### `tests/python/unit/preprocessor/test_splits.py` (new)
+
+* **TestTimeSeriesSplitter:** 10 tests
+  * Basic split, purge window, temporal leakage, overlapping indices, purge gap, expanding window, validation errors, invalid parameters, missing timestamp, unsorted data.
+
+* **TestPurgedKFold:** 4 tests
+  * Basic k-fold, purge/embargo removes samples, no train/test overlap, invalid n_splits.
+
+* **TestSplitsManifest:** 3 tests
+  * Manifest generation, JSON roundtrip, split boundaries recorded correctly.
+
+* **TestLeakageValidation:** 4 tests
+  * Valid split passes, detects temporal leakage, detects insufficient purge gap, validates monotonicity.
+
+* **TestMultiAssetLeakageValidation:** 3 tests (new)
+  * `test_key_cols_detects_row_overlap`: Composite key validation catches overlapping rows.
+  * `test_key_cols_passes_valid_split`: Valid multi-asset split passes validation.
+  * `test_timestamp_only_false_positive_multi_asset`: Demonstrates why `key_cols` matters.
+
+* **TestPurgedKFoldNonContiguous:** 3 tests (new)
+  * `test_non_contiguous_flag_set`: PurgedKFold sets `non_contiguous_train=True`.
+  * `test_walk_forward_contiguous_flag`: TimeSeriesSplitter sets `False`.
+  * `test_embargo_actually_removes_after_test`: Embargo removes post-test training data.
+
+* **TestSplitsIntegration:** 3 tests
+  * `create_splits_manifest` function, end-to-end walk-forward, `SplitResult.assert_no_leakage`.
+
+* **TestSplitsProperties:** 3 tests
+  * Train+test exhaustive coverage, timestamps strictly increasing, boundary timestamps match data.
+
+* **Fixtures:**
+  * `sample_daily_data`: 2 years (~504 rows)
+  * `small_daily_data`: 60 rows for edge cases
+  * `large_daily_data`: 5 years (~1260 rows)
+  * `multi_asset_data`: 3 symbols (SPY, QQQ, IWM) × 365 days (new)
+
+#### `tests/python/property/test_splits_properties.py` (new)
+
+* **Property-based tests using Hypothesis:** 7 tests
+  * `TestFitOnTrainOnlyInvariants`: No timestamp overlap, train before test.
+  * `TestTimestampMonotonicity`: Train monotonic, test monotonic.
+  * `TestNoFutureLeakage`: Purge gap enforced, expanding window property.
+  * `TestValidationFunction`: Valid splits pass validation.
+
+* **Custom Hypothesis strategy:**
+  * `valid_splitter_and_data()`: Generates splitter config with guaranteed sufficient data.
+
+---
+
+### Coverage Impact
+
+* **splits.py:** **0% → 100%** (new module, fully tested)
+* **Leakage invariants:** 40 tests covering all Phase 0 leakage patterns from Appendix D
+* **Property-based fuzzing:** 7 Hypothesis tests with 20-30 random examples each
+
+---
+
+### Behavioral Changes
+
+* **Embargo semantics clarified:** Walk-forward does NOT use embargo (train always precedes test). K-fold uses embargo for training data after test period.
+* **Manifest field names:** Changed from `purge_window_days` to `purge_window` per Appendix C specification.
+* **Index tracking:** `SplitResult` now stores indices explicitly, not via hidden column.
+* **Multi-asset safety:** `validate_no_leakage()` with `key_cols` prevents false positives on panel data.
+
+---
+
+### Breaking Changes
+
+* **TimeSeriesSplitter:** Removed `embargo_window_days` parameter (was documented but not enforced).
+* **SplitsManifest:** Field names changed to `purge_window`, `embargo_window` (loader migrates legacy names).
+* **Schema validation:** `from_json()` now rejects manifests with unknown major version.
+
+---
+
+### Files Created
+
+* `srcPy/preprocessor/splits.py` — 749 lines
+* `tests/python/unit/preprocessor/test_splits.py` — 643 lines (33 unit tests)
+* `tests/python/property/test_splits_properties.py` — 7 property-based tests
+
+---
+
+### Phase 0 Checklist Items Completed
+
+* ✅ Time-series validation splits tested (purge/embargo)
+* ✅ Splits manifest emitted (`splits_manifest.json`)
+* ✅ Leakage invariants verified (no timestamp overlap, purge gap enforced, monotonicity)
+* ✅ Property-based tests for known leakage patterns
+* ✅ Appendix C manifest schema compliance
+* ✅ Schema version validation in gate layer
+
+---
+
+### Remaining Phase 0 Items
+
+* Gate CLI alignment with Appendix D bundle format
+* Record 2-minute demo video of working UI (interview proof point)
+* Integration with graph-based preprocessor (`api.py`) for fit/transform separation
+
+---
+
+### Test Results
+
+```
+40 passed in 1.82s
+- 33 unit tests (0.79s)
+- 7 property-based tests with Hypothesis (1.03s)
+```
+
+---
+
+### Sample Manifest Output
+
+**Walk-Forward (embargo=0, contiguous training):**
+```json
+{
+  "schema_version": "1.0.0",
+  "split_method": "walk_forward",
+  "purge_window": 5,
+  "embargo_window": 0,
+  "splits": [{
+    "fold_id": 0,
+    "purged_count": 4,
+    "embargoed_count": 0,
+    "non_contiguous_train": false
+  }]
+}
+```
+
+**PurgedKFold (embargo applies, non-contiguous training):**
+```json
+{
+  "schema_version": "1.0.0",
+  "split_method": "purged_kfold",
+  "purge_window": 5,
+  "embargo_window": 3,
+  "splits": [{
+    "fold_id": 1,
+    "purged_count": 5,
+    "embargoed_count": 3,
+    "non_contiguous_train": true
+  }]
+}
+```
+
 ## Version 3.1.1 (2025-11-05)
 
 Changelog for GPU-Accelerated Data Processing Pipeline Stack
@@ -331,7 +530,6 @@ Version: 3.1.0 (Param matrix upgrades, structured engine scenarios, dataframe he
 ### Future Work
 - Migrate remaining legacy references in cleaning/feature steps to the new `pipeline_core_*` APIs.
 - Extend devtools scanners with auto-fix mode for common shim patterns.
-
 
 ## Version 2.0.0 (2025-08-06)
 
