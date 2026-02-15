@@ -1,680 +1,482 @@
-# MarketMind ![Version](https://img.shields.io/badge/Version-3.3.0-8A2BE2) [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python)](https://www.python.org/) [![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=cplusplus)](https://isocpp.org/) [![CUDA](https://img.shields.io/badge/CUDA-12.9-76B900?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit) ![License](https://img.shields.io/badge/license-Proprietary-red) [![Build Status](https://img.shields.io/github/actions/workflow/status/Nalakram/QuantAIvus/ci.yml?branch=main)](https://github.com/Nalakram/QuantAIvus/actions) [![codecov](https://codecov.io/gh/MindForgeLabs/MarketMind/graph/badge.svg?token=LIJZD4YCFB)](https://codecov.io/gh/MindForgeLabs/MarketMind) [![Java 21](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21) [![Spring](https://img.shields.io/badge/Spring-3.5.0-6DB33F?style=flat-square&logo=spring&logoColor=white)](https://spring.io/) ![JavaFX 21](https://img.shields.io/badge/JavaFX-21-3873B3?style=flat-square)
- [![Windows Supported](https://custom-icon-badges.demolab.com/badge/Windows-Supported-0078D6?logo=windows11&logoColor=white)](https://www.microsoft.com/windows) [![Linux](https://img.shields.io/badge/Linux-Tested-FCC624?style=flat-square&logo=linux)](https://kernel.org/) [![Read the Docs](https://img.shields.io/badge/docs-Read_the_Docs-8CA1AF?logo=readthedocs)](https://marketmind-docs.readthedocs.io/en/latest/) ![Status](https://img.shields.io/badge/status-development-FFA500?style=flat-square)
+**MarketMind**  
+────────────────────────
 
-![MarketMind Banner](https://raw.githubusercontent.com/Nalakram/marketmind-docs/main/docs/source/images/banner1.png)
+Algorithmic Trading Platform
 
+README & Technical Overview
 
-MarketMind is an algorithmic trading platform designed for automated, high-frequency trading with built-in analytics and risk controls. It employs a multilingual architecture — performance-critical modules in C++, modeling and orchestration in Python, and a JavaFX desktop UI with Spring Boot services — optimized for ultra-low-latency use cases.
+Version 3.3.1  ·  February 2026  ·  Proprietary
 
-**What's working today (Phase 0):** A complete vertical slice from JavaFX UI → Python subprocess → preprocessing (OHLCV ingestion, technical indicators) → backtesting engine (SMA crossover, Sharpe/drawdown/win rate) → validation gates → JSON results displayed in the desktop UI. The system produces auditable run bundles with deterministic artifact hashing, leakage-protected time-series splits (purge/embargo), and a fail-closed gate framework — all backed by 150+ passing tests.
+Python 3.12  ·  C++20  ·  Java 21 / JavaFX  ·  Spring Boot
 
-**What's planned:** The platform is designed to ingest real-time market data and news (NLP pipelines) and apply hybrid deep-learning models (Transformer + LSTM/TCN) for price and trend forecasting, with C++ inference for sub-millisecond latency. Future features include Informer models for long-sequence forecasting, graph neural networks for cross-asset relationships, hidden Markov models for regime detection, Granger causality for leading indicators, and SHAP-based interpretability. See [Current Status & Roadmap](#current-status--roadmap) for phase timelines.
+*Companion documents: Implementation Plan v5.3  ·  Technical Roadmap v1.1  ·  VERSION.md*
 
-> **Proprietary — internal contributions or by arrangement.** See the _Contributing_ section below and the `Programming Guidelines` for review/coverage/security requirements.
+# **Contents**
 
----
+1\.  Overview
 
-## Table of Contents
-- [Current Status & Roadmap](#current-status--roadmap)
-- [What's New in 3.3.0](#whats-new-in-330)
-- [Architecture Overview](#architecture-overview)
-- [Backtesting Infrastructure](#backtesting-infrastructure)
-- [Desktop UI & Services (JavaFX + Spring Boot)](#desktop-ui--services-javafx--spring-boot)
-- [Tech Stack](#tech-stack)
-- [Installation & Support Matrix](#installation--support-matrix)
-- [3-step End-to-end Quickstart](#3-step-end-to-end-quickstart)
-- [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Testing & Gates](#testing--gates)
-- [Performance (SLOs)](#performance-slos)
-- [Security & Privacy (summary)](#security--privacy-summary)
-- [Public Interfaces (at a glance)](#public-interfaces-at-a-glance)
-- [Contributing](#contributing)
-- [Versioning & Changelog](#versioning--changelog)
-- [License](#license)
+2\.  Current Status & Roadmap
 
----
+3\.  Architecture Overview
 
-## Current Status & Roadmap
+4\.  Design Foundations
 
-**Version:** 3.3.0 (February 2026) &nbsp;|&nbsp; **Phase:** 0 (Nearing Completion)
+5\.  Backtesting Infrastructure
 
-### Phase 0 Definition of Done
+6\.  Desktop UI & Services
 
-| Criteria | Status | Evidence |
-|----------|--------|----------|
-| Run Bundle v1 emitted by pipeline | ✅ Done | `run_pipeline.py` produces `run_bundle_v1/{timestamp}_{hash}/` per Appendix C |
-| Gate CLI invoked automatically | ✅ Done | `srcPy/cli/gate.py` — Appendix C/D v5.1 compliant, 42 tests |
-| Java↔Python bridge stable | ✅ Done | stdout JSON + exit codes match Appendix E (0/1/2/3) |
-| End-to-end UI demo | ✅ Done | JavaFX button → Python subprocess → backtest → gates → results card |
-| Integration canary (vertical slice) | ✅ Done | 10 tests in `test_vertical_slice.py` |
-| Splits with purge/embargo | ✅ Done | `splits.py` — 40 tests (33 unit + 7 property), `splits_manifest.json` v1.0.0 |
-| ≥5 leakage property tests | ✅ Done | 20 Hypothesis tests covering 5 invariants (temporal ordering, sample disjointness, purge gap, fit-on-train-only, no look-ahead) |
-| Preprocessor ≥85% line / ≥70% branch | 🚧 79.9% / 92% | ~125 lines remaining for 85% target; branch target exceeded |
-| Baseline locked (CI == local ≤0.5% drift) | ❌ Not started | Infrastructure task |
+7\.  Tech Stack
 
-### Preprocessor Coverage (`srcPy/preprocessor/*`)
+8\.  Installation & Quickstart
 
-**Line coverage:** 79.9% → 85% target (~125 lines remaining) &nbsp;|&nbsp; **Branch coverage:** 92% ✅ (target: 70%)
+9\.  Project Structure
 
-<details>
-<summary>Per-file breakdown</summary>
+10\. Testing & Quality
 
-| File | Coverage | Notes |
-|------|----------|-------|
-| `ops_custom.py` | 96% | ✅ Bug-fixed (method overrides) |
-| `graph.py` | 94% | ✅ |
-| `core.py` | 93% | ✅ |
-| `expr.py` | 93% | ✅ Bug-fixed (frozen dataclass) |
-| `ops.py` | 90% | ✅ Bug-fixed (cached_property) |
-| `transforms.py` | 88% | ✅ |
-| `columns.py` | 86% | ✅ |
-| `api.py` | 83% | ✅ Bug-fixed (dead code removed) |
-| `errors.py` | 83% | ✅ |
-| `splits.py` | 81% | ✅ New (purge/embargo) |
-| `dsl.py` | 80% | ✅ |
-| `specs.py` | 59% | 🚧 ~36 uncovered lines |
-| `executor.py` | 55% | 🚧 ~60 uncovered lines, bug-fixed (lru_cache) |
-| `backends/polars.py` | 42% | 🚧 ~67 uncovered lines |
-| `expr_builders.py` | 31% | 🚧 ~34 uncovered lines |
+11\. Performance SLOs
 
-</details>
+12\. Security & Privacy
 
-### Roadmap
+13\. Document Map
+
+14\. Versioning & Changelog
+
+15\. License
+
+# **1\. Overview**
+
+MarketMind is an algorithmic trading platform designed for automated, high-frequency trading with built-in analytics, validation gates, and risk controls. It ingests market data and applies hybrid deep-learning models to generate continuous price and trend forecasts. Its trading engine executes buy/sell orders based on model signals with configurable risk management.
+
+**What works today (Phase 0):** A complete vertical slice from JavaFX desktop UI through Python subprocess to preprocessing, backtesting, gate validation, and results display — backed by 150+ passing tests, 20 Hypothesis property-based leakage tests, and an artifact registry with content-addressable storage.
+
+**What’s planned:** Real-time data feeds, ML training pipelines (Transformer \+ LSTM/TCN), ONNX/TensorRT optimization, C++ sub-millisecond inference, a Medallion-inspired signal factory with meta-learning, and SHAP-based interpretability. The architectural vision encompasses a 6-lane fidelity simulation system, an Autonomous Alpha Factory loop, and hierarchical meta-learning.
+
+The system employs a multilingual architecture: performance-critical modules in C++, modeling and orchestration in Python (Polars/PyTorch), and a JavaFX desktop UI with Spring Boot services. All backtesting artifacts are hashed with RFC8785 JCS canonicalization for reproducibility.
+
+*Proprietary — internal contributions or by arrangement. See Contributing and Programming Guidelines for requirements.*
+
+# **2\. Current Status & Roadmap**
+
+**Version:** 3.3.0  |  Phase 0: Validation Infrastructure  |  7 of 9 milestones complete
+
+| What Works ✅ | What Doesn’t Yet ❌ |
+| :---- | :---- |
+| End-to-end vertical slice: UI → Python → backtest → gates → results | Live data feeds — no streaming, no replay, no WebSocket |
+| Run bundle pipeline producing auditable artifact directories | ML models — no training, no ONNX export, no inference |
+| Gate CLI with Appendix C/D v5.1 compliance (42 tests) | C++ inference engine — JNI interface exists, no native lib |
+| Purge/embargo time-series splits (40 tests, 100% coverage) | NLP / sentiment pipeline — deps installed, nothing wired |
+| 20 Hypothesis leakage property tests covering 5 invariants | Statistical validity report — spec’d (Appendix H), not built |
+| Artifact Registry with CAS, dedup, state machine (14 tests) | Strategy ecosystem — stat\_arb/momentum sketched, not pipelined |
+| Preprocessor at 80% line / 92% branch coverage | Risk framework — Kelly/position sizing not integrated |
+| 150+ tests passing across unit, integration, property suites | Execution cost modeling — backtests assume zero costs |
+
+**Phase 0 remaining:** Preprocessor coverage 80% → 85% (\~125 test lines across 4 files) and CI baseline lock (pytest.ini/.coveragerc diff check).
+
+## **Roadmap**
 
 | Phase | Focus | Timeline | Status |
-|-------|-------|----------|--------|
-| **Phase 0** | Validation infrastructure — gates, splits, leakage tests, run bundles, UI vertical slice | Jan–Feb 2026 | 🚧 7/9 criteria met |
-| **Phase I** | Live data integration — streaming ingestion, replay, data quality gates | 4–6 weeks after Phase 0 | Not started |
-| **Phase II** | ML model integration — feature engineering, XGBoost/LSTM baselines, walk-forward validation, meta-learning | 6–8 weeks after Phase I | Not started |
-| **Phase III** | Low-latency execution — C++ inference (<1ms), order execution, risk controls, kill switch | 8–12 weeks after Phase II | Not started |
-| **Phase IV** | Production & scale — distributed backtesting, monitoring, multi-asset, multi-strategy | Ongoing after Phase III | Not started |
+| :---- | :---- | :---- | :---- |
+| 0 | Validation infrastructure: gates, bundles, splits, leakage tests | Jan – Feb 2026 | 🚧 7/9 complete |
+| I | Live data: feeds, replay engine, quality gates, PIT enforcement | \+4–6 weeks | Not started |
+| II | ML models: features, XGBoost/LSTM, signal registry, meta-learning | \+6–8 weeks | Not started |
+| III | Low-latency execution: C++ inference, order engine, risk controls | \+8–12 weeks | Not started |
+| IV | Production & scale: distributed backtesting, monitoring, multi-asset | Ongoing | Not started |
 
-### Pipeline Architecture (Working)
+## **Working Pipeline**
 
-```
-Java UI → python -m srcPy.bridge.run_pipeline input.csv
-              ↓
-         1. Create run_bundle_v1/{timestamp}_{hash}/
-         2. Write plan.json (IN_PROGRESS)
-         3. Write env_fingerprint.json
-         4. Preprocess (load OHLCV, compute returns/SMA/RSI)
-         5. Backtest (SMA crossover signals → Sharpe, drawdown, win rate)
-         6. Write dataset_manifest.json, preprocessing_report.json, splits_manifest.json
-         7. Invoke Gate CLI → gate_result.json
-         8. Update plan.json (COMPLETE)
-              ↓
-         stdout: JSON with status + backtest metrics + gate result
-         Exit codes: 0=SUCCESS, 1=FAILED_GATES, 2=INVALID_INPUT, 3=ERROR
-```
+\# Single command produces auditable run bundle:
 
----
+python \-m srcPy.bridge.run\_pipeline tests/fixtures/sample\_spy.csv \--fast-sma 5 \--slow-sma 10
 
-## What's New in 3.3.0
+\# Output: run\_bundle\_v1/{timestamp}\_{hash}/
 
-**3.3.0** completes the Phase 0 vertical slice — an end-to-end pipeline from JavaFX UI through backtesting to validation gates — and pushes preprocessor coverage from 56% to 80%.
+\#   ├── plan.json                    \# Run configuration \+ plan\_hash
 
-### End-to-End Pipeline & Java Integration
-- **Working vertical slice**: Button click in JavaFX UI → Python subprocess → preprocessing → backtesting → gate validation → JSON results displayed in UI results card (validation status, total return, Sharpe ratio, max drawdown, win rate, trade count)
-- **Run bundle pipeline** (`srcPy/bridge/run_pipeline.py`): Single command produces versioned `run_bundle_v1/{timestamp}_{hash}/` directories with all Appendix C artifacts
-- **Java↔Python bridge** with stdout JSON + exit codes per Appendix E; BacktestService with JSON extraction from mixed Python output
-- **AtlantaFX theming** for the desktop UI
+\#   ├── env\_fingerprint.json          \# Python, git, system, deps, GPU
 
-### Gate CLI (Appendix C/D v5.1 Compliant)
-- **Full bundle validation** (`srcPy/cli/gate.py`): Validates all 5 required files per Appendix C.2 with schema version checks
-- **Plan identity gate** with expected/actual evidence pattern per Appendix D.2
-- **Leakage invariant enforcement** with purge gap verification and timestamp parsing
-- **Exit codes** per Appendix D.1: `0`=PASS, `1`=FAIL, `2`=invalid input, `3`=internal error
-- **42 tests** covering gate logic, schema validation, and edge cases
+\#   ├── dataset\_manifest.json         \# Data provenance \+ hashes
 
-### Time-Series Splits with Purge/Embargo
-- **`splits.py`**: `TimeSeriesSplitter` and `PurgedKFold` implementations with configurable purge and embargo windows
-- **`splits_manifest.json`** v1.0.0 schema with fold metadata (purge count, embargo count, contiguity flags)
-- **40 tests** (33 unit + 7 property-based via Hypothesis)
+\#   ├── preprocessing\_report.json     \# Feature computation report
 
-### Property-Based Leakage Tests
-- **20 Hypothesis tests** covering 5 leakage invariants: temporal ordering, sample disjointness, purge gap enforcement, fit-on-train-only, no look-ahead bias
-- Located in `tests/python/property/test_leakage_invariants.py`
+\#   ├── splits\_manifest.json          \# Train/test split details
 
-### Preprocessor Coverage Push (56% → 80%)
-- **7 critical bug fixes**: `factory.py` (missing import + silent exceptions), `planner.py` (undefined attributes), `api.py` (dead code), `executor.py` (broken lru_cache), `ops.py` (cached_property incompatibility), `ops_custom.py` (method override mismatch), `expr.py` (frozen dataclass with mutable parent)
-- **Deleted dead code**: `expr_opt.py` (28 lines, 0% coverage, duplicated logic)
-- **~1,500 lines of new tests** across 4 test files targeting specific uncovered modules
+\#   └── gate\_result.json              \# PASS/FAIL \+ reason codes
 
-### Previous Release (3.2.0)
-<details>
-<summary>Gate Runner CLI, Artifact Registry, CAS Storage (December 2025)</summary>
+\# stdout: JSON result  |  exit codes: 0=PASS, 1=FAIL, 2=invalid input, 3=internal error
 
-- **Fail-closed validation service** (`mm-gate`) for Spec Bundle v1 inputs with deterministic decision artifacts
-- **RFC8785 JCS canonicalization** + SHA-256 for reproducible artifact hashing
-- **Content-addressable storage (CAS)** with idempotent artifact registration and deduplication
-- **Run state machine**: REGISTERING → COMPLETE → FAILED with visibility controls
-- **47 tests** covering happy path, hash tampering, threshold violations, schema violations, and determinism
+# **3\. Architecture Overview**
 
-</details>
+    ┌─────────────────────────┐     ┌─────────────────────────┐
 
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
+    │  Backtesting Engine        │     │  Python Orchestrator      │
 
----
+    │  (Lane A/B simulation)     │◄──►│  (pipelines / engines)    │
 
-## Architecture Overview
+    │  • Artifact provenance     │gRPC └──────────┬──────────────┘
 
-```
-         ┌──────────────────────────┐         ┌──────────────────────────┐
-         │   Backtesting Engine     │         │      Python Orchestrator │
-         │  (Lane A/B simulation)   │◄───────►│  (pipelines/engines)     │
-         │  • Artifact provenance   │  gRPC   └───────────┬──────────────┘
-         │  • Transfer gap analysis │                     │
-         └────────────┬─────────────┘                     │
-                      │                              Registries/Plugins
-         ┌────────────▼─────────────┐                     │
-         │   Gate Runner CLI        │                     ▼
-         │  (mm-gate validate)      │         ┌──────────────────────────┐
-         └──────────────────────────┘         │  Artifact Registry (CAS) │
-                                              │  • Run state machine     │
-         ┌──────────────────────────┐         │  • Deduplication         │
-         │        JavaFX UI         │         └──────────────────────────┘
-         │  (desktop client)        │◄────────►  GPU/CPU Backends
-         └────────────┬─────────────┘   gRPC   (cuDF/CuPy/Polars/Torch)
-                      │ JNI/gRPC
-                      ▼
-         ┌──────────────────────────┐
-         │      C++ Inference       │
-         │ (ultra‑low latency)      │
-         └──────────────────────────┘
-```
+    │  • Transfer gap analysis   │            │
 
-<details>
-<summary><strong>Mermaid: detailed pipeline (click to expand)</strong></summary>
+    └───────────┬─────────────┘    Registries / Plugins
 
-```mermaid
-flowchart LR
-  Training[Training (PyTorch/TensorFlow)] -->|export| ONNX[Export ONNX]
-  ONNX -->|optimize| TensorRT[TensorRT / TRT]
-  TensorRT -->|bundle| ORT[ORT / TensorRT EP]
-  ORT -->|serve| CppInf[C++ Inference (Triton/gRPC/ORT)]
-  CppInf -->|gRPC/JNI| Python[Python Orchestrator]
-  Python -->|gRPC| JavaFX[JavaFX UI & Spring Services]
-  Python -->|register| ArtifactReg[Artifact Registry]
-  ArtifactReg -->|validate| GateRunner[Gate Runner CLI]
-  GateRunner -->|promote| Production[Production Deployment]
-```
+               │                         │
 
-</details>
+    ┌───────────▼─────────────┐         ▼
 
-**Key ideas**
-- **Registry‑driven pipelines:** All cleaning/preprocessing steps are plug‑ins (e.g., `rename`, `cast`, `resample`, technical features, embeddings, topic modeling, explainability). Registries enable runtime composition and safe fallbacks.
-- **Self‑evolving engine:** Adaptive strategies learn when to parallelize, reorder, or switch backends based on risk/telemetry.
-- **GPU acceleration end‑to‑end:** cuDF → CuPy sliding windows → Torch tensors → model → TensorRT/ORT → C++ inference.
-- **Explainable modeling:** SHAP/feature importance and statistical tools for transparent decisions.
-- **Artifact provenance:** RFC8785-canonicalized hashing ensures reproducible artifact identity across backtesting lanes.
+    │  Gate Runner CLI          │  ┌─────────────────────────┐
 
----
+    │  (mm-gate validate)       │  │  Artifact Registry (CAS)  │
 
-## Backtesting Infrastructure
+    └─────────────────────────┘  │  • Run state machine       │
 
-MarketMind includes a production-grade backtesting system designed for multi-fidelity strategy validation:
+                                  │  • Deduplication           │
 
-### Multi-Fidelity Simulation (Lane A/B)
-- **Lane A (Low-fidelity)**: Rapid prototyping with simplified market dynamics for fast iteration cycles
-- **Lane B (High-fidelity)**: Production-grade simulation with full order book dynamics, slippage, and transaction costs
-- **Transfer gap measurement**: Quantitative metrics (Spearman ρ, top-k overlap) validate strategy robustness across lanes
+    ┌─────────────────────────┐  └─────────────────────────┘
 
-### Run Bundle Pipeline (Working)
-The pipeline produces a complete, auditable `run_bundle_v1/` directory from a single command:
+    │  JavaFX Desktop UI       │
 
-```bash
-# Full pipeline: preprocess → backtest → gate validation → JSON output
-python -m srcPy.bridge.run_pipeline tests/fixtures/sample_spy.csv --fast-sma 5 --slow-sma 10
+    │  (Spring Boot \+ AtlantaFX)│◄──► GPU/CPU Backends
 
-# Individual CLI tools
-python -m srcPy.cli.preprocess input.csv output.csv --sma 5 10 --rsi 14
-python -m srcPy.cli.backtest data.csv --output-dir bundles/run1
-```
+    └───────────┬─────────────┘  (Polars/cuDF/CuPy/Torch)
 
-**Bundle output** (per Appendix C):
-```
-run_bundle_v1/{timestamp}_{hash}/
-├── plan.json                    # Identity + point-in-time anchor
-├── env_fingerprint.json         # Python version, git SHA, dependencies
-├── dataset_manifest.json        # Symbols, row count, time range
-├── preprocessing_report.json    # Transform trace with fit/transform boundaries
-├── splits_manifest.json         # Fold metadata, purge/embargo windows
-└── gate_result.json             # PASS/FAIL per gate with evidence
-```
+               │ JNI/gRPC
 
-### Time-Series Splits (Purge/Embargo)
-Leakage-protected train/test splitting using Marcos López de Prado's methodology:
+               ▼
 
-- **`TimeSeriesSplitter`**: Walk-forward splits with configurable purge and embargo windows
-- **`PurgedKFold`**: K-fold cross-validation that purges observations within the purge window of test boundaries and embargoes observations after test periods
-- **`splits_manifest.json`**: Machine-readable fold metadata (purge count, embargo count, contiguity flags) with schema version validation
+    ┌─────────────────────────┐
 
-### Gate Runner CLI
-The `mm-gate` CLI provides fail-closed artifact validation before strategy promotion:
+    │  C++ Inference  🔮       │
 
-```bash
-# Validate backtesting artifacts against policy thresholds
-mm-gate validate <bundle_dir> [--policy policies/gating_policy.v1.yaml]
+    │  (ultra-low latency)      │
 
-# Promote strategy (emits promotion_event.json on PASS)
-mm-gate promote <bundle_dir> [--policy <path>] [--allow-run-ids]
-```
+    └─────────────────────────┘
 
-**Exit codes:**
-- `0` = PASS (all gates satisfied)
-- `2` = Validation failure (threshold violation, hash mismatch, schema error)
-- `3` = Configuration error (missing policy, invalid bundle)
+### **Key Architectural Ideas**
 
-**Validation gates:**
-- **Schema compliance**: JSON Schema Draft-07/2020-12 with deep closed-world validation
-- **Integrity verification**: SHA-256 hash matching for all artifacts in `artifact_index.json`
-- **Comparability locks**: Enforces matching `fidelity_id`, `cost_model_id`, `scenario_id`, `data_slice_id` between baseline and candidate
-- **Threshold gating**: Spearman ρ ≥ 0.70, top-k overlap ≥ 0.60 (k ∈ [5, 10, 20])
-- **Binding validation**: Requires content hashes (not just run IDs) for promotion to production
-- **Leakage invariant enforcement**: Purge gap verification with timestamp parsing
+* **Registry-driven plugin pipelines:** All cleaning, preprocessing, and strategy steps are typed plugins composed at runtime. Seven canonical plugin types (SignalFn through Validator) enforce strict separation of concerns.
 
-### Gate CLI (`srcPy/cli/gate.py`)
-Bundle-level validation aligned to Appendix C/D v5.1:
+* **Functional Core / Imperative Shell (FCIS):** Strategy logic is pure, stateless computation over immutable DataFrames. All side effects (I/O, clocks, exchange calls) live in the shell.
 
-```bash
-# Validate a run bundle
-marketmind-gate check --bundle /path/to/run_bundle_v1 --output /path/to/gate_result.json
-```
+* **Canonical IR Pipeline:** Strategies emit typed Intermediate Representations — not side effects. The 7-stage pipeline (MarketData → Features → Alpha → Targets → Orders → Fills → Ledger) separates pure computation from stateful execution.
 
-**Exit codes** (Appendix D.1): `0`=all gates PASS, `1`=one or more FAIL, `2`=invalid input, `3`=internal error
+* **Artifact provenance:** RFC8785 JCS-canonicalized hashing ensures reproducible artifact identity across backtesting lanes and environments.
 
-**Gates implemented:** file presence (5 required files per C.2), schema version validation, plan identity with expected/actual evidence, leakage invariant checks
+* **Multi-fidelity simulation:** Strategies are validated across a fidelity ladder (Lanes 0–5), from fast analytical screening to real-time shadow deployment.
 
-### Artifact Registry (CAS)
-Content-addressable storage with deterministic deduplication:
+# **4\. Design Foundations**
 
-```python
-from srcPy.artifact_registry import ArtifactRegistry, BlobStore
+MarketMind’s architecture is grounded in 11 research documents produced December 2025 through February 2026, covering every layer from data integrity to meta-learning. This section summarizes the key architectural commitments that shape all implementation decisions.
 
-# Register backtest result (automatic deduplication)
-artifact_id = await registry.register_artifact(
-    run_id="run_abc123",
-    plan_hash="sha256:...",
-    artifact_type="backtest_result",
-    content_hash="sha256:...",  # Computed via RFC8785 JCS
-    content={"sharpe_ratio": 1.42, "pnl": 0.18},
-    lane="A"  # or "B"
-)
-```
+## **4.1 Canonical IR Pipeline**
 
-**Key features:**
-- **Idempotency**: Re-registering `(plan_hash, artifact_type, content_hash)` returns existing artifact ID
-- **Run state machine**: `REGISTERING` → `COMPLETE` → `FAILED` with visibility controls
-- **Immutable identity**: Artifact provenance preserved across deduplication
-- **NaN/Infinity rejection**: Hashing contract enforcement prevents non-finite floats
+The system processes data through a 7-stage pipeline with a hard boundary between pure computation and stateful execution. Stages 1–3 are pure functions: deterministic, cacheable, and safe for JAX/GPU acceleration. Stages 4–7 are stateful: event-driven with explicit state machines.
 
-See the [Backtesting Guide](https://marketmind-docs.readthedocs.io/en/latest/backtesting.html) for detailed usage.
+MarketData → Features → Alpha → Targets → Orders → Fills → Ledger
 
----
+\[──── Pure (Functional Core) ────\]   \[─── Stateful (Imperative Shell) ───\]
 
-## Desktop UI & Services (JavaFX + Spring Boot)
-MarketMind ships a first‑class Java desktop and local service layer with a working end-to-end backtesting integration:
-- The JavaFX desktop is bundled with Spring Boot services for local APIs and controller wiring, themed with **AtlantaFX**.
-- Spring uses a controller factory wired to FXML controllers (FXML → Spring controller factory → beans), enabling Spring-managed services inside the UI controller lifecycle.
-- **BacktestService** invokes the Python pipeline via `PythonRunner` subprocess, extracts JSON from mixed stdout output, and displays results in a dashboard card showing: validation status (PASS/FAIL), total return, Sharpe ratio, max drawdown, win rate, and trade count.
+*Source: Research Pack · Strategy I/O Contract v2 (December 2025\)*
 
-Run the service + UI in development:
-```bash
-# start Spring Boot services (local dev)
+## **4.2 Plugin Architecture**
+
+All strategy logic composes from seven canonical plugin types with explicit Protocol signatures and forbidden boundaries. Each type has a single responsibility; cross-boundary access (e.g., a SignalFn reading cost data) is a hard violation.
+
+| Plugin Type | Primary I/O | Responsibilities | Forbidden |
+| :---- | :---- | :---- | :---- |
+| SignalFn | MarketData → Alpha \[-1,1\] | Normalized signals, indicators, param schema | Sizing, costs, execution, I/O |
+| SizingFn | Alpha \+ Data → Positions | Vol targeting, Kelly/fixed-fraction sizing | Signal generation, risk, costs |
+| RiskFn | Targets \+ Current → Clipped | Position caps, drawdown throttle, kill switch | Signals, sizing, costs, execution |
+| CostModel | Trades \+ Data → Cost | Spread/fee/impact estimation, lane-specific | Signal/sizing/risk decisions |
+| ExecutionModel | Orders \+ Data → Fills | Fill simulation, slippage, latency, queues | Signal/sizing/risk logic |
+| PortfolioAllocator | Strategy Pos → Portfolio | Multi-strategy combination, exposure limits | Individual signals, execution |
+| Validator | Any \+ Schema → Result | Config/output validation, combinatoric checks | Data transformation, side effects |
+
+*Source: Plugin Architecture — Best of All Worlds (December 2025\)*
+
+## **4.3 Multi-Fidelity Simulation (Lanes 0–5)**
+
+Strategies are validated across a fidelity ladder. Lower lanes are fast, cheap filters for hypothesis testing. Higher lanes are expensive, realistic validators. Promotion from Lane A to Lane B requires transfer metric thresholds (Kendall τ-b, NDCG@k).
+
+| Lane | Fidelity Level | Primary Use | Status |
+| :---- | :---- | :---- | :---- |
+| 0: Analytical | Monthly/daily returns | Factor analysis, portfolio theory | ✅ Current |
+| 1: Signal | OHLCV bars | Hypothesis testing, feature selection | ✅ Current |
+| 2: Backtest | Tick/quote \+ static costs | Parameter optimization, walk-forward | 🚧 Needs Appendix G |
+| 3: Microstructure | L2 / limit order book | Execution logic, fill probability | 🔮 Phase III |
+| 4: Agent-Based | Synthetic / generative | Resilience, liquidity crises | 🔮 Phase IV+ |
+| 5: Shadow | Real-time feed | Deployment validation, canary testing | 🔮 Phase III–IV |
+
+**Comparability locks:** When comparing across lanes, data\_slice\_id, feature\_plan\_hash, strategy\_config\_hash, and random\_seed must match. Only cost\_model and execution\_model may differ.
+
+*Source: Unified Fidelity & MetaLearning Report · Plugin Architecture Section 5 (December 2025\)*
+
+## **4.4 Point-in-Time Data Integrity**
+
+All data access flows through a single front door: DataView.as\_of(T), which enforces both valid\_time ≤ T and knowledge\_time ≤ T. This makes look-ahead bias mechanically impossible at the API level.
+
+* **Bitemporal facts:** Every mutable datum carries valid\_time (when it’s true in the world) and knowledge\_time (when it becomes knowable). Storage is append-only.
+
+* **Safe joins only:** All temporal joins are backward ASOF with explicit staleness bounds (TTL). Forward and nearest joins are forbidden.
+
+* **Restatements are rows:** Corrections are new versioned rows, not edits. Default PIT returns originally-known values.
+
+* **Universe is auditable:** Daily membership table with reason codes. Delisted assets included until delist date.
+
+* **Automated defense:** CI battery includes poison-pill, backward-time invariance, restatement replay, survivorship, and corporate action timing tests.
+
+*Source: Priority 0a Super Report — Point-in-Time & No Future Leakage (December 2025\)*
+
+## **4.5 Distributed Determinism**
+
+Reproducibility is a tiered contract, not an all-or-nothing property. Different artifact classes require different levels of determinism:
+
+| Tier | Guarantee | Applies To |
+| :---- | :---- | :---- |
+| D3: Bitwise | Byte-identical outputs | Orders, fills, positions, ledger, promotion decisions |
+| D2: Semantic | Within explicit (rtol, atol) | NAV, returns, risk metrics, ML training artifacts |
+| D1: Topological | Logically equivalent | Non-audit intermediate caches only |
+| D0: None | Debug only | Never for promotion or audit |
+
+**Three pillars:** Hierarchical seed derivation (master → run/fold/worker/strategy/asset via HMAC-SHA256), deterministic ordering (stable asset\_id \+ session index), and numeric policy (Decimal for cash/ledger, float64 for signals, Kahan summation for sensitive totals).
+
+*Source: Priority 0b Super Report — Distributed Determinism & Parallel Semantics (December 2025\)*
+
+## **4.6 Statistical Rigor**
+
+Every backtest claim requires statistical validation before it can be considered credible:
+
+* **Deflated Sharpe Ratio (DSR):** Adjusts for the number of trials and non-normality. Gate: FAIL if DSR \< 0 (strategy is likely a false discovery).
+
+* **Bootstrap confidence intervals:** Block bootstrap preserving autocorrelation. Gate: WARN if 95% CI includes zero.
+
+* **Minimum Track Record Length:** Estimates years needed for significance. SR \= 1.0 requires \~3.8 years at 95% confidence.
+
+* **Multiple testing correction:** Benjamini-Hochberg FDR control when testing multiple strategy variants.
+
+*Source: Research Agenda Priority 8 · Implementation Plan Appendix H (January 2026\)*
+
+# **5\. Backtesting Infrastructure**
+
+## **5.1 Run Bundle Pipeline**
+
+A single command produces an auditable run\_bundle\_v1/ directory containing all manifests and gate results. The pipeline assembles plan.json (configuration \+ plan\_hash), env\_fingerprint.json (Python, git, deps, system, GPU), dataset\_manifest.json (data provenance \+ hashes), preprocessing\_report.json, splits\_manifest.json, and gate\_result.json.
+
+python \-m srcPy.bridge.run\_pipeline tests/fixtures/sample\_spy.csv \--fast-sma 5 \--slow-sma 10
+
+## **5.2 Time-Series Splits**
+
+TimeSeriesSplitter implements walk-forward validation. PurgedKFold implements Marcos López de Prado’s purge and embargo methodology for financial cross-validation. Configurable purge and embargo windows prevent temporal contamination. 40 tests at 100% coverage.
+
+## **5.3 Gate Runner CLI (mm-gate)**
+
+Fail-closed artifact validation service for Spec Bundle v1 inputs. RFC8785 JCS canonicalization \+ SHA-256 for reproducible hashing. Multi-dialect JSON Schema validation (Draft-07/2020-12). Transfer report gating with Spearman ρ ≥ 0.70 and top-k overlap ≥ 0.60. 47 tests covering happy path, hash tampering, threshold violations, and determinism.
+
+## **5.4 Gate CLI (srcPy/cli/gate.py)**
+
+Bundle-level Appendix C/D v5.1 validation. Validates all 5 required bundle files per Appendix C.2. Implements plan\_identity gate with expected/actual evidence pattern. Enforces leakage invariants with purge gap verification. Exit codes: 0 \= PASS, 1 \= FAIL, 2 \= invalid input, 3 \= internal error. 42 tests.
+
+## **5.5 Artifact Registry (CAS)**
+
+Content-addressable storage with idempotent artifact registration and deduplication. Run state machine: REGISTERING → COMPLETE → FAILED with visibility controls (only COMPLETE runs queryable). Immutable artifact identity preserves provenance across deduplication. NaN/Infinity rejection with structured exception handling. 14 integration tests.
+
+## **5.6 Lane A/B Multi-Fidelity**
+
+Lane A provides rapid prototyping with zero or simplified costs. Lane B provides full order book simulation with realistic slippage and transaction costs. Comparability locks (data\_slice\_id, feature\_plan\_hash, strategy\_config\_hash, random\_seed) ensure valid cross-lane comparison. Only cost\_model and execution\_model differ between lanes.
+
+# **6\. Desktop UI & Services**
+
+JavaFX desktop application with Spring Boot services and AtlantaFX theming. The UI provides dashboard navigation, backtest controls, and a results card displaying validation status (PASS/FAIL), total return, Sharpe ratio, max drawdown, win rate, and trade count.
+
 export DISPLAY=host.docker.internal:0
-mvn compile -DskipTests -Dprotoc.skip=true -Dcheckstyle.skip=true -q
-mvn javafx:run -DskipTests -Dprotoc.skip=true -Dcheckstyle.skip=true
 
-# build the desktop artifact (CI / release)
-mvn -q -DskipTests package
-```
+mvn compile \-DskipTests \-Dprotoc.skip=true \-Dcheckstyle.skip=true \-q
 
-Generated gRPC stubs and the Java service layer are produced during `mvn compile` / build — see `cpp/` and `src/main/java` for wiring.
+mvn javafx:run \-DskipTests \-Dprotoc.skip=true \-Dcheckstyle.skip=true
 
----
+The Java service layer (BacktestService, PythonRunner) manages Python subprocess lifecycle, extracts JSON from mixed stdout/logging output, and maps exit codes to UI states.
 
-## Tech Stack
-**Languages:** Python 3.12 · C++20 · Java 21/JavaFX 21 · Maven/Spring Boot
+# **7\. Tech Stack**
 
-**ML & Infra:** PyTorch, TensorFlow/Keras, ONNX, TensorRT, ORT, Triton (optional), cuDF/CuPy, Polars
+| Layer | Technologies |
+| :---- | :---- |
+| Languages | Python 3.12, C++20, Java 21 / JavaFX 21, Maven / Spring Boot 3.5 |
+| ML & Compute | PyTorch, TensorFlow/Keras, ONNX, TensorRT, ORT, cuDF, CuPy, Polars |
+| Data & I/O | pandas, Polars, PyArrow, yfinance, FRED API, InfluxDB, Redis |
+| Validation | RFC8785 JCS, jsonschema (Draft-07/2020-12), Pandera, Pydantic, ruamel.yaml |
+| QA & CI | pytest \+ Hypothesis, mypy \--strict, structlog, CodeQL, Dependabot, GitHub Actions |
+| UI | JavaFX 21, AtlantaFX theming, FXML layouts, Scene Builder-compatible |
+| Infrastructure | Poetry (Python), Maven (Java), Docker, protobuf/gRPC (planned) |
 
-**Data & I/O:** pandas, Polars, PyArrow, yfinance, FRED, InfluxDB, Redis
+# **8\. Installation & Quickstart**
 
-**Orchestration & QA:** structlog, pytest + coverage (branch), mypy --strict, CodeQL/Dependabot (internal)
+### **Prerequisites**
 
-**Backtesting & Validation:** RFC8785 JCS canonicalization, jsonschema (Draft-07/2020-12), ruamel.yaml
+* Python 3.12+ with Poetry
 
----
+* Java 21+ with Maven
 
-## Installation & Support Matrix
-### Quick prerequisites
-- Python 3.12, Poetry, CMake, Ninja, Maven 3.8+, JDK 21
-- For GPU: NVIDIA drivers + CUDA 12.9, Conda (recommended for RAPIDS/cuDF)
+* Git
 
-| Mode | OS | Install path |
-|---|---:|---|
-| CPU-only | Linux / Windows | `poetry install` (recommended) |
-| GPU (CUDA + RAPIDS) | Linux (native Conda) | Create Conda env → use Poetry venv inside conda → `poetry install -E gpu` |
+### **Install**
 
-**Notes:** RAPIDS/cuDF are best installed in a Conda environment and paired with Poetry by pointing Poetry at the Conda venv. Windows GPU/RAPIDS support is limited — prefer Linux for GPU workloads.
+git clone \<repo-url\> && cd MarketMind
 
----
+poetry install                    \# Python dependencies
 
-## 3-step End-to-end Quickstart (lands the plane)
+mvn compile \-DskipTests \-q        \# Java compilation
 
-### Option A: Run the backtesting pipeline (working today)
-```bash
-# 1. Install Python dependencies
-poetry install
+### **Run Pipeline**
 
-# 2. Run the full pipeline (preprocess → backtest → validate → JSON output)
-python -m srcPy.bridge.run_pipeline tests/fixtures/sample_spy.csv --fast-sma 5 --slow-sma 10
+python \-m srcPy.bridge.run\_pipeline tests/fixtures/sample\_spy.csv \--fast-sma 5 \--slow-sma 10
 
-# 3. Run the JavaFX UI with backtesting integration
-export DISPLAY=host.docker.internal:0
-mvn compile -DskipTests -Dprotoc.skip=true -Dcheckstyle.skip=true -q
-mvn javafx:run -DskipTests -Dprotoc.skip=true -Dcheckstyle.skip=true
-```
+### **Run Desktop UI**
 
-### Option B: Build the C++ runtime + minimal inference (Phase III — not yet implemented)
-This path will produce a tiny ONNX model, build the C++ runtime, and run inference.
+mvn javafx:run \-DskipTests \-Dprotoc.skip=true \-Dcheckstyle.skip=true
 
-1. **Export a tiny model to ONNX**
-```bash
-poetry run python -m srcPy.models.export_tiny_onnx --out models/tiny.onnx
-```
+### **Run Tests**
 
-2. **Build the C++ runtime**
-```bash
-cmake -S cpp -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
-```
+poetry run pytest tests/python/ \-v                     \# All Python tests (150+)
 
-3. **Run the minimal Python pipeline (hello-pipeline → hello-inference)**
-```bash
-poetry run python -m srcPy.pipeline.examples.minimal --model models/tiny.onnx
-```
+poetry run pytest tests/python/property/ \-v            \# Hypothesis leakage tests
 
----
+poetry run mypy marketmind\_gate \--strict               \# Type checking
 
-## Project Structure
-<details>
-<summary><strong>View Directory Tree</strong></summary>
+# **9\. Project Structure**
 
-Legend: ✅ Production-ready &nbsp;|&nbsp; 🚧 In progress &nbsp;|&nbsp; 🔮 Planned
+Legend:  ✅ working & tested  ·  🚧 code exists, not fully pipelined  ·  🔮 spec or planned only
 
-```
-MarketMind/
-├── srcPy/                 # Python: pipelines, ML, trading logic
-│   ├── preprocessor/      # ✅ Feature engineering + data transforms
-│   │   ├── core.py        #    ✅ load_ohlcv, add_returns, add_sma, add_rsi (93% coverage)
-│   │   ├── splits.py      #    ✅ TimeSeriesSplitter, PurgedKFold (81% coverage, 40 tests)
-│   │   └── graph/         #    ✅ Registry-driven pipeline graph
-│   │       ├── factory.py     # ✅ Bug-fixed (SentimentLexicon import, alias registration)
-│   │       ├── planner.py     # ✅ Bug-fixed (metrics/weights init)
-│   │       ├── api.py         # ✅ Bug-fixed (dead code removed), 83% coverage
-│   │       ├── executor.py    # 🚧 Bug-fixed (lru_cache), 55% coverage
-│   │       ├── ops.py         # ✅ Bug-fixed (cached_property), 90% coverage
-│   │       ├── ops_custom.py  # ✅ Bug-fixed (method overrides), 96% coverage
-│   │       └── expr.py        # ✅ Bug-fixed (frozen dataclass), 93% coverage
-│   ├── backtest/          # ✅ Backtesting engine
-│   │   └── engine.py      #    ✅ BacktestResult, add_signals, compute_metrics
-│   ├── bridge/            # ✅ Java↔Python integration
-│   │   └── run_pipeline.py #   ✅ Bundle assembly + gate invocation (Appendix C/E)
-│   ├── cli/               # ✅ Command-line tools
-│   │   ├── gate.py        #    ✅ Appendix C/D v5.1 bundle validation (42 tests)
-│   │   ├── preprocess.py  #    ✅ Preprocessing CLI
-│   │   └── backtest.py    #    ✅ Backtesting CLI
-│   ├── backtesting/       # ✅ Multi-fidelity backtesting engine (Lane A/B)
-│   ├── artifact_registry/ # ✅ CAS storage with run state machine
-│   ├── pipeline/
-│   │   └── examples/      # ✅ Vertical slice smoke tests
-│   └── ...
-├── marketmind_gate/       # ✅ Gate Runner CLI for artifact validation
-│   ├── cli.py             # Entry point (mm-gate validate/promote)
-│   ├── hashing/
-│   │   └── canonical.py   # RFC8785 JCS + SHA-256
-│   ├── gates/
-│   │   ├── core.py        # ✅ Gate validation framework (19 tests)
-│   │   ├── schema.py      # JSON Schema validation
-│   │   ├── integrity.py   # Hash verification
-│   │   ├── invariants.py  # Transfer report checks
-│   │   ├── policy.py      # Threshold gating
-│   │   └── decision.py    # Decision artifact emission
-│   ├── io/
-│   │   └── resolvers.py   # URI resolution
-│   └── policy/
-│       └── loader.py      # YAML policy loading
-├── src/                   # ✅ Java: JavaFX + Spring Boot services
-│   └── main/java/**/
-│       ├── MainApp.java         # ✅ AtlantaFX theme initialization
-│       ├── utils/PythonRunner.java        # ✅ Python subprocess management
-│       ├── services/BacktestService.java  # ✅ Pipeline invocation + JSON extraction
-│       └── features/dashboard/
-│           ├── DashboardController.java   # ✅ Backtest integration + results display
-│           └── Dashboard.fxml             # ✅ Backtest controls + results card
-├── cpp/                   # 🔮 C++ backend (JNI/gRPC) — Phase III
-├── data/                  # Datasets & configs
-├── models/                # 🔮 Saved/trained models — Phase II
-├── schemas/               # ✅ JSON Schema definitions
-│   ├── identity.schema.json
-│   ├── artifacts.schema.json
-│   ├── transfer_report.schema.json
-│   ├── gate_decision.schema.json
-│   └── promotion_event.schema.json
-├── policies/              # ✅ Gating policies (YAML)
-│   └── gating_policy.v1.yaml
-├── tests/                 # Python/C++/Java + integration
-│   ├── fixtures/
-│   │   ├── sample_spy.csv               # ✅ Test data (20 rows)
-│   │   ├── valid_bundle/                # ✅ Gate runner test fixtures
-│   │   ├── hash_mismatch/
-│   │   ├── threshold_violation/
-│   │   └── ...                          # 7 fixture bundles total
-│   ├── python/
-│   │   ├── unit/
-│   │   │   ├── preprocessor/
-│   │   │   │   ├── test_core.py                     # ✅ 7 tests
-│   │   │   │   ├── test_dsl_and_api.py              # ✅ Coverage push
-│   │   │   │   ├── test_transforms_and_columns.py   # ✅ Coverage push
-│   │   │   │   ├── test_expr_ops_executor.py        # ✅ Coverage push
-│   │   │   │   └── test_executor_polars_coverage.py # ✅ Coverage push
-│   │   │   ├── backtest/test_engine.py  # ✅ 10 tests
-│   │   │   ├── gate/test_core.py        # ✅ 19 tests
-│   │   │   ├── cli/test_gate.py         # ✅ 42 tests (Gate CLI)
-│   │   │   └── test_hashing.py          # ✅ 27 tests (canonicalization)
-│   │   ├── property/
-│   │   │   ├── test_leakage_invariants.py  # ✅ 20 Hypothesis tests (5 invariants)
-│   │   │   └── test_splits_properties.py   # ✅ 7 property-based tests
-│   │   └── integration/
-│   │       ├── test_vertical_slice.py          # ✅ 10 end-to-end tests
-│   │       ├── test_gate_runner.py             # ✅ 20 tests
-│   │       ├── test_registry_smoke.py          # ✅ 14 tests
-│   │       └── test_vertical_slice_smoke.py    # ✅ 26 tests
-│   └── unit/
-│       └── test_hashing.py   # ✅ 27 tests
-├── deployment/            # Docker, InfluxDB, etc.
-├── docs/                  # canonical docs (point to ./docs)
-├── scripts/               # build & helper scripts
-├── .github/
-│   └── workflows/
-│       └── gate-runner.yml # CI: mypy, pytest, schema validation
-├── pyproject.toml         # Poetry config & plugin registries
-├── CMakeLists.txt         # C++ build config
-├── pom.xml                # Maven config (Java 24, AtlantaFX)
-└── README.md, LICENSE, .gitignore
-```
-</details>
+| Directory | Status | Description |
+| :---- | :---- | :---- |
+| srcPy/preprocessor/ | ✅ | Feature engineering: core.py, splits.py, graph/ engine. 80% coverage. |
+| srcPy/backtest/ | ✅ | SMA crossover engine, BacktestResult, metrics computation. |
+| srcPy/bridge/ | ✅ | run\_pipeline.py (\~450 lines) — bundle assembly \+ exit codes. |
+| srcPy/cli/ | ✅ | gate.py (42 tests), preprocess.py, backtest.py CLI tools. |
+| srcPy/strategies/ | 🚧 | stat\_arb.py (cointegration sketched), momentum.py. Not pipelined. |
+| srcPy/artifact\_registry/ | ✅ | CAS storage, run state machine, dedup. 14 integration tests. |
+| srcPy/pipeline/ | 🚧 | BatchPipeline, StepRegistry. Graph engine has bugs fixed. |
+| srcPy/data/ | 🚧 | Async IBKR fetch with tests. No live streaming. |
+| srcPy/ops/ | ✅ | Caching, logging, @instrument decorator, observability utilities. |
+| marketmind\_gate/ | ✅ | mm-gate CLI: RFC8785, schema validation, promotion. 47 tests. |
+| src/main/java/ | ✅ | JavaFX app, Spring Boot services, AtlantaFX theming. |
+| cpp/ | 🔮 | InferenceJNI interface exists in Java. No native C++ library. |
+| tests/ | ✅ | 150+ tests: unit, integration, property-based (Hypothesis). |
+| policies/ | ✅ | gating\_policy.v1.yaml — gate runner policy definitions. |
 
----
+# **10\. Testing & Quality**
 
-## Configuration
-- Store local secrets and settings in `data/config.yaml` or environment variables.
-- Pipelines are assembled from **plugin steps** registered via entry points; you can add custom steps in your own package and expose them via the registry.
-- Gate Runner policies are defined in `policies/gating_policy.v1.yaml` and can be customized per deployment.
+### **Commands**
 
----
+poetry run pytest tests/python/ \-v                     \# All Python tests
 
-## Testing & Gates
-```bash
-# Run all tests
-poetry run pytest -q
+poetry run pytest tests/python/unit/gate/ \-v           \# Gate tests (42 \+ 19\)
 
-# Full pipeline tests
-poetry run pytest tests/python/ -v
+poetry run pytest tests/python/unit/preprocessor/ \-v   \# Preprocessor tests
 
-# Gate CLI tests (42 tests)
-poetry run pytest tests/python/unit/cli/test_gate.py -v
+poetry run pytest tests/python/unit/backtest/ \-v       \# Backtest tests (10)
 
-# Gate Runner tests (47 tests)
-poetry run pytest tests/unit/test_hashing.py tests/integration/test_gate_runner.py
+poetry run pytest tests/python/property/ \-v            \# Hypothesis leakage (20)
 
-# Artifact Registry tests (40 tests)
-poetry run pytest tests/integration/test_registry_smoke.py tests/integration/test_vertical_slice_smoke.py
+poetry run mypy marketmind\_gate \--strict               \# Type checking
 
-# Preprocessor tests (~1,500 lines)
-poetry run pytest tests/python/unit/preprocessor/ -v
+### **Coverage & Quality**
 
-# Property-based leakage tests (27 Hypothesis tests)
-poetry run pytest tests/python/property/ -v
+* Preprocessor: 80% line / 92% branch coverage (target: 85% / 70%)
 
-# Splits tests (40 tests)
-poetry run pytest tests/python/unit/preprocessor/test_splits.py tests/python/property/test_splits_properties.py -v
+* mypy \--strict: 0 issues across 15 source files
 
-# Type checking
-poetry run mypy marketmind_gate --strict
-```
+* CI/CD: GitHub Actions validates mypy, pytest, and schema integrity on every push
 
-**Coverage & Quality:**
-- **Preprocessor line coverage**: 79.9% (target: 85%) | **Branch coverage**: 92% ✅ (target: 70%)
-- **mypy --strict**: Success across 15 source files (0 issues)
-- **CI/CD**: GitHub Actions workflow validates mypy, pytest, and schema integrity on every push
+### **Test Markers**
 
-**Test markers:**
-- `gpu`, `integration`, `perf`, `contract`, `executor`, `streaming`, `benchmark`, `smoke`, `regression`
-- `backtesting`, `provenance`, `lane_a`, `lane_b`, `leakage`, `property`
+gpu, integration, perf, contract, executor, streaming, benchmark, smoke, regression, backtesting, provenance, lane\_a, lane\_b
 
-**Test inventory (150+ tests):**
+# **11\. Performance SLOs**
 
-| Suite | Tests | Focus |
-|-------|------:|-------|
-| Gate CLI (`test_gate.py`) | 42 | Bundle validation, schema checks, exit codes per Appendix D |
-| Splits unit (`test_splits.py`) | 33 | TimeSeriesSplitter, PurgedKFold, manifest emission |
-| Hashing (`test_hashing.py`) | 27 | RFC8785 canonicalization, SHA-256 invariance |
-| Vertical slice smoke (`test_vertical_slice_smoke.py`) | 26 | End-to-end pipeline (CAS registry path) |
-| Leakage invariants (`test_leakage_invariants.py`) | 20 | Hypothesis: temporal ordering, purge, embargo, fit-on-train, look-ahead |
-| Gate runner (`test_gate_runner.py`) | 20 | Gate logic, determinism |
-| Gate core (`test_core.py`) | 19 | Gate validation framework |
-| CAS registry (`test_registry_smoke.py`) | 14 | CAS invariants, state machine |
-| Backtest engine (`test_engine.py`) | 10 | BacktestResult, metrics computation |
-| Vertical slice integration (`test_vertical_slice.py`) | 10 | UI pipeline end-to-end |
-| Splits property (`test_splits_properties.py`) | 7 | Hypothesis: split invariants |
-| Preprocessor core (`test_core.py`) | 7 | load_ohlcv, indicators |
-| Preprocessor coverage push | ~1,500 lines | 4 files targeting dsl, api, transforms, columns, expr, ops, executor |
-
----
-
-## Performance (SLOs)
-Measured latencies vary by hardware and configuration. Replace the example numbers below with your telemetry snapshots from `telemetry/` or monitoring.
+Measured latencies vary by hardware and configuration. Replace with your telemetry snapshots.
 
 | Component | p50 | p95 | p99 |
-|---|---:|---:|---:|
+| :---- | :---- | :---- | :---- |
 | GPU inference (single request) | 2 ms | 6 ms | 12 ms |
-| Feature materialization (in-memory, polars/cuDF) | 5 ms | 25 ms | 80 ms |
-| Cache hit (local redis) | 0.5 ms | 2 ms | 8 ms |
-| Artifact hash computation (RFC8785 JCS) | 1 ms | 5 ms | 15 ms |
+| Feature materialization (Polars/cuDF) | 5 ms | 25 ms | 80 ms |
+| Cache hit (local Redis) | 0.5 ms | 2 ms | 8 ms |
+| Artifact hash computation (RFC8785) | 1 ms | 5 ms | 15 ms |
 | Gate validation (single bundle) | 50 ms | 200 ms | 500 ms |
 
-> These are illustrative — please update with measured values from your perf runs or telemetry.
+*Illustrative targets — update with measured values from perf runs or telemetry.*
 
----
+# **12\. Security & Privacy**
 
-## Security & Privacy (summary)
-**Draft — <p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Security Practices</a> for security policies</p> and <p> <a href="https://marketmind-docs.readthedocs.io/en/latest/security_practices.html">Privacy Policy</a> for full (draft) details.**
-- gRPC‑TLS by default for all inter‑process communication.
-- Local‑first processing: models and PII (not collected by default) are processed locally unless explicitly configured.
-- No PII/telemetry shipped by default; opt‑in telemetry is gated and auditable.
-- **Artifact integrity**: SHA-256 hash verification prevents tampering with backtesting results.
+Draft — see Security Practices and Privacy Policy documentation for full details.
 
-**Important:** Security and privacy docs are marked **Draft**. This README intentionally avoids language implying public open‑source auditability because the project is proprietary.
+* gRPC-TLS by default for all inter-process communication
 
----
+* Local-first processing: models and PII processed locally unless explicitly configured
 
-## Public Interfaces (at a glance)
+* No PII/telemetry shipped by default; opt-in telemetry is gated and auditable
 
-### Working (Phase 0) ✅
+* Artifact integrity: SHA-256 hash verification prevents tampering with backtesting results
 
-**Run Bundle Pipeline**
-- `python -m srcPy.bridge.run_pipeline <input_csv>` — full pipeline producing `run_bundle_v1/` with JSON stdout
-- `python -m srcPy.cli.preprocess <input> <output>` — standalone preprocessing
-- `python -m srcPy.cli.backtest <input> --output-dir <dir>` — standalone backtesting
+*Security and privacy documentation is marked Draft. This README avoids implying public open-source auditability; the project is proprietary.*
 
-**Gate CLI** (`srcPy/cli/gate.py`)
-- `marketmind-gate check --bundle <dir> --output <path>` — validate run bundle per Appendix C/D
+# **13\. Document Map**
 
-**Gate Runner CLI** (`mm-gate`)
-- `mm-gate validate <bundle_dir>` — validate backtesting artifacts against policy
-- `mm-gate promote <bundle_dir>` — promote strategy (emits promotion_event.json on PASS)
+MarketMind’s design is documented across 11 research and operational documents. This table serves as the canonical index for finding the right document for any question.
 
-**Artifact Registry API**
-- `register_artifact()` — CAS registration with automatic deduplication
-- `get_latest()` — query latest COMPLETE artifacts for a plan
-- `mark_run_complete()` / `mark_run_failed()` — state machine transitions
+## **Operational Documents (Current State)**
 
-### Planned (Phase I–III) 🔮
+| Document | Purpose | Version | Date |
+| :---- | :---- | :---- | :---- |
+| README (this document) | What works today, quickstart, project structure | v3.3.1 | Feb 2026 |
+| VERSION.md | Release-by-release changelog | v3.3.0 | Feb 2026 |
+| Implementation Plan | Phase definitions, priority stack, appendices C–M | v5.3 | Feb 2026 |
+| Technical Roadmap | Feature inventory, research agenda, execution plan | v1.1 | Feb 2026 |
 
-**gRPC endpoints** (generated from `.proto` during `mvn compile`)
-- `PredictService.Predict` — single request inference
-- `IngestService.Stream` — streaming ingestion for market ticks
-- `ModelAdmin.Export` — export/prepare models (ONNX/TensorRT bundles)
+## **Architecture & Contract Documents (Dec 5–9, 2025\)**
 
-**C++ / ORT inference contract**
-- `input`: float32 tensor, shape `[B, T, F]` (batch, timesteps, features)
-- `output`: float32 tensor, shape `[B, O]` (batch, outputs/probabilities)
+| Document | Key Concepts |
+| :---- | :---- |
+| Research Agenda (Implementation Pack Ed.) | Priorities 0a–12 with dependency graph, done-when criteria, implementation packs |
+| Priority 0a: PIT & Leakage | Bitemporal data, DataView.as\_of(T), safe joins, leakage CI battery |
+| Priority 0b: Determinism | Tiers D0–D3, seed hierarchy, numeric policy, GPU knobs, env fingerprint |
+| Plugin Architecture | 7 plugin types, Protocol signatures, manifests, Lane A/B locks, cache keys |
+| Strategy I/O Contract v2 | Canonical IRs (Alpha/Target/Order/Fill), IGR lanes, Pandera/Pydantic |
 
-> Copy the exact contract fields from your generated stubs or `docs/protos` when locking APIs for integration.
+## **Research Vision Documents (Dec 19, 2025\)**
 
----
+| Document | Key Concepts |
+| :---- | :---- |
+| Unified Fidelity & MetaLearning Report | Lane 0–5 matrix, Autonomous Alpha Factory, meta-learning hierarchy, anti-Goodhart |
+| Research Pack (3 unified reports) | Canonical IR (7-stage pipeline), data contracts, artifact governance, CAS scaling |
 
-## Contributing
-This project is **proprietary**. Contributions are accepted from internal contributors or by arrangement only. For contribution workflows, code style, and coverage gates, see `Programming Guidelines` in the repo. Pull requests are subject to mandatory review, security review, and must meet coverage & contract tests.
+## **Quick Lookup**
 
-**Development workflow:**
-1. Create feature branch from `main`
-2. Implement changes with ≥90% branch coverage
-3. Run `mypy --strict` and `pytest` locally
-4. Submit PR (CI validates mypy, pytest, schema integrity)
-5. Require 1+ review from CODEOWNERS
+| I need to… | Open this document |
+| :---- | :---- |
+| Add a new strategy plugin | Plugin Architecture → Strategy I/O Contract v2 |
+| Add a new data source | Priority 0a (PIT contract \+ DataView API) |
+| Understand lane fidelity | Fidelity Report (Lanes 0–5) \+ Plugin Arch (A/B locks) |
+| Add a validation gate | Implementation Plan Appendices C–M |
+| Fix a determinism issue | Priority 0b (tiers \+ seeds \+ numeric policy) |
+| Plan Phase II work | Technical Roadmap \+ Research Agenda (priorities 0a–12) |
+| Understand signal architecture | Research Pack (Canonical IR) \+ Strategy I/O v2 (Alpha IR) |
+| Add statistical tests | Implementation Plan Appendix H \+ Research Agenda Priority 8 |
+| Design position management | Strategy I/O v2 (IGR lanes: α/β/π/Ω) |
+| Check acceptance criteria | Research Agenda (per-priority ‘Done When’) |
 
----
+# **14\. Versioning & Changelog**
 
-## Versioning & Changelog
-MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). New features that are backward-compatible increment the minor version, bug fixes increment the 
-patch version, and any breaking changes would increment the major version. Each release has corresponding notes in the changelog.
-<p>See <a href="https://marketmind-docs.readthedocs.io/en/latest/CHANGELOG.html">Changelog</a> for full changelog history.</p> 
+MarketMind follows Semantic Versioning (MAJOR.MINOR.PATCH). See VERSION.md for detailed release notes.
 
+| Version | Date | Highlights |
+| :---- | :---- | :---- |
+| 3.3.0 | Feb 2026 | End-to-end pipeline, Gate CLI (42 tests), splits, 20 leakage property tests, preprocessor 56→80% |
+| 3.2.0 | Dec 2025 | Gate Runner CLI (mm-gate), Artifact Registry (CAS), vertical slice smoke tests, CI/CD |
+| 3.1.1 | Nov 2025 | Unified adaptive executor, surgical execute/skip policy, coverage gates tightened |
 
-Current release: **3.3.0**.
+**Next:** 3.4.0 (Phase 0 complete: stat validity, CI baseline) → 4.0.0 (ML pipeline, C++ inference)
 
-**Recent releases:**
-- **3.3.0** (Feb 2026): End-to-end pipeline (UI → Python → backtest → gates → results), Gate CLI (Appendix C/D), splits with purge/embargo, 20 leakage property tests, preprocessor coverage 56% → 80%, 7 critical bug fixes
-- **3.2.0** (Dec 2025): Gate Runner CLI, Artifact Registry (CAS), vertical slice smoke tests, CI/CD improvements
-- **3.1.1** (Nov 2025): Unified adaptive executor, surgical execute/skip policy, coverage gates tightened
+# **15\. License**
 
-**Upcoming:**
-- **3.4.0** (Target: March 2026): Phase 0 completion (85% coverage, CI baseline lock), begin Phase I (live data)
-- **4.0.0** (Target: Q2–Q3 2026): ML training pipeline, C++ inference, meta-learning platform
+MarketMind is proprietary software (© 2025–2026 Mark Wuenschel. All rights reserved). Its source code is not open-source. MarketMind relies on third-party open-source libraries (NumPy, TensorFlow, ONNX Runtime, etc.) distributed under permissive licenses (MIT, BSD, Apache 2.0) which allow incorporation into proprietary products without copyleft restrictions. See the LICENSE file for full terms.
 
----
-
-## License
-MarketMind is proprietary software (© 2025–2026 Mark Wuenschel. All rights reserved.). Its source code is not open-source. However, MarketMind relies on 
-several third-party open-source libraries (e.g. NumPy, TensorFlow, ONNX Runtime, etc.) that are distributed under permissive licenses (such as MIT, BSD, or 
-Apache 2.0). These permissive licenses explicitly allow incorporating the code into proprietary products without imposing copyleft restrictions prohibited 
-without prior written permission from the copyright holder.
-See the [LICENSE](LICENSE) file for full terms.
-
----
-
-_Last updated: 3.3.0 (February 2026)._
+────────────────────────  
+*Last updated: v3.3.1 · February 2026*
