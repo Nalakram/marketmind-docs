@@ -1,0 +1,8 @@
+# === AI coding assistants ===
+.claude/
+.codex/
+.codex_pydeps/
+.cursor/
+.gemini/
+.agent/
+.agents/
