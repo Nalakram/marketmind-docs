@@ -1,13 +1,31 @@
 # MarketMind Documentation
 
-Read the Docs for `marketmind-docs` is the publication layer for canonical documentation exported from the private `MarketMind` repository. The site is centered on the current 4.4.x architecture, release history, governance/legal documents, and contributor engineering guidance.
+Read the Docs for `marketmind-docs` is the publication layer for canonical documentation exported from the private `MarketMind` repository. The published surface is centered on the March 2026 companion suite: the external overview, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, and supporting protocol appendices.
+
+Older secondary pages remain published but are intentionally out of scope for this sync. Governance/legal documents, contributor guidance, and the API reference remain available alongside the refreshed companion suite.
 
 ## Published Sections
 
 ### Overview
 
 - [README / Technical Overview](README.md)
+- [White Paper](WhitePaper.md)
 - [Release History](CHANGELOG.md)
+
+### Companion Suite
+
+- [Implementation Plan](ImplementationPlan.md)
+- [Technical Roadmap](TechnicalRoadmap.md)
+- [Meta-Learning Core](MetaLearningCore.md)
+- [Meta-Learning Architecture Vision](MetaLearningArchitectureVision.md)
+- [Resolution Ledger](ResolutionLedger.md)
+
+### Protocols and Appendices
+
+- [RiskFn Protocol](risk_protocol.md)
+- [Signal Generation Protocol](signal_generation_protocol.md)
+- [Task Validity Pilot Report](task_validity_pilot_report.md)
+- [Paper Trade Simulation Spec](paper_trade_sim_spec.md)
 
 ### Governance and Legal
 
@@ -23,11 +41,9 @@ Read the Docs for `marketmind-docs` is the publication layer for canonical docum
 
 - [Programming Guidelines](contributors/coding_standards.md)
 
-### Secondary Reference
+### Reference
 
 - [API Reference](reference/index.rst)
-
-The API reference remains available, but it is secondary to the canonical narrative, release, and governance documents.
 
 ```{toctree}
 :hidden:
@@ -35,7 +51,31 @@ The API reference remains available, but it is secondary to the canonical narrat
 :caption: Overview
 
 README.md
+WhitePaper.md
 CHANGELOG.md
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Companion Suite
+
+ImplementationPlan.md
+TechnicalRoadmap.md
+MetaLearningCore.md
+MetaLearningArchitectureVision.md
+ResolutionLedger.md
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Protocols and Appendices
+
+risk_protocol.md
+signal_generation_protocol.md
+task_validity_pilot_report.md
+paper_trade_sim_spec.md
 ```
 
 ```{toctree}
