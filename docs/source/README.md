@@ -186,7 +186,7 @@ From Phase II-0 forward, pilot runs may emit scaffolded `task_manifest.json` and
 Today, the real platform is best summarized as:
 
 <p align="center">
-  <img src="assets/diagrams/current-architecture.svg" alt="Current architecture diagram showing Sources flowing through PIT-safe adapters, canonical feature planner and executor, backtesting engines, statistical and governance gates, and into canonical bundles with artifact registry and RunRegistry." width="100%">
+  <img src="_static/assets/diagrams/current-architecture.svg" alt="Current architecture diagram showing Sources flowing through PIT-safe adapters, canonical feature planner and executor, backtesting engines, statistical and governance gates, and into canonical bundles with artifact registry and RunRegistry." width="100%">
 </p>
 
 That path is the trusted substrate on which later Phase II work must be built. It is already meaningful on its own because it enforces lineage, policy, and current-state truthfulness.
@@ -196,7 +196,7 @@ That path is the trusted substrate on which later Phase II work must be built. I
 If the empirical program succeeds, the intended runtime shape becomes:
 
 <p align="center">
-  <img src="assets/diagrams/meta-learning-runtime.svg" alt="Proposed meta-learning runtime diagram showing DataView as of T, feature operations and regime context, context encoder producing regime embedding z, signal library and active slot mask, meta-policy producing allocation weights and confidence scalar, sizing function, post-sizing confidence attenuation, and risk and execution layers." width="720">
+  <img src="_static/assets/diagrams/meta-learning-runtime.svg" alt="Proposed meta-learning runtime diagram showing DataView as of T, feature operations and regime context, context encoder producing regime embedding z, signal library and active slot mask, meta-policy producing allocation weights and confidence scalar, sizing function, post-sizing confidence attenuation, and risk and execution layers." width="720">
 </p>
 
 Several points matter here:

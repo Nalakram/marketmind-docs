@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Current architecture</title>
+  <desc id="desc">MarketMind current architecture showing sources, PIT-safe adapters, canonical planning and execution, governance gates, and bundle artifacts.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6efe4" />
+      <stop offset="100%" stop-color="#e8f0f4" />
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#355c7d" />
+    </marker>
+    <style>
+      .title { font: 700 28px "Segoe UI", Helvetica, Arial, sans-serif; fill: #13293d; }
+      .subtitle { font: 400 15px "Segoe UI", Helvetica, Arial, sans-serif; fill: #355c7d; }
+      .label { font: 700 18px "Segoe UI", Helvetica, Arial, sans-serif; fill: #13293d; }
+      .copy { font: 400 13px "Segoe UI", Helvetica, Arial, sans-serif; fill: #1e293b; }
+      .box { stroke-width: 2; rx: 20; ry: 20; }
+      .arrow { stroke: #355c7d; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg)" />
+
+  <text x="60" y="56" class="title">Current Architecture</text>
+  <text x="60" y="82" class="subtitle">Governed research substrate: PIT-safe ingestion, canonical planning, and auditable bundle output.</text>
+
+  <rect class="box" x="60" y="130" width="180" height="140" fill="#fdf6ec" stroke="#c77d4f" />
+  <text x="90" y="172" class="label">Sources</text>
+  <text x="90" y="198" class="copy">Files, daily vendors,</text>
+  <text x="90" y="218" class="copy">feature inputs,</text>
+  <text x="90" y="238" class="copy">and governed adapters</text>
+
+  <rect class="box" x="290" y="130" width="210" height="140" fill="#eef7f1" stroke="#4e8b6a" />
+  <text x="325" y="172" class="label">PIT-Safe Adapters</text>
+  <text x="325" y="198" class="copy">`DataView.as_of(T)`</text>
+  <text x="325" y="218" class="copy">source boundaries and</text>
+  <text x="325" y="238" class="copy">lineage-aware ingestion</text>
+
+  <rect class="box" x="550" y="118" width="250" height="164" fill="#eef3fb" stroke="#4267ac" />
+  <text x="588" y="160" class="label">Canonical Planner + Executor</text>
+  <text x="588" y="188" class="copy">single trusted feature path</text>
+  <text x="588" y="208" class="copy">strategy orchestration</text>
+  <text x="588" y="228" class="copy">deterministic run surfaces</text>
+  <text x="588" y="248" class="copy">artifact identity hooks</text>
+
+  <rect class="box" x="850" y="118" width="150" height="164" fill="#f8eff7" stroke="#905c8b" />
+  <text x="885" y="160" class="label">Gates</text>
+  <text x="885" y="188" class="copy">stats</text>
+  <text x="885" y="208" class="copy">costs</text>
+  <text x="885" y="228" class="copy">lineage</text>
+  <text x="885" y="248" class="copy">truthfulness</text>
+
+  <rect class="box" x="1040" y="118" width="120" height="164" fill="#fff6e8" stroke="#b98727" />
+  <text x="1062" y="160" class="label">Bundles</text>
+  <text x="1062" y="188" class="copy">plan.json</text>
+  <text x="1062" y="208" class="copy">manifests</text>
+  <text x="1062" y="228" class="copy">gate results</text>
+  <text x="1062" y="248" class="copy">RunRegistry</text>
+
+  <path class="arrow" d="M 240 200 H 290" />
+  <path class="arrow" d="M 500 200 H 550" />
+  <path class="arrow" d="M 800 200 H 850" />
+  <path class="arrow" d="M 1000 200 H 1040" />
+</svg>

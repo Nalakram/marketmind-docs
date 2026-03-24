@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Meta-learning runtime</title>
+  <desc id="desc">Proposed MarketMind meta-learning runtime showing DataView input, context encoder, signal library, meta-policy, sizing, confidence attenuation, and risk execution.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2efe8" />
+      <stop offset="100%" stop-color="#e7f3f0" />
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#264653" />
+    </marker>
+    <style>
+      .title { font: 700 28px "Segoe UI", Helvetica, Arial, sans-serif; fill: #102a43; }
+      .subtitle { font: 400 15px "Segoe UI", Helvetica, Arial, sans-serif; fill: #335c67; }
+      .label { font: 700 18px "Segoe UI", Helvetica, Arial, sans-serif; fill: #102a43; }
+      .copy { font: 400 13px "Segoe UI", Helvetica, Arial, sans-serif; fill: #243b53; }
+      .tiny { font: 700 12px "Segoe UI", Helvetica, Arial, sans-serif; fill: #52796f; }
+      .box { stroke-width: 2; rx: 18; ry: 18; }
+      .arrow { stroke: #264653; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="420" fill="url(#bg)" />
+
+  <text x="60" y="58" class="title">Proposed Meta-Learning Runtime</text>
+  <text x="60" y="84" class="subtitle">Validation-gated allocator path with frozen inference, explicit regime context, and post-sizing confidence attenuation.</text>
+
+  <rect class="box" x="60" y="150" width="160" height="120" fill="#fff7e8" stroke="#d08c3f" />
+  <text x="88" y="188" class="label">DataView.as_of(T)</text>
+  <text x="88" y="214" class="copy">point-in-time features</text>
+  <text x="88" y="234" class="copy">and market context</text>
+
+  <rect class="box" x="270" y="132" width="190" height="156" fill="#eef5ff" stroke="#4774b3" />
+  <text x="300" y="170" class="label">Context Encoder</text>
+  <text x="300" y="196" class="copy">regime descriptors</text>
+  <text x="300" y="216" class="copy">coherence-checked</text>
+  <text x="300" y="236" class="copy">embedding output</text>
+  <text x="300" y="260" class="tiny">z = regime_embedding</text>
+
+  <rect class="box" x="510" y="132" width="180" height="156" fill="#eef8f2" stroke="#4f8f63" />
+  <text x="540" y="170" class="label">Signal Library</text>
+  <text x="540" y="196" class="copy">active signal slots</text>
+  <text x="540" y="216" class="copy">dynamic-K masking</text>
+  <text x="540" y="236" class="copy">catalog identity</text>
+
+  <rect class="box" x="740" y="118" width="210" height="184" fill="#f8eef6" stroke="#94618e" />
+  <text x="776" y="160" class="label">Meta-Policy</text>
+  <text x="776" y="186" class="copy">frozen `theta_day_prime`</text>
+  <text x="776" y="206" class="copy">per-signal utility scores</text>
+  <text x="776" y="226" class="copy">allocation_weights</text>
+  <text x="776" y="246" class="copy">confidence_scalar</text>
+
+  <rect class="box" x="1000" y="118" width="140" height="84" fill="#ecf7f3" stroke="#3f7d69" />
+  <text x="1030" y="154" class="label">SizingFn</text>
+  <text x="1030" y="178" class="copy">base positions</text>
+
+  <rect class="box" x="1000" y="218" width="140" height="84" fill="#fef3ea" stroke="#c7784d" />
+  <text x="1020" y="254" class="label">Confidence</text>
+  <text x="1020" y="278" class="copy">post-sizing only</text>
+
+  <rect class="box" x="920" y="330" width="220" height="58" fill="#edf2f7" stroke="#415a77" />
+  <text x="954" y="364" class="label">Risk + Execution Layer</text>
+
+  <path class="arrow" d="M 220 210 H 270" />
+  <path class="arrow" d="M 460 210 H 510" />
+  <path class="arrow" d="M 690 210 H 740" />
+  <path class="arrow" d="M 950 168 H 1000" />
+  <path class="arrow" d="M 1070 202 V 218" />
+  <path class="arrow" d="M 1070 302 V 330" />
+
+  <text x="620" y="106" class="tiny">active signal set + masks</text>
+  <text x="873" y="100" class="tiny">frozen inference path</text>
+</svg>

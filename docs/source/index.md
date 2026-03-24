@@ -50,9 +50,9 @@ Older secondary pages remain published but are intentionally out of scope for th
 :maxdepth: 2
 :caption: Overview
 
-README.md
-WhitePaper.md
-CHANGELOG.md
+README / Technical Overview <README.md>
+White Paper <WhitePaper.md>
+Release History <CHANGELOG.md>
 ```
 
 ```{toctree}
@@ -60,11 +60,11 @@ CHANGELOG.md
 :maxdepth: 2
 :caption: Companion Suite
 
-ImplementationPlan.md
-TechnicalRoadmap.md
-MetaLearningCore.md
-MetaLearningArchitectureVision.md
-ResolutionLedger.md
+Implementation Plan <ImplementationPlan.md>
+Technical Roadmap <TechnicalRoadmap.md>
+Meta-Learning Core <MetaLearningCore.md>
+Meta-Learning Architecture Vision <MetaLearningArchitectureVision.md>
+Resolution Ledger <ResolutionLedger.md>
 ```
 
 ```{toctree}
@@ -72,10 +72,10 @@ ResolutionLedger.md
 :maxdepth: 2
 :caption: Protocols and Appendices
 
-risk_protocol.md
-signal_generation_protocol.md
-task_validity_pilot_report.md
-paper_trade_sim_spec.md
+RiskFn Protocol <risk_protocol.md>
+Signal Generation Protocol <signal_generation_protocol.md>
+Task Validity Pilot Report <task_validity_pilot_report.md>
+Paper Trade Simulation Spec <paper_trade_sim_spec.md>
 ```
 
 ```{toctree}
@@ -83,13 +83,13 @@ paper_trade_sim_spec.md
 :maxdepth: 2
 :caption: Governance and Legal
 
-GOVERNANCE.md
-MODEL_CARD.md
-PRIVACY_POLICY.md
-RISK_DISCLOSURE.md
-REPRODUCIBILITY.md
-SECURITY.md
-LICENSE.md
+Governance <GOVERNANCE.md>
+Model Card <MODEL_CARD.md>
+Privacy Policy <PRIVACY_POLICY.md>
+Risk Disclosure <RISK_DISCLOSURE.md>
+Reproducibility <REPRODUCIBILITY.md>
+Security Policy <SECURITY.md>
+License <LICENSE.md>
 ```
 
 ```{toctree}
