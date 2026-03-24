@@ -16,6 +16,8 @@ Companion documents: Technical Roadmap v1.4.16 · Meta-Learning Core v1.2.14 · 
 
 <!-- MM:BEGIN:DOCBODY -->
 
+# Implementation Plan & Execution Roadmap
+
 # Purpose
 
 This document translates MarketMind’s strategy into executable work. It maps the governed substrate that already exists to the closure work, protocol work, scaffolding work, and validation-gated build work still required before a promotable adaptive allocator can honestly exist.

@@ -86,7 +86,7 @@ exclude_patterns = [
 
 html_theme = "furo"
 html_static_path = ["_static"]
-html_extra_path = ["_extra"]
+html_extra_path = ["_extra", "assets"]
 html_css_files = ["custom.css"]
 html_theme_options = {
     "navigation_with_keys": True,

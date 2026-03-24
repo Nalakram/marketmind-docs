@@ -10,6 +10,8 @@ Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 ·
 
 <!-- MM:BEGIN:DOCBODY -->
 
+# Meta-Learning Architecture Vision
+
 # Purpose
 
 The Meta-Learning Core v2.0.0 defines the research program, validation framework, and governing failure criteria for MarketMind's meta-learning architecture. This document expresses the proposed architecture MarketMind is building toward: the runtime shape, system boundaries, interface contracts, and validation-gated defaults that become binding commitments only where the Core's empirical program confirms them.

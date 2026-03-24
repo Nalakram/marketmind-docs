@@ -14,6 +14,8 @@ Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 ·
 
 <!-- MM:BEGIN:DOCBODY -->
 
+# Meta-Learning Core
+
 <!-- MM:BEGIN:DOCMAP -->
 
 | Document | Version | Role |

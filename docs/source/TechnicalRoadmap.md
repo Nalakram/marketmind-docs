@@ -14,6 +14,8 @@ Companion documents: Implementation Plan v6.4.15 Â· Meta-Learning Core v1.2.14 Â
 
 <!-- MM:BEGIN:DOCBODY -->
 
+# Technical Roadmap & Feature Plan
+
 # Purpose
 
 This roadmap defines what to build next, what to validate before building further, and which workstreams are allowed to halt the meta-learning program entirely. It tracks engineering and research together because the adaptive-learning roadmap is evidence-first rather than milestone-first.
