@@ -1,7 +1,7 @@
 <!--
-  MRL_VERSION: 1.0.6
-  CODEBASE_VERSION: 4.9.0
-  LAST_UPDATED: 2026-03-24
+  MRL_VERSION: 1.0.40
+  CODEBASE_VERSION: 4.18.28
+  LAST_UPDATED: 2026-04-05
   MAINTAINER: Mark / MindForgeLabs
   SOURCE: Populated from MarketMind_ProjectState_v4_4_0.html
   STATUS_COUNTS_AUTO: false
@@ -20,9 +20,9 @@
 **Resolution Ledger**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.0.7 · March 2026 · Proprietary
+Version 1.0.40 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 · Meta-Learning Core v1.2.14 · Meta-Learning Architecture Vision v1.2.15 · README.md 4.9.1 · VERSION.md 4.9.1
+Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · README.md 4.18.12 · VERSION.md 4.18.28
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -37,17 +37,17 @@ Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 ·
 
 | Type  | OPEN | PARTIAL | BLOCKED | DEFERRED | CLOSED | SUPERSEDED | Total |
 |-------|------|---------|---------|----------|--------|------------|-------|
-| OI    | 14   | 1       | 0       | 1        | 24     | 0          | 40    |
-| RG    | 9    | 4       | 0       | 0        | 0      | 0          | 13    |
+| OI    | 9    | 1       | 0       | 1        | 42     | 0          | 53    |
+| RG    | 7    | 5       | 0       | 1        | 1      | 0          | 14    |
 | MLC   | 0    | 0       | 0       | 8        | 0      | 0          | 8     |
 | MLN   | 7    | 0       | 0       | 0        | 0      | 0          | 7     |
 | ADR   | 0    | 0       | 0       | 0        | 9      | 0          | 9     |
-| GATE  | 4    | 0       | 0       | 1        | 8      | 0          | 13    |
+| GATE  | 0    | 0       | 0       | 1        | 12     | 0          | 13    |
 | SI    | 0    | 0       | 0       | 0        | 0      | 0          | 0     |
-| AQ    | 7    | 0       | 0       | 0        | 1      | 0          | 8     |
+| AQ    | 4    | 0       | 0       | 0        | 4      | 0          | 8     |
 | SA    | 0    | 0       | 0       | 0        | 0      | 0          | 0     |
-| MOM   | 2    | 0       | 0       | 12       | 10     | 0          | 24    |
-| **∑** | **43** | **5** | **0** | **22**  | **52** | **0**      | **122** |
+| MOM   | 1    | 0       | 0       | 12       | 11     | 0          | 24    |
+| **∑** | **27** | **6** | **0** | **23**  | **79** | **0**      | **135** |
 
 *MLN: 7 entries — Phase II normative locks and threshold-governance items are now opened to match the v2.0 meta-learning contracts and proof burden.*
 *SA: 0 entries — stat_arb research gaps preserved as RG-01..08 for ID stability; SA prefix used for new stat_arb items going forward.*
@@ -59,19 +59,16 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | ID       | Title                                      | Status  | Phase | Gate(s)       | Depends On         |
 |----------|--------------------------------------------|---------|-------|---------------|--------------------|
 | OI-15    | 3-language golden-vector CI harness        | OPEN    | I-E   | —             | OI-13              |
-| MOM-020  | CSMOM vs TSMOM vs dual-momentum comparison | OPEN    | I-E   | GATE-II-01    | OI-08              |
-| OI-21    | F-3: ADR closure for Phase II-blocking seams | OPEN  | I-F   | GATE-I-F-03   | OI-20              |
-| OI-22    | F-4: Phase II interface contract stubs     | OPEN    | I-F   | GATE-I-F-04   | OI-21              |
-| OI-23    | F-5: Determinism boundary for ML entry     | OPEN    | I-F   | GATE-I-F-05   | OI-22              |
-| OI-24    | F-6: Coverage / CI truthfulness audit      | OPEN    | I-F   | GATE-I-F-06   | OI-23              |
 | MLN-01   | MetaTask and regime-episode contract       | OPEN    | II    | GATE-II-01    | OI-22              |
 | MLN-02   | Regime vocabulary and 5-class projection   | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-03   | Confidence routing contract                | OPEN    | II    | GATE-II-01    | MLN-01             |
+| MLN-03   | confidence_scalar default + routing pilot  | OPEN    | II    | GATE-II-01    | MLN-01             |
 | MLN-04   | Dynamic-K fixed-slot masking contract      | OPEN    | II    | GATE-II-01    | MLN-01             |
 | MLN-05   | Frozen inference boundary                  | OPEN    | II    | GATE-II-01    | MLN-01             |
 | MLN-06   | Phase II artifact contract                 | OPEN    | II    | GATE-II-01    | MLN-01             |
 | MLN-07   | Threshold-resolution governance            | OPEN    | II    | GATE-II-01    | MLN-06             |
 | RG-04    | stat_arb regime-conditional performance    | PARTIAL | II    | —             | AQ-03              |
+| RG-09    | meta-learning — task non-exchangeability pilot | PARTIAL | I-G | GATE-II-01    | AQ-04              |
+| OI-59    | RG-09 corrected-surface segmentation redesign after horizon-overlap feasibility collapse | OPEN | I-G | — | RG-09 |
 
 ## 1.3 Phase Gate Readiness
 
@@ -80,7 +77,7 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | GATE-I-C | I-C   | 0                  | 0                  | CLOSED      |
 | GATE-I-D | I-D   | 0                  | 0                  | CLOSED      |
 | GATE-I-E | I-E   | 0                  | 0                  | CLOSED      |
-| GATE-I-F | I-F   | 4                  | 0                  | OPEN        |
+| GATE-I-F | I-F   | 0                  | 0                  | CLOSED      |
 | GATE-II  | II    | 8+                 | 0                  | DEFERRED    |
 
 ## 1.4 Phase I-E Status — End of Thread
@@ -132,7 +129,77 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | OI-17 | _FEATURE_OPS retirement | CLOSED — direct governed `_FEATURE_OPS` execution retirement accepted on the canonical path at v4.9.0 |
 | OI-27 | generate_signal() type boundary follow-through | CLOSED — confirmed by scoped strict mypy run on `srcPy/strategies/momentum/` + `srcPy/strategies/pipeline_strategy.py` (20 source files, 0 issues) |
 | OI-30 | pytest tempdir Windows issue | Not confirmed in this thread |
-| MOM-020 | CSMOM/TSMOM/dual variant comparison report | Not started — correctly gated on GATE-II-01, not I-E exit |
+| MOM-020 | CSMOM/TSMOM/dual variant comparison report | CLOSED — child-owned `cpcv_path_scores.json` emitted; parent comparison is hash-validating and non-generative; shared PBO emitted via `comparison_stat_validity.json` |
+
+## 1.5 Program execution posture — RG-09 H3 successor rescue, sensitivity control, and live promotable posture
+
+**RG-09 remains `PARTIAL` (not `CLOSED`).** This section records what the evidence does and does **not** justify after the historical H1 failure, the unsuccessful H4 and proper H2 successor surfaces, and the later executed H3 strict-granularity successor surface that passed. It also supersedes earlier draft closeout language that treated RG-09 as dead for this phase: the current governed posture is that RG-09 is again a **promotable** decision path, but only on the stricter H3 successor surface documented below.
+
+### What the evidence says
+
+- On the **historical valid H1 path** (v2 BOCPD surface, corrected calendar folds, non-degenerate nulls), the governed decision **`NEEDS_MORE_EVIDENCE`** is real: fold-level statistics were directionally interesting but did not clear the pilot thresholds uniformly. That is **not** a proof of regime-task non-exchangeability and **not** permission to start trainer commitment.
+- On the earlier governed **H1 transition-anchored base surface**, the artifacts say the following:
+  - **Run identification:** `runs/rg09_h2_transition_dir/`; config `rg09_pilot_config_v1_transition`; fixture `sha256:07b28854ab30099bbe548ea77ec677122290c9412b6f451bd88fdb8ed781bfa9`; harness producer `rg09-harness/0.1.0`; empirical producer `rg09-empirical-closure/0.1.0`
+  - **Admissible episodes:** `104`
+  - **Emitted gate outcome:** `decision = NEEDS_MORE_EVIDENCE`
+  - **Emitted gate reason:** `Fold-level evidence disagreed across governed lanes, so non-reproducibility blocked a kill decision.`
+  - **Emitted empirical-closure outcome:** `fail_closed = true`; `fail_codes = [FAIL_NONREPRODUCIBLE]`; `supports_non_exchangeability = inconclusive`; `relative_rule_conclusion = insufficient_evidence`
+  - **Lane-level results:** functional **PASS** (`Harvey t` `5.88`, `4.78`); structural **PASS** on recalibrated transition-anchored `direction_score` (`0.2099`, `0.1373`; aggregate `0.1736`); statistical **split across folds**
+  - **Per-fold statistical detail:** fold 0 fails all three null families (`0.165`, `0.239`, `0.059`); fold 1 passes all three (`0.022`, `0.025`, `0.013`)
+  - **Governed interpretation:** this is a **reproducibility failure / non-reproducible evidence** result, not a structural-threshold, draw-count, or numerical-stability failure
+- On the executed **H4 market-class rescue attempt**, the artifacts say the following:
+  - **Run identification:** `runs/rg09_h4_market_class_risk/`; config `rg09_pilot_config_v1_h4_market_class`; fixture `sha256:2353c177546531af969c1c0b1089a96577ffbd0edd2297e9b2a70f38cfb07bab`
+  - **Entity set:** `ES,NQ,RTY,YM,SPY,HYG,VIX`
+  - **Admissible episodes:** `50`
+  - **Emitted gate outcome:** `decision = NEEDS_MORE_EVIDENCE`
+  - **Emitted empirical-closure outcome:** `fail_closed = true`; `fail_codes = [FAIL_NONREPRODUCIBLE]`; `supports_non_exchangeability = inconclusive`
+  - **Reproducibility surface:** `reproducibility_consistent = false`
+  - **Fold pattern:** fold 0 `overall_pass=true`, `statistical_pass=true`, `structural_pass=true`, `functional_pass=true`; fold 1 `overall_pass=false`, `statistical_pass=false`, `structural_pass=true`, `functional_pass=true`
+  - **Governed interpretation:** H4 narrowed the market class but reproduced the same class of non-reproducibility; it did **not** rescue RG-09 into a promotable path and it did **not** unlock trainer commitment
+- On the executed **proper H2 cross-sectional run**, the artifacts say the following:
+  - **Run identification:** `runs/rg09_h2_cross_sectional/`; config `rg09_pilot_config_v1_transition_h2`; fixture `sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`
+  - **Emitted gate outcome:** `decision = NEEDS_MORE_EVIDENCE`
+  - **Emitted gate reason:** `"Base harness is structurally valid and directionally consistent, but statistical evidence is below threshold."`
+  - **Emitted empirical-closure outcome:** `fail_closed = false`; `fail_codes = []`; `supports_non_exchangeability = inconclusive`
+  - **Reproducibility surface:** `reproducibility_consistent = true`
+  - **Fold pattern:** fold 0 `functional_pass=true`, `structural_pass=true`, `statistical_pass=false`; fold 1 `functional_pass=true`, `structural_pass=true`, `statistical_pass=false`
+  - **Governed interpretation:** this is **not** another non-reproducibility failure; it is a cleaner below-threshold negative on the proper H2 surface
+- On the executed **H3 strict granularity successor surface**, the artifacts say the following:
+  - **Run identification:** `runs/rg09_h3_granularity/`; config `rg09_pilot_config_v1_transition_h3`; fixture `sha256:d38639a4f2cb8be5e0c57cd1fdaa3750b8a26336b93dd907a6b0f2b9d289e11c`
+  - **Evaluated successor surface:** `vol_window = 120`; `trend_flat_epsilon = 0.01`; `vol_bucket_method = quintile`; `crisis_vol_score_percentile = 95.0`
+  - **Harness identity caveat:** emitted harness fields still identify the evaluated hypothesis as `RG09-H1`; this ledger therefore records the result as an **H3 successor surface evaluated through the base harness**, not as proof that the original H1 surface passed
+  - **Emitted gate outcome:** `decision = PASS`
+  - **Emitted gate reason:** `"All required RG-09 evidence families passed."`
+  - **Reproducibility / unlock state:** `reproducibility_consistent = true`; `fail_codes = []`; `trainer_commitment_unlocked = true`
+  - **Admissible episodes:** `86`
+  - **Class-distribution highlights:** `crisis rows = 2441`; `high_vol rows = 10462`; `crisis label agreement rate = 0.9454366631647182`
+  - **Fold pattern:** fold 0 `overall_pass=true`, `statistical_pass=true`, `structural_pass=true`, `functional_pass=true`; fold 1 `overall_pass=true`, `statistical_pass=true`, `structural_pass=true`, `functional_pass=true`
+  - **Governed interpretation:** the H3 strict successor surface passed and currently defines the live promotable RG-09 posture
+- On the nearby **H3 negative sensitivity control** with looser crisis labeling, the authoritative emitted facts say the following:
+  - **Evaluated control surface:** `crisis_vol_score_percentile = 85.0`
+  - **Negative-control gate outcome:** `decision = FAIL_KILL`
+  - **Negative-control gate reason:** `"Base harness ran cleanly but did not support non-exchangeability."`
+  - **Negative-control state:** `fail_codes = [FAIL_EXCHANGEABLE_TASKS]`; `reproducibility_consistent = true`
+  - **Negative-control fixture:** `sha256:6b62a5810a825c631677f810c39ff3880df79645216d976204e9c4ad1d0f32fe`
+  - **Negative-control class-distribution highlights:** `admissible_episode_count = 86`; `crisis rows = 12903`; `high_vol rows = 0`; `crisis label agreement rate = 0.7115810179493484`
+  - **Governed interpretation:** the looser threshold broadens crisis enough to absorb high_vol, collapses task separation, and yields exchangeable tasks
+- On the **live corrected multi-instrument basket** (`fixture_sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`), **pre-statistical** feasibility dominates: **zero** admissible episodes under the current task recipe, with **`HORIZON_OVERLAP`** excluding the overwhelming majority of candidate episodes; one-axis geometry loosening on the **existing segmentation** does **not** restore admissibility. So the **current corrected surface + current segmentation + current support/query recipe** is **not** a viable gate input surface until admissibility is recovered (**OI-59** boundary-treatment / contingent redesign lanes) or a **separately governed** task-definition change is authorized.
+- **Episode `regime_class` attribution:** diagnostics on boundary-recovery segments showed large mismatch between **first-bar** labels and the per-bar class distribution inside long segments (mixed raw classes under a single hysteresis token). Harness **majority (`mode`) labeling** for episode `regime_class` under **active** boundary-recovery modes (v1/v2/v3; not baseline) is **plumbing** to align the episode label with the segment’s bars; it does **not** change null families, the separability statistic, or pilot thresholds. It **does** remove a spurious collapse of between-class spread driven by mislabeled episode rows when interpreting separability on that lane.
+
+### What the evidence does **not** say
+
+- It does **not** show that **`shuffled_label` p-values near 1** on mislabeled segments were primarily a “null/statistic mismatch” artifact without also involving **wrong episode labels**; once labels are aligned to segment plurality, separability interpretation must be **re-evaluated** on fresh runs rather than retrofitted narratively.
+- It does **not** prove there is no signal everywhere or mathematically disprove the broader thesis. The truthful claim is narrower: the earlier H1, H4, and proper H2 surfaces were unsuccessful, while the later strict H3 successor surface did produce a promotable RG-09 decision on the tested surface.
+- It does **not** convert the earlier 104-episode H1 surface, the 50-episode H4 surface, or the proper H2 cross-sectional surface into a project-wide theorem about exchangeability. H1 and H4 remain **inconclusive / non-reproducible** evidence surfaces; H2 remains an **inconclusive but reproducible below-threshold** surface.
+- It does **not** unlock **trainer commitment**: **`GATE-II-01`** and the **MLN-01..07** normative stack remain **blocking** prerequisites; that lock is **correct** and unchanged.
+- It does **not** prove from the attached evidence alone that `vol_window = 120` and `trend_flat_epsilon = 0.01` are each individually necessary. Within the tested H3 neighborhood, crisis-label strictness appears to be the decisive lever; the necessity of window `120` and epsilon `0.01` is not fully isolated by the attached evidence alone.
+
+### Phase consequence and bounded execution posture
+
+- **Conclusion:** RG-09 now does justify continued governed follow-through on the executed strict H3 successor surface. The lane is **reopened / rescued as a promotable path** under that stricter H3 surface, while H1, H4, and proper H2 remain documented as earlier unsuccessful predecessor surfaces.
+- **Strongest supported lesson:** Within the tested H3 neighborhood, crisis-label strictness appears to be the decisive lever; the passing p95 surface preserves crisis/high_vol separation, while the looser p85 surface collapses high_vol into crisis and fails kill.
+- **Bounded program emphasis** remains **Phase II-0B** artifact-and-contract scaffolding (task manifest, meta-validity, execution assumptions, MLN sequence), but RG-09 should now be tracked against the strict H3 successor surface rather than against the earlier failed rescue attempts.
+- **Exploratory follow-up discipline:** H3 is no longer merely exploratory in this posture because the strict H3 successor surface passed. Any later neighboring H3 variants beyond the documented strict surface still require the same artifact-bound discipline, and the p85 control already provides one nearby negative sensitivity anchor.
 
 ---
 
@@ -1973,14 +2040,14 @@ resolution: "Resolved by ADR-009 §D4. OrchestratorHooks=Protocol in pipeline_st
 id:               MOM-020
 type:             MOM
 title:            CSMOM vs TSMOM vs dual-momentum comparison — Phase II entry block
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            I-E
 phase_links:      [II]
 strategy:         momentum
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "2026-03-29"
 owner:            unassigned
 depends_on:       [OI-08]
 blocks:           []
@@ -1992,15 +2059,28 @@ summary: >
 acceptance_criteria:
   - walk-forward comparison run on all three variants on identical splits
   - identical cost model used across variants
-  - momentum_variant_comparison_report.json produced and present in Phase I bundle
-  - report included in run bundle before Phase II entry
+  - child `cpcv_path_scores.json` emitted for xsec, tsmom, and dual and treated as the authoritative CPCV surface
+  - parent comparison layer validates split/cost hashes, aggregates emitted path-score surfaces, and does not recompute CPCV scores
+  - `comparison_stat_validity.json` emitted as the parent-owned shared-PBO artifact
+  - `momentum_variant_comparison_report.json` produced and present in the governed comparison bundle
 evidence_needed:
   - artifact
   - benchmark
+  - doc-update
 impact: >
-  Phase II cannot begin without this report. Most critical post-OI-08 research
-  deliverable for momentum strategy.
-resolution: ~
+  Phase II momentum entry evidence would be invalid if the parent comparison layer
+  could self-certify CPCV scores or silently mutate child comparison authority.
+resolution: >
+  Closed on 2026-03-29. Governed child bundles now emit authoritative
+  `cpcv_path_scores.json` artifacts on the shared CPCV split surface and shared
+  cost model. The parent comparison bundle verifies split and cost identity from
+  emitted child artifacts, aggregates those immutable path-score surfaces into
+  shared PBO, emits `comparison_stat_validity.json`, and ranks variants without
+  recomputing CPCV scores. Fail-closed conditions are explicit for missing child
+  CPCV artifacts and for split or cost hash mismatches. Remaining caveat: shared
+  PBO is a parent-owned post-processing artifact by design; child
+  `stat_validity_report.json` remains immutable and is not rewritten by the
+  comparison layer.
 ```
 
 ---
@@ -2100,7 +2180,7 @@ resolution: >
 id:               GATE-I-F-03
 type:             GATE
 title:            F-3 — ADR consequences real in code for Phase II-blocking seams
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            []
 phase:            I-F
@@ -2113,22 +2193,37 @@ pass_condition: >
   lineage, or Phase II integration.
 fail_mode:        HALT
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.10.0"
 owner:            unassigned
 depends_on:       [OI-21]
 blocks:           []
 related:          [OI-21, ADR-002, ADR-005]
 summary: Verifies ADRs are enforced, not just written.
 acceptance_criteria:
-  - ADR-002 consequence: single artifact path confirmed in code
-  - ADR-005 consequence: integration behavior reflects three-layer structure
+  - ADR-002: single artifact path confirmed; no live writes to old path
+  - ADR-005: java_entry.py delegates to orchestrator.py; run_pipeline.py is a
+    compatibility shim with no primary-path logic; suite_runner.py is present
+    as the third-layer suite-coordination surface and is not invoked by the
+    current single-run canonical path, consistent with ADR-005's explicit
+    "stub until multi-run orchestration" consequence
   - no ambiguous branches for TaskRegistry, model artifacts, or bundle lineage
+  - AQ-07 unresolved ADR candidates have a documented plan artifact
   - OI-21 closed
 evidence_needed:
   - code
   - tests
 impact: Phase II ML artifact storage is ambiguous without this gate.
-resolution: ~
+resolution: >
+  Closed at v4.10.0. Acceptance wording amended to match ADR-005's actual
+  decision: the three-layer structure is confirmed (java_entry.py → orchestrator.py
+  delegation proven by trusted integration tests; run_pipeline.py confirmed as
+  compatibility shim; suite_runner.py documented as present but not invoked by
+  the current single-run canonical path, consistent with ADR-005's explicit
+  "stub until multi-run orchestration" consequence). ADR-002 canonical
+  ownership confirmed with fail-closed sentinel evidence. No parallel Phase II
+  artifact sink found. AQ-07 plan artifact recorded. Evidence:
+  docs/audits/phase_if_f3_seam_audit.md,
+  docs/audits/AQ-07_alpha_ir_migration_plan.md.
 ```
 
 ### GATE-I-F-04 · F-4 Phase II interface contract stubs
@@ -2137,7 +2232,7 @@ resolution: ~
 id:               GATE-I-F-04
 type:             GATE
 title:            F-4 — Phase II interface contract stubs published
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            []
 phase:            I-F
@@ -2145,27 +2240,39 @@ phase_links:      [I-G, II-0, II]
 gate_section:     "F-4"
 pass_condition: >
   Stub-level contracts for MetaTask and TaskRegistry published. Task-generation
-  boundary defined with PIT expectations. Context encoder input contract and
-  signal output contract defined.
+  boundary defined with PIT expectations. Context encoder input contract,
+  signal output contract, and Signal Reliability Layer schema contract defined.
 fail_mode:        HALT
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.11.0"
 owner:            unassigned
-depends_on:       [OI-22]
+depends_on:       [OI-22, OI-41]
 blocks:           []
-related:          [OI-22, MLC-0, MLC-1]
+related:          [OI-22, OI-41, MLC-0, MLC-1]
 summary: Interface contracts must be locked before Phase II ML component implementation begins.
 acceptance_criteria:
   - MetaTask interface contract published as versioned stub with full type annotations
   - TaskRegistry interface contract published as versioned stub with full type annotations
   - task-generation boundary and PIT expectations documented
   - context encoder input and signal output contracts defined
+  - Signal Reliability Layer prose/schema contract published and cross-linked
+  - companion Phase II interface contract document published
+  - OI-41 closed
   - OI-22 closed
 evidence_needed:
   - code
   - doc-update
 impact: Phase II ML components cannot be implemented without locked interface contracts.
-resolution: ~
+resolution: >
+  Closed at v4.11.0. OI-22 published the Phase II stub contract package under
+  srcPy/meta_learning/ and the companion document at
+  docs/contracts/phase_ii_interface_contracts.md. OI-41 published the
+  governing Signal Reliability Layer prose/schema surface via
+  docs/src/signal_reliability_schema_v0_1_1.md and
+  schemas/signal_reliability.schema.json. The required F-2 strict mypy surface
+  was executed during closure review; the pandas import-untyped failures are
+  pre-existing OI-33 debt confirmed via local mypy log and were not introduced
+  by the F-4 change set, so they do not constitute an F-4 regression.
 ```
 
 ### GATE-I-F-05 · F-5 Determinism boundary for ML entry
@@ -2174,7 +2281,7 @@ resolution: ~
 id:               GATE-I-F-05
 type:             GATE
 title:            F-5 — Phase II artifact D-tiers declared and seed derivation specified
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            []
 phase:            I-F
@@ -2187,7 +2294,7 @@ pass_condition: >
   is the stated target.
 fail_mode:        HALT
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.12.0"
 owner:            unassigned
 depends_on:       [OI-23]
 blocks:           []
@@ -2202,7 +2309,13 @@ acceptance_criteria:
 evidence_needed:
   - doc-update
 impact: Undeclared D-tiers create non-reproducible ML training runs and gate ambiguity.
-resolution: ~
+resolution: >
+  Closed at v4.12.0. docs/contracts/phase_ii_determinism_boundary.md now locks
+  the ADR-007 D-tier assignments for the declared Phase II artifact surfaces,
+  one namespace-based HMAC-SHA256 seed derivation scheme, deterministic task-ID
+  consumption expectations, and a same-environment Python-only D2 reference-run
+  boundary. docs/contracts/phase_ii_interface_contracts.md now points to that
+  determinism source of truth instead of carrying a separate F-5 deferral list.
 ```
 
 ### F-6 worklog (coverage / CI truthfulness)
@@ -2215,7 +2328,7 @@ resolution: ~
 id:               GATE-I-F-06
 type:             GATE
 title:            F-6 — Coverage omit rules audited; CI thresholds match actual config
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            []
 phase:            I-F
@@ -2227,7 +2340,7 @@ pass_condition: >
   actual built surface. CI thresholds aligned with fail_under = 90.
 fail_mode:        HALT
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.12.2"
 owner:            unassigned
 depends_on:       [OI-24, OI-09, OI-10]
 blocks:           []
@@ -2236,13 +2349,22 @@ summary: Coverage audit closes the loop on OI-09 (omit list) and OI-10 (mark.net
 acceptance_criteria:
   - all omit rules justified or removed
   - OI-09 and OI-10 closed
-  - CI thresholds confirmed at fail_under = 90 line, 80 branch per pyproject.toml
+  - CI thresholds confirmed at fail_under = 90 line in pyproject.toml and 80 branch in CI coverage.json enforcement
   - OI-24 closed
 evidence_needed:
   - doc-update
   - tests
 impact: Silently excluded strategy code undermines the 90% threshold guarantee.
-resolution: ~
+resolution: >
+  Closed at v4.12.2. The F-6 audit removed dead omit entries
+  (`srcPy/trading.py`, `srcPy/simulation.py`, `srcPy/utils/backtester_bt.py`),
+  returned the live `srcPy.pipeline.stages.market_data.exceptions` seam to
+  coverage scope, removed residual `pytest.mark.net` labels from local-only
+  tests, aligned AGENTS.md to the canonical `fail_under = 90` line /
+  `80%` branch thresholds, and changed CI from misleading unused env vars to
+  an actual branch check against `coverage.json`. The local subset-run
+  convention now stays explicit: use `pytest --no-cov` unless intentionally
+  measuring coverage.
 ```
 
 ## Phase I-F Open Items
@@ -2334,13 +2456,13 @@ resolution: >
 id:               OI-21
 type:             OI
 title:            F-3 — ADR closure for Phase II-blocking seams
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-I-F-03]
 phase:            I-F
 phase_links:      [I-G, II-0, II]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.10.0"
 owner:            unassigned
 depends_on:       [OI-20]
 blocks:           [OI-22]
@@ -2352,59 +2474,81 @@ summary: >
   artifacts, bundle lineage, or Phase II integration.
 acceptance_criteria:
   - ADR-002: single artifact path confirmed; no live writes to old path
-  - ADR-005: integration behavior reflects three-layer structure
+  - ADR-005: java_entry.py delegates to orchestrator.py; run_pipeline.py is a
+    compatibility shim with no primary-path logic; suite_runner.py is present
+    as the third-layer suite-coordination surface and is not invoked by the
+    current single-run canonical path, consistent with ADR-005's explicit
+    "stub until multi-run orchestration" consequence
   - no ambiguous branches for TaskRegistry, model artifacts, or bundle lineage
-  - any unresolved ADR candidates (AQ-07) have a plan
+  - AQ-07 has a documented plan artifact
 evidence_needed:
   - code
   - doc-update
 impact: Ambiguous seams at Phase II start compound quickly once ML artifact writes begin.
-resolution: ~
+resolution: >
+  Closed at v4.10.0. Acceptance wording amended to reflect ADR-005's actual
+  committed scope before closure. All amended criteria satisfied: ADR-002
+  canonical ownership confirmed; ADR-005 three-layer structure confirmed per
+  ADR-consistent criterion; no parallel Phase II artifact sink; AQ-07 plan
+  artifact present. Evidence: docs/audits/phase_if_f3_seam_audit.md,
+  docs/audits/AQ-07_alpha_ir_migration_plan.md.
 ```
 
 ```yaml
 id:               OI-22
 type:             OI
 title:            F-4 — Phase II interface contract stubs
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-I-F-04]
 phase:            I-F
 phase_links:      [I-G, II-0, II]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.11.0"
 owner:            unassigned
 depends_on:       [OI-21]
 blocks:           [OI-23]
-related:          [MLC-0, MLC-1, ADR-006]
+related:          [MLC-0, MLC-1, ADR-006, OI-41]
 summary: >
   Add or finalize stub-level contracts for MetaTask and TaskRegistry. Define
   task-generation boundary with PIT expectations. Define context encoder input
-  contract and signal output contract compatible with planned AlphaIR / meta-policy path.
+  contract and signal output contract compatible with planned AlphaIR /
+  meta-policy path and the Signal Reliability Layer contract.
 acceptance_criteria:
   - MetaTask stub with full type annotations and docstring
   - TaskRegistry stub with versioned interface, full type annotations
   - task-generation PIT boundary documented
   - context encoder input contract defined
   - signal output contract compatible with AlphaIR Phase I schema
+  - signal output compatibility documented against SignalReliabilityState keying
 evidence_needed:
   - code
   - doc-update
 impact: Phase II ML components cannot be implemented without these contracts.
-resolution: ~
+resolution: >
+  Closed at v4.11.0. Published the five stub files:
+  srcPy/meta_learning/__init__.py,
+  srcPy/meta_learning/contracts/__init__.py,
+  srcPy/meta_learning/contracts/meta_task.py,
+  srcPy/meta_learning/contracts/task_registry.py, and
+  srcPy/meta_learning/contracts/encoder_contracts.py. Companion contract
+  documentation published at docs/contracts/phase_ii_interface_contracts.md.
+  The F-2 strict mypy surface was re-run for closure review; the pandas
+  import-untyped failures are pre-existing OI-33 debt confirmed via local mypy
+  log, not introduced by the F-4 change set.
 ```
 
 ```yaml
 id:               OI-23
 type:             OI
 title:            F-5 — Determinism boundary for ML entry
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-I-F-05]
 phase:            I-F
 phase_links:      [I-G, II-0, II]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.12.0"
 owner:            unassigned
 depends_on:       [OI-22]
 blocks:           [OI-24]
@@ -2425,20 +2569,26 @@ evidence_needed:
 impact: >
   Undeclared D-tiers make ML training non-reproducible by default and create
   ambiguous gate criteria — the gate may require D3 while only D2 is achievable.
-resolution: ~
+resolution: >
+  Closed at v4.12.0. Published docs/contracts/phase_ii_determinism_boundary.md
+  as the single F-5 source of truth for ADR-007 D-tier assignments, seed
+  lineage, task_id consumption expectations, and the early reference-run
+  reproducibility boundary. docs/contracts/phase_ii_interface_contracts.md now
+  points to that document, keeping early ML gate language explicitly at D2
+  rather than implying D3 certification.
 ```
 
 ```yaml
 id:               OI-24
 type:             OI
 title:            F-6 — Coverage / CI truthfulness audit
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-I-F-06]
 phase:            I-F
 phase_links:      [I-G]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.12.2"
 owner:            unassigned
 depends_on:       [OI-23, OI-09, OI-10]
 blocks:           []
@@ -2461,6 +2611,833 @@ impact: >
   Stale omit rules silently undercount coverage. Momentum strategy code added
   in I-E must be in scope, not omitted. ops_custom.py branch gap must be
   resolved before this gate can close.
+resolution: >
+  Closed at v4.12.2. The repo now distinguishes the covered Phase I surface
+  from deferred branches without hiding live code: broad historical `sources/*`
+  omissions remain gone, dead omit entries were deleted, and the live
+  market-data exception wrapper is measured again. Residual local-only tests no
+  longer hide behind `net`, CI enforces `fail_under = 90` plus an explicit
+  `80%` branch floor, and AGENTS.md documents `pytest --no-cov` as the
+  canonical narrow local validation convention.
+```
+
+```yaml
+id:               OI-41
+type:             OI
+title:            Signal Reliability Layer schema contract and JSON schema
+status:           CLOSED
+blocking:         YES
+gates:            [GATE-I-F-04]
+phase:            I-F
+phase_links:      [II]
+opened_on:        "v4.11.0"
+resolved_on:      "v4.11.0"
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [MLN-03, OI-22, OI-25, OI-35]
+summary: >
+  New ledger ID used because OI-35 already tracks the RiskFn Protocol in the
+  live ledger. Defines the Signal Reliability Layer contract boundary so Phase
+  II does not start with ambiguous per-signal trustworthiness semantics.
+acceptance_criteria:
+  - signal_reliability_schema_v0_1_1.md published as governing prose spec
+  - schemas/signal_reliability.schema.json validates against the prose spec
+  - fast state covers 8 reliability dimensions + aggregate + evidence fields
+  - slow state covers calibration provenance, dimension weights, and fold-level stats
+  - relationship to confidence_scalar, signal_embedding, regime_embedding documented
+  - advisory-only semantics documented; promotion path to gating requires ADR
+  - kill condition and ablation protocol documented
+evidence_needed:
+  - doc-update
+  - schema
+impact: >
+  Without this contract, Phase II reliability work starts ambiguously. The
+  meta-policy may silently assume reliability semantics that conflict with
+  confidence routing, artifact contracts, or Dynamic-K invariants.
+resolution: >
+  Closed at v4.11.0. New ID assigned explicitly because OI-35 already had a
+  different live-ledger meaning. Evidence: docs/src/signal_reliability_schema_v0_1_1.md
+  and schemas/signal_reliability.schema.json.
+```
+
+```yaml
+id:               OI-42
+type:             OI
+title:            Root package builtins shim trips strict mypy attr-defined
+status:           OPEN
+blocking:         NO
+gates:            []
+phase:            I-F
+phase_links:      [I-G, II-0, II]
+opened_on:        "v4.11.0"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [OI-33, GATE-I-F-02]
+summary: >
+  The root package bootstrap in srcPy/__init__.py assigns builtins.OPS and
+  builtins.spec_draw directly, which triggers strict mypy attr-defined errors
+  on the governed F-2 surface. This is outside the F-4 deliverable set and is
+  tracked separately as non-blocking I-F debt.
+acceptance_criteria:
+  - strict mypy no longer reports attr-defined at srcPy/__init__.py lines 37 and 46
+  - any fix is documented as root-package bootstrap debt, not F-4 contract work
+evidence_needed:
+  - code
+  - doc-update
+impact: >
+  The governed F-2 strict mypy command remains noisy until the root bootstrap
+  shim is typed or refactored, even when F-4 contract work itself is clean.
+resolution: ~
+```
+
+```yaml
+id:               OI-43
+type:             OI
+title:            RG-09 replay fixture production
+status:           CLOSED
+blocking:         YES
+gates:            []
+phase:            I-G
+phase_links:      [II-0A, MLC-0]
+opened_on:        "v4.13.1"
+resolved_on:      "v4.18.1"
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [RG-09, rg09_replay_fixture_spec.md]
+summary: >
+  Produce the first versioned replay fixture conforming to
+  rg09_replay_fixture_spec.md so that RG-09 Phase II-0A harness work can
+  begin when live BOCPD service output is not yet available. This item is
+  opened during Phase I-G because the blocking dependency must be visible
+  before II-0A begins; the work product is produced on the MLC-0-adjacent
+  pre-work lane and consumed by II-0A. Without this item, v4.14.0 appears
+  runnable when it is not.
+acceptance_criteria:
+  - fixture emitted at declared artifact path and path recorded in this
+    ledger entry's resolution field
+  - fixture conforms to rg09_replay_fixture_spec.md required fields:
+    entity_id, decision_ts, regime_label, effective_at, state_snapshot_id,
+    input_snapshot_id, config_version, change_probability, boundary_flag
+  - companion metadata present: fixture_sha256, source_dataset_id,
+    date_range_start, date_range_end, row_count, generation_timestamp,
+    config_version, producer_version
+  - fixture validated by consumer-side schema check and validation outcome
+    recorded before fixture is declared admissible
+  - RG-09 ledger entry updated with fixture artifact path as v4.14.0
+    entry-gate evidence
+evidence_needed:
+  - artifact
+  - doc-update
+impact: >
+  v4.14.0 cannot begin without a replay fixture or live service output.
+  Without this OI, the dependency remains invisible and v4.14.0 appears
+  runnable when it is not.
+resolution: >
+  Closed at v4.18.1. Replay fixture emitted at
+  fixtures/rg09/v1/rg09_fixture_v1.parquet with companion artifacts
+  fixtures/rg09/v1/rg09_fixture_summary.json and
+  fixtures/rg09/v1/rg09_fixture_metadata.json. Narrow artifact audit recorded:
+  parquet fields preserve the intended semantics
+  (regime_id=canonical compositional label, regime_label=canonical service
+  label, regime_class=additive 5-class projection); summary and metadata agree
+  on fixture_sha256
+  sha256:3ba47a1ef9445f1694c411151219bd2935f2d6b1b075e33a6c5fe13f903c4553;
+  required reference-baseline and provenance fields are present
+  (row_counts_by_class_bocpd_gated, crisis_label_agreement_rate, amendment,
+  projection_rule). This satisfies the RG-09 replay-fixture dependency for
+  Phase II-0A entry when live BOCPD service output is not yet available.
+```
+
+```yaml
+id:               OI-44
+type:             OI
+title:            Evidence OI — DIAG-001 volatility regime separability
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            I-G
+phase_links:      []
+opened_on:        "v4.17.0"
+resolved_on:      "v4.17.0"
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [RG-09, MLN-02, MLN-02-AMD-01]
+summary: >
+  Formal registration for DIAG-001 (volatility regime separability diagnostic,
+  RG-09 I-G session evidence). Path (a): CLOSED at registration; points to session
+  transcript / diagnostic artifacts per governance.
+acceptance_criteria:
+  - ledger row exists with stable ID OI-44 and CLOSED status
+  - cross-reference from MLN-02-AMD-01 evidence register satisfied
+evidence_needed:
+  - doc-update
+impact: >
+  Anchors MLN-02-AMD-01 empirical narrative without re-opening the MetaTask
+  schema or regime_id vocabulary.
+resolution: >
+  Closed at v4.17.0 per MLN-02-AMD-01 §5.1 (path a). Evidence item DIAG-001.
+```
+
+```yaml
+id:               OI-45
+type:             OI
+title:            Evidence OI — DIAG-002 BOCPD vs volatility-tail characterization
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            I-G
+phase_links:      []
+opened_on:        "v4.17.0"
+resolved_on:      "v4.17.0"
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [RG-09, MLN-02, MLN-02-AMD-01, AQ-04]
+summary: >
+  Formal registration for DIAG-002 (BOCPD changepoints vs volatility-tail
+  characterization, RG-09 I-G session evidence). Path (a): CLOSED at registration.
+acceptance_criteria:
+  - ledger row exists with stable ID OI-45 and CLOSED status
+  - cross-reference from MLN-02-AMD-01 evidence register satisfied
+evidence_needed:
+  - doc-update
+impact: >
+  Motivates MLN-02-AMD-01 separation of BOCPD segmentation from Level 2 crisis
+  labeling.
+resolution: >
+  Closed at v4.17.0 per MLN-02-AMD-01 §5.1 (path a). Evidence item DIAG-002.
+```
+
+```yaml
+id:               OI-46
+type:             OI
+title:            Evidence OI — RG-09 H1 precondition failure on single-entity replay fixture
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            I-G
+phase_links:      [II-0, II]
+opened_on:        "v4.18.5"
+resolved_on:      "v4.18.5"
+owner:            unassigned
+depends_on:       [RG-09, OI-43]
+blocks:           []
+related:          [RG-09, MLN-01, MLN-02, MLN-07]
+summary: >
+  Formal registration for the first governed RG-09 H1 replay-fixture run result:
+  H1 was attempted on the bounded ES-only replay fixture and returned
+  FAIL_INSUFFICIENT_EPISODES before gate execution. The artifact itself records
+  successor activation as ineligible because preconditions were not met. This
+  evidence item anchors RG-09's PARTIAL continuation state before additional
+  fixture work proceeds.
+acceptance_criteria:
+  - ledger row exists with stable ID OI-46 and CLOSED status
+  - RG-09 continuation text references the governed H1 precondition failure
+  - the next-step remedy is stated as fixture-scope expansion, not silent threshold tuning
+evidence_needed:
+  - doc-update
+impact: >
+  Without a governed evidence item, the H1 precondition failure can be
+  misremembered as an ordinary negative result or as successor-eligible. The
+  repo must record that the bounded ES-only fixture never reached gate
+  evaluation and therefore cannot justify follow-on hypothesis activation.
+resolution: >
+  Closed at v4.18.5 as evidence registration. Governed artifacts under
+  runs/rg09_empirical_closure/example_run/ record: executed_hypotheses =
+  [RG09-H1], fail_codes = [FAIL_INSUFFICIENT_EPISODES], gate_executed = false,
+  decision = null, successor_hypotheses.eligible = false, reason =
+  preconditions_not_met. Root cause is treated as single-entity replay-fixture
+  scope: one ticker does not provide enough independent temporal folds under
+  the governed episode geometry to support H1 honestly. The required remedy is
+  cross-sectional replay-fixture expansion with the same provenance and
+  fixture-spec governance, followed by a rerun of H1. Thresholds RG09-V06,
+  RG09-V09, RG09-V10, and RG09-V11 may be recalibrated only after the wider
+  fixture exists; they are secondary to the   fixture-scope deficiency.
+```
+
+```yaml
+id:               OI-47
+type:             OI
+title:            RG-09 multi-ticker replay fixture v2 production
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.8"
+resolved_on:      "v4.18.8"
+owner:            unassigned
+depends_on:       [OI-43, OI-46, RG-09]
+blocks:           []
+related:          [RG-09, MLN-01, MLN-02, MLN-07]
+summary: >
+  Governed production of the multi-ticker RG-09 replay fixture v2 (same schema
+  as v1), generator extension in scripts/generate_rg09_fixture.py with unit and
+  integration tests, and empirical H1 re-run against the unchanged pilot config.
+acceptance_criteria:
+  - v2 parquet and companion sidecars under fixtures/rg09/v2/ with fixture_sha256 recorded
+  - rg09_pilot_config_v1.json thresholds unchanged; harness and empirical closure code unchanged
+  - empirical closure output and H1 outcome recorded in this resolution
+evidence_needed:
+  - code
+  - fixture
+  - doc-update
+impact: >
+  Documents whether cross-sectional replay rows satisfy H1 preconditions under
+  fixed pilot geometry without silent threshold tuning.
+resolution: >
+  Closed at v4.18.8. Fixture path fixtures/rg09/v2/rg09_fixture_v2.parquet with
+  fixture_sha256
+  sha256:6daf760e571cd8d7172a98182bbcbd2953e761dcdca80f76360e9ae68828f419.
+  Basket (source_dataset_id): ES, NQ, RTY, YM derived from
+  es_daily_2000_2024.parquet segments per docs/rg09/rg09_multi_fixture_manifest_v1.json.
+  Empirical closure (docs/rg09/rg09_pilot_config_v1.json unchanged) yields
+  gate_executed=false,
+  fail_codes=[FAIL_INSUFFICIENT_EPISODES, FAIL_NONREPRODUCIBLE], decision=null,
+  successor_hypotheses.eligible=false with reason=preconditions_not_met.
+  Under the governed episode geometry and unchanged pilot thresholds, admissible
+  contiguous regime_id runs remain below the min_admissible_episode_count budget;
+  multi-ticker stacking alone does not unlock gate execution. No threshold
+  tuning was performed in this branch per OI-46 governance; successor hypotheses
+  remain ineligible until H1 reaches an actual gate decision.
+  Follow-on diagnostic (no threshold or harness changes): docs/rg09/rg09_v2_precondition_diagnostic.md
+  records the v2_diag bundle generated with docs/rg09/rg09_bocpd_fixture_config_v1.json,
+  pre-flight checks, threshold-by-threshold measured shortfalls, and fail-code mapping
+  for runs/rg09_v2_diag/h1_v1_bocpd/rg09_gate_result.json.
+```
+
+```yaml
+id:               OI-52
+type:             OI
+title:            RG-09 null-distribution invalidity correction (stage 3)
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.11"
+resolved_on:      "v4.18.13"
+owner:            unassigned
+depends_on:       [OI-51, RG-09]
+blocks:           []
+related:          [RG-09, MLN-01, MLN-02, MLN-07]
+summary: >
+  Close the RG-09 H1 null-distribution defect after v4.18.12 showed that the
+  remaining degeneracy in shuffled_label and matched_exchangeable_window came
+  from the still-invariant `abs(mean(adaptation_gain))` statistic. Stage 3
+  scope is limited to using the regime separability statistic uniformly across
+  all authorized null families, rerunning H1 into a fresh directory, and
+  recording the first valid governed H1 outcome without changing pilot
+  thresholds, fixture inputs, or null-generator behavior.
+acceptance_criteria:
+  - all authorized null families use the same regime separability statistic
+  - the governed rerun at runs/rg09_v2/h1_v2bocpd_uniform_stat/ emits no invalid null families
+  - the governed rerun emits a valid non-null decision without FAIL_NULL_DISTRIBUTION_INVALID
+  - OI-52 records the valid H1 outcome as a harness-fix closeout rather than as another invalid-evidence iteration
+evidence_needed:
+  - code
+  - tests
+  - rerun-artifact
+  - doc-update
+impact: >
+  Resolves the null-distribution correctness defect entirely and restores the
+  RG-09 H1 statistical lane as a valid governed decision surface.
+resolution: >
+  Closed at v4.18.13. `_statistic_for_family` in srcPy/meta/rg09_harness.py now
+  dispatches the regime separability statistic uniformly across
+  shuffled_regime, shuffled_label, and matched_exchangeable_window. The gate
+  spec was updated to record the uniform statistical lane, and the existing
+  provisional denominator-floor governance (RG09-V14 / THR-RG09-V15) now
+  applies to the shared statistic rather than only the shuffled_regime family.
+  Targeted RED/GREEN tests passed, strict mypy passed, and the governed rerun at
+  runs/rg09_v2/h1_v2bocpd_uniform_stat/rg09_gate_result.json emitted
+  gate_executed=true with invalid_families=[] and non-degenerate null
+  distributions across all three authorized families and both folds. OI-53
+  (v4.18.14) later refined the decision-logic interpretation from the
+  then-current FAIL_KILL output to NEEDS_MORE_EVIDENCE; that refinement does not
+  reopen the null-distribution defect itself.
+```
+
+```yaml
+id:               OI-53
+type:             OI
+title:            RG-09 directional-underpowered decision branch missing from _synthesize_decision
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.14"
+resolved_on:      "v4.18.14"
+owner:            unassigned
+depends_on:       [OI-52, RG-09]
+blocks:           []
+related:          [RG-09, MLN-01, MetaLearningCore]
+summary: >
+  The null-distribution defect was fixed by OI-52, but the harness still had no
+  decision state for structural-pass, statistically underpowered, yet
+  directionally consistent evidence. Under the old fall-through, the first
+  valid H1 rerun emitted FAIL_KILL even though the evidence did not satisfy the
+  confirmed-collapse standard implied by MetaLearningCore §0.4. Add an explicit
+  NEEDS_MORE_EVIDENCE branch for this governed case before further reruns.
+acceptance_criteria:
+  - _synthesize_decision returns NEEDS_MORE_EVIDENCE when structural evidence passes, nulls are valid, statistics are directionally consistent, and functional evidence retains positive directional delta but remains below threshold
+  - rg09_gate_spec.md expands NEEDS_MORE_EVIDENCE to cover the directional-underpowered case
+  - governed rerun artifacts record NEEDS_MORE_EVIDENCE instead of FAIL_KILL for the current v2 fixture
+  - empirical closure reports inconclusive rather than a negative conclusion for the directional-underpowered rerun
+evidence_needed:
+  - code
+  - tests
+  - rerun-artifact
+  - doc-update
+impact: >
+  Prevents the RG-09 harness from overstating a project kill when the evidence
+  is structurally positive but statistically underpowered.
+resolution: >
+  Closed at v4.18.14. Added a directional-underpowered NEEDS_MORE_EVIDENCE
+  branch to srcPy/meta/rg09_harness.py using existing fold-level null-family
+  summaries (`real_statistic > null_mean` across all folds / families) plus
+  positive functional directionality. Updated docs/rg09/rg09_gate_spec.md to
+  reserve FAIL_KILL for confirmed collapse and to expand NEEDS_MORE_EVIDENCE for
+  this governed case. Targeted RED/GREEN tests passed, strict mypy passed, and
+  the governed rerun at runs/rg09_v2/h1_v2bocpd_directional_nme/rg09_gate_result.json
+  emitted gate_executed=true, decision=NEEDS_MORE_EVIDENCE, fail_codes=[],
+  structural_separability_ratio=1.8352959310529893, aggregate Harvey
+  t=2.022353402589051, positive_delta=true, and successor_hypotheses eligible
+  for a single targeted follow-up. Empirical closure at
+  runs/rg09_v2/empirical_v2bocpd_directional_nme/rg09_empirical_summary.json
+  now reports supports_non_exchangeability=inconclusive.
+```
+
+```yaml
+id:               OI-54
+type:             OI
+title:            RG-09 power analysis advisory conclusion invalid — fixture fold asymmetry contaminates effect size estimates
+status:           OPEN
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.15"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       [RG-09, runs/rg09_power_analysis/v1/rg09_power_analysis.json]
+blocks:           []
+related:          [RG-09, OI-55]
+summary: >
+  The advisory power-analysis tool emitted a deterministic output, but its
+  baseline input surface is not trustworthy for a scope-worthiness conclusion.
+  The baseline fold structure inherits contamination from
+  uniform_calendar_day_index=true stacking, so fold 0 and fold 1 are different
+  instrument/period mixtures rather than independent temporal samples.
+acceptance_criteria:
+  - fixture fold construction is reviewed against the v2 stacked real-instrument design
+  - the source of the fold asymmetry is documented against the actual governed fixture semantics
+  - advisory power analysis is rerun on a corrected fold design before its conclusion is used for RG-09 scope planning
+  - the current advisory conclusion is explicitly barred from project-level use until the rerun exists
+evidence_needed:
+  - analysis-artifact
+  - rerun-artifact
+  - doc-update
+impact: >
+  Prevents the RG-09 advisory planning lane from weakening the base thesis on a
+  contaminated fold/effect-size surface.
+resolution: >
+  The rg09_power_analysis.json advisory conclusion
+  (baseline_effect_too_weak_for_reasonable_scope_expansion) is not a
+  trustworthy finding because the baseline run's per-fold standardized margins
+  were derived from a fold structure corrupted by uniform_calendar_day_index:
+  true stacking. Fold 0 and fold 1 contain different instrument/period
+  mixtures rather than two independent temporal samples, producing artificial
+  asymmetry (structural ratios of 15.44 vs 0.69) that weakens the pooled effect
+  size estimate. The power_b fold 1 result (Harvey t 3.31, all three
+  statistical families passing with 28 episodes) is inconsistent with a "too
+  weak to detect" underlying effect. The power analysis tool is correctly
+  built; its input is not valid for this conclusion. Re-run after the fixture
+  fold design is corrected.
+  v4.18.20 implements the governed fixture correction path: manifests with
+  calendar_overlap_policy=independent_instruments must set
+  uniform_calendar_day_index=false; the generator emits real per-instrument
+  decision_ts, rg09_trading_day_ord, summary fold_construction with
+  calendar_time time_ranges, and fail-fast fold geometry validation. Checked-in
+  fixtures/rg09/v2/* must be regenerated from frozen data for hashes and
+  sidecars to match; rerunning advisory power analysis on the new bundle remains
+  an explicit follow-up before treating OI-54 as closed for planning use.
+```
+
+```yaml
+id:               OI-55
+type:             OI
+title:            RG-09 harness `_synthesize_decision` missing state for fold-inconsistent evidence — routes to FAIL_KILL incorrectly
+status:           CLOSED
+blocking:         NO
+gates:            [GATE-II-01]
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.15"
+resolved_on:      "v4.18.17"
+owner:            unassigned
+depends_on:       [RG-09]
+blocks:           []
+related:          [RG-09, OI-53, OI-54]
+summary: >
+  The directional-underpowered branch added in OI-53 does not cover the mixed
+  fold case exposed by power_b: one fold can clear the statistical and
+  functional lanes while another fails structurally, yet the harness still
+  falls through to FAIL_KILL / FAIL_EXCHANGEABLE_TASKS.
+acceptance_criteria:
+  - _synthesize_decision has an explicit state for contradictory fold-level evidence
+  - the chosen state aligns with rg09_gate_spec.md FAIL_NONREPRODUCIBLE / NEEDS_MORE_EVIDENCE semantics
+  - future RG-09 kill interpretations do not rely on the current fold-inconsistent fall-through
+evidence_needed:
+  - code
+  - tests
+  - doc-update
+impact: >
+  Blocks RG-09 closure until fold-inconsistent governed evidence can no longer
+  be mislabeled as a valid kill.
+resolution: >
+  Resolved in v4.18.17. `_synthesize_decision` now evaluates per-lane fold
+  outcomes before the terminal kill branch and routes contradictory
+  statistical / structural / functional fold evidence to
+  NEEDS_MORE_EVIDENCE with FAIL_NONREPRODUCIBLE. The harness no longer relies
+  on overall_pass uniformity alone, so mixed fold-lane evidence does not fall
+  through to FAIL_KILL / FAIL_EXCHANGEABLE_TASKS. Targeted unit tests cover
+  the helper and the routing branch, and rg09_gate_spec.md now documents the
+  fold-inconsistency behavior.
+  v4.18.19 follow-up: `_per_lane_fold_inconsistent` is evaluated before the
+  directional-underpowered branch so contradictory fold-level lane outcomes
+  always emit FAIL_NONREPRODUCIBLE even when directional statistics and
+  functional positive_delta would otherwise satisfy case (b) alone.
+```
+
+```yaml
+id:               OI-56
+type:             OI
+advisory:         true
+title:            RG-09 H1 statistical-validation advisory brief (ADV-H1-STAT-01)
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.22"
+resolved_on:      "v4.18.22"
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [RG-09, OI-52, OI-53, OI-54, OI-55]
+summary: >
+  Advisory only. Register ADV-H1-STAT-01 as a non-governed audit of the current
+  H1 statistical-validation surface. The brief does not change the official H1
+  verdict, does not change thresholds, does not block H2, and does not enter
+  the governed evidence chain.
+acceptance_criteria:
+  - advisory brief explicitly labeled non-governed and not an official H1 verdict
+  - findings recorded without changing governed artifacts, thresholds, or H2 eligibility
+  - advisory output remains informational only and does not amend the official H1 line
+evidence_needed:
+  - analysis-artifact
+  - doc-update
+impact: >
+  Records the completed advisory audit as finished work while preserving a clean
+  boundary between advisory analysis and governed RG-09 evidence.
+resolution: >
+  Closed at v4.18.22. ADV-H1-STAT-01 completed the requested non-governed audit
+  of the H1 statistical-validation surface and remained correctly scoped:
+  no governed artifacts were changed, no thresholds were changed, no rerun was
+  executed, and the official H1 state remains the artifact at
+  runs/rg09_v2/h1_v2bocpd_directional_nme/rg09_gate_result.json. The advisory
+  findings are informational only and do not supersede, amend, or re-adjudicate
+  the governed RG-09 line.
+```
+
+```yaml
+id:               OI-57
+type:             OI
+title:            RG-09 matched_exchangeable_window null semantics are underspecified relative to the implemented generator
+status:           OPEN
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.22"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       [RG-09]
+blocks:           []
+related:          [RG-09, OI-52, OI-56]
+summary: >
+  The current gap is governed-specification scope, not a harness bug. The gate
+  spec describes matched_exchangeable_window as a volatility/duration-matched
+  exchangeable-window null, but the implemented generator in srcPy/meta/rg09_nulls.py
+  performs a simpler episode-level support/query reassignment. This mismatch must
+  be resolved before successor interpretation treats the three-family statistical
+  surface as equally motivated across all three null families.
+acceptance_criteria:
+  - intended null semantics for matched_exchangeable_window are explicitly decided
+  - rg09_gate_spec.md and the implemented generator are reconciled, either by spec correction or by later generator replacement
+  - the governed rationale for keeping, revising, or retiring this family from the three-family surface is documented
+  - H2 may execute with this family enabled, but design and result surfaces must carry the underspecification caveat until OI-57 resolves before final interpretation
+evidence_needed:
+  - doc-update
+  - code
+  - tests
+impact: >
+  Prevents RG-09 successors from inheriting stronger null-family semantics than
+  the current governed specification and implementation actually justify.
+resolution: ~
+```
+
+```yaml
+id:               OI-58
+type:             OI
+title:            RG-09 null draw count is runtime-derived rather than governed
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.22"
+resolved_on:      "v4.18.23"
+owner:            unassigned
+depends_on:       [RG-09, MLN-07]
+blocks:           []
+related:          [RG-09, OI-56]
+summary: >
+  The current RG-09 statistical lane derives draw_count at runtime rather than
+  from an explicit governed parameter. Close this gap by promoting draw count
+  onto the governed pilot-config surface so p-value resolution no longer
+  inherits episode-count behavior as an implicit runtime side effect.
+acceptance_criteria:
+  - current runtime-derived draw-count rule is documented honestly on a governed surface
+  - explicit governed ownership for draw count is introduced as threshold or policy, not left implicit in runtime behavior
+  - any later move from derived draw count to explicit configured draw count occurs in a separate resolution patch without retroactive ambiguity
+  - H2 planning material acknowledges that current p-value granularity is not yet an explicitly governed research choice
+evidence_needed:
+  - doc-update
+  - code
+  - tests
+impact: >
+  Prevents RG-09 statistical-resolution policy from remaining an undocumented
+  side effect of episode count and runtime implementation details.
+resolution: >
+  Closed at v4.18.23. Added governed config field `null_draw_count` to
+  docs/rg09/rg09_pilot_config_v1.json and the power_a variant, and updated
+  srcPy/meta/rg09_harness.py so `_evaluate_fold` reads draw count from config
+  rather than deriving it from episode count. docs/rg09/rg09_gate_spec.md now
+  states that each family/fold comparison uses configured `null_draw_count`
+  draws, and docs/src/ThresholdGovernanceRegister.md transitions
+  THR-RG09-V16 from `PROVISIONAL` to `VALIDATED` at `null_draw_count = 64`.
+  This patch does not change any governed run artifact retroactively; it closes
+  the threshold-ownership gap before H2 execution so successor runs inherit an
+  explicit governed parameter instead of a runtime side effect.
+```
+
+```yaml
+id:               OI-59
+type:             OI
+title:            RG-09 corrected-surface episode segmentation redesign after horizon-overlap feasibility collapse
+status:           OPEN
+blocking:         YES
+gates:            []
+phase:            I-G
+phase_links:      []
+opened_on:        "v4.18.24"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       [RG-09]
+blocks:           []
+related:          [RG-09, OI-54, OI-57, OI-58]
+summary: >
+  The corrected RG-09 v2 surface is now honest on fold construction but remains
+  non-constructible on the current task recipe. The corrected-surface
+  feasibility artifact for fixture `sha256:421b8a...` yields zero admissible
+  episodes, and the one-axis geometry sensitivity study shows
+  `HORIZON_OVERLAP` remains dominant under tested support/query relaxations on
+  the current segmentation. Open a governed successor lane for segmentation
+  redesign only after the existing recipe has been shown structurally non-viable.
+acceptance_criteria:
+  - corrected-surface feasibility evidence for fixture `sha256:421b8a...` is recorded and tied to the live surface, not the stale stacked artifact
+  - one-axis geometry sensitivity on the existing segmentation is recorded before any segmentation redesign candidate is evaluated
+  - segmentation candidates are evaluated in semantic-distance order: boundary hysteresis / minimum-dwell smoothing first, same-class micro-episode merge second, and inside-span window construction deferred unless earlier candidates fail
+  - every candidate preserves PIT, label-timing, and horizon-isolation invariants
+  - candidate comparison is feasibility-first and includes an explicit interpretability-continuity note for H1/H2 comparability
+  - no threshold changes or breadth expansion are used to satisfy this item
+evidence_needed:
+  - fixture
+  - doc-update
+  - code
+  - tests
+impact: >
+  Restores a governed path to executable RG-09 successor work after the
+  corrected-surface diagnostics showed that the current task recipe, not fold
+  geometry, is the active execution blocker.
+resolution: ~
+```
+
+```yaml
+id:               OI-51
+type:             OI
+title:            RG-09 v2 fixture regeneration — BOCPD v2 config + manifest uniform_calendar_day_index fix
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.10"
+resolved_on:      "v4.18.10"
+owner:            unassigned
+depends_on:       [OI-46, OI-47, OI-50, RG-09]
+blocks:           []
+related:          [RG-09, MLN-01, MLN-02, MLN-07]
+summary: >
+  Regenerate the official RG-09 v2 multi-instrument fixture from frozen local
+  data using BOCPD config v2 and corrected multi-manifest calendar policy.
+  This item addresses governed root causes from the real-instrument diagnostic:
+  NONCONTIGUOUS exclusions from non-uniform day indexing and HORIZON_OVERLAP
+  pressure from BOCPD v1 daily-window mismatch.
+acceptance_criteria:
+  - manifest v2 uses uniform_calendar_day_index=true
+  - fixture regenerated with rg09_bocpd_fixture_config_v2.json
+  - two independent generation runs produce identical fixture_sha256
+  - gate result emits gate_executed=true after regeneration
+  - empirical closure emits rg09_empirical_summary.json
+evidence_needed:
+  - code
+  - fixture
+  - doc-update
+impact: >
+  Produces the governed RG-09 v2 replay fixture surface and a corresponding H1
+  evaluation artifact on a genuine multi-instrument daily basket, without
+  pilot-threshold tuning.
+resolution: >
+  Closed at v4.18.10. Updated docs/rg09/rg09_multi_fixture_manifest_v2.json to
+  uniform_calendar_day_index=true and documented the weekend/holiday-gap rationale.
+  Regenerated fixtures/rg09/v2/ with docs/rg09/rg09_bocpd_fixture_config_v2.json
+  (config_version rg09_v1.1.0). Determinism check passed across two independent
+  outputs (fixtures/rg09/v2/ and fixtures/rg09/v2_tmp_check/), both with
+  fixture_sha256 sha256:34d367c6a1d0bbe5384c66c2d8cfd32090d3ad5a99ea6847b6468ff69d9de958.
+  Harness output runs/rg09_v2/h1_v2bocpd/rg09_gate_result.json initially
+  reported gate_executed=true, decision=FAIL_KILL, fail_codes=[FAIL_EXCHANGEABLE_TASKS];
+  OI-52 (v4.18.11) invalidated that hypothesis interpretation after the null
+  distributions were shown to be degenerate across all authorized families and
+  both folds. OI-51 therefore remains closed on fixture-regeneration scope only.
+  docs/rg09/rg09_pilot_config_v1.json remained unchanged (empty git diff).
+```
+
+```yaml
+id:               OI-50
+type:             OI
+title:            RG-09 multi-instrument yfinance data acquisition and v2 fixture
+status:           CLOSED
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      []
+opened_on:        "v4.18.9"
+resolved_on:      "v4.18.9"
+owner:            unassigned
+depends_on:       [OI-46, OI-47, RG-09]
+blocks:           []
+related:          [RG-09, MLN-01, MLN-02, MLN-07]
+summary: >
+  Governed download of independent daily futures-proxy series via yfinance into
+  frozen data/rg09/*.parquet files; docs/rg09/rg09_data_acquisition_log.md provenance;
+  docs/rg09/rg09_multi_fixture_manifest_v2.json; generator support for
+  independent_instruments calendar overlap and optional perturbation off; official
+  fixtures/rg09/v2/ bundle; harness and empirical closure runs under unchanged pilot.
+acceptance_criteria:
+  - acquisition log and manifest v2 committed; fixture SHA recorded
+  - pilot config unchanged; BOCPD fixture config v1 only
+  - gate and empirical artifacts paths recorded
+evidence_needed:
+  - code
+  - fixture
+  - data
+  - doc-update
+impact: >
+  Establishes reproducible cross-sectional inputs for RG-09 H1 without single-series
+  segmentation artifacts.
+resolution: >
+  Closed at v4.18.9. Acquisition log: docs/rg09/rg09_data_acquisition_log.md;
+  download manifest: data/rg09/rg09_download_manifest.json; multi-manifest:
+  docs/rg09/rg09_multi_fixture_manifest_v2.json (eight instruments: ES, NQ, RTY, YM,
+  GC, ZN, CL, 6E). Official fixture fixtures/rg09/v2/rg09_fixture_v2.parquet with
+  fixture_sha256
+  sha256:408e3670430edd03b3ac4ae8af6408fd36c5f593f90d55645e48465c57fd9701.
+  Harness: runs/rg09_v2/h1/rg09_gate_result.json — gate_executed=false,
+  fail_codes=[FAIL_INSUFFICIENT_EPISODES], decision=null under unchanged
+  docs/rg09/rg09_pilot_config_v1.json. Empirical closure:
+  runs/rg09_v2/empirical/rg09_empirical_summary.json emitted. No pilot thresholds
+  changed; BOCPD fixture generation uses rg09_bocpd_fixture_config_v1.json (rg09_v1.0.2).
+```
+
+```yaml
+id:               OI-48
+type:             OI
+title:            Field naming — PhaseIIArtifactContract.md harvey_t_statistic vs ImplementationPlan Appendix B.1 inner_loop_gain_harvey_t
+status:           OPEN
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      [II]
+opened_on:        "v4.18.6"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [MLN-06, PhaseIIArtifactContract, ImplementationPlan]
+summary: >
+  PhaseIIArtifactContract.md §5 names the governing Harvey t field
+  ``harvey_t_statistic``. ImplementationPlan.md Appendix B.1 lists
+  ``inner_loop_gain_harvey_t`` for the same semantic concept. Promotable
+  scaffold code follows the contract document; Appendix B.1 must be reconciled
+  before MLN-06 closes the artifact contract.
+acceptance_criteria:
+  - single normative field name chosen and documented across Appendix B.1 and the contract doc
+  - scaffold / research lanes updated if renames are required
+evidence_needed:
+  - doc-update
+impact: >
+  Silent aliasing would drift the governed artifact surface and confuse gate
+  consumers. Resolution must be explicit, not editorial.
+resolution: ~
+```
+
+```yaml
+id:               OI-49
+type:             OI
+title:            execution_assumptions.json required by PhaseIIArtifactContract.md §3 but absent from ImplementationPlan.md Appendix B
+status:           OPEN
+blocking:         NO
+gates:            []
+phase:            II-0
+phase_links:      [II]
+opened_on:        "v4.18.6"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       []
+blocks:           []
+related:          [MLN-06, PhaseIIArtifactContract, ImplementationPlan]
+summary: >
+  PhaseIIArtifactContract.md §3 lists ``execution_assumptions.json`` as a
+  required governed artifact. ImplementationPlan.md Appendix B documents other
+  report surfaces but does not list this file — a companion gap, not permission
+  to omit the artifact. Reconcile Appendix B with the contract before MLN-06
+  closes.
+acceptance_criteria:
+  - Appendix B (or successor appendix) references execution_assumptions.json consistently with PhaseIIArtifactContract.md
+evidence_needed:
+  - doc-update
+impact: >
+  Without an explicit ledger hook, teams may treat Appendix B as exhaustive and
+  under-document the execution-assumption evidence chain.
 resolution: ~
 ```
 
@@ -2504,7 +3481,7 @@ resolution: ~
 id:               RG-09
 type:             RG
 title:            meta-learning — task non-exchangeability pilot
-status:           OPEN
+status:           PARTIAL
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            I-G
@@ -2514,35 +3491,277 @@ resolved_on:      ~
 owner:            unassigned
 depends_on:       [AQ-04]
 blocks:           [MLC-0]
-related:          [AQ-04, MLC-0]
+related:          [AQ-04, MLC-0, RG-14]
 summary: >
   Define and run the first governed pilot proving that regime-indexed tasks are
-  non-exchangeable and leakage-safe enough to justify trainer commitment. The
+  non-exchangeable, leakage-safe, and task-like enough to justify trainer
+  commitment. This is a structural gate (March 2026 synthesis): failure here is
+  among the earliest reasons the meta-learning trainer path should halt. The
   pilot belongs in the empirical/protocol foundation phase, not in late Phase II.
+  All regime episodes in this pilot must be formed from labels emitted by the
+  canonical PIT-safe orchestrator BOCPD regime service (AQ-04). Graph-local or
+  retrospectively recomputed regime labels are not admissible evidence for
+  passing this gate.
+  Pilot-ingestion label schema (five fields: regime_label, effective_at,
+  state_snapshot_id, input_snapshot_id, config_version) is frozen and traceable
+  in docs/rg09/rg09_gate_spec.md and docs/rg09/rg09_replay_fixture_spec.md at
+  v4.13.0. MLC-0 full service contract compatibility beyond this subset is
+  explicitly deferred to Phase II-0A integration (no blocking ambiguity on the
+  published pilot subset).
 acceptance_criteria:
   - regime episode boundary conditions defined and documented
-  - BOCPD change-point detection placement resolved well enough for the pilot
-  - non-exchangeability evidence emitted against a shuffled-label / shuffled-regime null
-  - leakage assumptions made explicit; no silent support/query contamination remains
+  - BOCPD regime service placement resolved (AQ-04 CLOSED) and cold-start
+    policy explicitly defined before the pilot runs
+  - all regime episodes constructed from canonical orchestrator-managed BOCPD
+    service labels; graph-local or retrospective labels are inadmissible
+  - non-exchangeability evidence emitted against shuffled-label,
+    shuffled-regime, and matched exchangeable-window nulls
+  - state snapshot lineage verified: each support/query example carries the
+    historically available regime label (no backfilled or replay-inconsistent
+    label mixed into decision-time evidence)
+  - leakage assumptions made explicit; no silent support/query contamination
+    remains
+  - explicit kill criterion documented: stop trainer commitment if
+    regime-indexed tasks fail when built from the canonical PIT-safe
+    orchestrator service, or if apparent gains depend on graph-local BOCPD
+    placement, retrospective relabeling, or unreplayable temporal state
 evidence_needed:
   - code
   - tests
   - doc-update
 impact: Trainer commitment should not begin if tasks may collapse into exchangeable windows.
-resolution: ~
+resolution: >
+  I-G protocol deliverables published at v4.13.0: gate spec with definitions,
+  admissibility rules, exclusion codes, evidence requirements, assumptions
+  register (RG09-V01 through RG09-V14), provisional pilot config
+  (docs/rg09/rg09_pilot_config_v1.json), replay fixture spec, and pilot report
+  design (docs/src/task_validity_pilot_report.md). Replay fixture dependency
+  satisfied at v4.18.1 via fixtures/rg09/v1/rg09_fixture_v1.parquet
+  (fixture_sha256
+  sha256:3ba47a1ef9445f1694c411151219bd2935f2d6b1b075e33a6c5fe13f903c4553)
+  with companion summary/metadata sidecars. The earliest governed H1 evidence
+  recorded in OI-46 was a bounded ES-only precondition failure
+  (FAIL_INSUFFICIENT_EPISODES, gate_executed=false); that row remains
+  historical evidence about the original fixture surface, not the current
+  governed RG-09 line state. OI-50 (v4.18.9) closed governed yfinance acquisition and the official multi-instrument
+  v2 bundle at fixtures/rg09/v2/rg09_fixture_v2.parquet (fixture_sha256
+  sha256:408e3670430edd03b3ac4ae8af6408fd36c5f593f90d55645e48465c57fd9701;
+  basket ES, NQ, RTY, YM, GC, ZN, CL, 6E per docs/rg09/rg09_data_acquisition_log.md).
+  OI-51 (v4.18.10) then regenerated the same v2 fixture surface with
+  uniform_calendar_day_index=true and BOCPD fixture config v2, yielding
+  fixture_sha256 sha256:34d367c6a1d0bbe5384c66c2d8cfd32090d3ad5a99ea6847b6468ff69d9de958
+  (deterministic across two independent generation runs). OI-52 (v4.18.11)
+  then invalidated the initial hypothesis interpretation recorded at
+  runs/rg09_v2/h1_v2bocpd/rg09_gate_result.json: all authorized null families
+  collapsed to machine-epsilon ranges across both folds, so the statistical
+  lane did not produce a valid null distribution. The corrected rerun at
+  runs/rg09_v2/h1_v2bocpd_fix/rg09_gate_result.json preserves
+  gate_executed=true but emits decision=null with
+  fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID]; empirical closure at
+  runs/rg09_v2/empirical_v2bocpd_fix/rg09_empirical_summary.json now reports
+  supports_non_exchangeability=inconclusive. OI-52 stage 2 at v4.18.12 then
+  changed shuffled_regime to a regime-sensitive separability statistic and
+  reran H1 at runs/rg09_v2/h1_v2bocpd_regime_stat/rg09_gate_result.json. That
+  rerun cleared shuffled_regime degeneracy (`distinct_draw_count` 38 on fold 0
+  and 36 on fold 1) but still emitted decision=null with
+  fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID] because shuffled_label and
+  matched_exchangeable_window remained machine-epsilon degenerate across both
+  folds. Empirical closure at
+  runs/rg09_v2/empirical_v2bocpd_regime_stat/rg09_empirical_summary.json
+  remains supports_non_exchangeability=inconclusive. OI-52 stage 3 at v4.18.13
+  then applied the same regime separability statistic uniformly across all
+  three null families and reran H1 at
+  runs/rg09_v2/h1_v2bocpd_uniform_stat/rg09_gate_result.json. That rerun
+  produced non-degenerate null distributions for all authorized families across
+  both folds (`invalid_families=[]`) and recorded the first valid governed H1
+  artifact under the then-current decision logic. OI-53 at v4.18.14 then
+  resolved the decision-logic gap for directional-but-underpowered evidence and
+  reran H1 at runs/rg09_v2/h1_v2bocpd_directional_nme/rg09_gate_result.json.
+  The governed finding is now NEEDS_MORE_EVIDENCE, not FAIL_KILL:
+  gate_executed=true, decision=NEEDS_MORE_EVIDENCE, fail_codes=[],
+  structural_separability_ratio=1.8352959310529893, aggregate Harvey
+  t=2.022353402589051, positive_delta=true, and invalid_families=[]. Fold 0 was
+  near-pass on shuffled_label (`p=0.05128205128205128`) while the other
+  fold/family statistics remained directionally above their null means but below
+  the 0.05 threshold. Empirical closure at
+  runs/rg09_v2/empirical_v2bocpd_directional_nme/rg09_empirical_summary.json
+  reports supports_non_exchangeability=inconclusive, and the governed H1 line
+  remains in the allowed state: NEEDS_MORE_EVIDENCE with one targeted
+  successor follow-up permitted. RG-09 therefore remains PARTIAL on pilot
+  power and follow-up evidence, not on evidence validity, not on precondition
+  insufficiency, and not as a project kill.
+  The later advisory planning run at
+  runs/rg09_power_analysis/v1/rg09_power_analysis.json emitted
+  baseline_effect_too_weak_for_reasonable_scope_expansion, but OI-54 now
+  records that this is not a trustworthy scope decision because the baseline
+  fold surface is contaminated by uniform_calendar_day_index=true stacking
+  rather than two independent temporal samples. The later scope-only expansion
+  at runs/rg09_v3_power_b/h1_baseline_geometry/rg09_gate_result.json then
+  exposed the remaining decision-state gap: fold 0 stayed weak
+  (`shuffled_label` p=0.7796610169491526; structural ratio
+  15.444811647231726) while fold 1 cleared all three statistical families
+  (`p=0.017543859649122806`, `0.017543859649122806`, `0.03508771929824561`)
+  and crossed the functional threshold (`harvey_t=3.3092168225566025`) but
+  failed structurally (`structural_separability_ratio=0.6887586816933332`).
+  OI-55 was resolved in v4.18.17 (terminal kill fall-through) with a v4.18.19
+  routing correction: per-lane fold inconsistency is now ordered before the
+  directional-underpowered branch so mixed fold lanes cannot return
+  NEEDS_MORE_EVIDENCE without FAIL_NONREPRODUCIBLE when directional
+  consistency also holds. The historical power_b FAIL_KILL artifact therefore
+  remains a superseded routing interpretation, not a valid governed kill and
+  not the live RG-09 H1 status surface.
+  OI-56 at v4.18.22 then recorded the completed non-governed advisory audit
+  ADV-H1-STAT-01 without changing any governed artifact. Two governed
+  follow-ups were opened in the same patch: OI-57 tracks the
+  matched_exchangeable_window null-specification gap between rg09_gate_spec.md
+  and the implemented generator, and OI-58 tracks the currently runtime-derived
+  null draw-count rule as unresolved threshold governance. Both follow-ups are
+  non-blocking for H2 in this ledger patch, but they remain open governance
+  work before later successor interpretation treats all three statistical
+  families as equally motivated and fully governed.
+  OI-58 was then closed at v4.18.23 by promoting draw count onto the governed
+  pilot-config surface (`null_draw_count = 64`) and updating the harness to use
+  that config value directly. The H2 design brief at
+  docs/rg09/rg09_h2_design_brief.md proceeds on that governed basis, requires
+  corrected fold construction under the v4.18.20 fixture policy rather than the
+  contaminated stacked v2 surface, and carries the OI-57 underspecification
+  caveat on matched_exchangeable_window as a pre-interpretation constraint
+  rather than a pre-execution blocker.
+  v4.18.24 then regenerated the corrected-surface feasibility artifact against
+  fixture `sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`
+  and added a one-axis geometry sensitivity study on the existing task recipe.
+  Those diagnostics show zero admissible episodes on the live corrected basket,
+  `HORIZON_OVERLAP` excluding `44,727 / 44,733` candidate episodes, no recovery
+  under tested support/query relaxations on the current segmentation, and
+  `min_dwell_time_bars` remaining inert in the current episode-derivation path.
+  The corrected summary also shows crisis collapsing from `4,570` canonical
+  crisis rows to `1` BOCPD-gated crisis row before feasibility is even reached.
+  The active RG-09 blocker is therefore pre-statistical task admissibility, not
+  fold geometry. OI-59 is opened as the contingent governed segmentation lane,
+  and the H2 brief is revised so execution is gated first by corrected-surface
+  admissibility recovery while breadth expansion stays frozen. OI-57 remains a
+  pre-interpretation caveat rather than a pre-execution blocker.
+  Prior OI-47 segmented-single-source v2 attempts remain superseded for
+  cross-sectional evidence by OI-50/OI-51.
+  This finding does not block Phase II-0B artifact-and-contract scaffolding or
+  the MLN-01 through MLN-07 normative lock sequence, which continue independently
+  while RG-09 governance remains open.
+  v4.18.25 adds §1.5 program posture: explicit PARTIAL closeout language (what
+  corrected-surface and H1 evidence do/do not imply), registration of RG09-H2 as
+  ledger item RG-14, harness episode regime_class majority labeling under active
+  boundary-recovery modes as attribution plumbing only, and reaffirmation that
+  GATE-II-01 trainer commitment stays locked while bounded execution emphasis
+  shifts to Phase II-0B. v4.18.26 then records the executed H4 market-class
+  rescue attempt at runs/rg09_h4_market_class_risk on the narrowed
+  ES/NQ/RTY/YM/SPY/HYG/VIX basket
+  (fixture_sha256
+  sha256:2353c177546531af969c1c0b1089a96577ffbd0edd2297e9b2a70f38cfb07bab;
+  config_id rg09_pilot_config_v1_h4_market_class). H4 reached 50 admissible
+  episodes and preserved structural/functional passes, but it emitted
+  decision=NEEDS_MORE_EVIDENCE with fail_closed=true,
+  fail_codes=[FAIL_NONREPRODUCIBLE], supports_non_exchangeability=inconclusive,
+  and a fold pattern of one full pass and one statistical failure. The narrow
+  truthful conclusion is that H4 reproduced the same class of
+  non-reproducibility and did not rescue RG-09 into a promotable lane.
+  v4.18.27 then records the proper H2 cross-sectional run at
+  runs/rg09_h2_cross_sectional on fixture_sha256
+  sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636
+  (config_id rg09_pilot_config_v1_transition_h2). That run emitted
+  decision=NEEDS_MORE_EVIDENCE with decision_reason
+  "Base harness is structurally valid and directionally consistent, but
+  statistical evidence is below threshold.", fail_closed=false, fail_codes=[],
+  supports_non_exchangeability=inconclusive, and
+  reproducibility_consistent=true; both folds passed functional and structural
+  lanes while failing the statistical lane. The proper H2 surface therefore does
+  not repeat the H4 non-reproducibility failure class, but it still does not
+  validate the non-exchangeability claim. v4.18.28 then records the executed H3
+  strict granularity successor surface at runs/rg09_h3_granularity on fixture
+  sha256:d38639a4f2cb8be5e0c57cd1fdaa3750b8a26336b93dd907a6b0f2b9d289e11c
+  (config_id rg09_pilot_config_v1_transition_h3; evaluated surface
+  vol_window=120, trend_flat_epsilon=0.01, vol_bucket_method=quintile,
+  crisis_vol_score_percentile=95.0). That emitted decision=PASS with
+  decision_reason "All required RG-09 evidence families passed.",
+  reproducibility_consistent=true, fail_codes=[], trainer_commitment_unlocked=true,
+  admissible_episode_count=86, crisis rows=2441, high_vol rows=10462, crisis
+  label agreement rate=0.9454366631647182, and both folds passing overall,
+  statistical, structural, and functional lanes. The harness still emits the
+  base-field hypothesis identity RG09-H1, so the ledger records this as an H3
+  successor surface evaluated through the base harness rather than as proof that
+  the original H1 surface passed. The same release also records a nearby H3
+  negative sensitivity control at crisis_vol_score_percentile=85.0 with fixture
+  sha256:6b62a5810a825c631677f810c39ff3880df79645216d976204e9c4ad1d0f32fe:
+  decision=FAIL_KILL, decision_reason "Base harness ran cleanly but did not
+  support non-exchangeability.", fail_codes=[FAIL_EXCHANGEABLE_TASKS],
+  reproducibility_consistent=true, admissible_episode_count=86, crisis rows=12903,
+  high_vol rows=0, and crisis label agreement rate=0.7115810179493484. The
+  strongest supported lesson is therefore narrow: within the tested H3
+  neighborhood, stricter crisis labeling preserved the crisis/high_vol
+  separation required for non-exchangeability, while the looser p85 threshold
+  collapsed high_vol into crisis and failed kill. Earlier draft closeout language
+  from v4.18.26-v4.18.27 that treated RG-09 as dead for this phase is
+  superseded by the executed H3 successor evidence. The attached evidence does
+  not fully isolate whether window=120 and epsilon=0.01 are individually
+  necessary.
+```
+
+```yaml
+id:               RG-14
+type:             RG
+title:            meta-learning — RG09-H2 successor (cross-sectional universe axis; governed brief)
+status:           DEFERRED
+blocking:         NO
+gates:            []
+phase:            II-0B
+phase_links:      [I-G, II-0, II]
+opened_on:        "v4.18.25"
+resolved_on:      ~
+owner:            unassigned
+depends_on:       [RG-09]
+blocks:           []
+related:          [RG-09, OI-59, OI-57, "RG09-H2"]
+summary: >
+  Registers the former governed H2 successor brief at
+  docs/rg09/rg09_h2_design_brief.md for traceability. The proper executed H2
+  cross-sectional run is now recorded as a reproducible but below-threshold
+  negative predecessor surface. The later strict H3 successor surface passed,
+  so this item remains a historical predecessor anchor rather than the live
+  promotable lane. This item does not itself unlock trainer commitment
+  (GATE-II-01) or MLN-01..07.
+acceptance_criteria:
+  - H2 execution package states how admissibility is cleared before expecting gate_executed=true with admissible episodes
+  - fixture fold construction satisfies v4.18.20 corrected policy when run
+  - OI-57 caveat surfaced anywhere matched_exchangeable_window is reported
+evidence_needed:
+  - doc-update
+  - code
+  - tests
+impact: >
+  Without a deferred ledger anchor, teams may misread the old H2 brief as the
+  live RG-09 decision surface rather than as an unsuccessful predecessor to the
+  later successful H3 successor surface.
+resolution: >
+  Deferred in v4.18.26 after the executed H4 market-class rescue attempt
+  (`runs/rg09_h4_market_class_risk`) reproduced NEEDS_MORE_EVIDENCE /
+  FAIL_NONREPRODUCIBLE on the narrowed risk-complex basket. v4.18.27 then
+  records the proper H2 cross-sectional run (`runs/rg09_h2_cross_sectional`) as
+  a reproducible but statistically below-threshold negative:
+  NEEDS_MORE_EVIDENCE, fail_closed=false, fail_codes=[], and
+  reproducibility_consistent=true. v4.18.28 leaves that H2 outcome intact but
+  records that the later strict H3 successor surface, not H2, defines the live
+  promotable RG-09 posture.
 ```
 
 ```yaml
 id:               RG-10
 type:             RG
 title:            meta-learning — context encoder upgrade criteria
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
 phase_links:      [II-0, II]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.15.0"
 owner:            unassigned
 depends_on:       [AQ-01, AQ-02]
 blocks:           []
@@ -2559,20 +3778,28 @@ evidence_needed:
   - doc-update
   - benchmark
 impact: Architecture can drift silently if upgrade criteria are not frozen before buildout.
-resolution: ~
+resolution: >
+  Encoder upgrade criteria frozen at docs/rg10/rg10_encoder_upgrade_criteria.md.
+  AQ-01 addressed: D=64 governed baseline with literature grounding and
+  tiered research plan. AQ-02 addressed: three-surface diagnostic with
+  explicit decision rules including blocked-on-insufficient-evidence state.
+  SNAIL deferral to Phase III explicit. All thresholds ⚑ VALIDATE until
+  Phase II silhouette gate runs. Policy closes I-G obligations for encoder
+  governance; empirical validation remains deferred to the Phase II
+  silhouette gate.
 ```
 
 ```yaml
 id:               OI-35
 type:             OI
 title:            I-G — RiskFn Protocol definition
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
 phase_links:      [II-0, II, III]
 opened_on:        "v4.9.0"
-resolved_on:      ~
+resolved_on:      "v4.14.0"
 owner:            unassigned
 depends_on:       [OI-22]
 blocks:           []
@@ -2581,27 +3808,41 @@ summary: >
   Define the governed allocator-to-risk boundary before promotable allocator
   code exists. Freeze what allocator outputs RiskFn may consume, what remains
   Phase II vs Phase III scope, and which risk-budgeting semantics remain provisional.
+  **II-D is the primary home for structured post-allocator conditioning** (turnover,
+  liquidity/capacity, drawdown overlays): RiskFn must compose with that layer without
+  confusing deployment wins for allocator validation (March 2026 synthesis;
+  Implementation Plan Appendix D).
 acceptance_criteria:
   - RiskFn Protocol written and linked from the companion suite
   - allocator-to-risk interface and non-goals made explicit
+  - **post-allocator conditioning** semantics distinguished from raw allocator output
   - provisional thresholds remain visibly provisional
 evidence_needed:
   - doc-update
 impact: Risk semantics stay ambiguous if allocator code is built before the protocol exists.
-resolution: ~
+resolution: >
+  RiskFn Protocol written and published at docs/src/risk_protocol.md
+  (v4.14.0). Allocator-to-risk interface defined with permitted Phase II
+  inputs (allocation_weights, confidence_scalar), hard constraints on
+  exposure attenuation direction including full-abstention rule
+  (confidence_scalar = 0), II-D post-allocator conditioning boundary made
+  explicit and normatively separated from RiskFn scope, Phase II vs Phase
+  III scope boundary stated, auditability requirements defined, and all
+  provisional thresholds marked ⚑ VALIDATE. Referenced from ImplementationPlan
+  companion protocol surfaces.
 ```
 
 ```yaml
 id:               OI-36
 type:             OI
 title:            I-G — Signal Generation Protocol
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
 phase_links:      [II-0, IV]
 opened_on:        "v4.9.0"
-resolved_on:      ~
+resolved_on:      "v4.14.0"
 owner:            unassigned
 depends_on:       []
 blocks:           []
@@ -2617,20 +3858,31 @@ acceptance_criteria:
 evidence_needed:
   - doc-update
 impact: Signal-factory language can outrun actual governance if the admission path is not frozen.
-resolution: ~
+resolution: >
+  Signal Generation Protocol written and published at
+  docs/src/signal_generation_protocol.md (v4.14.0). Current governed base
+  stated explicitly (4 signals). Admission requirements defined (Signal ABC,
+  SignalCatalog, PIT-safe ops, screening and stat-validity gates). Admission
+  vs promotion vs retirement distinction frozen as three distinct states.
+  Signal identity contract stated normatively (signal_id, slot_index,
+  signal_set_version), including slot_index never-reuse rule and historical
+  mapping reconstructibility requirement. Retirement procedure defined.
+  Alternative-data admission deferred to OI-38. Breadth expansion confirmed
+  as Phase IV scope. Referenced from ImplementationPlan companion protocol
+  surfaces.
 ```
 
 ```yaml
 id:               OI-37
 type:             OI
 title:            I-G — signal-universe expansion policy
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
-phase_links:      [IV]
+phase_links:      [IV-A, IV-B, IV-D]
 opened_on:        "v4.9.0"
-resolved_on:      ~
+resolved_on:      "v4.16.0"
 owner:            unassigned
 depends_on:       [OI-36]
 blocks:           []
@@ -2638,27 +3890,42 @@ related:          []
 summary: >
   Freeze how the signal universe may widen from the current narrow governed
   base without turning I-F or Phase II into an unbounded breadth program.
+  **Strategic breadth** (many weak signals) is valuable **only** under rigorous governance
+  (identity, redundancy control, multiple-testing discipline, decay, diversity); **serious
+  scale-out remains Phase IV**, tied to SignalCatalog / Signal Generation Protocol maturity
+  (March 2026 breadth cluster).
 acceptance_criteria:
   - current narrow-base truth stated explicitly
   - expansion criteria and retirement expectations defined
   - policy linked to Signal Generation Protocol
+  - explicit link to **IV-A / IV-B / IV-D** as the serious program home (not Phase II smuggling)
 evidence_needed:
   - doc-update
 impact: Signal breadth can become an ungoverned dumping ground without an expansion policy.
-resolution: ~
+resolution: >
+  Signal-universe expansion policy published at
+  docs/src/signal_universe_expansion_policy.md (v4.16.0). Expansion gate
+  conditions frozen: Harvey t > 3.0, DSR, and PBO all required from the
+  same governed evaluation bundle on the same split surface under the same
+  cost assumptions. Diversity gate and decay policy required for promotion.
+  Multiple-testing budget governed via RunRegistry trial counter family;
+  split-submission gaming explicitly prohibited. signal_id change is a new
+  candidate, not tuning. Phase IV (IV-A, IV-B, IV-D) named as serious
+  expansion home. Scope exclusions explicit. Referenced from ImplementationPlan
+  companion protocol surfaces.
 ```
 
 ```yaml
 id:               OI-38
 type:             OI
 title:            I-G — alternative-data admissibility contract
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
 phase_links:      [II, IV]
 opened_on:        "v4.9.0"
-resolved_on:      ~
+resolved_on:      "v4.16.0"
 owner:            unassigned
 depends_on:       []
 blocks:           []
@@ -2674,20 +3941,32 @@ acceptance_criteria:
 evidence_needed:
   - doc-update
 impact: Alternative-data language becomes misleading if admissibility rules are not frozen first.
-resolution: ~
+resolution: >
+  Alternative-data admissibility contract published at
+  docs/src/alt_data_admissibility.md (v4.16.0). PIT requirements: available_at
+  timestamping distinct from event_ts, DataView.as_of(T) access required,
+  vintage preservation. Provenance requirements: source identifier, content
+  addressability, lineage traceability, license documentation. Replay
+  requirements: fixture is a precondition not post-hoc aid; versioned fixture
+  required before any governed evaluation run. Event-driven entry explicitly
+  deferred to Phase IV. Seven-step admissibility decision tree governs
+  eligibility for governed evaluation runs only; signal admission and promotion
+  still require Signal Generation Protocol and expansion gate. Closing OI-38
+  removes one dependency from OI-40. Referenced from ImplementationPlan
+  companion protocol surfaces.
 ```
 
 ```yaml
 id:               OI-39
 type:             OI
 title:            I-G — paper-trading simulation requirements
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            I-G
 phase_links:      [III]
 opened_on:        "v4.9.0"
-resolved_on:      ~
+resolved_on:      "v4.18.5"
 owner:            unassigned
 depends_on:       [OI-35]
 blocks:           []
@@ -2695,14 +3974,21 @@ related:          []
 summary: >
   Freeze the paper-trading realism requirements that later Phase III work must
   satisfy without implying that the broker/runtime stack is already justified.
+  Complement (not substitute) **II-D post-allocator conditioning**: simulation specs should
+  align with **utility after frictions** testing, not paper-weight-only allocator stories.
 acceptance_criteria:
   - paper_trade_sim_spec.md or equivalent handoff surface exists
   - required realism dimensions listed
   - broker connectivity explicitly remains out of scope for this item
+  - **III remains conditional**; spec must not read as execution-serious claims already earned
 evidence_needed:
   - doc-update
 impact: Phase III can drift into vague realism claims if the handoff spec is not explicit.
-resolution: ~
+resolution: >
+  paper_trade_sim_spec.md satisfies all four acceptance criteria:
+  file present, realism dimensions listed, broker connectivity
+  explicitly out of scope, Phase III remains conditional.
+  No new implementation was required.
 ```
 
 ```yaml
@@ -2717,17 +4003,22 @@ phase_links:      [II]
 opened_on:        "v4.9.0"
 resolved_on:      ~
 owner:            unassigned
-depends_on:       [RG-09, OI-35, OI-36, OI-38]
+depends_on:       [RG-09, OI-35, OI-36]
 blocks:           []
 related:          [MLN-06]
 summary: >
   Build the minimum non-promotable harness for reproducible diagnostics,
   baseline/challenger comparison, pilot artifact emission, and early governed
   report scaffolding. This item exists so Phase II-0 is visible as a real bridge phase.
+  II-0 is also the home for **cheap falsification** pilots aligned to the March 2026
+  synthesis: **honest benchmark**, **uncertainty / routing pilot** around `confidence_scalar`,
+  domain-shift tests, early expert/modularity and retrieval pilots, **narrow adaptation**
+  experiments—without promotable allocator implication.
 acceptance_criteria:
   - reference-run harness exists for agreed pilot comparisons
   - pilot task/report artifacts emit reproducibly
   - non-promotable status remains explicit in docs and report surfaces
+  - **routing pilot** remains explicitly **non-default**; fail action = stay attenuation-only
 evidence_needed:
   - code
   - tests
@@ -2890,6 +4181,7 @@ acceptance_criteria:
   - task_id includes signal_ids_hash
   - support/query split, purge, and embargo invariants are explicit
   - TaskRegistry is append-only and keyed by regime_id plus t0
+  - task_id HMAC **key** contract is explicit and frozen before the normative task_manifest.json contract locks (assumption RG09-V13, ⚑ VALIDATE; register in docs/rg09/rg09_gate_spec.md §4): Core §2.1 specifies HMAC-SHA256 over concatenated fields but not key material — the scaffold uses empty-key HMAC with message-only entropy; **any change to key material invalidates all historical task_id values** unless a governed migration exists
 evidence_needed:
   - doc-update
   - code
@@ -2915,21 +4207,46 @@ resolved_on:      ~
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-0, MLC-1, MLC-2, MLC-6]
-related:          [AQ-01, AQ-02]
+related:          [AQ-01, AQ-02, MLN-02-AMD-01]
 summary: >
   v2.0 docs lock regime_id as the primary task identity and regime_class as the
   derived 5-class projection used for curriculum, supervision, and reporting.
+  MLN-02-AMD-01 (incorporated v4.18.0) redefines Level 2 crisis as a
+  severity-gated subset of high_vol (vol_hi AND severity_flag); BOCPD remains a
+  Level 1 compositional dimension only for crisis labeling.
 acceptance_criteria:
   - all docs and code surfaces use regime_id as primary identity
   - regime_class vocabulary is the 5-class set {bull, bear, sideways, high_vol, crisis}
   - curriculum and reporting language do not collapse regime_id into regime_class
+  - Architecture Vision §4.2 crisis row documents vol_hi AND severity_flag (expanding vol_score_raw percentile >= p90 [⚑ VALIDATE])
+  - §4.2 carries an explicit BOCPD-as-segmentation-primitive statement
+  - §4.2 historical-frequency estimate for crisis is tagged ⚑ VALIDATE
+  - assumption RG09-V12 is recorded in the RG-09 open assumptions register (rg09_gate_spec.md)
+  - DIAG-001 registered as OI-44 (CLOSED) and DIAG-002 as OI-45 (CLOSED) at v4.17.0
+  - Anti-Goodhart holdout manifest is re-evaluated under the new projection rule before GATE-II-01; version change documented
+  - Phase II-0A pilot design records the BOCPD-gated rule as a reference condition (side-by-side empirical check, not threshold tuning)
 evidence_needed:
   - doc-update
   - code
 impact: >
   Task identity, encoder supervision, and gate reporting become incoherent if
-  the two regime layers are mixed.
-resolution: ~
+  the two regime layers are mixed. Crisis pool composition shifts under the
+  severity gate; task-pool sufficiency and holdout manifest versioning apply
+  per MLN-02-AMD-01 contract consequence register.
+resolution: >
+  Crisis redefined at Level 2 as severity-gated subset of high_vol:
+  crisis := vol_hi AND severity_flag, where severity_flag derives from
+  PIT-safe expanding vol_score_raw percentile at p90 (assumption RG09-V12;
+  ⚑ VALIDATE). bocpd_cp removed from the Level 2 crisis projection rule.
+  bocpd_cp remains a Level 1 regime_id dimension and is unchanged.
+  Architecture Vision §4.2 amended: crisis row updated, BOCPD-primitive
+  statement added. Backward compatibility preserved: Level 1 regime_id
+  unchanged, 5-class vocabulary unchanged, MetaTask schema unchanged.
+  Contract consequences documented in MLN-02-AMD-01. Anti-Goodhart manifest
+  re-evaluation required before GATE-II-01. Validation deferred to Phase II-0A;
+  BOCPD-gated rule is the reference condition for pilot comparison.
+  Evidence: DIAG-001, DIAG-002.
+  MLN-01 (MetaTask contract) must be CLOSED before this entry is CLOSED.
 ```
 
 ### MLN-03 · Confidence routing contract
@@ -2937,23 +4254,27 @@ resolution: ~
 ```yaml
 id:               MLN-03
 type:             MLN
-title:            confidence_scalar — post-sizing attenuation only
+title:            confidence_scalar — post-sizing attenuation default; routing pilot governed
 status:           OPEN
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
-phase_links:      []
+phase_links:      [II-0]
 opened_on:        "v4.5.3"
 resolved_on:      ~
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-4, MLC-6, MLC-7]
-related:          [ADR-006]
+related:          [ADR-006, OI-40]
 summary: >
-  The v2.0 contract restricts confidence_scalar to post-sizing attenuation.
-  It is not a ranking override, leverage control, or substitute for risk limits.
+  Default contract: confidence_scalar post-sizing attenuation; uncertainty is also a
+  broader control surface (sizing, participation, turnover, abstention). Uncertainty-aware
+  routing is a Phase II-0 pilot layered on that contract—not default architecture—and
+  only graduates with earned reject-set evidence after costs (Core §2.5.2; Implementation
+  Plan Appendix D).
 acceptance_criteria:
-  - docs and interfaces treat confidence_scalar as post-sizing only
+  - docs and interfaces treat confidence_scalar as post-sizing default
+  - pilot routing language stays explicitly conditional; fail action = attenuation-only
   - no allocator or sizing prose implies confidence may lever above base size
   - calibration and ECE reporting are part of the Phase II artifact contract
 evidence_needed:
@@ -3052,11 +4373,14 @@ blocks:           [MLC-6, MLC-7]
 related:          [GATE-II-01]
 summary: >
   Phase II now requires explicit task-manifest and meta-validity artifacts so
-  promotion, rollback, and Anti-Goodhart enforcement can be audited.
+  promotion, rollback, and Anti-Goodhart enforcement can be audited. Artifacts must
+  support **net-of-cost** baseline comparison and **decision quality after frictions**,
+  not forecast-only narratives (March 2026 allocator-validation cluster).
 acceptance_criteria:
   - meta_validity_report.json required in docs and gate planning
   - task_manifest.json required for nightly training evidence
   - artifact fields align with Core v2.0.0 and Architecture Vision v2.0.0
+  - reporting language preserves **fail gracefully** to simpler baseline if gates fail
 evidence_needed:
   - doc-update
   - artifact
@@ -3086,10 +4410,13 @@ related:          [OI-22, OI-23]
 summary: >
   Core v2.0.0 introduces an explicit threshold-resolution registry. Values still
   marked VALIDATE must remain provisional until the required evidence exists.
+  Tie threshold promotion to **tasks-not-timestamps** validity and **utility after costs**
+  gates so routing, allocator, and deployment claims cannot drift into implied proof.
 acceptance_criteria:
   - Threshold Resolution Table tracked as a first-class governance surface
   - Tier 1/2/3 resolution rules reflected in docs and gate planning
   - no docs or code silently convert unresolved values into fixed commitments
+  - pilot vs promotable distinctions remain explicit for routing and II-D conditioning
 evidence_needed:
   - doc-update
   - policy-update
@@ -3106,7 +4433,7 @@ resolution: ~
 ```yaml
 id:               MLC-0
 type:             MLC
-title:            MetaTask dataclass, TaskRegistry, RegimeLabeler with BOCPD op
+title:            MetaTask dataclass, TaskRegistry, RegimeLabeler backed by canonical BOCPD regime service
 status:           DEFERRED
 blocking:         YES
 gates:            [GATE-II-01]
@@ -3128,7 +4455,7 @@ summary: >
 acceptance_criteria:
   - MetaTask dataclass implements the frozen v2.0 schema including signal_ids_hash and pit_boundary
   - TaskRegistry implemented per interface contract stub (OI-22) and append-only semantics
-  - RegimeLabeler with BOCPD op is PIT-safe (ADR-008)
+  - RegimeLabeler backed by canonical BOCPD regime service is PIT-safe (ADR-008)
   - regime_id primary and 5-class regime_class projection both represented explicitly
   - task-pool minimums defer to Core v2.0.0 §10.2 and remain VALIDATE until calibrated
   - 90%/85% coverage
@@ -3556,7 +4883,7 @@ summary: >
   future work. AQ-03 open — fixed ±2σ thresholds shipped in I-D.
   NOTE: Predates SA prefix adoption — kept as RG for ID stability.
 acceptance_criteria:
-  - BOCPD op implemented and PIT-safe (unblocked by AQ-04)
+  - BOCPD regime service implemented and PIT-safe (unblocked by AQ-04)
   - regime-conditional z-score thresholds implemented (unblocked by AQ-03)
   - performance evaluated across regime buckets with documented results
 evidence_needed:
@@ -4177,13 +5504,13 @@ resolution: "Accepted. C++ inference remains deferred to Phase III pending laten
 id:               AQ-01
 type:             AQ
 title:            z ∈ R⁶⁴ embedding dimension — empirical grounding
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            [GATE-I-F-05]
 phase:            II
 phase_links:      [I-F]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.15.0"
 owner:            unassigned
 depends_on:       []
 blocks:           [MLC-1, RG-10]
@@ -4205,7 +5532,14 @@ impact: >
   Silent representation failure that passes Harvey t narrowly is harder to detect
   than failure that causes Harvey t < 3.0. Commitment before evidence risks
   systematic underdiscrimination of regime buckets.
-resolution: ~
+resolution: >
+  D=64 retained as governed Phase II baseline per
+  docs/rg10/rg10_encoder_upgrade_criteria.md §2. Position grounded in
+  literature review (minimum two sources cited from originals in the doc).
+  Tiered research plan recorded: non-blocking for MLC-1 start; upgrade
+  review if silhouette gate or separation ratio fails; hard block if
+  multiple surfaces fail simultaneously. D=64 is the governed baseline, not
+  a claim of empirical optimality for MarketMind. ⚑ VALIDATE.
 ```
 
 ### AQ-02 · Context encoder architecture ceiling
@@ -4214,13 +5548,13 @@ resolution: ~
 id:               AQ-02
 type:             AQ
 title:            Context encoder architecture ceiling — upgrade trigger
-status:           OPEN
+status:           CLOSED
 blocking:         NO
 gates:            []
 phase:            II
 phase_links:      []
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.15.0"
 owner:            unassigned
 depends_on:       [AQ-01]
 blocks:           []
@@ -4239,7 +5573,16 @@ evidence_needed:
   - adr-decision
   - doc-update
 impact: Without upgrade criterion, architecture change decisions are ad-hoc and undocumented.
-resolution: ~
+resolution: >
+  Upgrade trigger defined in docs/rg10/rg10_encoder_upgrade_criteria.md §3.
+  Three diagnostic surfaces: within-regime cosine similarity (A),
+  cross-regime separation ratio (B), silhouette score (C). Decision rules
+  cover all failure combinations including INSUFFICIENT_DIAGNOSTIC_EVIDENCE
+  when task pool is too small for stable diagnostics. Upgrade path
+  prioritized: increase D first, add MLP layer second, SNAIL deferred to
+  Phase III requiring ADR. Harvey t narrow-pass band is ⚑ VALIDATE,
+  config-driven. Criterion captures representation failure not detectable
+  by Harvey t alone.
 ```
 
 ### AQ-03 · Regime-conditional z-score thresholds
@@ -4279,19 +5622,19 @@ impact: >
 resolution: ~
 ```
 
-### AQ-04 · BOCPD op placement
+### AQ-04 · BOCPD placement
 
 ```yaml
 id:               AQ-04
 type:             AQ
-title:            BOCPD op placement — graph op vs. orchestrator regime service
-status:           OPEN
+title:            BOCPD placement — orchestrator regime service (ACCEPTED)
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-I-F-04]
 phase:            II
 phase_links:      [I-F]
 opened_on:        "v4.4.0"
-resolved_on:      ~
+resolved_on:      "v4.12.4"
 owner:            unassigned
 depends_on:       []
 blocks:           [RG-09, MLC-0]
@@ -4313,7 +5656,44 @@ impact: >
   Wrong placement creates PIT violation risk (if graph op bypasses DataView)
   or orchestrator coupling risk (if service creates hidden temporal dependency).
   Blocks MLC-0 and RG-09.
-resolution: ~
+resolution: >
+  Context: AQ-04 asked whether BOCPD should live inside governed feature
+  execution as a graph op or as an orchestrator-managed regime service.
+  AQ-04 blocked RG-09 and MLC-0. The decision must satisfy ADR-008
+  single-path PIT discipline and produce a stable RegimeLabeler-compatible
+  contract.
+
+  Decision: BOCPD is implemented as an orchestrator-managed regime service
+  over governed DataView.as_of(T) inputs. Graph-op BOCPD is not permitted
+  for governed production regime labels. Any analysis-only graph-local
+  experimentation must be explicitly marked non-canonical and inadmissible
+  for RG-09 gate evidence.
+
+  Service state constraint: The service must be deterministically replayable
+  from explicit inputs plus an explicit prior snapshot, with no hidden warm
+  state, no implicit in-memory carry, and no direct raw-store reads outside
+  governed PIT access. The effective_at field on emitted regime labels must
+  record the availability timestamp (the earliest time a consumer could have
+  observed the label), not the underlying change-point timestamp.
+
+  Cold-start policy: The cold-start behavior at the start of a pilot or
+  evaluation window must be explicitly defined before RG-09 can run. Labels
+  emitted during any burn-in period before the prior snapshot is established
+  must be flagged as cold-start and must not be used as gate evidence in RG-09
+  without explicit separation.
+
+  Offline carve-out: This prohibition applies to governed production regime
+  labels. Research-only and retrospective offline-analysis paths that use
+  graph-local BOCPD remain permitted provided they are explicitly marked
+  non-canonical and their outputs are not admissible as RG-09 gate evidence.
+
+  Companion cleanup required: Replace stale "BOCPD op" or "RegimeLabeler with
+  BOCPD op" wording in MLC-0, RG-04, and MetaLearningCore.md with
+  service-backed language so the architecture description matches this
+  resolution.
+
+  Unblocks: RG-09 (pilot can now proceed against canonical PIT-safe service
+  labels), MLC-0 (RegimeLabeler interface depends on service contract).
 ```
 
 ### AQ-05 · KSB template governance

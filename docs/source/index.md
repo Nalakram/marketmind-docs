@@ -1,6 +1,6 @@
 # MarketMind Documentation
 
-Read the Docs for `marketmind-docs` is the publication layer for canonical documentation exported from the private `MarketMind` repository. The published surface is centered on the March 2026 companion suite: the external overview, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, and supporting protocol appendices.
+Read the Docs for `marketmind-docs` is the publication layer for canonical documentation exported from the private `MarketMind` repository. The published surface is centered on the April 2026 companion suite: the external overview, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, governance registers, Phase II contract/playbook docs, and supporting protocol appendices.
 
 Older secondary pages remain published but are intentionally out of scope for this sync. Governance/legal documents, contributor guidance, and the API reference remain available alongside the refreshed companion suite.
 
@@ -19,6 +19,13 @@ Older secondary pages remain published but are intentionally out of scope for th
 - [Meta-Learning Core](MetaLearningCore.md)
 - [Meta-Learning Architecture Vision](MetaLearningArchitectureVision.md)
 - [Resolution Ledger](ResolutionLedger.md)
+
+### Governance / Phase II Controls
+
+- [Threshold Governance Register](ThresholdGovernanceRegister.md)
+- [Data Governance Charter](DataGovernanceCharter.md)
+- [Phase II Artifact Contract](PhaseIIArtifactContract.md)
+- [Phase II Research Execution Playbook](PhaseIIResearchExecutionPlaybook.md)
 
 ### Protocols and Appendices
 
@@ -65,6 +72,17 @@ Technical Roadmap <TechnicalRoadmap.md>
 Meta-Learning Core <MetaLearningCore.md>
 Meta-Learning Architecture Vision <MetaLearningArchitectureVision.md>
 Resolution Ledger <ResolutionLedger.md>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Governance / Phase II Controls
+
+Threshold Governance Register <ThresholdGovernanceRegister.md>
+Data Governance Charter <DataGovernanceCharter.md>
+Phase II Artifact Contract <PhaseIIArtifactContract.md>
+Phase II Research Execution Playbook <PhaseIIResearchExecutionPlaybook.md>
 ```
 
 ```{toctree}

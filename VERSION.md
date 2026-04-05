@@ -9,23 +9,49 @@ Older release entries are archived in `docs/releases/`.
 
 ## Version Index
 
-### 4.x — ADR-007 Hashing Contract + Phase I PIT Feature Hardening
-- 4.9.1 — roadmap phase-model clarification PATCH: explicit I-F / I-G / II-0 sequencing, evidence-first guardrails, protocol appendix surfaces, and Resolution Ledger phase-semantic alignment
-- 4.9.0 — Phase I-F-2 planning-surface sync PATCH: companion-suite version rebasing, F-2 closure reflected on canonical docs, Resolution Ledger 1.0.6 consistency patch, and README/VERSION release-anchor update
-- 4.8.0 — Phase I-F-1 / OI-19 / GATE-I-F-01: companion-doc truthfulness audit, structural sync to v4.8.0 baseline, audit artifacts under `docs/audits/`, Resolution Ledger evidence for companion alignment
-- 4.5.4 — Phase I-E closure pass: canonical artifact-registry ownership, canonical CLI delegation, governed momentum blocker closure, ADR-007 D2 replay evidence, and companion-doc sync
-- 4.5.3 — test-suite closure pass: torture-fixture CSV robustness, governed/docs test alignment, async/cache hardening, and property-test stabilization
-- 4.5.2 — ADR-009 momentum package migration, focused momentum test closure, and companion-doc synchronization
-- 4.5.1 — Phase I-E governance closure pass: DataLineageGate wiring, artifact-registry hashing ownership, canonical-frame CI evidence model, governed momentum artifact path hardening, and companion-doc status sync
-- 4.5.0 — Phase I-E SignalFactory substrate (SignalCatalog + slot_index, screening_report.json, taxonomy, gate_to_screening), stricter `gate.py` Phase I-E policy enforcement, and mypy --strict for momentum/preprocessor/columns
-- 4.4.2 — companion-doc cleanup and DOCX typography normalization
-- 4.4.1 — companion-doc synchronization for delivered Phase I-C / I-D state
-- 4.4.0 — Phase I-D stat-arb pairs vertical slice (governed graph ops, thin entry → orchestrator, bundle artifacts)
-- 4.3.0 — Phase I-C feature-path integrity and canonical governed execution lock (single-path feature materialization)
-- 4.2.0 — Phase I-B source adaptation into the PIT contract (bitemporal sources, Yahoo/FRED PIT-ready)
-- 4.1.0 — Phase I-A PIT orchestration closure at canonical backtest boundary
-- 4.0.1 — explicit absolute imports for hashing, artifact-registry, and backtesting contracts
-- 4.0.0 — ADR-007 hashing contract scaffold, golden-vector layout, artifact-registry attestation facade, D-tier terminology lock
+### 4.x — ADR-007 hashing, Phase I PIT & closure, I-G protocols & governance
+
+- 4.18.28 — RG-09 H3 strict-surface rescue + p85 sensitivity control: documentation-only patch recording the executed H3 successor PASS on the strict p95 granularity surface, the nearby p85 negative sensitivity control fail-kill, and the reopened RG-09 promotable posture under the strict H3 surface
+- 4.18.27 — RG-09 H2/H4 decision-path closeout: documentation-only patch recording the proper H2 cross-sectional result alongside H4; H4 stays a non-reproducible failed rescue, H2 is reproducible but below threshold, and RG-09 is closed for this phase as a promotable decision path
+- 4.18.26 — RG-09 H4 rescue failure / phase stop: documentation-only patch recording the executed market-class rescue attempt as another **NEEDS_MORE_EVIDENCE** / **FAIL_NONREPRODUCIBLE** surface; RG-09 is terminated for this phase as a promotable decision path
+- 4.18.25 — RG-09 ledger closeout: register **RG09-H2** as **RG-14**, add §1.5 evidentiary boundaries (H1 vs corrected surface), reaffirm **GATE-II-01** trainer lock, move bounded execution emphasis to **Phase II-0B**; companion policy doc touch-ups (`Artifact Write Contract`, `release_authoring_policy`)
+- 4.18.23 — RG-09 OI-58 closure: add governed `null_draw_count`, update the harness to read draw count from config, validate THR-RG09-V16, and publish the H2 design brief with OI-57 and residual OI-54 called out as explicit constraints
+- 4.18.24 — RG-09 corrected-surface precondition debugging: regenerate the live feasibility artifact, add one-axis geometry sensitivity diagnostics, open OI-59 for contingent segmentation redesign after horizon-overlap collapse, and revise the H2 brief so task admissibility, not fold geometry, is the immediate blocker
+- 4.18.22 — RG-09 governance patch: close advisory OI-56; open governed OI-57 for the matched_exchangeable_window semantics/specification gap and OI-58 for draw-count governance; ledger/spec/register alignment only, no runtime or artifact changes
+- 4.18.21 — RG-09 documentation alignment: Resolution Ledger, README, Implementation Plan, and companion RG-09 notes now treat earlier insufficient-episode runs as historical fixture-scope evidence; the live governed H1 status remains `NEEDS_MORE_EVIDENCE` with one targeted successor follow-up permitted
+- 4.18.20 — **OI-54** RG-09 fixture data layer: `independent_instruments` manifests forbid `uniform_calendar_day_index=true`; real calendar timestamps + `rg09_trading_day_ord` + summary `fold_construction` (calendar time ranges); generator validation; harness applies calendar folds when summary present, trading-ordinal NONCONTIGUOUS, and per-`entity_id` episode tokenization for multi-instrument rows
+- 4.18.19 — **OI-55** RG-09 routing follow-up: `_per_lane_fold_inconsistent` runs before the directional-underpowered branch so contradictory fold-level lanes always get `FAIL_NONREPRODUCIBLE`; regression test + spec/ledger alignment
+- 4.18.18 — companion-doc version stamp alignment across the live DOCMAP-managed suite; stale managed title-page, DOCMAP, footer, and current-version references corrected with no semantic changes
+- 4.18.17 — **OI-55** RG-09 fold-inconsistency routing fix: `_synthesize_decision` now routes contradictory fold-lane evidence to `NEEDS_MORE_EVIDENCE` with `FAIL_NONREPRODUCIBLE`; **OI-54** remains open because the current advisory power-analysis conclusion is still invalid for project-level use
+- 4.18.16 — companion-doc version stamp alignment across the live DOCMAP-managed suite; no semantic or behavioral changes
+- 4.18.15 — **OI-54** / **OI-55** RG-09 ledger-only validity follow-up: advisory power-analysis conclusion marked untrustworthy due to fixture fold asymmetry; `power_b` FAIL_KILL interpretation blocked pending a fold-inconsistent `_synthesize_decision` state
+- 4.18.14 — **OI-53** RG-09 directional-underpowered decision correction: valid non-degenerate H1 evidence is now classified as `NEEDS_MORE_EVIDENCE`; empirical closure returns `inconclusive`; targeted successor follow-up is permitted
+- 4.18.13 — **OI-52** Stage 3 RG-09 uniform statistic closeout: all three null families now use the regime-separability statistic; `FAIL_NULL_DISTRIBUTION_INVALID` is gone on the governed rerun; the then-current `FAIL_KILL` interpretation was later superseded by `4.18.14`
+- 4.18.12 — **OI-52** Stage 2 RG-09 family-specific statistic: `shuffled_regime` now uses a regime-separability statistic; `RG09-V14` and `THR-RG09-V15` recorded; H1 rerun still emits `FAIL_NULL_DISTRIBUTION_INVALID` because `shuffled_label` and `matched_exchangeable_window` remain degenerate
+- 4.18.11 — **OI-52** RG-09 null-distribution invalidity correction: null generators recompute derived episode stats; H1 rerun now emits `gate_executed=true`, `decision=null`, `fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID]`; empirical closure becomes `inconclusive`
+- 4.18.10 — **OI-51** RG-09 v2 regeneration: manifest `uniform_calendar_day_index=true` + BOCPD v2 fixture config; deterministic SHA check across two runs; H1 `gate_executed=true` with non-null decision (`FAIL_KILL`)
+- 4.18.9 — **OI-50** RG-09 yfinance multi-instrument acquisition + `rg09_multi_fixture_manifest_v2.json`; frozen `data/rg09/`; generator multi-manifest `independent_instruments`; companion sync **6.4.29** / Ledger **1.0.25**
+- 4.18.8 — **OI-47** RG-09 multi-ticker replay fixture v2 (`fixtures/rg09/v2/`); generator + tests; empirical H1 outcome recorded; companion sync **6.4.28** / Ledger **1.0.24**
+- 4.18.7 — RG09-V13 MetaTask `task_id` HMAC key assumption (⚑ VALIDATE); MLN-01 acceptance criteria; `rg09_gate_spec.md` §4 register **RG09-V01**–**RG09-V13**; companion sync **6.4.27** / Ledger **1.0.23**
+- 4.18.6 — Phase II-0B promotable artifact scaffolding (task_manifest / meta_validity_report / execution_assumptions emitters, seed policy, meta_learner_scaffold gate shell); RG-09 pilot threshold IDs; Resolution Ledger **OI-48** / **OI-49**
+- 4.18.5 — RG-09 empirical meta-validity scaffold AC patch; OI-39 (paper-trade sim spec) closed in Resolution Ledger
+- 4.18.4 — docs/out packaging for versioned implementation manifests and plans
+- 4.18.3 — companion-doc synchronization after RG-09 II-0A harness closeout at 4.18.2
+- 4.18.2 — RG-09 II-0A harness implementation closeout: bounded gate path, run-derived machine manifest, and release trace/manifest recorded
+- 4.18.1 — OI-43 closure: RG-09 replay fixture production completed; ResolutionLedger updated; replay fixture dependency for RG-09 Phase II-0A satisfied
+- 4.18.0 — MLN-02-AMD-01: Level 2 `crisis` severity gate (`vol_hi AND severity_flag`), Architecture Vision §4.2 + RG09-V12; `RegimeLabeler` / `BOCPDRegimeService`; ResolutionLedger **OI-44** / **OI-45**; companion suite **1.0.19** / **1.2.19**
+- 4.17.1 — RG-09 RG09-DIAG-002: severity-stratified high-vol diagnostic (standalone script + unit tests; PIT-safe thresholds, Cohen's d, basket dedup)
+- 4.17.0 — MOM-020 closure: artifact-driven momentum variant comparison; child-owned CPCV surfaces, parent shared-PBO aggregation, no self-certifying comparison layer
+- 4.16.0 — Phase I-G protocol closure: signal-universe expansion policy and alt-data admissibility contract published; OI-37 and OI-38 closed
+- 4.15.0 — Phase I-G protocol closure: context encoder upgrade criteria frozen; AQ-01, AQ-02, and RG-10 closed
+- 4.14.0 — Phase I-G protocol closure: RiskFn Protocol and Signal Generation Protocol published; OI-35 and OI-36 closed
+- 4.13.1 — governance patch: OI-43 opened for RG-09 replay fixture production; II-0A entry gate explicit; ImplementationPlan sequencing
+- 4.13.0 — Phase I-G RG-09 protocol closure: gate spec, pilot config, replay fixture spec, pilot report design; no code changes
+- 4.12.4 — AQ-04 closure; BOCPD orchestrator service; companion wording cleanup
+- 4.12.0–4.12.3 — Phase I-F-5 determinism boundary through F-6 coverage/CI closure; companion sync to closed Phase I-F baseline
+- 4.9.0–4.11.0 — Phase I-F-2 planning surface through I-F-4 contracts, Signal Reliability schema, ADR-005 seam, companion alignment
+- 4.5.4–4.8.0 — Phase I-E closure, I-F-1 audit, momentum/stat_arb vertical slices, companion and ledger evidence
+- 4.0.0–4.5.3 — ADR-007 scaffold through PIT (4.1–4.2), governed feature path and stat_arb (4.3–4.4), SignalFactory / I-E governance, test-suite closure
 
 ### 3.x — Governed Research System
 - 3.8.x — backtesting substrate scaffold and companion-suite synchronization
@@ -50,7 +76,7 @@ Older release entries are archived in `docs/releases/`.
 
 | Era | Versions | Focus |
 |-----|----------|------|
-| ADR-007 Hashing + Phase I PIT | 4.x | ADR-007 hashing/attestation, golden-vector layout; Phase I PIT orchestration (4.1), source adaptation (4.2), governed feature path (4.3), stat-arb pairs vertical slice (4.4), Phase I-E SignalFactory substrate (4.5) |
+| ADR-007 Hashing + Phase I PIT + I-G | 4.x | ADR-007 hashing/attestation, golden-vector layout; Phase I PIT orchestration (4.1), source adaptation (4.2), governed feature path (4.3), stat-arb pairs vertical slice (4.4), Phase I-E SignalFactory substrate (4.5); Phase I–I-G protocols & governance (RG-09, RiskFn, signal admission) |
 | Governed Artifact System | 3.6.x | CAS storage, RunRegistry, deterministic bundle identity |
 | Contract-Driven Execution | 3.5–3.6 | strategy bridge, artifact gates, determinism tiers |
 | Reliability Hardening | 3.4.x | coverage push, integration stabilization |
@@ -62,6 +88,1379 @@ Older release entries are archived in `docs/releases/`.
 | ML Research Prototype | 1.x | model experimentation, data ingestion, logging infrastructure |
 
 ---
+
+## Version 4.18.28 (2026-04-05) — RG-09 H3 strict-surface rescue + p85 sensitivity control
+
+Changelog for a docs-only patch that records the executed H3 strict granularity successor surface, the nearby p85 negative sensitivity control, and supersedes earlier draft closeout language that had treated RG-09 as dead for this phase.
+Version: **4.18.28** (**PATCH; documentation / ledger truthfulness only**)
+
+### Major Themes Across All Changes
+
+- The historical **H1** transition base surface remains governed evidence with fixture `sha256:07b28854ab30099bbe548ea77ec677122290c9412b6f451bd88fdb8ed781bfa9` and result class **`NEEDS_MORE_EVIDENCE / FAIL_NONREPRODUCIBLE`**: the broad transition surface did not validate non-exchangeability.
+- The executed **H4** market-class rescue attempt at `runs/rg09_h4_market_class_risk` remains an unsuccessful predecessor surface because it reproduced the same **non-reproducibility** failure class on the narrowed risk-complex basket.
+- The executed proper **H2** cross-sectional run at `runs/rg09_h2_cross_sectional` also remains an unsuccessful predecessor surface, but for a different reason: it was reproducible enough to evaluate and still stayed **below threshold statistically**.
+- The executed **H3** strict granularity successor surface at `runs/rg09_h3_granularity` passed on the stricter p95 crisis-labeling surface: `decision = PASS`, `decision_reason = "All required RG-09 evidence families passed."`, `reproducibility_consistent = true`, `fail_codes = []`, and `trainer_commitment_unlocked = true`.
+- The nearby **p85** H3 sensitivity control failed cleanly with `decision = FAIL_KILL` and `fail_codes = [FAIL_EXCHANGEABLE_TASKS]`; both the pass and fail H3 surfaces retained the same `admissible_episode_count = 86`, so the pass/fail flip is not explained by more episodes or cleaner geometry.
+- The strongest supported lesson is careful and local: **Within the tested H3 neighborhood, crisis-label strictness appears to be the decisive lever; the passing p95 surface preserves crisis/high_vol separation, while the looser p85 surface collapses high_vol into crisis and fails kill.** The attached evidence does **not** fully isolate whether `vol_window = 120` and `trend_flat_epsilon = 0.01` are individually necessary.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump **MRL 1.0.40** / **CODEBASE 4.18.28**; replace earlier draft phase-stop wording in **§1.5** with the executed H3 strict-surface PASS, retain H1/H4/proper-H2 as unsuccessful predecessor surfaces, record the nearby p85 negative sensitivity control, and state that the emitted harness still identifies the run through the base `RG09-H1` field. |
+| `docs/src/ImplementationPlan.md` | Bump to **6.4.32**; update the current-reality paragraph so bounded execution now tracks the strict H3 successor surface rather than the earlier H2/H4 closeout draft. |
+| `docs/src/README.md` | Bump to **4.18.12**; refresh current release context, DOCMAP, recent changes, and source stamp so readers no longer see stale language implying RG-09 is still dead or unresolved after the H3 pass. |
+| `docs/rg09/rg09_h3_design_brief.md` | Mark the brief as executed; replace the old shared-fixture scaffold note with an emitted-fixture note; append the H3 PASS outcome, nearby p85 control outcome, base-harness identity caveat, and the strictness/separation interpretation. |
+| `docs/rg09/rg09_h2_design_brief.md` | Preserve the executed H2 outcome and add a short note that H2 remained an unsuccessful predecessor relative to the later successful strict H3 successor. |
+| `docs/rg09/rg09_h4_design_brief.md` | Preserve the executed H4 outcome, mark execution status truthfully, narrow the failure rule to the H4 rescue surface itself, and add a short note that H4 remained an unsuccessful predecessor relative to the later successful strict H3 successor. |
+| `docs/traces/4.18.28_implementation_trace.md` | New implementation trace for the docs-only posture rewrite. |
+| `docs/manifests/4.18.28_change_manifest.json` | New machine-readable change manifest. |
+| `docs/releases/4.18.28.yml` | New release manifest for the docs-only patch. |
+| `VERSION.md` | Add the 4.18.28 index bullet and release entry. |
+
+### Behavioral Changes
+
+None. Documentation / ledger truthfulness only.
+
+### Breaking Changes
+
+None.
+
+### Validation Summary
+
+- `rg -n "RG-09|rg09_h3|p95|p85|FAIL_EXCHANGEABLE_TASKS|trainer_commitment_unlocked|strict crisis|high_vol" VERSION.md docs/src docs/rg09`
+- `python -m devtools.docs.cli validate-manifest --version 4.18.28`
+
+### Linked Artifacts
+
+- Trace: `docs/traces/4.18.28_implementation_trace.md`
+- Manifest: `docs/releases/4.18.28.yml`
+- Change manifest: `docs/manifests/4.18.28_change_manifest.json`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.12` |
+| `Implementation Plan` | `6.4.32` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.40` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.28` |
+
+## Version 4.18.27 (2026-04-05) — RG-09 H2/H4 decision-path closeout
+
+Changelog for a docs-only patch that records the executed proper H2 cross-sectional result alongside the earlier H4 rescue attempt and closes RG-09 for this phase as a promotable decision path.
+Version: **4.18.27** (**PATCH; documentation / ledger truthfulness only**)
+
+### Major Themes Across All Changes
+
+- The historical H1 transition base surface remains governed evidence with fixture `sha256:07b28854ab30099bbe548ea77ec677122290c9412b6f451bd88fdb8ed781bfa9` and result class **`NEEDS_MORE_EVIDENCE / FAIL_NONREPRODUCIBLE`**: the broad transition surface did not validate non-exchangeability.
+- The executed **H4** market-class rescue attempt at `runs/rg09_h4_market_class_risk` remained a **non-reproducible failed rescue** on the narrowed `ES,NQ,RTY,YM,SPY,HYG,VIX` basket.
+- The executed proper **H2** cross-sectional run at `runs/rg09_h2_cross_sectional` did **not** repeat the H4 non-reproducibility failure class; it was reproducible enough to evaluate, but statistical evidence stayed **below threshold** on both folds.
+- The resulting phase-level conclusion is narrow and explicit: **RG-09 does not justify trainer commitment** and is **terminated for this phase as a promotable decision path**. Any later **H3** work would be exploratory only.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump **MRL 1.0.39** / **CODEBASE 4.18.27**; extend **§1.5** so the current RG-09 posture now includes the valid H1 non-reproducible base surface, the H4 failed rescue, and the proper H2 reproducible-but-below-threshold negative; keep trainer commitment locked and close RG-09 for this phase as a promotable path. |
+| `docs/src/ImplementationPlan.md` | Bump to **6.4.31**; update the current-reality paragraph so bounded execution no longer treats RG-09 as an active promotable lane after either H4 or proper H2. |
+| `docs/src/README.md` | Bump to **4.18.11**; refresh current release context, DOCMAP, recent changes, and source stamp so readers see both executed successor outcomes rather than an H4-only closeout. |
+| `docs/rg09/rg09_h4_design_brief.md` | Tighten the executed outcome note to include `reproducibility_consistent = false` and a shorter rescue-failed conclusion. |
+| `docs/rg09/rg09_h2_design_brief.md` | Mark execution status as executed and append the proper H2 outcome note with run path, fixture SHA, base decision, `fail_closed=false`, and the below-threshold interpretation. |
+| `docs/traces/4.18.27_implementation_trace.md` | New implementation trace for the docs-only patch. |
+| `docs/manifests/4.18.27_change_manifest.json` | New machine-readable change manifest. |
+| `docs/releases/4.18.27.yml` | New release manifest for the docs-only patch. |
+| `VERSION.md` | Add the 4.18.27 index bullet and release entry. |
+
+### Behavioral Changes
+
+None. Documentation / ledger truthfulness only.
+
+### Breaking Changes
+
+None.
+
+### Validation Summary
+
+- `rg -n "RG-09|rg09_h2_cross_sectional|rg09_h4_market_class_risk|FAIL_NONREPRODUCIBLE|below threshold|terminated for this phase|trainer commitment" VERSION.md docs/src docs/rg09`
+- `python -m devtools.docs.cli validate-manifest --version 4.18.27`
+
+### Linked Artifacts
+
+- Trace: `docs/traces/4.18.27_implementation_trace.md`
+- Manifest: `docs/releases/4.18.27.yml`
+- Change manifest: `docs/manifests/4.18.27_change_manifest.json`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.11` |
+| `Implementation Plan` | `6.4.31` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.39` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.27` |
+
+## Version 4.18.26 (2026-04-05) — RG-09 H4 rescue failure / phase stop
+
+Changelog for a docs-only patch that records the executed RG-09 H4 market-class rescue attempt truthfully and closes the promotable lane for this phase.
+Version: **4.18.26** (**PATCH; documentation / ledger truthfulness only**)
+
+### Major Themes Across All Changes
+
+- The executed **H4** market-class rescue lane is now recorded as a **failed rescue attempt for this phase**, not as proof that no signal exists everywhere.
+- The earlier valid **H1** transition surface remains historical governed evidence: **104 admissible episodes**, **`NEEDS_MORE_EVIDENCE`**, **`FAIL_NONREPRODUCIBLE`**, **inconclusive**.
+- The executed **H4** successor surface narrowed the basket to the 7-entity equity-risk complex but reproduced the same class of non-reproducibility, so **RG-09 does not justify trainer commitment and is terminated for this phase as a promotable decision path**.
+- Any later **H2/H3** work is described only as optional **exploratory / non-governed** follow-up outside the current promotable path.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump **MRL 1.0.38** / **CODEBASE 4.18.26**; update **§1.5** posture to include the valid H1 base surface and the executed H4 rescue failure; mark RG-09 as terminated for this phase as a promotable path; remove stale implication that H2/H3 remains an active governed rescue lane. |
+| `docs/src/ImplementationPlan.md` | Bump to **6.4.30**; refresh the RG-09 current-reality paragraph so H4 is treated as a failed rescue attempt with the same non-reproducibility class of outcome; state that bounded execution should not treat RG-09 as salvageable for promotion in the current phase. |
+| `docs/src/README.md` | Bump to **4.18.10**; refresh current release context, DOCMAP, recent changes, and source stamp so users no longer see stale language implying an active post-H4 rescue path. |
+| `docs/rg09/rg09_h4_design_brief.md` | Append an outcome note with the executed H4 run path, fixture SHA, config id, decision, fail code, admissible-episode count, and phase-stop interpretation. |
+| `docs/traces/4.18.26_implementation_trace.md` | New implementation trace for the docs-only patch. |
+| `docs/manifests/4.18.26_change_manifest.json` | New machine-readable change manifest. |
+| `docs/releases/4.18.26.yml` | New release manifest for the docs-only patch. |
+| `VERSION.md` | Add the 4.18.26 index bullet and release entry. |
+
+### Behavioral Changes
+
+None. Documentation / ledger truthfulness only.
+
+### Breaking Changes
+
+None.
+
+### Validation Summary
+
+- `rg -n "4\\.18\\.26|1\\.0\\.38|6\\.4\\.30|4\\.18\\.10|rg09_h4_market_class_risk|FAIL_NONREPRODUCIBLE|terminated for this phase" VERSION.md docs/src docs/rg09`
+- `python -m devtools.docs.cli validate-manifest --version 4.18.26`
+- `python -m devtools.docs.cli build-docx-suite --version 4.18.26`
+- `python -m devtools.docs.cli verify-suite --version 4.18.26`
+
+### Linked Artifacts
+
+- Trace: `docs/traces/4.18.26_implementation_trace.md`
+- Manifest: `docs/releases/4.18.26.yml`
+- Change manifest: `docs/manifests/4.18.26_change_manifest.json`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.10` |
+| `Implementation Plan` | `6.4.30` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.38` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.26` |
+
+## Version 4.18.25 (2026-04-04) — RG-09 PARTIAL ledger closeout, RG09-H2 registration (RG-14), II-0B execution focus
+
+Changelog for Resolution Ledger governance: register the H2 successor hypothesis, state what RG-09 evidence does and does not imply, and align companion doc policy references.
+Version: **4.18.25** (**documentation / ledger PATCH**)
+
+### Major Themes Across All Changes
+
+- **RG-09** stays **`PARTIAL`**: the ledger now has an explicit **§1.5** separating (a) valid historical H1 `NEEDS_MORE_EVIDENCE` from (b) corrected-surface **zero admissibility** under the current task recipe, and (c) episode-label attribution plumbing (majority `regime_class` under boundary recovery) without claiming gate promotion.
+- **RG09-H2** is **registered** as ledger item **`RG-14`** (`OPEN`, **II-0B**, non-blocking); execution remains deferred per `docs/rg09/rg09_h2_design_brief.md` until admissibility recovers (**OI-59** and related lanes).
+- **Trainer commitment** (**`GATE-II-01`**) remains **locked** with **MLN-01..07**; Phase **II-0B** scaffolding is the stated bounded execution emphasis alongside parallel RG-09 work.
+- Companion policy docs (`docs/Artifact Write Contract.md`, `docs/release_authoring_policy.md`) gain small clarifications already aligned to this release discipline.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump **MRL 1.0.37** / **CODEBASE 4.18.25**; count matrix (**RG** +1 **OPEN**, totals +1); new **§1.5** program posture; **`RG-14`** YAML for RG09-H2; extend **RG-09** `related` + `resolution` with v4.18.25 pointer. |
+| `docs/rg09/rg09_h2_design_brief.md` | Note **RG-14** ledger registration. |
+| `docs/src/README.md` | Title companion line, **current release context**, **DOCMAP** rows for Resolution Ledger **1.0.37** and `VERSION.md` **4.18.25**; **RECENT_CHANGES** row for **4.18.25**. |
+| `docs/src/ImplementationPlan.md` | Title companion line; **§1.2** opening paragraph for **4.18.25** / **1.0.37**; **RECENT_CHANGES** row; **SOURCE_STAMP** alignment. |
+| `docs/traces/4.18.25_implementation_trace.md` | New implementation trace. |
+| `docs/manifests/4.18.25_change_manifest.json` | New change manifest. |
+| `docs/releases/4.18.25.yml` | New release manifest. |
+| `VERSION.md` | This entry + index bullet. |
+
+### Behavioral Changes
+
+None. Ledger and companion documentation only.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- Manual consistency: `rg -n "RG-14|§1\\.5|4\\.18\\.25|1\\.0\\.37" docs/src/ResolutionLedger.md VERSION.md docs/releases/4.18.25.yml`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` (stamps only) |
+| `Implementation Plan` | `6.4.29` (stamps + §1.2 paragraph) |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.37` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.25` |
+
+### Deferred
+
+- Re-run RG-09 harness / feasibility / separability on post–label-plumbing surfaces and refresh emitted JSON artifacts under `fixtures/` or `runs/` as separate evidence tasks (not part of this ledger-only patch).
+
+---
+
+## Version 4.18.22 (2026-04-04) — RG-09 governance patch: advisory closeout + two governed follow-ups
+
+Changelog for a documentation-only RG-09 governance patch.
+Version: **4.18.22** (**documentation-only PATCH release; ledger/spec/threshold-governance alignment only**)
+
+### Major Themes Across All Changes
+
+- The completed advisory lane is now recorded as closed work in the Resolution Ledger without changing the governed H1 result.
+- Two new governed RG-09 follow-ups are now explicit: one for the `matched_exchangeable_window` specification gap and one for null draw-count governance.
+- No code, thresholds, configs, or governed run artifacts changed in this patch.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump ledger metadata to `1.0.34` / `VERSION.md 4.18.22`, close advisory **OI-56**, open governed **OI-57** and **OI-58**, update the count matrix, and extend the RG-09 narrative to record the two new non-blocking governance gaps. |
+| `docs/rg09/rg09_gate_spec.md` | Add a governed caveat that `matched_exchangeable_window` remains authorized in v1 but its stated semantics versus the implemented generator are under active review under **OI-57**; add open assumption **RG09-V15** for the runtime-derived null draw-count rule. |
+| `docs/src/ThresholdGovernanceRegister.md` | Bump the register title-page version to `1.0.1`, align companion references to the current ledger/version baseline, and add provisional threshold row **THR-RG09-V16** for the current null draw-count rule `max(8, len(episodes) * 2)`. |
+| `docs/releases/4.18.22.yml` | Add the patch release manifest for this RG-09 governance-only documentation update. |
+
+### Behavioral Changes
+
+None. Documentation-only governance patch.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- `rg -n "OI-56|OI-57|OI-58" docs/src/ResolutionLedger.md`
+- `rg -n "matched_exchangeable_window|OI-57|RG09-V15" docs/rg09/rg09_gate_spec.md`
+- `rg -n "draw_count|max\\(8, len\\(episodes\\) \\* 2\\)|THR-RG09-V16|OI-58" docs/src/ThresholdGovernanceRegister.md srcPy/meta/rg09_harness.py docs/src/ResolutionLedger.md`
+- `rg -n "4\\.18\\.22|1\\.0\\.34|1\\.0\\.1" VERSION.md docs/releases/4.18.22.yml docs/src/ResolutionLedger.md docs/src/ThresholdGovernanceRegister.md`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.34` |
+| `Threshold Governance Register` | `1.0.1` |
+| `VERSION.md` | `4.18.22` |
+
+## Version 4.18.23 (2026-04-04) — RG-09 OI-58 closure + H2 design brief
+
+Changelog for the narrow RG-09 draw-count governance closure patch and H2 design brief publication.
+Version: **4.18.23** (**PATCH**)
+
+### Major Themes Across All Changes
+
+- OI-58 is now closed by moving RG-09 null draw count onto the governed pilot-config surface.
+- The harness no longer derives draw count from episode count at runtime.
+- H2 design is now documented explicitly with OI-57 and residual OI-54 carried as constraints rather than blockers.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `srcPy/meta/rg09_harness.py` | Add `null_draw_count` to `RG09PilotConfig`, load it from config, and make `_evaluate_fold` use the configured value instead of `max(8, len(episodes) * 2)`. |
+| `docs/rg09/rg09_pilot_config_v1.json` | Add governed field `null_draw_count = 64`. |
+| `docs/rg09/rg09_pilot_config_v1_power_a.json` | Add governed field `null_draw_count = 64` so the alternative pilot config remains schema-compatible. |
+| `tests/python/unit/meta/test_rg09_harness.py` | Add RED/GREEN coverage that `null_draw_count` loads from config and that fold summaries emit the configured draw count. |
+| `docs/rg09/rg09_gate_spec.md` | Update the statistical-lane description so each family/fold comparison uses configured `null_draw_count` draws and remove the former open draw-count assumption row. |
+| `docs/src/ThresholdGovernanceRegister.md` | Bump the register to `1.0.2` and transition `THR-RG09-V16` from `PROVISIONAL` to `VALIDATED` at `null_draw_count = 64`. |
+| `docs/src/ResolutionLedger.md` | Bump ledger metadata to `1.0.35`, close `OI-58`, tighten `OI-57` language so H2 may execute with the underspecification caveat, and record the H2 brief path. |
+| `docs/rg09/rg09_h2_design_brief.md` | Publish the H2 design brief with corrected fold-construction as a fixture requirement and `OI-57` / residual `OI-54` as explicit interpretation constraints. |
+| `docs/releases/4.18.23.yml` | Add the release manifest for this RG-09 closure patch. |
+
+### Behavioral Changes
+
+- RG-09 statistical null draws are now governed by config (`null_draw_count = 64`) rather than by admissible episode count.
+
+### Breaking Changes
+
+- `load_rg09_config()` now requires `null_draw_count` in governed RG-09 pilot configs.
+
+### Test / Validation Evidence
+
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m pytest --no-cov tests\\python\\unit\\meta\\test_rg09_harness.py -q"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m pytest --no-cov tests\\python\\integration\\meta\\test_run_rg09_gate.py -q"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m mypy --strict srcPy\\meta\\rg09_harness.py"`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.35` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.23` |
+
+## Version 4.18.24 (2026-04-04) — RG-09 corrected-surface precondition diagnostics + contingent OI-59
+
+Changelog for the corrected-surface RG-09 precondition-debug pass on the live v2 basket.
+Version: **4.18.24** (**PATCH**)
+
+### Major Themes Across All Changes
+
+- The stale stacked-surface feasibility artifact has been replaced by a corrected-surface feasibility artifact for fixture `sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`.
+- A new one-axis geometry sensitivity diagnostic now measures support/query/dwell leverage on the existing segmentation before any task-definition redesign.
+- The evidence shows the current blocker is pre-statistical task admissibility on the corrected surface, so OI-59 is opened as the contingent governed segmentation-redesign lane and the H2 brief is updated accordingly.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `srcPy/meta/rg09_feasibility.py` | Bump the feasibility artifact schema to `v2` and add regime-class coverage plus crisis-surface summary fields. |
+| `srcPy/meta/rg09_geometry_sensitivity.py` | Add a new one-axis geometry sensitivity diagnostic over `min_support_rows`, `min_query_rows`, and `min_dwell_time_bars` on the current segmentation. |
+| `scripts/run_rg09_geometry_sensitivity.py` | Add the CLI entrypoint that emits `rg09_geometry_sensitivity.json`. |
+| `fixtures/rg09/v2/rg09_episode_feasibility.json` | Regenerate the live corrected-surface feasibility artifact against fixture `sha256:421b8a...`; it now records zero admissible episodes and `HORIZON_OVERLAP` dominance on the corrected basket. |
+| `fixtures/rg09/v2/rg09_geometry_sensitivity.json` | Add the corrected-surface one-axis sensitivity artifact; tested support/query relaxations do not recover admissibility on the current segmentation. |
+| `docs/rg09/rg09_v2_corrected_surface_precondition_diagnostic.md` | Record the corrected-surface findings, stale-surface comparison note, geometry sensitivity result, and crisis sub-diagnostic. |
+| `docs/rg09/rg09_h2_design_brief.md` | Reframe H2 so corrected-surface task admissibility is the immediate blocker, breadth remains frozen, and OI-59 is the contingent governed successor lane if redesign is required. |
+| `docs/src/ResolutionLedger.md` | Bump ledger metadata to `1.0.36`, open `OI-59`, and update the RG-09 narrative with the corrected-surface feasibility and sensitivity findings. |
+| `tests/python/unit/meta/test_rg09_feasibility.py` | Add coverage for regime-class and crisis-surface detail in the feasibility artifact. |
+| `tests/python/unit/meta/test_rg09_geometry_sensitivity.py` | Add unit coverage for first-order binding detection and dwell-axis inactivity. |
+| `tests/python/integration/meta/test_run_rg09_geometry_sensitivity.py` | Add the integration check that the geometry sensitivity CLI emits its required artifact. |
+| `docs/releases/4.18.24.yml` | Add the release manifest for this RG-09 corrected-surface diagnostics patch. |
+
+### Behavioral Changes
+
+- RG-09 now has an explicit corrected-surface geometry sensitivity artifact alongside the pre-gate feasibility artifact.
+- Feasibility reporting now exposes admissible/candidate regime-class detail and a crisis-surface summary.
+
+### Breaking Changes
+
+None to governed gate execution. This patch is diagnostic and governance-oriented.
+
+### Test / Validation Evidence
+
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m pytest --no-cov tests\\python\\unit\\meta\\test_rg09_feasibility.py tests\\python\\unit\\meta\\test_rg09_geometry_sensitivity.py -q"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m pytest --no-cov tests\\python\\integration\\meta\\test_run_rg09_feasibility.py tests\\python\\integration\\meta\\test_run_rg09_geometry_sensitivity.py -q"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m mypy --strict srcPy\\meta\\rg09_feasibility.py srcPy\\meta\\rg09_geometry_sensitivity.py"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m scripts.run_rg09_feasibility --fixture fixtures\\rg09\\v2\\rg09_fixture_v2.parquet --fixture-summary fixtures\\rg09\\v2\\rg09_fixture_summary.json --fixture-metadata fixtures\\rg09\\v2\\rg09_fixture_metadata.json --config docs\\rg09\\rg09_pilot_config_v1.json --output-path fixtures\\rg09\\v2\\rg09_episode_feasibility.json"`
+- `cmd.exe /c "cd /d C:\\Users\\Nalakram\\Documents\\GitHub\\MarketMind && .venv-codex\\Scripts\\python.exe -m scripts.run_rg09_geometry_sensitivity --fixture fixtures\\rg09\\v2\\rg09_fixture_v2.parquet --fixture-summary fixtures\\rg09\\v2\\rg09_fixture_summary.json --fixture-metadata fixtures\\rg09\\v2\\rg09_fixture_metadata.json --config docs\\rg09\\rg09_pilot_config_v1.json --output-path fixtures\\rg09\\v2\\rg09_geometry_sensitivity.json --support-values 64,48,32 --query-values 32,24,16 --dwell-values 32,24,16"`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.36` |
+| `Threshold Governance Register` | `1.0.2` |
+| `VERSION.md` | `4.18.24` |
+
+## Version 4.18.21 (2026-04-03) — RG-09 governed-evidence doc alignment
+
+Changelog for RG-09 documentation alignment after the governed H1 line settled into its allowed `NEEDS_MORE_EVIDENCE` state.
+Version: **4.18.21** (**documentation-only PATCH release; governed-evidence wording alignment only**)
+
+### Major Themes Across All Changes
+
+- Live RG-09 status text was corrected to distinguish historical precondition-failure artifacts from the current governed H1 line.
+- No architectural scope changed. No new ADR, AQ, or OI was introduced, and no code, threshold, fixture, or harness behavior changed.
+
+### Detailed Changes
+
+| File | Change |
+|---|---|
+| `docs/src/ResolutionLedger.md` | Bump ledger metadata to `1.0.33` / `VERSION.md 4.18.21` and update the RG-09 narrative so the current governed state is explicitly `NEEDS_MORE_EVIDENCE` with one targeted successor follow-up permitted; earlier insufficient-episode runs remain historical fixture-scope evidence only. |
+| `docs/src/README.md` | Update current-release context to reference the corrected RG-09 live status instead of presenting the old precondition-failure surface as current. |
+| `docs/src/ImplementationPlan.md` | Update audit-baseline and RG-09 roadmap text so OI-46 / OI-47 / OI-50 remain historical evidence while the live H1 line is the later valid `NEEDS_MORE_EVIDENCE` run. |
+| `docs/rg09/rg09_data_acquisition_log.md` | Clarify that the documented v2 insufficient-episodes result is historical evidence for that bundle, not the current RG-09 H1 status. |
+| `docs/rg09/rg09_power_b_comparison.md` | Mark the historical `FAIL_KILL` output as a superseded routing interpretation and align the narrative with the Resolution Ledger’s governed reading. |
+| `docs/releases/4.18.21.yml` | Add the release manifest for this documentation-only RG-09 status alignment patch. |
+
+### Behavioral Changes
+
+None. Documentation-only pass.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- `rg -n "gate_executed=false|FAIL_INSUFFICIENT_EPISODES|successor activation remains blocked|FAIL_KILL" docs/src/README.md docs/src/ImplementationPlan.md docs/rg09`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.33` |
+| `VERSION.md` | `4.18.21` |
+
+### Deferred
+
+- Historical RG-09 comparison documents that intentionally preserve emitted artifact truth, such as `docs/rg09/rg09_power_a_comparison.md`, still describe their recorded outputs and were not rewritten beyond the minimum wording needed to avoid overstating the live RG-09 status.
+
+## Version 4.18.18 (2026-04-03) — companion-doc version stamp alignment
+
+Changelog for companion-doc version stamp alignment across the live DOCMAP-managed suite.
+Version: **4.18.18** (**documentation-only PATCH release; live stamp synchronization only**)
+
+### Major Themes Across All Changes
+
+- Suite stamp synchronization only. The live DOCMAP-managed source documents were aligned to the actual canonical versions in this repo with token-level stamp updates only.
+- No semantic rewrite. Historical release rows, architecture claims, gate language, and ledger decision bodies were left unchanged.
+
+### Detailed Changes
+
+| File | Stale String | Corrected String |
+|---|---|---|
+| `docs/src/README.md` | `Version 4.18.16`; managed companion line with `v1.0.0` siblings and `VERSION.md 4.18.16`; current prose `VERSION.md 4.18.16`; managed DOCMAP rows `4.18.16 / 1.0.0 / ... / 4.18.16`; source stamp `v4.18.16 ... v1.0.0 ... 4.18.16` | `Version 4.18.9`; managed companion line `v6.4.29 / v1.4.21 / v1.2.19 / v1.2.20 / v1.0.32 / 4.18.17`; current prose `VERSION.md 4.18.17`; managed DOCMAP rows `4.18.9 / 6.4.29 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.32 / 4.18.17`; source stamp aligned |
+| `docs/src/ImplementationPlan.md` | `Version 1.0.0`; managed companion line `v1.0.0 ... 4.18.16`; source stamp `v1.0.0 ... 4.18.16` | `Version 6.4.29`; managed companion line `v1.4.21 / v1.2.19 / v1.2.20 / v1.0.32 / 4.18.9 / 4.18.17`; source stamp aligned |
+| `docs/src/TechnicalRoadmap.md` | `Version 1.0.0`; managed companion line `v1.0.0 ... 4.18.16`; source stamp `v1.0.0 ... 4.18.16` | `Version 1.4.21`; managed companion line `v6.4.29 / v1.2.19 / v1.2.20 / v1.0.32 / 4.18.9 / 4.18.17`; source stamp aligned |
+| `docs/src/MetaLearningCore.md` | `Version 1.0.0`; managed companion line `v1.0.0 ... 4.18.16`; managed DOCMAP rows `1.0.0 / ... / 4.18.16`; source stamp `v1.0.0 ... 4.18.16` | `Version 1.2.19`; managed companion line `v6.4.29 / v1.4.21 / v1.2.20 / v1.0.32 / 4.18.9 / 4.18.17`; managed DOCMAP rows aligned; source stamp aligned |
+| `docs/src/MetaLearningArchitectureVision.md` | `Version 1.0.0`; managed companion line `v1.0.0 ... 4.18.16`; prose `Resolution Ledger v1.0.31`; managed DOCMAP rows `1.0.0 / ... / 4.18.16`; source stamp `v1.0.0 ... 4.18.16` | `Version 1.2.20`; managed companion line `v6.4.29 / v1.4.21 / v1.2.19 / v1.0.32 / 4.18.9 / 4.18.17`; prose `Resolution Ledger v1.0.32`; managed DOCMAP rows aligned; source stamp aligned |
+| `docs/traces/4.18.18_implementation_trace.md` | `n/a (new file)` | `implementation trace added` |
+| `docs/manifests/4.18.18_change_manifest.json` | `n/a (new file)` | `change manifest added` |
+| `VERSION.md` | latest release record stopped at `4.18.17` | `4.18.18` index bullet and release entry added |
+
+### Behavioral Changes
+
+None. Documentation-only pass.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- Managed-suite stale-string grep returned zero matches:
+
+```bash
+rg -n "Version 1\.0\.0|v1\.0\.0|README\.md 4\.18\.16|VERSION\.md 4\.18\.16|Resolution Ledger v1\.0\.31|\| README\.md \| 4\.18\.16 \||\| VERSION\.md \| 4\.18\.16 \||\| Implementation Plan \| 1\.0\.0 \||\| Technical Roadmap \| 1\.0\.0 \||\| Meta-Learning Core \| 1\.0\.0 \||\| Meta-Learning Architecture Vision \| 1\.0\.0 \||\| Resolution Ledger \| 1\.0\.0 \|" docs/src/README.md docs/src/ImplementationPlan.md docs/src/TechnicalRoadmap.md docs/src/MetaLearningCore.md docs/src/MetaLearningArchitectureVision.md docs/src/ResolutionLedger.md
+```
+
+```text
+<no output; exit code 1>
+```
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.32` |
+| `VERSION.md` | `4.18.18` |
+
+### Deferred
+
+- Out-of-scope docs outside the live managed DOCMAP still contain stale companion stamps and were intentionally not edited in this pass:
+  - `docs/src/FormattingSpec.md`
+  - `docs/src/DataGovernanceCharter.md`
+  - `docs/src/PhaseIIArtifactContract.md`
+  - `docs/src/PhaseIIResearchExecutionPlaybook.md`
+  - `docs/src/ThresholdGovernanceRegister.md`
+- `docs/releases/VERSION_3.x.md` was scanned for the stale patterns used in this pass; no matching stale companion references were found, so the archive remained unchanged.
+
+## Version 4.18.17 (2026-04-03) — RG-09 fold-inconsistency routing correction
+
+Version: **4.18.17** (**PATCH**)
+
+This release records the RG-09 power-analysis advisory-validity finding in the ledger and fixes the harness decision gap for contradictory fold-level lane evidence. No thresholds, null generators, fixtures, pilot configs, or power-analysis formulas changed.
+
+### Detailed Changes
+
+- `srcPy/meta/rg09_harness.py`: add `_per_lane_fold_inconsistent(...)` and route contradictory fold-level statistical / structural / functional outcomes to `NEEDS_MORE_EVIDENCE` with `FAIL_NONREPRODUCIBLE` before the terminal `FAIL_KILL` branch.
+- `tests/python/unit/meta/test_rg09_harness.py`: add RED/GREEN unit coverage for the new helper and the fold-inconsistent routing case.
+- `docs/rg09/rg09_gate_spec.md`: document that contradictory fold-level lane evidence is non-reproducible and routes to `NEEDS_MORE_EVIDENCE` / `FAIL_NONREPRODUCIBLE`, not `FAIL_KILL`.
+- `docs/src/ResolutionLedger.md`: keep **OI-54** open as the advisory-validity finding, close **OI-55** with the implemented routing fix, update the RG-09 resolution narrative, and advance the ledger release metadata.
+- `docs/releases/4.18.17.yml`: add the release manifest for this narrow RG-09 corrective patch.
+
+### Behavioral Changes
+
+- Mixed fold-level lane outcomes no longer fall through to `FAIL_KILL`.
+- The current RG-09 power-analysis advisory conclusion remains invalid for project-level decision use until rerun on corrected fixture fold structure.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- `pytest --no-cov tests/python/unit/meta/test_rg09_harness.py`
+- `mypy --strict srcPy/meta/rg09_harness.py`
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.32` |
+| `VERSION.md` | `4.18.17` |
+
+## Version 4.18.16 (2026-04-03) — companion-doc version stamp alignment
+
+Changelog for companion-doc version stamp alignment across the live DOCMAP-managed suite.
+Version: **4.18.16** (**documentation-only PATCH release; live stamp synchronization only**)
+
+### Major Themes Across All Changes
+
+- Suite stamp synchronization only. Live title-page companion lines, footer/source stamps, DOCMAP rows, and safe live version tokens were aligned to the canonical companion baseline confirmed from the ledger header and live DOCMAP.
+- No semantic rewrite. Historical release rows, ledger entry bodies, threshold text, and behavioral descriptions were left untouched unless a direct live companion token could be corrected safely.
+
+### Detailed Changes
+
+| File | Stale String | Corrected String |
+|---|---|---|
+| `README.md` | `Version 4.18.1 · March 2026`; `Implementation Plan v6.4.24`; `Resolution Ledger v1.0.20`; `VERSION.md 4.18.1` | `Version 4.18.9 · April 2026`; `Implementation Plan v6.4.29`; `Resolution Ledger v1.0.31`; `VERSION.md 4.18.16` |
+| `docs/src/README.md` | `Resolution Ledger v1.0.25`; `VERSION.md 4.18.9` | `Resolution Ledger v1.0.31`; `VERSION.md 4.18.16` |
+| `docs/src/ImplementationPlan.md` | `Version 6.4.26`; `Resolution Ledger v1.0.21`; `README.md 4.18.5`; `VERSION.md 4.18.5` | `Version 6.4.29`; `Resolution Ledger v1.0.31`; `README.md 4.18.9`; `VERSION.md 4.18.16` |
+| `docs/src/TechnicalRoadmap.md` | `Implementation Plan v6.4.26`; `Resolution Ledger v1.0.21`; `README.md 4.18.5`; `VERSION.md 4.18.5` | `Implementation Plan v6.4.29`; `Resolution Ledger v1.0.31`; `README.md 4.18.9`; `VERSION.md 4.18.16` |
+| `docs/src/MetaLearningCore.md` | `Implementation Plan 6.4.26`; `Resolution Ledger 1.0.21`; `README.md 4.18.5`; `VERSION.md 4.18.5` | `Implementation Plan 6.4.29`; `Resolution Ledger 1.0.31`; `README.md 4.18.9`; `VERSION.md 4.18.16` |
+| `docs/src/MetaLearningArchitectureVision.md` | `Implementation Plan 6.4.26`; `Resolution Ledger 1.0.21`; `README.md 4.18.5`; `VERSION.md 4.18.5`; `Resolution Ledger v1.0.21` | `Implementation Plan 6.4.29`; `Resolution Ledger 1.0.31`; `README.md 4.18.9`; `VERSION.md 4.18.16`; `Resolution Ledger v1.0.31` |
+| `docs/src/ResolutionLedger.md` | `VERSION.md 4.18.15` | `VERSION.md 4.18.16` |
+| `docs/traces/4.18.16_implementation_trace.md` | `n/a (new file)` | `implementation trace added` |
+| `docs/manifests/4.18.16_change_manifest.json` | `n/a (new file)` | `change manifest added` |
+| `VERSION.md` | latest release record stopped at `4.18.15` | `4.18.16` index bullet and release entry added |
+
+### Behavioral Changes
+
+None. Documentation-only pass.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- Exact stale-string grep probes for the managed live surfaces returned no matches:
+  - `README.md`
+  - `docs/src/README.md`
+  - `docs/src/ImplementationPlan.md`
+  - `docs/src/TechnicalRoadmap.md`
+  - `docs/src/MetaLearningCore.md`
+  - `docs/src/MetaLearningArchitectureVision.md`
+  - `docs/src/ResolutionLedger.md`
+- `docs/releases/VERSION_3.x.md` was scanned for the stale companion-version patterns used in this pass; no matches were found and the archive was left unchanged.
+- Full command strings and outputs are recorded in `docs/traces/4.18.16_implementation_trace.md`.
+
+### Companion Document Versions
+
+| Document | Version |
+|---|---:|
+| `README.md` | `4.18.9` |
+| `Implementation Plan` | `6.4.29` |
+| `Technical Roadmap` | `1.4.21` |
+| `Meta-Learning Core` | `1.2.19` |
+| `Meta-Learning Architecture Vision` | `1.2.20` |
+| `Resolution Ledger` | `1.0.31` |
+| `VERSION.md` | `4.18.16` |
+
+### Deferred
+
+- `docs/src/ImplementationPlan.md` still contains a current-baseline section anchored to `4.18.9`. A truthful update would require semantic rebasing of the narrative, not a stamp-only token replacement.
+- `docs/src/MetaLearningArchitectureVision.md` still contains a `Documentation baseline` row anchored to the historical `4.18.5` companion baseline. A truthful update would require semantic rewriting, so it was not changed in this pass.
+- Out-of-scope docs outside the live DOCMAP still carry older companion stamps and were not edited: `docs/src/WhitePaper.md`, `docs/src/FormattingSpec.md`, `docs/src/DataGovernanceCharter.md`, `docs/src/PhaseIIResearchExecutionPlaybook.md`, `docs/src/PhaseIIArtifactContract.md`, `docs/src/ThresholdGovernanceRegister.md`.
+- `docs/releases/VERSION_3.x.md` was scanned for the stale patterns used in this pass; no matching stale companion references were found, so the archive remained unchanged.
+
+## Version 4.18.15 (2026-04-03) — OI-54 / OI-55 RG-09 Advisory Validity and Fold-Inconsistency Ledger Update
+
+Version: **4.18.15** (**PATCH**)
+
+Summary:
+Open **OI-54** and **OI-55** in the Resolution Ledger only. **OI-54** records that the advisory power-analysis conclusion at `runs/rg09_power_analysis/v1/rg09_power_analysis.json` is not trustworthy because the baseline fold surface used by the tool is contaminated by `uniform_calendar_day_index=true` stacking rather than two independent temporal samples. **OI-55** records a remaining RG-09 harness decision-state gap exposed by `power_b`: fold-inconsistent evidence currently falls through to `FAIL_KILL` / `FAIL_EXCHANGEABLE_TASKS`, so that output must not be treated as a valid kill decision until `_synthesize_decision()` gets an explicit contradictory-fold branch. No code, fixture, gate-spec, or companion-doc changes land in this release; only `docs/src/ResolutionLedger.md` and `VERSION.md` advance.
+
+Major changes:
+- `docs/src/ResolutionLedger.md`: bump ledger version to `1.0.31` / codebase `4.18.15`, open **OI-54** and **OI-55**, add the new blocking-hotlist row for **OI-55**, and extend the **RG-09** resolution text with the advisory power-analysis invalidity finding and the `power_b` fold-inconsistency caveat.
+- `VERSION.md`: add the `4.18.15` index bullet and this doc-only release entry.
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `git diff -- docs/src/ResolutionLedger.md VERSION.md`
+  - Result: only the requested ledger + release-ledger updates are included.
+- Tests not run.
+  - Reason: explicit doc-only scope; no code paths changed in this release.
+
+Linked trace path:
+- None authored for this explicit doc-only scope.
+
+Linked manifest path:
+- None authored for this explicit doc-only scope.
+
+## Version 4.18.14 (2026-04-02) — OI-53 RG-09 Directional-Underpowered Decision Correction
+
+Version: **4.18.14** (**PATCH**)
+
+Summary:
+Open and close **OI-53** to correct the RG-09 decision-logic gap discovered after the first valid non-degenerate H1 rerun. The harness previously had no state for "structural passes, nulls valid, directional signal present, but statistical power below threshold," so `_synthesize_decision()` fell through to `FAIL_KILL`. This release adds an explicit `NEEDS_MORE_EVIDENCE` branch for that governed case, updates the gate spec accordingly, reruns H1 and empirical closure into fresh directories, and records the governed finding accurately. The new H1 artifact at `runs/rg09_v2/h1_v2bocpd_directional_nme/` is `NEEDS_MORE_EVIDENCE`, not `FAIL_KILL`.
+
+Major changes:
+- `srcPy/meta/rg09_harness.py`: `_synthesize_decision()` now returns `NEEDS_MORE_EVIDENCE` when structural evidence passes, nulls are valid, the statistical lane remains directionally above the null surface across all folds/families, and functional evidence retains positive directional delta but remains below threshold.
+- `tests/python/unit/meta/test_rg09_harness.py`: add RED/GREEN coverage for the directional-underpowered branch both at the pure decision-function level and at the emitted gate-result artifact level.
+- `docs/rg09/rg09_gate_spec.md`: expand `NEEDS_MORE_EVIDENCE` to cover the directional-underpowered case and reserve `FAIL_KILL` / `FAIL_EXCHANGEABLE_TASKS` for confirmed collapse.
+- `docs/src/ResolutionLedger.md`: add **OI-53** and update **RG-09** to record the governed outcome as `NEEDS_MORE_EVIDENCE`.
+- Fresh reruns:
+  - `runs/rg09_v2/h1_v2bocpd_directional_nme/rg09_gate_result.json`
+  - `runs/rg09_v2/empirical_v2bocpd_directional_nme/rg09_empirical_summary.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m pytest --no-cov tests\python\unit\meta\test_rg09_harness.py tests\python\unit\meta\test_rg09_empirical_closure.py tests\python\integration\meta\test_run_rg09_gate.py"`
+  - Result: `46 passed in 2.12s`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m mypy --strict srcPy\meta\rg09_harness.py srcPy\meta\rg09_empirical_closure.py"`
+  - Result: `Success: no issues found in 2 source files`
+- `git diff -- docs/rg09/rg09_pilot_config_v1.json`
+  - Result: empty
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_gate --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\h1_v2bocpd_directional_nme"`
+  - Result: `gate_executed=true`, `decision=NEEDS_MORE_EVIDENCE`, `fail_codes=[]`, `successor_hypotheses.eligible=true`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_empirical_closure --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\empirical_v2bocpd_directional_nme"`
+  - Result: artifacts emitted with `base_decision=NEEDS_MORE_EVIDENCE`, `supports_non_exchangeability=inconclusive`, `fail_closed=false`
+
+Linked trace path:
+- `docs/traces/4.18.14_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.14_change_manifest.json`
+
+## Version 4.18.13 (2026-04-02) — OI-52 RG-09 Uniform Statistic Closeout (Stage 3)
+
+Version: **4.18.13** (**PATCH**)
+
+Summary:
+Close **OI-52** with the narrow Stage 3 follow-up: keep the Stage 1 null-generator recomputation baseline and the Stage 2 separability statistic, but use that separability statistic uniformly across all three authorized null families instead of falling back to `abs(mean(adaptation_gain))` for `shuffled_label` and `matched_exchangeable_window`. This removes the last permutation-invariant statistical defect. The governed rerun at `runs/rg09_v2/h1_v2bocpd_uniform_stat/` now has non-degenerate null distributions for all three families and records the first valid H1 artifact. Its then-current `FAIL_KILL` interpretation was later superseded by the `4.18.14` directional-underpowered decision correction.
+
+Major changes:
+- `srcPy/meta/rg09_harness.py`: `_statistic_for_family` now returns `_regime_separability_statistic(episodes)` unconditionally for all authorized null families.
+- `tests/python/unit/meta/test_rg09_harness.py`: add RED/GREEN coverage that `shuffled_label` and `matched_exchangeable_window` null draws are non-constant under the shared separability statistic, and update the dispatch test to require uniform behavior.
+- `docs/rg09/rg09_gate_spec.md`: document the uniform separability statistic across all three families and update the `RG09-V14` wording accordingly.
+- `docs/src/ThresholdGovernanceRegister.md`: align `THR-RG09-V15` so it governs the shared statistical-lane denominator floor rather than a `shuffled_regime`-only consumer.
+- `docs/src/ResolutionLedger.md`: close **OI-52** and update **RG-09** to point at the valid governed H1 artifact; later interpretation refined in `4.18.14`.
+- Fresh rerun:
+  - `runs/rg09_v2/h1_v2bocpd_uniform_stat/rg09_gate_result.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m pytest --no-cov tests\python\unit\meta\test_rg09_harness.py tests\python\unit\meta\test_rg09_empirical_closure.py tests\python\integration\meta\test_run_rg09_gate.py"`
+  - Result: `44 passed in 1.98s`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m mypy --strict srcPy\meta\rg09_harness.py srcPy\meta\rg09_empirical_closure.py"`
+  - Result: `Success: no issues found in 2 source files`
+- `git diff -- docs/rg09/rg09_pilot_config_v1.json`
+  - Result: empty
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_gate --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\h1_v2bocpd_uniform_stat"`
+  - Result: `gate_executed=true`, non-degenerate null distributions for all families (`invalid_families=[]`); decision interpretation later superseded by `4.18.14`
+
+Linked trace path:
+- `docs/traces/4.18.13_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.13_change_manifest.json`
+
+## Version 4.18.12 (2026-04-02) — OI-52 RG-09 Family-Specific Statistic Fix (Stage 2)
+
+Version: **4.18.12** (**PATCH**)
+
+Summary:
+Continue **OI-52** with the narrow Stage 2 follow-up: keep the Stage 1 null-invalidity semantics and null-generator recomputation baseline, but make the `shuffled_regime` null family use a regime-sensitive separability statistic instead of `abs(mean(adaptation_gain))`. Register the new denominator-floor assumption as **RG09-V14** and **THR-RG09-V15**, rerun H1 and empirical closure into fresh directories, and record the actual governed outcome. The rerun clears `shuffled_regime` degeneracy, but **does not close OI-52** because `shuffled_label` and `matched_exchangeable_window` remain machine-epsilon degenerate on the governed v2 fixture; H1 therefore still emits `gate_executed=true`, `decision=null`, `fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID]`, and empirical closure remains `inconclusive`.
+
+Major changes:
+- `srcPy/meta/rg09_harness.py`: add `REGIME_SEPARABILITY_DENOMINATOR_FLOOR`, `_regime_separability_statistic`, and `_statistic_for_family`; dispatch the statistical lane by null family inside `_evaluate_fold`.
+- `tests/python/unit/meta/test_rg09_harness.py`: add Stage 2 RED/GREEN coverage for the new shuffled-regime statistic and update the null-invalidity regression to force collapse from `shuffled_label` rather than a structured shuffled-regime fold.
+- `docs/rg09/rg09_gate_spec.md`: document the family-specific statistical lane and add governed assumption **RG09-V14**.
+- `docs/src/ThresholdGovernanceRegister.md`: add provisional threshold row **THR-RG09-V15** for the `1e-9` denominator floor.
+- `docs/src/ResolutionLedger.md`: keep **OI-52** open and update **RG-09** with the new rerun paths and the remaining invalid families.
+- Fresh reruns:
+  - `runs/rg09_v2/h1_v2bocpd_regime_stat/rg09_gate_result.json`
+  - `runs/rg09_v2/empirical_v2bocpd_regime_stat/rg09_empirical_summary.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m pytest --no-cov tests\python\unit\meta\test_rg09_harness.py tests\python\unit\meta\test_rg09_empirical_closure.py tests\python\integration\meta\test_run_rg09_gate.py"`
+  - Result: `42 passed in 1.98s`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m mypy --strict srcPy\meta\rg09_harness.py srcPy\meta\rg09_empirical_closure.py"`
+  - Result: `Success: no issues found in 2 source files`
+- `git diff -- docs/rg09/rg09_pilot_config_v1.json`
+  - Result: empty
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_gate --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\h1_v2bocpd_regime_stat"`
+  - Result: `gate_executed=true`, `decision=null`, `fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID]`; invalid families remain `shuffled_label`, `matched_exchangeable_window`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_empirical_closure --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\empirical_v2bocpd_regime_stat"`
+  - Result: artifacts emitted with `base_decision=null`, `supports_non_exchangeability=inconclusive`, `fail_closed=true`; CLI exited `1` by design
+
+Linked trace path:
+- `docs/traces/4.18.12_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.12_change_manifest.json`
+
+## Version 4.18.11 (2026-04-02) — OI-52 RG-09 Null-Distribution Invalidity Correction (Stage 1)
+
+## Version 4.18.11 (2026-04-02) — OI-52 RG-09 Null-Distribution Invalidity Correction (Stage 1)
+
+Version: **4.18.11** (**PATCH**)
+
+Summary:
+Open **OI-52** and deliver the Stage 1 RG-09 correction pass: recompute null-generator derived episode statistics from mutated payloads, preserve `gate_executed=true` when evaluation ran but the statistical evidence surface invalidated itself, and rerun H1 / empirical closure into fresh directories without changing the pilot config, fixture inputs, thresholds, or governed statistical metric. The prior `2026-04-02` `FAIL_KILL` interpretation from `runs/rg09_v2/h1_v2bocpd/` is now invalidated as defective evidence, not accepted as a governed RG-09 finding.
+
+Major changes:
+- `srcPy/meta/rg09_nulls.py`: recompute `support_mean`, `query_mean`, and `adaptation_gain` after null-family mutation.
+- `srcPy/meta/rg09_harness.py`: add `FAIL_NULL_DISTRIBUTION_INVALID`; emit `gate_executed=true` with `decision=null` for degenerate null distributions; record `distinct_draw_count`, `null_min`, `null_max`, and `null_range`.
+- `srcPy/meta/rg09_empirical_closure.py`: map null-invalid base runs to `supports_non_exchangeability=inconclusive`.
+- `docs/rg09/rg09_gate_spec.md`: correction to fail-code and `gate_executed` semantics.
+- `docs/src/ResolutionLedger.md`: open **OI-52**, keep **OI-51** fixture-scoped, and update **RG-09** correction text.
+- Fresh reruns:
+  - `runs/rg09_v2/h1_v2bocpd_fix/rg09_gate_result.json`
+  - `runs/rg09_v2/empirical_v2bocpd_fix/rg09_empirical_summary.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m pytest --no-cov tests\python\unit\meta\test_rg09_harness.py tests\python\unit\meta\test_rg09_empirical_closure.py tests\python\integration\meta\test_run_rg09_gate.py"`
+  - Result: `40 passed in 1.89s`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m mypy --strict srcPy\meta\rg09_nulls.py srcPy\meta\rg09_harness.py srcPy\meta\rg09_empirical_closure.py"`
+  - Result: `Success: no issues found in 3 source files`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_gate --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\h1_v2bocpd_fix"`
+  - Result: `gate_executed=true`, `decision=null`, `fail_codes=[FAIL_NULL_DISTRIBUTION_INVALID]`
+- `cmd.exe /c "cd /d C:\Users\Nalakram\Documents\GitHub\MarketMind && .venv-codex\Scripts\python.exe -m scripts.run_rg09_empirical_closure --fixture fixtures\rg09\v2\rg09_fixture_v2.parquet --fixture-summary fixtures\rg09\v2\rg09_fixture_summary.json --fixture-metadata fixtures\rg09\v2\rg09_fixture_metadata.json --config docs\rg09\rg09_pilot_config_v1.json --output-dir runs\rg09_v2\empirical_v2bocpd_fix"`
+  - Result: emitted corrected research artifacts with `supports_non_exchangeability=inconclusive`; CLI exited `1` because `fail_closed=true`
+
+Linked artifact paths:
+- `docs/traces/4.18.11_implementation_trace.md`
+- `docs/manifests/4.18.11_change_manifest.json`
+- `docs/releases/4.18.11.yml`
+
+## Version 4.18.10 (2026-04-02) — OI-51 RG-09 v2 Regeneration (BOCPD v2 + Uniform Calendar Index)
+
+Version: **4.18.10** (**PATCH**)
+
+Summary:
+Close **OI-51**: regenerate official `fixtures/rg09/v2/` from frozen `data/rg09/*.parquet` using `docs/rg09/rg09_bocpd_fixture_config_v2.json` and corrected `docs/rg09/rg09_multi_fixture_manifest_v2.json` (`uniform_calendar_day_index=true`). Determinism validated across two independent output directories (`fixtures/rg09/v2/`, `fixtures/rg09/v2_tmp_check/`) with identical fixture SHA. H1 gate now executes under unchanged pilot config with non-null decision: `gate_executed=true`, `decision=FAIL_KILL`, `fail_codes=[FAIL_EXCHANGEABLE_TASKS]`. Empirical closure completed at `runs/rg09_v2/empirical_v2bocpd/` with `supports_non_exchangeability=does_not_support_non_exchangeability`.
+
+Major changes:
+- `docs/rg09/rg09_multi_fixture_manifest_v2.json`: set `uniform_calendar_day_index=true` and document weekend/holiday-gap rationale.
+- Regenerated fixture bundle: `fixtures/rg09/v2/rg09_fixture_v2.parquet` + sidecars (`fixture_sha256` `sha256:34d367c6a1d0bbe5384c66c2d8cfd32090d3ad5a99ea6847b6468ff69d9de958`).
+- Determinism check run: `fixtures/rg09/v2_tmp_check/` (matching SHA).
+- Harness output: `runs/rg09_v2/h1_v2bocpd/rg09_gate_result.json`.
+- Empirical closure output: `runs/rg09_v2/empirical_v2bocpd/rg09_empirical_summary.json`.
+- `docs/src/ResolutionLedger.md`: OI-51 opened/closed; RG-09 resolution text updated.
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `git diff -- docs/rg09/rg09_pilot_config_v1.json` (empty)
+- `python -m scripts.generate_rg09_fixture --multi-manifest docs/rg09/rg09_multi_fixture_manifest_v2.json --config docs/rg09/rg09_bocpd_fixture_config_v2.json --output-dir fixtures/rg09/v2/`
+- `python -m scripts.generate_rg09_fixture --multi-manifest docs/rg09/rg09_multi_fixture_manifest_v2.json --config docs/rg09/rg09_bocpd_fixture_config_v2.json --output-dir fixtures/rg09/v2_tmp_check/`
+- `python -m scripts.run_rg09_gate --fixture fixtures/rg09/v2/rg09_fixture_v2.parquet --fixture-summary fixtures/rg09/v2/rg09_fixture_summary.json --fixture-metadata fixtures/rg09/v2/rg09_fixture_metadata.json --config docs/rg09/rg09_pilot_config_v1.json --output-dir runs/rg09_v2/h1_v2bocpd/`
+- `python -m scripts.run_rg09_empirical_closure --fixture fixtures/rg09/v2/rg09_fixture_v2.parquet --fixture-summary fixtures/rg09/v2/rg09_fixture_summary.json --fixture-metadata fixtures/rg09/v2/rg09_fixture_metadata.json --config docs/rg09/rg09_pilot_config_v1.json --output-dir runs/rg09_v2/empirical_v2bocpd/`
+
+Linked release manifest path:
+- `docs/releases/4.18.10.yml`
+
+## Version 4.18.9 (2026-04-01) — OI-50 RG-09 Multi-Instrument yfinance Data & v2 Fixture
+
+Version: **4.18.9** (**PATCH**)
+
+Summary:
+Close **OI-50**: governed yfinance download script (`scripts/download_rg09_market_data.py`), frozen per-instrument parquets under `data/rg09/`, `docs/rg09/rg09_data_acquisition_log.md`, `docs/rg09/rg09_multi_fixture_manifest_v2.json` (eight futures proxies). Extend `scripts/generate_rg09_fixture.py` with `MultiManifestSettings`: `calendar_overlap_policy: independent_instruments`, optional `apply_diversification_perturbation`, and deterministic timestamp staggering for multi-instrument rows. Official `fixtures/rg09/v2/` bundle; harness run `runs/rg09_v2/h1/`; empirical closure `runs/rg09_v2/empirical/`. Pilot and BOCPD fixture configs unchanged. **Gate outcome:** `gate_executed=false`, `FAIL_INSUFFICIENT_EPISODES` (thresholds not tuned). Companion sync **6.4.29** / Resolution Ledger **1.0.25** / README **4.18.9**.
+
+Major changes:
+- `scripts/download_rg09_market_data.py`, `tests/python/unit/scripts/test_download_rg09_market_data.py`
+- `scripts/generate_rg09_fixture.py` (`MultiManifestSettings`, `stagger_multi_instrument_timestamps`)
+- `data/rg09/*.parquet`, `data/rg09/rg09_download_manifest.json`
+- `docs/rg09/rg09_multi_fixture_manifest_v2.json`, `docs/rg09/rg09_data_acquisition_log.md`
+- `docs/src/ResolutionLedger.md` **OI-50**; RG-09 resolution; `docs/src/README.md`, `docs/src/ImplementationPlan.md`
+- `docs/releases/4.18.9.yml`, `docs/traces/4.18.9_implementation_trace.md`, `docs/manifests/4.18.9_change_manifest.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `pytest tests/python/unit/meta/test_generate_rg09_fixture.py tests/python/unit/scripts/test_download_rg09_market_data.py --no-cov`
+- `python -m scripts.download_rg09_market_data` (network); `python -m scripts.generate_rg09_fixture --multi-manifest docs/rg09/rg09_multi_fixture_manifest_v2.json ...`
+- `git diff --exit-code docs/rg09/rg09_pilot_config_v1.json` (empty)
+
+Linked trace path:
+- `docs/traces/4.18.9_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.9_change_manifest.json`
+
+## Version 4.18.8 (2026-04-01) — OI-47 RG-09 Multi-Ticker Replay Fixture v2
+
+Version: **4.18.8** (**PATCH**)
+
+Summary:
+Close **OI-47**: multi-ticker RG-09 replay fixture v2 at `fixtures/rg09/v2/rg09_fixture_v2.parquet` with companion sidecars (fixture_sha256 `sha256:6daf760e571cd8d7172a98182bbcbd2953e761dcdca80f76360e9ae68828f419`; basket ES, NQ, RTY, YM per manifest). Extend `scripts/generate_rg09_fixture.py` with multi-segment generation; add unit tests and `tests/python/integration/meta/test_rg09_v2_fixture.py`. Empirical closure under unchanged `docs/rg09/rg09_pilot_config_v1.json` records `gate_executed=false` with `FAIL_INSUFFICIENT_EPISODES` and `FAIL_NONREPRODUCIBLE` (documented in ledger — no pilot threshold changes). Companion documents synced to **6.4.28** / Resolution Ledger **1.0.24** / README **4.18.8**.
+
+Major changes:
+- `scripts/generate_rg09_fixture.py`, `tests/python/unit/meta/test_generate_rg09_fixture.py`, `tests/python/integration/meta/test_rg09_v2_fixture.py`
+- `fixtures/rg09/v2/` parquet + sidecars
+- `docs/src/ResolutionLedger.md`: **OI-47**; **RG-09** resolution updated
+- `docs/src/README.md`, `docs/src/ImplementationPlan.md`, `docs/releases/4.18.8.yml`
+- `docs/traces/4.18.8_implementation_trace.md`, `docs/manifests/4.18.8_change_manifest.json`
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `pytest tests/python/unit/meta/test_generate_rg09_fixture.py tests/python/integration/meta/test_rg09_v2_fixture.py --no-cov`
+
+Linked trace path:
+- `docs/traces/4.18.8_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.8_change_manifest.json`
+
+## Version 4.18.7 (2026-04-01) — RG09-V13 task_id HMAC Key Assumption & MLN-01 Governance
+
+Version: **4.18.7** (**PATCH**)
+
+Summary:
+Governed assumption **RG09-V13** records the MetaTask `task_id` HMAC **key** contract (scaffold: empty-key HMAC; message-only entropy; **⚑ VALIDATE** — any key change invalidates all historical `task_id` values). **MLN-01** acceptance criteria extended to require explicit key resolution before the normative `task_manifest.json` contract locks. `docs/rg09/rg09_gate_spec.md` Section 4 register extended to **RG09-V13**. `compute_task_id()` documents **RG09-V13** and MLN-01. Companion documents synced to **6.4.27** / Resolution Ledger **1.0.23**.
+
+Major changes:
+- `srcPy/meta/task_manifest_emitter.py`: `compute_task_id` governing docstring + RG09-V13 inline note
+- `docs/rg09/rg09_gate_spec.md`: assumptions register row **RG09-V13**
+- `docs/src/ResolutionLedger.md`: **MLN-01** acceptance criteria; ledger **1.0.23**; RG-09 resolution text **RG09-V01**–**RG09-V13**
+- `docs/src/ImplementationPlan.md` **6.4.27**, `docs/src/README.md`, `docs/src/task_validity_pilot_report.md`
+- `docs/traces/4.18.7_implementation_trace.md`, `docs/manifests/4.18.7_change_manifest.json`, `docs/releases/4.18.7.yml`
+
+Breaking changes:
+- None (documentation and governance record; HMAC implementation unchanged).
+
+Validation summary:
+- `mypy --strict` on `srcPy/meta/task_manifest_emitter.py`; `pytest` on `tests/python/unit/meta/test_task_manifest_emitter.py` (optional subset).
+
+Linked trace path:
+- `docs/traces/4.18.7_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.7_change_manifest.json`
+
+## Version 4.18.6 (2026-04-01) — Phase II-0B Artifact & Contract Scaffolding
+
+Version: **4.18.6** (**PATCH**)
+
+Summary:
+Non-promotable Phase II scaffold emitters for governed artifact surfaces (`task_manifest.json`, `meta_validity_report.json`, `execution_assumptions.json`), centralized seed/run identity for Phase II ML runs, early `meta_learner_scaffold` gate shell (always `SCAFFOLD_INCOMPLETE`), and Threshold Governance Register migration for `docs/rg09/rg09_pilot_config_v1.json`. Opens **OI-48** (Harvey field naming: contract vs Appendix B.1) and **OI-49** (`execution_assumptions.json` vs Appendix B gap) for pre-MLN-06 reconciliation.
+
+Major changes:
+- `srcPy/meta/task_manifest_emitter.py`, `meta_validity_emitter.py`, `execution_assumptions_emitter.py`, `seed_policy.py`, `rg09_threshold_catalog.py`
+- `marketmind_gate/gates/meta_learner_scaffold.py`
+- `docs/rg09/rg09_pilot_config_v1.json`: threshold_id-wrapped pilot thresholds; `load_rg09_config` accepts legacy bare scalars
+- `docs/src/ResolutionLedger.md`: **OI-48**, **OI-49** opened; ledger **1.0.22** (Markdown source)
+- `docs/releases/4.18.6.yml`
+
+Breaking changes:
+- None (scaffold and RG-09 config remain non-promotable / backward-compatible for harness tests using bare numeric thresholds).
+
+Validation summary:
+- Unit tests for new modules; `mypy --strict` on touched modules; `pytest` subsets with `--no-cov` as needed for local runs.
+
+## Version 4.18.5 (2026-04-01) — RG-09 Empirical Meta-Validity AC Patch & OI-39 Closure
+
+Version: **4.18.5** (**PATCH**)
+
+Summary:
+Align `meta_validity_report_research.json` with Appendix B.1 research-scaffold expectations: `inner_loop_gain_harvey_t` is always unavailable in the II-0 empirical lane; IC-based Harvey t is emitted under `ic_harvey_t`; `overall_result` is the fixed research sentinel; non-exchangeability state is preserved under `overall_conclusion_research`; add explicit `unavailable` stubs for encoder clustering, proxy IC correlation, forgetting delta, confidence ECE, net allocation Sharpe, and `signal_set_version` when absent from the fixture summary. Rename `projection_rule_text` to `projection_rule_version` in `rg09_empirical_summary.json` and align `reference_condition` with `diag_regime_class_bocpd_gated`. Close **OI-39** in the Resolution Ledger (paper-trading simulation requirements satisfied by `paper_trade_sim_spec.md`).
+
+Major changes:
+- `srcPy/meta/rg09_empirical_closure.py`: meta validity and empirical summary field fixes.
+- `docs/src/ResolutionLedger.md`: **OI-39** `CLOSED` at v4.18.5; ledger bumped to **1.0.21**.
+- `docs/src/ImplementationPlan.md`: companion sync to **4.18.5** / **6.4.26** (OI-39 closed; RG-09 empirical lane meta scaffold updated; RG-09 remains PARTIAL).
+- `docs/src/README.md`: companion stamps aligned to 4.18.5; OI-39 closed and RG-09 empirical lane wording updated.
+- Full companion Markdown + DOCX suite for **4.18.5**: `docs/releases/4.18.5.yml`; built outputs under `docs/out/4.18.5/` (FormattingSpec **1.0.4**, README **4.18.5**, Implementation Plan **6.4.26**, Technical Roadmap **1.4.21**, Meta-Learning Core **1.2.19**, Architecture Vision **1.2.20**, Resolution Ledger **1.0.21**, White Paper **2.2.12**); stale **OI-39** / pre-**1.0.21** companion references scrubbed in bumped sources.
+
+Breaking changes:
+- None (research / non-promotable scaffold; `schema_version` unchanged).
+
+Validation summary:
+- Unit and integration tests for RG-09 empirical closure; strict mypy on `rg09_empirical_closure.py`.
+- Implementation Trace and Change Manifest recorded per Artifact Write Contract (`docs/Artifact Write Contract.md`).
+- `python -m devtools.docs.cli validate-manifest --version 4.18.5`; `build-docx-suite` + `verify-suite` for **4.18.5** passed.
+
+Linked trace path:
+- `docs/traces/4.18.5_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.5_change_manifest.json`
+
+## Version 4.18.4 (2026-04-01) — docs/out Implementation Metadata Packaging
+
+Version: **4.18.4** (**PATCH**)
+
+Summary:
+Add versioned `implementation_manifest.json` and `implementation_plan.md` files to the matching `docs/out/4.18.2/` and `docs/out/4.18.3/` release directories.
+
+Major changes:
+- Added `docs/out/4.18.2/implementation_manifest.json` and `docs/out/4.18.2/implementation_plan.md`.
+- Added `docs/out/4.18.3/implementation_manifest.json` and `docs/out/4.18.3/implementation_plan.md`.
+
+Breaking changes:
+- None.
+
+Validation summary:
+- Confirmed the four new files exist under the expected `docs/out` version directories.
+
+Linked trace path:
+- `docs/traces/4.18.4_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.4_change_manifest.json`
+
+## Version 4.18.3 (2026-03-31) — Companion Sync After RG-09 II-0A Harness Closeout
+
+Version: **4.18.3** (**PATCH**)
+
+Summary:
+Rebase the companion document suite onto the `4.18.2` RG-09 II-0A harness closeout so the current-state narrative and release stamps no longer describe the bounded II-0A harness/gate path as still pending.
+
+Major changes:
+- Updated `docs/src/README.md`, `docs/src/ImplementationPlan.md`, and `docs/src/WhitePaper.md` to reference the `4.18.2` harness baseline and keep RG-09 empirical closure explicitly open.
+- Added `docs/releases/4.18.3.yml` for the companion-doc patch.
+
+Breaking changes:
+- None.
+
+Validation summary:
+- Documentation sync only; no runtime code changed.
+- Release summary derived from `docs/traces/4.18.3_implementation_trace.md` and machine-readable deltas recorded in `docs/manifests/4.18.3_change_manifest.json`.
+
+Linked trace path:
+- `docs/traces/4.18.3_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.3_change_manifest.json`
+
+## Version 4.18.2 (2026-03-31) — RG-09 II-0A Harness Closeout
+
+Version: **4.18.2** (**PATCH**)
+
+Summary:
+Deliver the RG-09 II-0A bounded gate path against the governed replay-fixture baseline and close the implementation thread with versioned execution records.
+
+Major changes:
+- Added the RG-09 base harness, deterministic null-evidence path, artifact emission layer, and CLI entrypoint.
+- Replaced placeholder gate behavior with governed precondition handling, fold-aware evidence aggregation, and run-derived machine-manifest emission.
+- Removed the invalid `srcPy.__init__` runtime shim so the RG-09 strict-mypy surface passes without package import-time hacks.
+
+Breaking changes:
+- None.
+
+Validation summary:
+- `python -m pytest --strict-markers --no-cov tests/python/unit/meta/test_rg09_harness.py tests/python/integration/meta/test_run_rg09_gate.py` → `28 passed in 1.24s`
+- `python -m mypy --strict srcPy/__init__.py srcPy/meta/rg09_harness.py srcPy/meta/rg09_artifacts.py srcPy/meta/rg09_nulls.py tests/python/unit/meta/test_rg09_harness.py tests/python/integration/meta/test_run_rg09_gate.py` → `Success: no issues found in 6 source files`
+
+Linked trace path:
+- `docs/traces/4.18.2_implementation_trace.md`
+
+Linked manifest path:
+- `docs/manifests/4.18.2_change_manifest.json`
+
+## Version 4.18.1 (2026-03-30) — OI-43 Closure: RG-09 Replay Fixture Production
+
+This is a PATCH release. It closes the remaining OI-43 implementation scope by emitting the governed RG-09 replay fixture, correcting the canonical replay label mapping, and recording the closure in the ledger.
+
+### Detailed Changes
+
+| Area | Change |
+|------|--------|
+| `srcPy/meta/bocpd_service.py` | `RegimeLabelRecord` now carries explicit `regime_id` and preserves `regime_label` as the canonical service label rather than backfilling from additive `regime_class`; `BOCPDRegimeService.update()` emits the corrected field semantics. |
+| `scripts/generate_rg09_fixture.py` | Generator now writes the fixture parquet with the intended field sourcing (`regime_id`, `regime_label`, `regime_class` distinct), deterministic canonical fixture hashing over the declared canonical subset, atomic artifact writes, fail-closed precondition checks, and the governed summary/metadata contracts. |
+| `tests/python/unit/meta/test_generate_rg09_fixture.py`, `tests/python/unit/meta/test_bocpd_service.py` | Added direct contract coverage for fixture field semantics and an explicit assertion that `regime_label` is not backfilled from `regime_class`. |
+| `fixtures/rg09/v1/rg09_fixture_v1.parquet`, `fixtures/rg09/v1/rg09_fixture_summary.json`, `fixtures/rg09/v1/rg09_fixture_metadata.json` | Regenerated governed ES replay fixture artifacts. Corrected fixture SHA: `sha256:3ba47a1ef9445f1694c411151219bd2935f2d6b1b075e33a6c5fe13f903c4553`. |
+| `docs/src/ResolutionLedger.md` | **MRL 1.0.19 → 1.0.20**. OI-43 marked CLOSED, artifact path recorded, OI count matrix updated, blocking hotlist cleared of OI-43, and RG-09 resolution text updated to state that the replay fixture dependency is satisfied. |
+| `docs/releases/4.18.1.yml` | Added release manifest for the OI-43 closure patch. |
+
+### Behavioral Changes
+
+- The emitted RG-09 replay fixture now preserves canonical label semantics in the parquet contract:
+  `regime_id` = canonical compositional label,
+  `regime_label` = canonical service label,
+  `regime_class` = additive non-canonical 5-class projection.
+- RG-09 Phase II-0A is no longer blocked on replay fixture production; remaining RG-09 work is the II-0A code/gate path, not fixture availability.
+
+### Breaking Changes
+
+- The canonical replay fixture hash changed because `regime_label` now reflects the canonical service label rather than the additive `regime_class`. Older `fixtures/rg09/v1/*` outputs are superseded by the v4.18.1 artifacts.
+
+### Test / Validation Evidence
+
+- `cmd.exe /c %CD%\\.venv-codex\\Scripts\\python.exe -m pytest --strict-markers --no-cov tests\\python\\unit\\meta\\test_generate_rg09_fixture.py tests\\python\\unit\\meta\\test_bocpd_service.py tests\\python\\unit\\meta\\test_crisis_diagnostic.py tests\\python\\unit\\meta\\test_severity_diagnostic.py`
+- `cmd.exe /c %CD%\\.venv-codex\\Scripts\\python.exe -m mypy --strict --follow-imports silent srcPy\\meta\\bocpd_service.py scripts\\generate_rg09_fixture.py tests\\python\\unit\\meta\\test_generate_rg09_fixture.py tests\\python\\unit\\meta\\test_bocpd_service.py`
+
+## Version 4.18.0 (2026-03-30) — MLN-02-AMD-01: Crisis Redefinition (Severity Gate)
+
+This is a MINOR release. **MLN-02-AMD-01** moves Level 2 `crisis` from `vol_hi AND bocpd_cp` to **`vol_hi AND severity_flag`**, where `severity_flag` is a PIT-safe expanding-window threshold on `vol_score_raw` (default **p90**, **RG09-V12**, not tuned on Anti-Goodhart holdouts). Level 1 compositional `regime_id` and BOCPD service semantics are unchanged; BOCPD is documented explicitly as a **segmentation** primitive, not a crisis primitive.
+
+### Detailed Changes
+
+| Area | Change |
+|------|--------|
+| `docs/src/MetaLearningArchitectureVision.md` | §4.2 crisis row, `severity_flag` definition, BOCPD contract note, historical-frequency ⚑ VALIDATE; edition **1.2.19**. |
+| `docs/src/ResolutionLedger.md` | **MRL 1.0.19**: MLN-02 acceptance criteria + resolution text; **OI-44** / **OI-45** (DIAG-001 / DIAG-002) CLOSED; OI count matrix. |
+| `docs/rg09/rg09_gate_spec.md` | **RG09-V12** assumption row (`crisis_vol_score_percentile`). |
+| `docs/src/README.md`, `ImplementationPlan.md`, `TechnicalRoadmap.md`, `MetaLearningCore.md`, `docs/src/WhitePaper.md`, root `README.md` | Companion suite stamps → **4.18.0** / **6.4.23** / **1.4.20** / **1.2.18** / **1.2.19** / **1.0.19**; White Paper **v2.2.9**. |
+| `docs/src/task_validity_pilot_report.md` | Open-assumption wording to **RG09-V01–V12**; cross-reference table adds **RG09-V12**. |
+| `srcPy/meta/regime_config.py` | `crisis_vol_score_percentile` (default 90); `config_version` **rg09_v1.0.2**. |
+| `srcPy/meta/regime_labeler.py` | `compute_severity_flag_vol_score_raw`; `project_regime_class(..., severity_flag=...)`; `project_regime_class_bocpd_gated_reference` for pilot baseline. |
+| `srcPy/meta/bocpd_service.py` | `RegimeLabelRecord.diag_regime_class_bocpd_gated`; canonical `regime_class` uses severity gate. |
+| `schemas/rg09_fixture_config.schema.json`, `docs/rg09/rg09_bocpd_fixture_config_v1.json` | Optional `crisis_vol_score_percentile`; fixture config version **rg09_v1.0.2**. |
+| `tests/python/unit/meta/test_regime_labeler.py`, `test_regime_config.py`, `test_crisis_diagnostic.py`, `test_bocpd_service.py` | Coverage for new projection, PIT-safe severity, diagnostics. |
+| `docs/releases/4.18.0.yml` | Release manifest for companion DOCX build. |
+
+### Behavioral Changes
+
+- **5-class `regime_class` from `BOCPDRegimeService.update`:** `crisis` no longer requires `bocpd_cp`; it requires **high volatility bucket** plus **severity_flag** from past-only expanding percentile of `vol_score_raw`.
+- **Replay/diagnostics:** each record adds **`diag_regime_class_bocpd_gated`** preserving the pre-amendment rule for Phase II-0A side-by-side comparison (`diag_regime_class_extended` remains RG09-DIAG-001 ablation).
+
+### Breaking Changes
+
+- Call sites of `RegimeLabeler.project_regime_class` must pass **`severity_flag`** (keyword-only). Fixture config hash changes when `crisis_vol_score_percentile` or `config_version` is material to `BOCPDConfig.content_hash()`.
+
+### Test / Validation Evidence
+
+- `pytest tests/python/unit/meta/test_regime_labeler.py tests/python/unit/meta/test_regime_config.py tests/python/unit/meta/test_crisis_diagnostic.py tests/python/unit/meta/test_bocpd_service.py -q --no-cov`
+- `mypy srcPy/meta/regime_labeler.py srcPy/meta/regime_config.py srcPy/meta/bocpd_service.py`
+
+## Version 4.17.1 (2026-03-29) — RG-09 RG09-DIAG-002: Severity-Stratified High-Vol Diagnostic
+
+This is a PATCH release. Standalone measurement tooling only; no changes to governed regime contracts, BOCPD core, or existing fixture parquet column sets.
+
+### Detailed Changes
+
+| Area | Change |
+|------|--------|
+| `scripts/rg09_severity_diagnostic.py` | New CLI (`python -m scripts.rg09_severity_diagnostic`): discovers `rg09_fixture_v1.parquet` under a basket directory; extracts contiguous `high_vol` episodes after cold-start exclusion; PIT-safe expanding-window percentile thresholds on `vol_score_raw` (history strictly before episode start); per-episode peak/mean log-RV and constructibility vs `MetaTaskSizingParams.l_min`; Cohen's d on per-episode mean `trend_score_raw`; cross-entity dedup of crisis-grade episode start dates via `scripts.run_rg09_basket._deduplicate_crisis_events`; JSON report (`diagnostic_id` RG09-DIAG-002, `threshold_results`, `decision_table`). `--thresholds` accepts comma- or space-separated percentiles (e.g. `80,85,90,95` or `"80 85 90 95"`). |
+| `tests/python/unit/meta/test_severity_diagnostic.py` | Unit coverage: episode extraction, PIT vs full-sample threshold, classification, Cohen's d edge cases, JSON sanitize, CLI smoke, dedup integration. |
+
+### Behavioral Changes
+
+- None to production runtime; diagnostic is opt-in analysis on existing basket outputs.
+
+### Breaking Changes
+
+None.
+
+### Test / Validation Evidence
+
+- Pass: `pytest tests/python/unit/meta/test_severity_diagnostic.py` (with `--cov=scripts.rg09_severity_diagnostic` for line/branch gate on the new script in local validation).
+
+## Version 4.17.0 (2026-03-29) — MOM-020 Closure: Artifact-Driven Momentum Variant Comparison
+
+This is a MINOR release. The governed momentum stack gains a new backward-compatible comparison capability: CSMOM, TSMOM, and dual-momentum bundles now compare through emitted child artifacts rather than a self-certifying parent scoring path.
+
+### Major Themes Across All Changes
+
+- Move CPCV scoring authority into child momentum bundles so the comparison layer no longer generates the evidence it later validates.
+- Make cross-variant comparison artifact-driven: parent comparison reads, hash-checks, and aggregates child `cpcv_path_scores.json`, `stat_validity_report.json`, and `execution_assumptions.json` artifacts.
+- Close MOM-020 on the governed path by emitting a parent-owned shared-PBO artifact and a reproducible comparison report derived only from bundle artifacts.
+
+### Detailed Changes
+
+| Area | Change |
+|------|--------|
+| `srcPy/strategies/momentum/entry.py` | Governed momentum child runs now emit `cpcv_path_scores.json` whenever the run is executing on the shared CPCV split surface, alongside the existing canonical `stat_validity_report.json` and `execution_assumptions.json` artifacts. The child bundle becomes the authoritative CPCV evaluation source for its own variant. |
+| `srcPy/strategies/momentum/comparison.py` | `run_variant_comparison(...)` now loads child-owned `cpcv_path_scores.json`, `stat_validity_report.json`, and `execution_assumptions.json`; verifies split-surface and shared-cost identity; aggregates child `evaluations` into one shared CPCV surface; computes shared PBO from those emitted evaluations; emits `comparison_stat_validity.json`; and writes `momentum_variant_comparison_report.json` without recomputing child scores. |
+| `tests/python/integration/strategies/test_momentum_variant_comparison.py` | Integration proof locks the governed comparison contract: child surfaces drive the expected evaluation set, parent shared PBO matches recomputation from aggregated child evaluations, ranking is derived from child summaries, hash-linked paths are correct, and child `stat_validity_report.json` remains unchanged (`pbo.method == "unavailable"`). |
+| `tests/python/unit/strategies/momentum/test_comparison.py`, `tests/python/unit/strategies/momentum/test_entry.py` | Unit coverage hardens fail-closed behavior around missing or malformed child CPCV surfaces plus split/cost identity mismatches, and confirms child CPCV path-score emission on the governed path. |
+| `docs/src/ResolutionLedger.md`, `docs/src/ImplementationPlan.md`, `docs/src/README.md` | Companion planning/ledger surfaces now describe MOM-020 as closed on the governed comparison lane and record the child-owned CPCV / parent-owned shared-PBO split explicitly. |
+
+### Behavioral Changes
+
+- Child momentum bundles, not the parent comparison layer, now own CPCV path scoring authority.
+- The parent comparison layer is non-generative with respect to child evaluation surfaces: it aggregates emitted `evaluations` and validates shared split/cost identity before computing cross-variant PBO.
+- `comparison_stat_validity.json` is now the parent-owned statistical-validity artifact for shared PBO across variants, while each child `stat_validity_report.json` remains immutable and local to that child run.
+- `momentum_variant_comparison_report.json` is derived from persisted child summaries and aggregated evaluations only; there is no hidden recomputation path in the comparison report.
+
+### Breaking Changes
+
+None. Existing governed momentum child artifacts remain valid; this release adds a new comparison workflow and new parent comparison artifacts without intentionally breaking prior bundle consumers.
+
+### Test / Validation Evidence
+
+- Pass: `tests/python/integration/strategies/test_momentum_variant_comparison.py::test_run_variant_comparison_emits_parent_and_child_bundles`
+  - Confirms parent `comparison_stat_validity.json` shared PBO equals canonical recomputation from the concatenated child `cpcv_path_scores.json` evaluation surface.
+  - Confirms variant ranking is derived from child CPCV summaries.
+  - Confirms child `stat_validity_report.json` is not rewritten by the parent comparison layer.
+- Pass: `tests/python/unit/strategies/momentum/test_comparison.py`
+  - Confirms fail-closed behavior for missing child CPCV artifacts, malformed child CPCV payloads, split-surface hash mismatch, and shared-cost hash mismatch.
+- Pass: `tests/python/unit/strategies/momentum/test_entry.py`
+  - Confirms governed child momentum runs emit `cpcv_path_scores.json` with variant, split-surface hash, shared-cost hash, and path-level evaluations on the CPCV path.
+
+### Deferred
+
+- Shared PBO currently lives in the parent comparison path rather than being emitted through the generic statistical validator module; this is a design follow-on, not a correctness blocker.
+- No dedicated tamper-detection test exists yet for `comparison_stat_validity.json`; child artifact identity and parent recomputation coverage are present, but direct parent-artifact tamper coverage remains future hardening work.
+- The child-vs-parent statistical-validity split is implemented and tested, but companion documentation may still need further narrative cleanup where older wording implied a more generative parent comparison role.
+
+## Version 4.16.0 (2026-03-28) — Phase I-G Protocol Closure: Expansion Policy + Alt-Data Admissibility
+
+This is a MINOR release. No runtime behavior, schemas, or public APIs change.
+
+| Area | Change |
+|------|--------|
+| `docs/src/signal_universe_expansion_policy.md` | New policy document: expansion gate (Harvey t, DSR, PBO all required from same governed bundle); diversity gate and decay policy as promotion requirements; multiple-testing budget via RunRegistry; `signal_id` change = new candidate; Phase IV (IV-A/IV-B/IV-D) as serious expansion home; scope exclusions and identity loophole close-out. |
+| `docs/src/alt_data_admissibility.md` | New policy document: PIT requirements (`available_at` distinct from `event_ts`, `DataView.as_of(T)` access, vintage preservation); provenance requirements; replay requirements (fixture is precondition not post-hoc); event-driven entry deferred to Phase IV; 7-step admissibility decision tree governing eligibility for governed evaluation runs only. |
+| `docs/src/ResolutionLedger.md` | OI-37 and OI-38 closed. Count matrix: OI OPEN −2, CLOSED +2; ∑ OPEN −2, CLOSED +2. OI-40 `depends_on` no longer lists OI-38. **MRL 1.0.16 → 1.0.17**; title page companion stamps (Implementation Plan **6.4.21**, VERSION.md **4.16.0**). |
+| `docs/src/ImplementationPlan.md` | §9 Priority Stack: OI-37 + OI-38 closed; core I-G protocol documents noted as complete; remaining I-G work (OI-39, RG-09 empirical closure) explicit. **6.4.20 → 6.4.21** (RECENT_CHANGES, SOURCE_STAMP, title page). §1.2 audit baseline advanced to **4.16.0**. Appendix A links to the two new policy documents. |
+
+## Version 4.15.0 (2026-03-28) — Phase I-G Protocol Closure: Encoder Upgrade Criteria
+
+This is a MINOR release. No runtime behavior, schemas, or public APIs change.
+
+| Area | Change |
+|------|--------|
+| `docs/rg10/rg10_encoder_upgrade_criteria.md` | New policy document: D=64 governed baseline with literature grounding; three-surface upgrade trigger (within-regime cosine similarity, cross-regime separation ratio, silhouette score); INSUFFICIENT_DIAGNOSTIC_EVIDENCE state for small task pools; decision rules for all failure combinations; SNAIL explicitly deferred to Phase III; Harvey t narrow-pass band config-driven; all thresholds ⚑ VALIDATE. |
+| `docs/src/ResolutionLedger.md` | AQ-01, AQ-02, RG-10 closed. Count matrix deltas: AQ OPEN −2, CLOSED +2; RG OPEN −1, CLOSED +1; ∑ OPEN −3, CLOSED +3 (column totals). **MRL 1.0.15 → 1.0.16**; title page companion stamps (Implementation Plan **6.4.20**, VERSION.md **4.15.0**). |
+| `docs/src/ImplementationPlan.md` | §9 Priority Stack: RG-10 closed; OI-37 + OI-38 noted as next. **6.4.19 → 6.4.20** (RECENT_CHANGES, SOURCE_STAMP, title page). §1.2 audit baseline advanced to **4.15.0**. |
+
+## Version 4.14.0 (2026-03-28) — Phase I-G Protocol Closure: RiskFn + Signal Generation
+
+This is a MINOR release. No runtime behavior, schemas, or public APIs change.
+
+| Area | Change |
+|------|--------|
+| `docs/src/risk_protocol.md` | Stub replaced with governed protocol: allocator output surface, Phase II permitted actions (confidence_scalar post-sizing attenuation; full abstention = confidence_scalar 0), II-D boundary (post-allocator conditioning explicitly out of RiskFn scope), phase scope table, auditability requirements, and ⚑ VALIDATE provisional thresholds. |
+| `docs/src/signal_generation_protocol.md` | Stub replaced with governed protocol: current governed base (4 signals), admission requirements table, admission/promotion/retirement as three distinct states, signal identity contract (signal_id, slot_index, signal_set_version; historical slot_index reconstructibility rule), retirement procedure, alternative-data deferral to OI-38, breadth as Phase IV scope. |
+| `docs/src/ResolutionLedger.md` | OI-35 and OI-36 closed. Count matrix: OI OPEN 11→9, CLOSED 29→31; ∑ OPEN 36→34, CLOSED 60→62. **MRL 1.0.14 → 1.0.15**; title page companion stamps (README **4.14.0**, Implementation Plan **6.4.19**). |
+| `docs/src/ImplementationPlan.md` | §9 Priority Stack: OI-35 + OI-36 recorded as closed; RG-10 noted as next with AQ-01/AQ-02 dependency. **6.4.18 → 6.4.19** (RECENT_CHANGES, SOURCE_STAMP, title page). |
+| `VERSION.md` | **4.x** version index condensed; section heading updated to ADR-007 hashing, Phase I PIT & closure, I-G protocols & governance. |
+
+## Version 4.13.1 (2026-03-28) — Governance Patch: OI-43 and II-0A Entry Gate
+
+This is a PATCH release. No protocol docs, code, schemas, or runtime behavior change.
+
+| Area | Change |
+|------|--------|
+| ResolutionLedger.md | OI-43 opened: RG-09 replay fixture production, blocking YES, phase I-G, phase_links II-0A + MLC-0. Count matrix: OI OPEN 10→11, Total 41→42; ∑ OPEN 35→36, Total 123→124. |
+| ResolutionLedger.md §1.2 | OI-43 added to blocking hotlist. |
+| ResolutionLedger.md RG-09 | Resolution note updated: v4.14.0 entry gate explicitly blocked by OI-43. |
+| ImplementationPlan.md §4.2 | II-0A entry gate dependency note added: no RG-09 code work may begin until OI-43 closes or live service output is available. |
+| ImplementationPlan.md §9 | Immediate Priority Stack updated to reflect Phase I-F closure, RG-09 PARTIAL status, sequencing of remaining I-G items, MOM-020 as parallel empirical track, and II-0A blocked state. |
+
+## Version 4.13.0 (2026-03-28) — Phase I-G RG-09 Protocol Closure
+
+This is a MINOR release. No runtime behavior, schemas, or public APIs change.
+
+| Area | Change |
+|------|--------|
+| `docs/rg09/rg09_gate_spec.md` | Published with four sections: definitions (four first-class objects, timing authority rule, exclusion code family), admissibility rules, gate specification (evidence sufficiency preconditions, three evidence kinds, three null comparisons with preservation rules, decision states, kill criteria, fail codes), and open assumptions register (RG09-V01 through RG09-V11). |
+| `docs/rg09/rg09_pilot_config_v1.json` | Published as governed provisional config artifact for all II-0A modules and tests. All values remain ⚑ VALIDATE. |
+| `docs/rg09/rg09_replay_fixture_spec.md` | Published replay fixture format spec defining required fields, companion metadata, and blocking rule for v4.14.0. |
+| `docs/src/task_validity_pilot_report.md` | Stub populated with pilot design only; no results claimed; all VALIDATE items cross-referenced by assumption ID. |
+| `docs/src/ResolutionLedger.md` | RG-09 moved to PARTIAL: pilot-ingestion five-field schema frozen and traceable in governed RG-09 docs; I-G protocol deliverables recorded; II-0A code deliverables remain open. Count matrix updated (RG OPEN 9→8, PARTIAL 4→5). Ledger **1.0.13 → 1.0.14**. |
+| `README.md`, `docs/src/README.md` | Companion stamps and release context rebased to **4.13.0** / Ledger **1.0.14**. |
+| `docs/src/ImplementationPlan.md` | §1.2 audit baseline advanced to **4.13.0**; RG-09 **PARTIAL** bullet; document **6.4.17 → 6.4.18**. |
+
+## Version 4.12.4 (2026-03-28) — AQ-04 Governance Closure
+
+This is a PATCH release. No runtime behavior, contracts, schemas, or public
+APIs change.
+
+### Summary
+
+Closes AQ-04 (BOCPD placement decision) and removes stale "BOCPD op" wording
+from companion surfaces that would otherwise be internally inconsistent with
+the accepted decision.
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| ResolutionLedger.md AQ-04 | Closed. Decision: orchestrator-managed regime service over governed DataView inputs. Graph-op BOCPD prohibited for governed production labels. Resolution block includes PIT compliance statement, cold-start policy caveat, effective_at semantics, and offline research carve-out. |
+| ResolutionLedger.md §1.1 | AQ count: OPEN 7→6, CLOSED 1→2. ∑ OPEN 37→36, CLOSED 59→60. |
+| ResolutionLedger.md §1.2 | AQ-04 removed from blocking hotlist. |
+| ResolutionLedger.md MLC-0 | Title and one acceptance criterion updated from "BOCPD op" to "canonical BOCPD regime service." |
+| ResolutionLedger.md RG-04 | One acceptance criterion updated from "BOCPD op" to "BOCPD regime service." |
+| ResolutionLedger.md RG-09 | Summary and acceptance criteria hardened: canonical PIT-safe service labels required; graph-local or retrospective labels inadmissible; kill criterion links AQ-04 to structural gate. |
+| MetaLearningCore.md §5.5 | BOCPD prerequisites row: stale ops_custom.py file path replaced with service-placement note; description updated. |
+| MetaLearningCore.md §1.3 | BOCPD current-role cell updated to reflect orchestrator service placement per AQ-04. |
+
+## Version 4.12.3 (2026-03-27) — Companion-Doc Synchronization After Phase I-F Closure
+
+Changelog for **companion documentation sync** only: rebase the README and sibling source documents on the now-closed **4.12.2** F-6 coverage / CI truthfulness baseline, remove stale "Phase I-F remains open" wording, align companion stamps to Resolution Ledger **1.0.13**, and restore a release manifest for the current docs suite. This patch does not change code, tests, CI behavior, or the claimed implementation surface.
+
+Version: **4.12.3** (**PATCH** — documentation and manifest truthfulness only)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `README.md`, `docs/src/README.md` | Updated title pages, release context, phase tables, recent-changes blocks, and source stamps so the suite reflects that Phase I-F closed at **4.12.2** and the current companion baseline is **4.12.3**. |
+| `docs/src/ImplementationPlan.md`, `docs/src/TechnicalRoadmap.md` | Rebased companion lines/source stamps, advanced document patch versions, and removed stale text that treated F-6 / Phase I-F as still open work. |
+| `docs/src/MetaLearningCore.md`, `docs/src/MetaLearningArchitectureVision.md`, `docs/src/WhitePaper.md` | Updated companion/version references to the current suite baseline; White Paper release note and baseline wording now reference the closed Phase I-F state. |
+| `docs/releases/4.12.3.yml` | Added the current release manifest so `docs/releases/` again contains manifest truth for the active companion baseline. |
+| `VERSION.md` | Added this release entry and index line. |
+
+### Test / Validation Evidence
+
+- Pass: documentation truth audit
+  - `Select-String -Path README.md,docs\src\*.md,VERSION.md,docs\releases\4.12.3.yml -Pattern '4\.12\.1|1\.0\.12|Phase I-F remains open|Version 4\.11\.0|VERSION.md 4\.11\.0'`
+  - Result after patch: no stale hits in the touched companion-doc surfaces.
+- Pass: manual review
+  - Title pages, RECENT_CHANGES blocks, DOCMAP tables, and SOURCE_STAMP blocks now agree on the **4.12.3** / **1.0.13** companion baseline.
+## Version 4.12.2 (2026-03-27) — Phase I-F-6 Coverage / CI Truthfulness Closure (GATE-I-F-06 / OI-24)
+
+Changelog for **Phase I-F-6 coverage / CI truthfulness closure**: audit the live omit surface against the built Phase I boundary, remove stale/dead omit entries, stop treating local filesystem and mocked-HTTP tests as `net`, align AGENTS coverage guidance with the canonical thresholds, and make CI enforce the branch floor it claims instead of passing unused environment variables. This closure does not expand Phase I scope or hide uncovered code; it tightens the repo’s truthfulness around the surface that is actually built and claimed.
+
+Version: **4.12.2** (**PATCH** — F-6 coverage truth closure, CI threshold enforcement, and ledger/version alignment)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `pyproject.toml` | Removed dead omit entries for nonexistent files, restored `srcPy.pipeline.stages.market_data.exceptions` to coverage scope, and clarified omit comments so they describe deferred/non-canonical surfaces instead of silently hiding live code. |
+| `tests/python/unit/pipeline/test_file_source_bitemporal.py`, `tests/python/integration/test_source_to_pit_chain.py`, `tests/python/unit/test_loaders_api_edges.py` | Removed residual `pytest.mark.net` labels from local-only tests so `MARKERS="not net"` no longer skips offline coverage-bearing tests. |
+| `.github/workflows/ci.yml` | Removed unused coverage-threshold env vars from the test step and added an explicit branch-coverage check from `coverage.json` with an `80%` floor. |
+| `AGENTS.md` | Corrected coverage guidance to `fail_under = 90` line / `80%` branch and documented `pytest --no-cov` as the canonical narrow local validation convention. |
+| `docs/src/ResolutionLedger.md` | Closed `OI-24` and `GATE-I-F-06`, updated the dashboard/hotlist, and recorded the omit/marker/CI truthfulness evidence. |
+| `VERSION.md` | Added this release entry and index line. |
+
+### Test / Validation Evidence
+
+- Pass: `python -m pytest --override-ini addopts='' tests\python\unit\pipeline\test_file_source_bitemporal.py -q -k "not context_manager" --cov=srcPy.pipeline.stages.market_data.sources.file --cov=srcPy.pipeline.stages.market_data.exceptions --cov-branch --cov-fail-under=0 --cov-report=json:tmp_cov_market_data.json --cov-report=term`
+  - Observed before the omit fix: `market_data.exceptions` was suppressed by the omit list and did not report.
+  - Observed after the omit fix: the focused market-data seam reports normally and `coverage.json` exposes `totals.percent_branches_covered` for CI enforcement.
+- Pass: targeted offline marker audit after removing stale labels:
+  - `python -m pytest --override-ini addopts='' -q -m "not net" tests\python\unit\pipeline\test_file_source_bitemporal.py tests\python\integration\test_source_to_pit_chain.py tests\python\unit\test_loaders_api_edges.py`
+- Pass: config/doc audit
+  - `Select-String -Path pyproject.toml,AGENTS.md,.github\workflows\ci.yml,docs\src\ResolutionLedger.md -Pattern 'fail_under = 90|80%|--no-cov|not net|percent_branches_covered'`
+
+## Version 4.12.1 (2026-03-27) — Companion Suite: March 2026 Report Synthesis & Phase Mapping
+
+Changelog for **companion documentation sync** only: absorb a twelve-report internal synthesis into `docs/src/` without runtime changes. The suite now carries a canonical **report-cluster → phase** test matrix (Implementation Plan, summarized in README and Technical Roadmap), sharpens **truth vs pilot vs promotable** language, and encodes allocator design-memo direction as **research target** (task-aware adaptation, utility after frictions, hierarchical target layers A–D) distinct from **present governed substrate truth**.
+
+Version: **4.12.1** (**PATCH** — documentation and semantic alignment only)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `docs/src/README.md` | March 2026 synthesis subsection; honest conclusions (substrate truth, unproven allocator, deployment/governance emphasis, routing pilot, narrow signal base); cluster→phase mapping; future allocator direction line; companion versions → **4.12.1**. |
+| `docs/src/ImplementationPlan.md` | I-G / II-0 / II-A–E / III / IV sharpened per synthesis; II-D emphasizes structured post-allocator conditioning; **Appendix D** report-to-phase matrix + design-idea mapping; version → **6.4.16**. |
+| `docs/src/TechnicalRoadmap.md` | Report-driven sequencing; next-gen allocator direction; II-0 / II-D strategic weight; expanded kill/fallback language; version → **1.4.17**. |
+| `docs/src/MetaLearningCore.md` | Burden-of-proof and March 2026 evidence-stack subsection; routing pilot vs default `confidence_scalar`; deployment layer complement; failure-mode warnings; task/utility framing; version → **1.2.15**. |
+| `docs/src/MetaLearningArchitectureVision.md` | Target stack layers (representation, world model, expert family, post-allocator conditioning, conditional execution); routing explicitly non-default; version → **1.2.16**. |
+| `docs/src/ResolutionLedger.md` | RG-09, OI-35/37/39/40, MLN-03/06/07 summaries and acceptance criteria aligned to synthesis; ledger metadata → **1.0.12** / **4.12.1**. |
+| `docs/src/WhitePaper.md` | Tone calibrated to substrate truth, pilot hypotheses, and deployment discipline without claiming validated next-gen machinery; companion bump → **2.2.5**. |
+| `VERSION.md` | This patch entry and index line. |
+
+### Test / Validation Evidence
+
+- Pass: manual review — companion DOCMAP / SOURCE_STAMP / RECENT_CHANGES blocks updated consistently across touched sources.
+- No pytest / mypy scope: documentation-only patch.
+
+## Version 4.12.0 (2026-03-26) — Phase I-F-5 Determinism Boundary Closure (GATE-I-F-05 / OI-23)
+
+Changelog for **Phase I-F-5 determinism boundary closure**: publish the Phase II determinism source of truth in `docs/contracts/phase_ii_determinism_boundary.md`, replace the old F-5 deferral block in the interface contract companion doc with a source-of-truth pointer, close `OI-23`, close `GATE-I-F-05`, and synchronize the Resolution Ledger dashboard and version surfaces without claiming any Phase II implementation work. This release keeps early ML gate language explicitly at ADR-007 `D2` / semantic reproducibility and does not promote early artifacts to `D3` / bitwise certification.
+
+Version: **4.12.0** (**MINOR** — F-5 determinism boundary closure, companion-contract sync, and ledger/version alignment)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `docs/contracts/phase_ii_determinism_boundary.md` | Added the new F-5 anchor document covering the ADR-007 D-tier table for Phase II artifact surfaces, the singular HMAC-SHA256 namespace-based seed derivation scheme, deterministic `task_id` expectations, the same-environment Python-only `D2` reference-run boundary, explicit non-goals, and open `⚑ VALIDATE` items. |
+| `docs/contracts/phase_ii_interface_contracts.md` | Replaced the old F-5 deferral section with a pointer to the determinism boundary document and tied the `task_id` contract note to the new source of truth, while keeping the interface doc free of accidental `D3` language. |
+| `docs/src/ResolutionLedger.md` | Closed `OI-23` and `GATE-I-F-05`, updated the status dashboard counts, removed `OI-23` from the blocking hotlist, reduced `GATE-I-F` HALT-open count from 2 to 1, and left `OI-24` open with `OI-23` as its now-closed predecessor. |
+| `VERSION.md` | Added the 4.12.0 index line and detailed release entry for the F-5 closure. |
+
+### Test / Validation Evidence
+
+- Pass: `Select-String -Path docs/contracts/phase_ii_determinism_boundary.md -Pattern '## 1. Purpose','## 4. Phase II artifact D-tier table','## 5. Seed derivation scheme','## 6. Deterministic task-ID expectations','## 7. Reference-run reproducibility boundary','## 9. Open ⚑ VALIDATE items'`
+- Pass: `Select-String -Path docs/contracts/phase_ii_interface_contracts.md -Pattern 'phase_ii_determinism_boundary.md'`
+- Pass: `if (-not (Select-String -Path docs/contracts/phase_ii_interface_contracts.md -Pattern 'D3')) { 'ok' }`
+- Pending repo-wide doc/render checks are intentionally left to later phases; this closure is documentation-first and does not claim new runtime or CI behavior.
+## Version 4.11.0 (2026-03-25) — Phase I-F-4 Contract Publication and Closure
+
+Changelog for **Phase I-F-4 contract publication**: add the Phase II meta-learning interface stub package under `srcPy/meta_learning/`, publish the companion contract document, publish the draft-07 Signal Reliability Layer schema derived from the governing prose specification, assign the reliability schema to new ledger ID `OI-41` because `OI-35` already means RiskFn in the live ledger, close `OI-22`, close `OI-41`, close `GATE-I-F-04`, and truthfully omit the stub-only package from coverage under `[tool.coverage.run]` without changing the global `fail_under = 90` threshold.
+
+Version: **4.11.0** (**MINOR** — F-4 contract publication, reliability schema lock, gate closure, and separate tracking for unrelated strict-mypy debt)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `srcPy/meta_learning/`, `srcPy/meta_learning/contracts/` | Added Phase II contract stubs only: package root `CONTRACT_VERSION = "v1"`, frozen `MetaTask`, `TaskGeneratorProtocol`, `TaskRegistryProtocol` with typed exceptions, and context encoder input/output protocols with explicit F-5 determinism deferrals. |
+| `schemas/signal_reliability.schema.json` | Added draft-07 machine-readable schema covering the Signal Reliability Layer fast state, slow state, and run-level report surface while preserving advisory-only semantics from the governing prose spec. |
+| `docs/contracts/phase_ii_interface_contracts.md` | Added the companion Phase II contract note covering MetaTask, TaskRegistry, context encoder boundaries, reliability crosswalks, and explicit F-5 / Phase II deferrals. |
+| `pyproject.toml` | Added `srcPy/meta_learning/*` to `[tool.coverage.run].omit` under a dedicated Phase II contract-stub comment block; left `[tool.coverage.report].fail_under = 90` unchanged. |
+| `docs/src/ResolutionLedger.md` | Restored `OI-35` as the RiskFn item, closed `OI-22`, added and closed `OI-41` for the Signal Reliability schema contract, closed `GATE-I-F-04`, and opened `OI-42` for the separate `srcPy/__init__.py` strict-mypy blockers. |
+
+### Test / Validation Evidence
+
+- Pass: `/usr/bin/python3 -m compileall srcPy/meta_learning`
+- Pass: `/usr/bin/python3 -m json.tool schemas/signal_reliability.schema.json`
+- Pass: `cmd.exe /c '.venv-codex\Scripts\python.exe' -m pytest tests/python/unit/backtesting/test_contracts_roundtrip.py --collect-only --no-cov -q`
+- Closure review check: `cmd.exe /c '.venv-codex\Scripts\python.exe' -m mypy srcPy/strategies/momentum/ srcPy/strategies/pipeline_strategy.py srcPy/artifact_registry/ srcPy/cli/gate.py --strict`
+  - Current result: 7 errors total. Five are pre-existing `import-untyped` failures for missing `pandas` stubs across the governed F-2 surface and are tracked as OI-33 debt, not F-4 regressions. Two are `attr-defined` failures in `srcPy/__init__.py`, now tracked separately under OI-42 and not folded into F-4 closure.
+
+## Version 4.10.0 (2026-03-25) — Phase I-F-3 Seam Closure (GATE-I-F-03 / OI-21)
+
+Changelog for **Phase I-F-3 seam closure**: amend `GATE-I-F-03` and `OI-21` acceptance criteria to match ADR-005's committed scope; close `GATE-I-F-03` and `OI-21` at v4.10.0; record verification evidence in `docs/audits/phase_if_f3_seam_audit.md` and the AQ-07 plan in `docs/audits/AQ-07_alpha_ir_migration_plan.md`.
+
+Version: **4.10.0** (**PATCH** — F-3 seam closure, OI-21 closure, GATE-I-F-03 closure, AQ-07 plan artifact)
+
+### Detailed Changes
+
+| Location | Change |
+|----------|--------|
+| `docs/audits/phase_if_f3_seam_audit.md` | F-3 seam verification audit with exercised evidence references; checklist aligned to amended acceptance |
+| `docs/audits/AQ-07_alpha_ir_migration_plan.md` | AQ-07 planning/deferral record for unresolved Phase II seam ADR scope |
+| `docs/src/ResolutionLedger.md` | Amended F-3 acceptance criteria; closed `GATE-I-F-03` and `OI-21` at v4.10.0 |
+
+### Test / Validation Evidence
+
+- Ran targeted tests:
+  - `pytest tests/python/integration/strategies/test_momentum_governed_path.py --no-cov`
+  - `pytest tests/python/integration/backtesting/test_orchestrator_backtesting_artifacts.py --no-cov`
+  - `pytest tests/python/unit/artifact_registry/test_storage_shims.py --no-cov`
 
 ## Version 4.9.1 (2026-03-24) — Roadmap Phase-Model Clarification Patch
 
@@ -799,17 +2198,3 @@ Full release entries for older versions are preserved in:
 - docs/releases/VERSION_3.x.md
 - docs/releases/VERSION_2.x.md
 - docs/releases/VERSION_1.x.md
-
-
-
-
-
-
-
-
-
-
-
-
-
-

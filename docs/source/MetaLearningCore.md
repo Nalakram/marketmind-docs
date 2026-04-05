@@ -3,9 +3,9 @@
 **Meta-Learning Core**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.2.14 · March 2026 · Proprietary
+Version 1.2.19 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 · Meta-Learning Architecture Vision v1.2.15 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1
+Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
 <!-- MM:END:TITLEPAGE -->
 
 *Research agenda supplement — task definition, training mechanics, empirical validation program, and acceptance criteria*
@@ -20,13 +20,13 @@ Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 ·
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Core | 1.2.14 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Implementation Plan | 6.4.15 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.16 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Architecture Vision | 1.2.15 | High-level architectural vision and system framing |
-| Resolution Ledger | 1.0.7 | Resolution ledger and workflow state dashboard |
-| README.md | 4.9.1 | Suite overview, current status, and navigation |
-| VERSION.md | 4.9.1 | Canonical release ledger |
+| Meta-Learning Core | 1.2.19 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Implementation Plan | 6.4.32 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.21 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Architecture Vision | 1.2.20 | High-level architectural vision and system framing |
+| Resolution Ledger | 1.0.40 | Resolution ledger and workflow state dashboard |
+| README.md | 4.18.12 | Suite overview, current status, and navigation |
+| VERSION.md | 4.18.28 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
@@ -38,11 +38,11 @@ Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 ·
 
 ## 0.1 Architectural Claim
 
-Meta-learning is the preferred architecture for adaptive signal recombination across regime-indexed, non-exchangeable market tasks in MarketMind. Individual strategies — stat-arb, momentum, mean-reversion — are not combiners to be averaged; they are training tasks drawn from a distribution of market regimes. The meta-learner is the system's allocation brain, not a late-arriving ensemble weighter. This claim supersedes the ensemble-averaging model implicit in EnsemblePipelineStrategy's adaptive weights. The architecture asserts that rapid inner-loop adaptation (<= 10 gradient steps at daily frequency) produces allocation quality across regime shifts that a static or BOCPD-conditioned combiner cannot match. Every Phase II architectural decision is subject to this framing.
+The **governed hypothesis** is that meta-learning is the preferred architecture for **task-aware adaptation** across **non-exchangeable market tasks**—episodes indexed by volatility, liquidity, macro/cost/objective regimes—not merely a better timestamp classifier or one-step return predictor. Individual strategies — stat-arb, momentum, mean-reversion — are not combiners to be averaged; they populate tasks drawn from a **task distribution**. The meta-learner is the intended allocation brain, not a late-arriving ensemble weighter. This claim supersedes naive ensemble averaging **if and only if** the empirical program falsifies the simpler baseline. The architecture **asserts** that rapid inner-loop adaptation (<= 10 gradient steps at daily frequency) *may* produce **decision utility after frictions** that a static or simpler regime-conditioned combiner cannot match **net of costs**; that remains **unproven** here. Every Phase II architectural decision is subject to this framing.
 
 ## 0.2 Null Hypothesis
 
-A simpler allocator — specifically an XGBoost ensemble with BOCPD-triggered regime conditioning, equivalent to the best configuration achievable with existing MarketMind infrastructure — matches or exceeds the Reptile meta-policy net of cost, robustness, and operational complexity. The null is not "meta-learning does nothing." The null is that the added machinery (context encoder, inner/outer loop separation, regime-indexed curriculum, EWC, crisis replay) does not deliver measurable net benefit after accounting for its cost and complexity. The burden of proof falls on the meta-learning architecture. The empirical de-risking program in Section 4 is the vehicle for rejecting this null.
+A **simpler regime-conditioned baseline allocator** — specifically an XGBoost ensemble with BOCPD-triggered regime conditioning, equivalent to the best configuration achievable with existing MarketMind infrastructure — **remains the incumbent production outcome** until falsified. It matches or exceeds the Reptile meta-policy **net of costs, robustness, and operational complexity**. The null is not "meta-learning does nothing." The null is that the added machinery (context encoder, inner/outer loop separation, regime-indexed curriculum, EWC, crisis replay) does not deliver **measurable net benefit** on **post-adaptation utility after frictions** after accounting for cost and complexity. The burden of proof falls on the meta-learning architecture. The empirical de-risking program in Section 4 is the vehicle for rejecting this null. **Fail gracefully:** if the challenger does not win, **keep the simpler baseline**; if regime conditioning itself fails, collapse toward **B2/B1-style** governed paths rather than compounding complexity.
 
 ## 0.3 What Must Be Proven
 
@@ -73,6 +73,21 @@ Phase II-0 is where those I-G decisions become reproducible, non-promotable harn
 
 Phase II remains the first promotable adaptive-learning build phase. Trainer commitment stays gated by W2 and Tier 1 readiness, and final validation gates still govern promotion, rollback, and kill logic even when early pilots look promising.
 
+## 0.6 What the March 2026 evidence stack supports (synthesis, not results)
+
+Companion docs integrate twelve internal reports as **obligations and falsifiers**, not as proof of edge:
+
+- **Task validity is fragile.** Regime episodes must be **leakage-safe**, **non-exchangeable**, and **task-like** enough to justify meta-learning; otherwise the trainer path should **stop early**—this is a **structural gate**, not preprocessing trivia.
+- **Replay and honest baselines are load-bearing** relative to storytelling about elegant continual learning—claims require **measurement harnesses**, not architecture enthusiasm.
+- **Artifact-level evaluation is anti-self-certification**: bundle-local evaluation surfaces should be emitted once and compared via immutable artifacts rather than recomputed by the layer that judges them.
+- **Net uplift after costs** is the hardest promotion gate; **forecast-quality** and **stylized reward** gains are not substitute evidence.
+- **Simpler baselines remain legitimate outcomes** if complexity cannot prove net benefit.
+- **Governance is survivability insurance** (rollback, kill, shadow, staged promotion, drift triggers)—it protects against operational failure modes; it **does not** validate allocator alpha.
+- **Deployment-layer / post-allocator conditioning** may matter **more near-term** than allocator novelty for **realistic capital expression**, yet it **does not relax** the burden to beat the simpler baseline **net of costs**.
+- **Uncertainty-aware routing** is a **Phase II-0 pilot hypothesis** layered on the **`confidence_scalar` contract**; default semantics remain **post-sizing attenuation** unless routing earns promotion through **reject-set EV** evidence after costs.
+
+**Anti-patterns (documentation and research hygiene):** treating rolling-window refits as meta-learning without task structure; claiming robustness without domain-shift tests; declaring “SOTA” if edge disappears under implementation realism; using Sharpe or forecast metrics alone; treating differentiability or model scale as a moat.
+
 ---
 
 # 1. Executive Thesis
@@ -97,7 +112,7 @@ The following components represent proto-meta-learning infrastructure that is al
 |---|---|---|
 | EnsemblePipelineStrategy | Adaptive weight combiner over N strategy instances | Outer-loop evaluator: measures which task specializations are performing in the current regime |
 | ChampionChallenger | A/B evaluation of strategy variants | Inner-loop candidate evaluator: measures fast-adaptation gain on held-out query set |
-| BOCPD change-point detector | Binary change-point flag (bocpd_cp) | Task-boundary signal: triggers new learning episode when distribution shift is detected |
+| BOCPD change-point detector | Change-point detection (slated for orchestrator-managed regime service per AQ-04; not a feature graph op in governed production use) | Task-boundary signal: triggers new learning episode when distribution shift is detected |
 | RegimeDetector Protocol slot | Gating plugin for position sizing | Context encoder input: regime embedding that indexes the task distribution |
 | parameter_sweep() / optuna_tune() | Hyperparameter search | Inner-loop gradient steps: fast adaptation over recent episode support set |
 | Signal ABC / SignalCatalog | Catalog of tradeable strategies | SignalCatalog supplies weak learners inside each regime-episode task |
@@ -184,6 +199,12 @@ The active signal set may change over time as signals are added or retired from 
 **Calibration method.** After core model training, fit isotonic regression or Platt-style calibration on a held-out calibration set. Recalibrate nightly alongside the outer-loop update. Report reliability curves and Expected Calibration Error (ECE) in `meta_validity_report.json`. If ECE exceeds threshold (`⚑ VALIDATE`), recalibrate before promoting `theta_day_prime`.
 
 **Monitoring rules.** See Section 11.1. The dashboard monitors: (a) mean `confidence_scalar` < 0.2 for 3+ sessions; (b) calibration error above ECE threshold; (c) rolling correlation between `confidence_scalar` and realized allocation quality below acceptable floor for N consecutive runs. All three are alert conditions, not just (a).
+
+### 2.5.2 Uncertainty-aware routing pilot (non-default)
+
+**Normative default:** `confidence_scalar` **attenuates** exposure after sizing; uncertainty also informs **risk-budget shrinkage**, **participation**, **turnover**, and **abstention** through governed mechanisms—without implying a promoted router.
+
+**Pilot scope (Phase II-0 primary; II-D only if earned):** a **governed hypothesis** that some regions of `(z, calibration, familiarity)` space are **negative EV after costs** and merit **routing / rejection** distinct from pure attenuation. **Promotion rule:** promote routing only if MarketMind-specific evidence shows the **reject set** is negative EV after costs **and** the incumbent baseline retains positive EV there; if attenuation already captures the economic effect, **do not promote routing**. **Fail action:** remain **attenuation + simpler RiskFn path**. Any change to default `confidence_scalar` semantics requires an **ADR** and threshold governance (MLN-07).
 
 ## 2.6 Loss Hierarchy
 
@@ -361,6 +382,8 @@ The baseline must be frozen before meta-learning experiments begin. No changes t
 
 **Hard boundary.** Layers 1 and 2 are pure computation (functional core). Layer 3 has state but operates offline — not on the critical execution path.
 
+**Post-allocator conditioning (II-D research target).** Even when Layers 1–2 exist, **allocator intent is not identical to deployable capital**. **Structured post-allocator conditioning**—turnover-aware targets, liquidity/capacity-aware sizing, drawdown and regime overlays, constrained construction—is where **frictions enter seriously**. That layer can be **economically load-bearing** near-term and still **not** satisfy the **burden to beat the simpler baseline net of costs**; conversely, allocator proof **does not** make execution realism optional. Systems trained on paper weights and only later bolted to realistic constraints are **not** the desired end state.
+
 ## 5.2 Parameter Lifecycle
 
 ### theta_meta
@@ -419,7 +442,7 @@ The following deliverables must be in place before Phase II training infrastruct
 |---|---|---|---|
 | MetaTask dataclass | `srcPy/meta/task.py` | Defines task schema (§2.1). All subsequent meta-learning code depends on this contract. | 2 hrs |
 | TaskRegistry | `srcPy/meta/task_registry.py` | Stores historical tasks indexed by regime_id and t0. Required for curriculum and outer-loop batch sampling. | 3 hrs |
-| BOCPD implementation | `srcPy/preprocessor/graph/ops_custom.py` | `bocpd_cp` column is the task-boundary signal. | 4–6 hrs |
+| BOCPD implementation | (orchestrator regime service — file path TBD at Phase II implementation; must not be placed inside feature graph ops) | BOCPD regime service provides canonical PIT-safe regime labels and task-boundary signals to RegimeLabeler. Service placement is governed by AQ-04 (CLOSED). Must not be implemented as a graph op in the feature execution path. | 4–6 hrs |
 | Signal embedding field on Signal ABC | `srcPy/registry/signal_abc.py` | `signal_embedding: Optional[np.ndarray] = None` until context encoder is online. | 1 hr |
 | Regime label pipeline | `srcPy/meta/regime_labeler.py` | Assigns `regime_class` to each historical bar from current-knowledge variables only. | 3–4 hrs |
 
@@ -742,6 +765,11 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 | Release | Date | Meta-Learning Core impact |
 |---|---|---|
+| 1.2.19 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.5**, Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**; no Core semantics change. |
+| 1.2.18 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.0**, Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**; no Core semantics change. |
+| 1.2.17 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.17.0**, Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**; no Core semantics change. |
+| 1.2.16 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.16.0**, Implementation Plan **6.4.21**, Resolution Ledger **1.0.17**; no Core semantics change. |
+| 1.2.15 | March 2026 | March 2026 synthesis: §0.6 evidence stack; stronger incumbent baseline / net-of-cost / fail-gracefully language; §2.5.2 routing pilot vs attenuation default; post-allocator conditioning note in §5.1; task-first architectural claim refinement. |
 | 1.2.13 | March 2026 | F-1/F-2 planning baseline carried forward; this edition clarifies that I-G and II-0 may host empirical pilots and harness work, while final Phase II promotion logic still governs trainer commitment, promotion, rollback, and kill. |
 | 2.0.0 | March 2026 | Major revision: added Decision Framing, the empirical de-risking program, failure modes and recovery playbooks, the promotion/rollback/kill framework, observability, and threshold-resolution registry. Rebased the document on validation-gated architecture rather than presumed Phase II commitment, and refreshed current-state references through VERSION.md 4.5.4. |
 | 1.2.11 | March 2026 | Prior companion-edition framing: task schema, inner/outer loop mechanics, and Phase II build guidance aligned to the 4.5.2 suite. |
@@ -751,7 +779,7 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Source: This document v1.2.14 · March 2026 · Companion to Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 · Meta-Learning Architecture Vision v1.2.15 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1*
+*Source: This document v1.2.19 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
 
 <!-- MM:END:SOURCE_STAMP -->
 

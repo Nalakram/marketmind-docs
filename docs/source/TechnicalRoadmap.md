@@ -3,9 +3,9 @@
 **Technical Roadmap & Feature Plan**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.4.16 · March 2026 · Proprietary
+Version 1.4.21 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.15 · Meta-Learning Core v1.2.14 · Meta-Learning Architecture Vision v1.2.15 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1
+Companion documents: Implementation Plan v6.4.32 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
 <!-- MM:END:TITLEPAGE -->
 
 *Strategic build order, research sequencing, and go/no-go checkpoints*
@@ -30,7 +30,7 @@ This inventory separates what is real today from what is governed future scope.
 |---|---|---|
 | Canonical research substrate | PIT-safe orchestration, governed bundle emission, lineage, statistical-validity artifacts, and cost assumptions are real | Later phases must extend this substrate rather than fork it |
 | Governed strategies and signals | `stat_arb_pairs`, materially advanced momentum, SignalCatalog, and stable `slot_index` exist | Broader governed breadth and signal-factory lifecycle remain later work |
-| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, and CI discipline are mature on the trusted path | MetaTask-era evidence and meta-validity reporting are not built |
+| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, CI discipline, and bundle-local immutable evaluation surfaces are mature on the trusted path | MetaTask-era evidence and meta-validity reporting are not built |
 | Meta-learning contracts | Runtime shape and proof burden are documented in the companion suite | Context encoder, task generator, trainer, allocator, and rollout control are still unbuilt |
 | Execution realism | Governed execution assumptions exist as artifacts | TCA loops, paper/live control flow, broker integration, and low-latency paths remain conditional |
 
@@ -45,7 +45,7 @@ This inventory separates what is real today from what is governed future scope.
 
 ## 2.1 Execution Plan
 
-1. I-F honest closeout.
+1. Hold the I-F closure boundary.
 2. I-G empirical and protocol foundation.
 3. II-0 scaffolding and research harness.
 4. II-A through II-E validation-gated build.
@@ -82,6 +82,21 @@ This inventory separates what is real today from what is governed future scope.
 | Adaptation usefulness proven | Continue only if held-out query gain is real and statistically meaningful |
 | Proxy alignment proven | Continue only if the trainer is optimizing a trustworthy target |
 | Continual robustness proven | Continue only if nightly adaptation preserves crisis/generalization behavior |
+
+## 2.5 Report-driven sequencing (March 2026 synthesis)
+
+The heaviest **current** obligation sits in **I-G** (policy freeze, task validity, survivability semantics, breadth rules) and **II-0** (honest benchmark, harnesses, pilots). **II-D is not a short epilog** after II-C: it is where **structured post-allocator conditioning** and **deployment-layer realism** convert allocator intent into **governed capital expression**. **Phase III** and **Phase IV** remain **conditional** even when deployment-layer arguments are strong—documentation must not read as “III/IV are next” without that guard.
+
+**Fall backs (explicit):**
+
+- **Invalid regime tasks / non-exchangeability failure:** halt trainer path; do not narrate meta-learning from contaminated episode design.
+- **No net uplift vs simpler baseline** (after costs and burden): **no allocator promotion**; **fail gracefully** to incumbent baseline.
+- **Routing pilot fails or attenuation subsumes gains:** remain **attenuation-only**; routing does not become default architecture.
+- **Unmanaged breadth:** does not enter the program; expand only under **Signal Generation Protocol**, **SignalCatalog** identity, and Phase IV readiness.
+
+## 2.6 Next-gen allocator direction (target, not current truth)
+
+The forward thesis is **not** “build a smarter return predictor.” It is to build a **governed system that adapts safely across changing market tasks**, where a **task** spans universe, horizon, volatility/liquidity/macro/cost/objective regimes. **Task adaptation** is primary; return forecasting is secondary. Training and promotion must emphasize **decision utility after frictions**, not stylized offline loss. **II-0** grows because that direction demands **cheap falsification**; **II-D** grows because frictions and capacity must enter **before** claiming live-safe behavior. None of this implies today’s repo implements a next-gen meta-allocator, validated routing, or latent regime memory.
 
 # 3. Priority Execution Plan
 
@@ -120,7 +135,7 @@ This inventory separates what is real today from what is governed future scope.
 | T1 | II-A task substrate and validity closure | W2 clean enough to justify trainer commitment |
 | T2 | II-B representation layer | Encoder quality is evidence-backed |
 | T3 | II-C adaptation core | Adaptation usefulness and proxy alignment are real |
-| T4 | II-D allocator and governance integration | Allocator behavior is reportable and reversible |
+| T4 | II-D allocator integration **and deployment-layer conditioning** | Allocator intent is reportable, reversible, and expressed under **turnover / liquidity / capacity** realism (not proven live stack) |
 | T5 | II-E controlled rollout harness | Rollout control exists without implying Phase III execution seriousness |
 
 ### 3.4.1 Kill Criteria as Roadmap Gates
@@ -128,11 +143,14 @@ This inventory separates what is real today from what is governed future scope.
 The following remain explicit stop conditions:
 
 - Harvey t remains below 3.0 after full task-pool construction.
-- No net Sharpe uplift over the frozen XGBoost baseline after costs.
+- No **net** performance uplift over the frozen **simpler regime-conditioned** baseline after **realistic costs** and **operational burden** (utility after frictions—not forecast vanity).
 - Context encoder coherence cannot be repaired.
 - Held-out crisis performance remains non-positive after curriculum and replay tuning.
+- **Regime-task validity** collapses: tasks are exchangeable, leakage-prone, or not **task-like** enough to justify meta-learning framing.
 
-If any of those are confirmed, the roadmap records the failure and re-scopes or kills the program. It does not automatically escalate complexity.
+Warnings (failure-mode hygiene): do not call rolling refits “meta-learning” without task structure; do not call a model “robust” without domain-shift tests; do not treat Sharpe or stylized reward alone as success; **differentiability and model size are not moats by themselves**.
+
+If any stop condition is confirmed, the roadmap records the failure and re-scopes or kills the program—typically **failing gracefully to the simpler governed baseline**. It does not automatically escalate complexity.
 
 # 4. Subphase Map
 
@@ -151,7 +169,7 @@ If any of those are confirmed, the roadmap records the failure and re-scopes or 
 | II-A | Task substrate & validity closure | `MetaTask`, `TaskRegistry`, regime labeler, task generator, provenance surfaces |
 | II-B | Representation layer | context encoder, coherence evidence, cross-regime separation evidence |
 | II-C | Adaptation core | trainer, support/query mechanics, held-out gain reporting, K-budget evidence, proxy alignment evidence |
-| II-D | Allocator & governance integration | meta-policy, confidence routing, risk-budgeting interfaces, MetaLearner gate, rollback surfaces |
+| II-D | Allocator & **deployment conditioning** | meta-policy (if earned), **`confidence_scalar` attenuation default**, conditional routing **pilot only**, structured **post-allocator** constraints, MetaLearner gate, rollback surfaces |
 | II-E | Controlled rollout harness | allocator-level champion/challenger, shadow mode, capped blend, rollback/kill control flow |
 
 ## 4.3 Phase III Subphases
@@ -169,7 +187,7 @@ If any of those are confirmed, the roadmap records the failure and re-scopes or 
 | IV-A | Governed signal expansion | signal onboarding workflow, governed breadth expansion, PIT-safe alt-data adapters |
 | IV-B | Signal identity & embedding layer | `signal_embedding`, novelty checks, lifecycle controls |
 | IV-C | Assisted discovery | governed validation lane for machine-assisted signal ideation |
-| IV-D | Factory automation | broader discovery orchestration, governed backtest/promotion loops, retirement handling |
+| IV-D | Factory automation | **signal-factory-serious** breadth: discovery orchestration, governed backtest/promotion loops, retirement handling (only after governance maturity) |
 
 ## 4.5 Phase IV+ Examples
 
@@ -188,7 +206,7 @@ If any of those are confirmed, the roadmap records the failure and re-scopes or 
 - `regime_id` is primary identity; `regime_class` is the 5-class derived vocabulary used for curriculum and reporting.
 - `theta_meta`, `theta_task_prime`, and `theta_day_prime` are distinct lifecycle objects.
 - Dynamic-K uses fixed-slot masking rather than dynamic output heads.
-- `confidence_scalar` is post-sizing attenuation only unless changed by later governance.
+- `confidence_scalar` is **post-sizing attenuation by default**; **uncertainty-aware routing** is a **Phase II-0 pilot** and only graduates with **earned** evidence (Implementation Plan · Appendix D).
 
 ## 5.2 Canonical Pipeline Direction
 
@@ -209,8 +227,8 @@ Practical roadmap interpretation:
 
 - Stages 1-2 on the governed path are materially real today.
 - Stage 2.5 is Phase II work preceded by I-G and II-0 preparation.
-- The allocator portion of Stage 3 is Phase II work.
-- Stages 4-7 remain largely later-phase execution work.
+- The allocator portion of Stage 3 is Phase II work; **Stage 3 must not absorb deployment-layer conditioning** without treating it as **II-D post-allocator** seriousness (allocator proof remains separate).
+- Stages 4-7 remain largely later-phase execution work (**III conditional** for execution-serious claims).
 
 # 6. Research Hygiene
 
@@ -227,6 +245,8 @@ Practical roadmap interpretation:
 - DSR, PBO, and multiple-testing controls remain part of promotion logic.
 - Holdout crisis regimes are architectural constraints, not optional stress tests.
 - Thresholds not yet justified by evidence remain `⚑ VALIDATE` rather than silently becoming policy.
+- Evaluation surfaces are bundle-local and immutable; cross-variant metrics operate strictly on emitted artifacts.
+- Parent comparison layers validate hashes and aggregate emitted path-score surfaces; they must not recompute CPCV scores.
 
 ## 6.3 Meta-Learning Discipline
 
@@ -261,6 +281,11 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 | Release | Date | Technical Roadmap impact |
 |---|---|---|
+| 1.4.21 | April 2026 | Companion-sync: title-page and stamps advanced through **4.18.5** (Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**, README/VERSION **4.18.5**); **OI-39** closed; RG-09 II-0A harness and II-0 empirical research scaffold treated as implemented at **4.18.2** / **4.18.5**; full RG-09 empirical closure remains **PARTIAL**. |
+| 1.4.20 | March 2026 | Companion-sync: title-page and stamps advanced through **4.18.0** (Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**, README/VERSION **4.18.0**); MLN-02-AMD-01 crisis redefinition is part of the active baseline. Roadmap sequencing otherwise unchanged. |
+| 1.4.19 | March 2026 | Companion-sync: title-page and stamps advanced through **4.17.0** (Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**, README/VERSION **4.17.0**); MOM-020 closure is now part of the active baseline rather than a parallel/open comparison track. Roadmap sequencing otherwise unchanged. |
+| 1.4.18 | March 2026 | Companion-sync: Phase I-F closed at **4.12.2**; title-page and stamps advanced through **4.16.0** (Implementation Plan **6.4.21**, Resolution Ledger **1.0.17**, README/VERSION **4.16.0**). Roadmap sequencing unchanged since the **4.12.2** edition. |
+| 1.4.17 | March 2026 | March 2026 report-driven sequencing; II-0/II-D strategic weight; next-gen allocator direction as tasks-not-timestamps + utility after frictions; expanded kill/fallback and failure-mode hygiene; II-D table row aligned to deployment conditioning + routing pilot. |
 | 1.4.15 | March 2026 | F-1/F-2 planning baseline carried forward; this edition makes the sequencing explicit: I-F closeout, I-G protocol foundation, II-0 non-promotable harnesses, evidence-gated II-A through II-E, and still-conditional III/IV expansion. |
 | 1.4.14 | March 2026 | Phase I-F-1 / OI-19: companion baseline **VERSION.md 4.8.0**, title-page and stamp sync. Prior row: fuller capability inventory with Meta-Learning v2.0 roadmap logic. |
 | 1.4.13 | March 2026 | Rebased the roadmap on Meta-Learning v2.0: added design locks, empirical workstreams, go/no-go checkpoints, and explicit stop conditions tied to baseline superiority, task validity, adaptation usefulness, proxy alignment, and continual robustness. |
@@ -271,7 +296,7 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Technical Roadmap v1.4.16 · March 2026 · Companion to Implementation Plan v6.4.15 · Meta-Learning Core v1.2.14 · Meta-Learning Architecture Vision v1.2.15 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1*
+*Technical Roadmap v1.4.21 · April 2026 · Companion to Implementation Plan v6.4.32 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
 
 <!-- MM:END:SOURCE_STAMP -->
 

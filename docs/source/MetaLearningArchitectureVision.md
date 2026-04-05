@@ -3,9 +3,9 @@
 **Meta-Learning Architecture Vision**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.2.15 · March 2026 · Proprietary
+Version 1.2.20 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 · Meta-Learning Core v1.2.14 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1
+Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -53,6 +53,21 @@ Before the proposed architecture transitions from design to deployment commitmen
 ## 1.4 Kill-Criteria Preview
 
 The architecture is abandoned — not rolled back, abandoned — if any of the following are confirmed: inner-loop gain Harvey t < 3.0 after full task pool construction; no net Sharpe uplift over the XGBoost baseline after transaction costs; context encoder clustering fails and cannot be repaired; or crisis episode IC <= 0 on held-out crisis windows after curriculum adjustment and replay tuning. Core v2.0.0 §9.3 is the governing framework and defines the exact kill set, including the operational burden scorecard (§9.3.1). This section is a preview only; Core §9.3 governs in any conflict.
+
+## 1.5 Hierarchical target architecture (research target, not repo truth)
+
+If the validation program succeeds, the **desired** runtime is **hierarchical**, not monolithic. The following layers are **future-facing**; none imply the whole stack already exists:
+
+| Layer | Purpose | Typical home |
+|---|---|---|
+| **A — Representation** | Market/context representation model | II-B |
+| **B — Latent regime / world model** | Structured beliefs about regime/state (candidate) | II-B |
+| **C — Expert allocator family** | Modular meta-policy / fast adaptation candidates | II-C |
+| **D — Post-allocator conditioning** | **Structured** conversion of allocator intent into constrained, friction-aware capital (turnover, liquidity/capacity, drawdown/regime overlays); **differentiable portfolio optimization is optional here**, not the moat claim | **II-D primary**, III second |
+
+**Three distinct “seriousness” escalations (all conditional):** **Phase II** = promotable adaptive-learning machinery (if earned). **Phase III** = execution-serious deployment (**not** implied by II-D conditioning importance). **Phase IV** = signal-factory-serious breadth and automation. **Breadth, routing sophistication, and deployment conditioning** are **governed optional layers** until evidence and policy say otherwise.
+
+**Multi-timescale control (vision).** Separates **strategic allocator**, **tactical overlay**, **execution controller**, and **risk governor**—future-facing coordination, not a present module list.
 
 ---
 
@@ -143,11 +158,19 @@ The following components represent proto-meta-learning infrastructure that is al
 
 | 5-Class Label | Compositional Conditions | Historical Freq |
 |---|---|---|
-| crisis | vol_hi AND bocpd_cp | ~5% |
+| crisis | vol_hi AND severity_flag | ~5% ⚑ VALIDATE |
 | high_vol | vol_hi AND NOT crisis | ~15% |
 | bear | trend_lo AND NOT (crisis OR high_vol) | ~12% |
 | bull | trend_hi AND vol_{lo\|med} | ~18% |
 | sideways | Everything else | ~50% |
+
+**`severity_flag` (MLN-02-AMD-01; assumption RG09-V12, ⚑ VALIDATE).** True when `vol_score_raw` at the labeling timestamp is at or above a PIT-safe expanding-window percentile of strictly prior `vol_score_raw` values (window starts after `cold_start_burn_in` on the labeling path). Initial default threshold: **p90**. Not tuned against Anti-Goodhart holdouts; validation surface is Phase II-0A learning performance. Implementation: `RegimeLabeler.compute_severity_flag_vol_score_raw` + `BOCPDConfig.crisis_vol_score_percentile`.
+
+> **BOCPD is a segmentation primitive. It is not a crisis label primitive.**
+>
+> `bocpd_cp` remains a Level 1 dimension inside compositional `regime_id` (for example `trend_hi__vol_hi__bocpd_cp`). A change-point flag informs task boundaries and episode construction; it is neither necessary nor sufficient for Level 2 `crisis`.
+
+**Historical frequency.** The ~5% figure for `crisis` under the severity-gated rule is a working hypothesis; empirical frequency must be confirmed in pilot measurement. Tag: ⚑ VALIDATE.
 
 > **CONTRACT:** Compositional `regime_id` is the primary contract for task identity and storage. 5-class projection is derived convenience only.
 
@@ -173,6 +196,8 @@ The following components represent proto-meta-learning infrastructure that is al
 **SizingFn Protocol.** The SizingFn signature is not changed in Phase II. A protocol version bump to accept confidence explicitly is deferred to Phase III unless the post-sizing approach proves insufficient.
 
 **Calibration.** `confidence_scalar` is supervised against a bounded realized-quality target and calibrated via isotonic regression or Platt scaling on a held-out calibration set after core model training. Recalibrated nightly. ECE and realized-quality correlation are reported in `meta_validity_report.json` and monitored per Section 8.
+
+**Routing (explicitly non-default).** **Uncertainty-aware routing**—treating some states as reject/route zones—is a **Phase II-0 pilot hypothesis**, not part of the default inference contract. Default behavior remains **post-sizing attenuation** only unless Core §2.5.2 promotion criteria are met and an **ADR** updates defaults.
 
 ## 4.4 Dynamic-K Contract
 
@@ -386,9 +411,13 @@ OHLCV + alt data
     ↓ Signal library: z → K Alpha IR signals
     ↓ Meta-policy: z + IC_vec → allocation_weights ΔK
     ↓ SizingFn: allocation_weights → base positions
-    ↓ confidence_scalar applied as post-sizing multiplier
+    ↓ confidence_scalar applied as post-sizing multiplier (default contract)
+    ↓ (pilot / ADR-gated) uncertainty-aware routing — not default; see Core §2.5.2
+    ↓ Structured post-allocator conditioning (II-D target): turnover / liquidity / capacity / drawdown overlays
     ↓ RiskFn → Orders → Fills → Ledger
 ```
+
+**Vision note.** Layer **D** (post-allocator conditioning) is **visibly separate** from allocator “intelligence.” Near-term value may concentrate there **without** proving allocator superiority; allocator proof remains its own **net-of-cost** comparison to the simpler baseline.
 
 ---
 
@@ -572,8 +601,8 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 | Feature-path integrity | 4.3.0 closed the single-path governed feature execution lock and expanded the canonical op floor. |
 | Governed strategy slices | 4.4.0 landed `stat_arb_pairs` on the trusted path; 4.5.x materially advanced the governed momentum package spine and bundle-facing reporting. |
 | Signal identity and governance substrate | 4.5.0–4.5.4 added SignalCatalog with stable `slot_index`, `screening_report.json`, stricter governed statistical-validity/cost artifacts, DataLineageGate, artifact-registry-owned hashing/canonicalization boundaries, evidence-backed canonical-frame CI reporting, and Phase I-E companion-doc closure. |
-| Documentation baseline | **4.9.0** carries the F-2 planning-surface sync over the Phase I-F-1 truth baseline; Phase I-A–I-E gates remain closed; **GATE-I-F** and follow-on OI items remain open per Resolution Ledger **v1.0.6**. |
-| Remaining Phase I / II boundary items | OI-15 golden-vector certification, governed momentum follow-ons (`MOM-020`, **`OI-34`** crash-trigger adapter, `OI-32`), and remaining **Phase I-F** tasks are tracked in Resolution Ledger **v1.0.6**. |
+| Documentation baseline | **4.18.5** carries forward **MLN-02-AMD-01** (Level 2 `crisis` severity gate per Architecture Vision §4.2; **RG09-V12** in `rg09_gate_spec.md`), closes **OI-43** (governed RG-09 replay fixture for II-0A entry), implements the bounded **II-0A** harness/gate path (**4.18.2**), closes **OI-39** at **4.18.5** (`paper_trade_sim_spec.md`), and aligns the II-0 empirical `meta_validity_report_research.json` research scaffold to Appendix B.1 unavailable-field expectations (non-promotable). Prior baseline **4.17.0** closed MOM-020 on the governed momentum comparison lane. Companion suite stamps advance per §14 DOCMAP (Implementation Plan **6.4.26**, Technical Roadmap **1.4.21**, Core **1.2.19**, this document **1.2.20**, Resolution Ledger **1.0.21**, README **4.18.5**). Phase I-A through I-F remain closed on the canonical path. |
+| Remaining Phase I-G / II boundary items | **RG-09** empirical closure (**PARTIAL**; replay fixture satisfied, **II-0A** harness implemented, II-0 empirical research scaffold at **4.18.5**; promotion-level empirical decision still open), governed momentum follow-ons (**`OI-34`**, **`OI-32`**), Phase II normative locks (**MLN-01**–**07**), and **OI-15** golden-vector work are tracked in Resolution Ledger **v1.0.32**. |
 
 ---
 
@@ -581,6 +610,11 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Release | Date | Architecture Vision impact |
 |---|---|---|
+| 1.2.20 | April 2026 | Companion-sync: documentation baseline advanced to **4.18.5** / **1.0.21**; **OI-39** closed; II-0A harness and II-0 empirical meta-validity scaffold treated as implemented; §13.2 and DOCMAP updated; full RG-09 empirical closure remains **PARTIAL**. |
+| 1.2.19 | March 2026 | §4.2 **MLN-02-AMD-01:** Level 2 `crisis` is `vol_hi AND severity_flag` (PIT-safe expanding `vol_score_raw` percentile ≥ p90, **RG09-V12** ⚑ VALIDATE); explicit BOCPD-as-segmentation-primitive note; historical crisis frequency tagged ⚑ VALIDATE. Companion stamps → **4.18.0** / **6.4.23** / **1.0.19**. |
+| 1.2.18 | March 2026 | Companion stamp sync: DOCMAP/SOURCE_STAMP to **4.17.0** / **6.4.22** / **1.0.18**; §13.2 documentation-baseline rows updated so MOM-020 is closed rather than listed as a remaining boundary item; no architectural thesis change. |
+| 1.2.17 | March 2026 | Companion stamp sync: DOCMAP/SOURCE_STAMP to **4.16.0** / **6.4.21** / **1.0.17**; §13.2 documentation-baseline rows updated for **OI-37**/**OI-38** closure and current ledger; no architectural thesis change. |
+| 1.2.16 | March 2026 | §1.5 hierarchical target A–D + three seriousness layers; inference flow shows post-allocator conditioning and non-default routing; §4.3 routing pilot callout; multi-timescale vision note. |
 | 1.2.14 | March 2026 | F-1/F-2 planning baseline carried forward; this edition adds forward-compatibility notes for RiskFn, signal admission, and alternative-data contracts while keeping signal-factory and frontier topics explicitly later-phase. |
 | 2.0.0 | March 2026 | Major revision aligned to Core v2.0.0. Rewrote Purpose to remove "closes every remaining open question" framing; added Decision Framing, Validation-Gated Defaults, Promotion/Rollback/Kill, and Observability sections; refreshed implemented-substrate references through VERSION.md 4.5.4. |
 | 1.2.12 | March 2026 | Prior companion-edition framing: committed architectural decisions, interface contracts, and held-out crisis protocol aligned through the 4.5.2 suite. |
@@ -594,19 +628,19 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Architecture Vision | 1.2.15 | High-level architectural vision and system framing |
-| Implementation Plan | 6.4.15 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.16 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Core | 1.2.14 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Resolution Ledger | 1.0.7 | Resolution ledger and workflow state dashboard |
-| README.md | 4.9.1 | Suite overview, current status, and navigation |
-| VERSION.md | 4.9.1 | Canonical release ledger |
+| Meta-Learning Architecture Vision | 1.2.20 | High-level architectural vision and system framing |
+| Implementation Plan | 6.4.29 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.21 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Core | 1.2.19 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Resolution Ledger | 1.0.40 | Resolution ledger and workflow state dashboard |
+| README.md | 4.18.12 | Suite overview, current status, and navigation |
+| VERSION.md | 4.18.28 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Meta-Learning Architecture Vision v1.2.15 · March 2026 · Companion to Implementation Plan v6.4.15 · Technical Roadmap v1.4.16 · Meta-Learning Core v1.2.14 · Resolution Ledger v1.0.7 · README.md 4.9.1 · VERSION.md 4.9.1*
+*Meta-Learning Architecture Vision v1.2.20 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
 
 <!-- MM:END:SOURCE_STAMP -->
 
