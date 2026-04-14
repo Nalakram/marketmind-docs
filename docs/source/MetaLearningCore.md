@@ -3,9 +3,9 @@
 **Meta-Learning Core**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.2.19 · April 2026 · Proprietary
+Version 1.2.24 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Research agenda supplement — task definition, training mechanics, empirical validation program, and acceptance criteria*
@@ -20,13 +20,13 @@ Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 ·
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Core | 1.2.19 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Implementation Plan | 6.4.32 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.21 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Architecture Vision | 1.2.20 | High-level architectural vision and system framing |
-| Resolution Ledger | 1.0.40 | Resolution ledger and workflow state dashboard |
-| README.md | 4.18.12 | Suite overview, current status, and navigation |
-| VERSION.md | 4.18.28 | Canonical release ledger |
+| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
+| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
+| README.md | 6.2.2 | Suite overview, current status, and navigation |
+| VERSION.md | 6.2.2 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
@@ -765,6 +765,7 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 | Release | Date | Meta-Learning Core impact |
 |---|---|---|
+| 1.2.24 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **`VERSION.md` 6.2.2**, Implementation Plan **6.5.5**, Resolution Ledger **1.0.51**, Architecture Vision **1.3.5**; baseline framing now records the frozen strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1` and the explicit **XGBoost incumbent** comparison boundary; no change to Core proof obligations or acceptance hierarchy. |
 | 1.2.19 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.5**, Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**; no Core semantics change. |
 | 1.2.18 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.0**, Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**; no Core semantics change. |
 | 1.2.17 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.17.0**, Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**; no Core semantics change. |
@@ -779,7 +780,7 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Source: This document v1.2.19 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
+*Source: This document v1.2.24 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

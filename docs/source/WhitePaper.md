@@ -11,12 +11,12 @@ Meta-Learning Enabled Computational Trading System
 **Positioning:** A governed research and allocation platform for regime-adaptive signal combination, with promotion contingent on outperformance versus simpler alternatives.
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 2.2.12 · April 2026 · Proprietary
+Version 2.2.13 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
-**Version:** 2.2.12
+**Version:** 2.2.13
 
 **Date:** 2026-04-01
 
@@ -35,6 +35,7 @@ Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 ·
 MarketMind is a validation-first algorithmic trading research platform built to confront the central challenge of financial markets: non-stationarity. Signals decay, correlation structures break, execution conditions shift, and strategies that appear strong in one regime often degrade when the regime changes that matter most. MarketMind’s current strength is not that it already possesses a validated adaptive allocator. Its strength is the **governed substrate**: point-in-time data handling, leakage-aware backtesting, deterministic artifact lineage, statistical and lineage gatekeeping, and a canonical bundle workflow that makes research claims auditable—together with **survivability machinery** (rollback, staged promotion, auditability) that functions as **insurance**, not a guarantee of alpha. **Near-term practical value may depend as much on deployment discipline and structured post-allocator conditioning as on unproven allocator sophistication**; those layers do not substitute for honest baseline comparison, but they are part of a serious capital-allocation story. On top of the substrate, MarketMind proposes a meta-learning allocator that would learn to recombine signals across **market tasks** (regime-, friction-, and state-bounded episodes), not merely fit timestamped returns. The economic hypothesis is **task-dependent** signal efficacy and **reusable adaptation** across episodes. The platform still operates on a **narrow governed signal base**. **Written policies** for how that base may widen and how non-standard data may become evaluation-eligible are published, and the governed momentum comparison lane is now closed through artifact-driven child-owned CPCV evaluation (**4.17.0**); **4.18.0** further aligns **Level 2 `crisis`** with a PIT-safe volatility-severity projection (**MLN-02-AMD-01**, **RG09-V12**, Architecture Vision §4.2); **4.18.2** adds the bounded RG-09 II-0A harness and gate artifacts against the governed replay-fixture baseline. **4.18.5** closes **OI-39** (paper-trading simulation handoff in `paper_trade_sim_spec.md`) and aligns the RG-09 II-0 empirical `meta_validity_report_research.json` research scaffold (non-promotable; Appendix B.1 field expectations). Those releases do **not** claim live breadth expansion, an alternative-data pipeline, full RG-09 empirical program closure (**PARTIAL** remains), or Phase IV-scale factory automation. **Breadth at scale** remains conditional future scope under strict governance. The meta-allocator is **not** presented as proven. It is a **governed hypothesis** that must beat the **simpler regime-conditioned baseline net of costs and burden**, demonstrate inner-loop adaptation where tasks justify it, preserve robustness under continual updates where promoted, and respect crisis holdouts. **Uncertainty-aware routing** is a **pilot** idea layered on **`confidence_scalar` attenuation**, not assumed default behavior. The platform combines rigorous infrastructure now with a validation-gated path toward adaptive allocation **only if** evidence—and frictions-aware evaluation—justify it.
 
 <!-- MM:BEGIN:RELEASE_NOTE key="WhitePaper" -->
+> ✦ v2.2.13: Companion stamps aligned to **`VERSION.md` 6.2.2** (**6.5.5** / **1.4.26** / **1.2.24** / Architecture Vision **1.3.5** / Ledger **1.0.51** / README **6.2.2**). Abstract and §10 acknowledge companion-recorded **WS-1 / WS-2 / WS-3** and **II-0A** completion, the frozen strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1`, and the explicit **XGBoost incumbent** baseline boundary for Phase II comparison. No change to economic thesis.
 > ✦ v2.2.12: Companion stamps aligned to the **4.18.5** suite (**6.4.32** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.40** / README **4.18.12** & **VERSION.md 4.18.28**). Abstract, §3.1, and §10 updated: **OI-39** closed; RG-09 II-0 empirical `meta_validity_report_research.json` scaffold alignment; full RG-09 empirical closure remains **PARTIAL**. No change to economic thesis.
 > ✦ v2.2.11: Companion stamps aligned to the **4.18.3** suite (**6.4.25** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.20** / README & **VERSION.md 4.18.3**). Abstract, §1.1, and §10 updated so the RG-09 II-0A bounded harness/gate path is treated as implemented at **4.18.2** while empirical closure remains open. No change to economic thesis.
 > ✦ v2.2.10: Companion stamps aligned to the **4.18.1** suite (**6.4.24** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.20** / README & **VERSION.md 4.18.1**). Abstract, §1.1, and §10 updated so RG-09 is no longer described as blocked on replay-fixture production; remaining work is II-0A and empirical closure. No change to economic thesis.
@@ -137,7 +138,7 @@ The platform’s economic thesis is that categories of signal opportunity—tren
 
 ## 3.1 Governed Research Substrate
 
-As of the **4.18.5** companion baseline (**4.18.5**: **OI-39** closed; RG-09 II-0 empirical `meta_validity_report_research.json` research scaffold aligned; **4.18.2**: bounded RG-09 II-0A harness/gate path implemented against the governed replay-fixture baseline; **4.18.1**: OI-43 closed with the governed RG-09 replay fixture artifact recorded in the ledger; **4.17.0**: MOM-020 closed on the governed comparison lane; **MLN-02-AMD-01**: Level 2 `crisis` severity gate; Phase I-G policy documents for signal-universe expansion and alt-data admissibility published at **4.16.0**; Phase I-F closed at **4.12.2**/**4.12.3**; engineering substrate through **4.5.4** recorded in `VERSION.md`), MarketMind has:
+As of the **4.18.5** companion baseline (**4.18.5**: **OI-39** closed; RG-09 II-0 empirical `meta_validity_report_research.json` research scaffold aligned; **4.18.2**: bounded RG-09 II-0A harness/gate path implemented against the governed replay-fixture baseline; **4.18.1**: OI-43 closed with the governed RG-09 replay fixture artifact recorded in the ledger; **4.17.0**: MOM-020 closed on the governed comparison lane; **MLN-02-AMD-01**: Level 2 `crisis` severity gate; Phase I-G policy documents for signal-universe expansion and alt-data admissibility published at **4.16.0**; Phase I-F closed at **4.12.2**/**4.12.3**; engineering substrate through **4.5.4** recorded in `VERSION.md`; extended by **`VERSION.md` 6.2.2** with companion-recorded **WS-1**/**WS-2**/**WS-3** and **II-0A** completion, a frozen strict-H3 RG-09 task-validity reference anchor at `run_bundles/rg09_reference_v1`, and explicit Phase II **XGBoost incumbent** baseline framing), MarketMind has:
 
 - canonical orchestration and governed bundle emission,
 - PIT-safe source and feature-path seams on the trusted path,
@@ -415,6 +416,7 @@ The strategic question, however, is not only whether MarketMind can prevent fals
 
 | Release | Date | White Paper impact |
 |---|---|---|
+| 2.2.13 | April 2026 | Companion stamps to **`VERSION.md` 6.2.2** (**6.5.5** / **1.4.26** / **1.2.24** / Architecture Vision **1.3.5** / Ledger **1.0.51** / README **6.2.2**); abstract §10 acknowledges **WS-1**/**WS-2**/**WS-3** and **II-0A** completion, frozen RG-09 reference anchor at `run_bundles/rg09_reference_v1`, and **XGBoost incumbent** baseline boundary; no economic thesis change. |
 | 2.2.12 | April 2026 | Companion stamps to the **4.18.5** suite (**6.4.32** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.40**); abstract §3.1 §10 updated for **OI-39** closure and RG-09 II-0 empirical meta-validity scaffold; full RG-09 empirical closure remains **PARTIAL**; no economic thesis change. |
 | 2.2.11 | March 2026 | Companion stamps to the **4.18.3** suite (**6.4.25** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.20**); abstract §1.1 §3.1 §10 updated so the RG-09 II-0A bounded harness is treated as implemented at **4.18.2** while empirical closure remains open; no economic thesis change. |
 | 2.2.10 | March 2026 | Companion stamps to the **4.18.1** suite (**6.4.24** / **1.4.21** / **1.2.19** / Architecture Vision **1.2.20** / Ledger **1.0.20**); abstract §1.1 §3.1 §10 updated so replay-fixture production is treated as satisfied and II-0A remains the pending RG-09 path; no economic thesis change. |
@@ -435,7 +437,7 @@ The strategic question, however, is not only whether MarketMind can prevent fals
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*White Paper v2.2.12 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
+*White Paper v2.2.13 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

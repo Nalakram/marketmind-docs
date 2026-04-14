@@ -7,9 +7,9 @@
 README & Technical Overview
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 4.18.12 · April 2026 · Proprietary
+Version 6.2.2 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -76,7 +76,7 @@ The following design pillars remain non-negotiable whether the final promoted al
 
 ## 1.3 What Works Today
 
-The implemented platform is strongest where research truthfulness matters most. Companion and ledger truth are current through **`VERSION.md` 4.18.28**; the Phase I-F-2 planning-surface milestone remains **4.9.0**, and Phase I-E engineering delivery remains anchored at **`4.5.4`** in the version ledger. MarketMind already has:
+The implemented platform is strongest where research truthfulness matters most. Companion and ledger truth are current through **`VERSION.md` 6.2.2** (Resolution Ledger **v1.0.51**); prior **4.18.x** milestones remain documented in `VERSION.md` history; the Phase I-F-2 planning-surface milestone remains **4.9.0**, and Phase I-E engineering delivery remains anchored at **`4.5.4`** in the version ledger. MarketMind already has:
 
 - a canonical bundle-producing orchestration path,
 - PIT-safe daily source adaptation on the governed path,
@@ -127,7 +127,7 @@ If the two documents appear to disagree, Core governs on evidence and proof requ
 > .\docs\release-docs.ps1 all X.Y.Z
 > ```
 
-**Current release context:** `VERSION.md` is at **4.18.28**. The earlier unsuccessful RG-09 surfaces remain true and still matter: the historical H1 transition base with fixture `sha256:07b28854ab30099bbe548ea77ec677122290c9412b6f451bd88fdb8ed781bfa9` remained `NEEDS_MORE_EVIDENCE / FAIL_NONREPRODUCIBLE`; H4 at `runs/rg09_h4_market_class_risk` stayed a non-reproducible failed rescue on the narrowed `ES,NQ,RTY,YM,SPY,HYG,VIX` basket; and proper H2 at `runs/rg09_h2_cross_sectional` removed the non-reproducibility failure mode but still remained below threshold statistically on a reproducible surface. The new authoritative learning is the executed H3 strict successor surface at `runs/rg09_h3_granularity`: `vol_window = 120`, `trend_flat_epsilon = 0.01`, `vol_bucket_method = quintile`, `crisis_vol_score_percentile = 95.0`, fixture `sha256:d38639a4f2cb8be5e0c57cd1fdaa3750b8a26336b93dd907a6b0f2b9d289e11c`, `decision = PASS`, `decision_reason = "All required RG-09 evidence families passed."`, `reproducibility_consistent = true`, `fail_codes = []`, and `trainer_commitment_unlocked = true`, with both folds passing overall/statistical/structural/functional lanes and **86 admissible episodes**. A nearby H3 p85 sensitivity control failed kill with `FAIL_EXCHANGEABLE_TASKS` on the same admissible-episode count (**86**), with `crisis rows = 12903` and `high_vol rows = 0`, which is why the current docs now say the strict p95 successor surface rescued RG-09 as a promotable path under the tested H3 neighborhood rather than treating the line as dead. The strongest supported lesson is careful rather than sweeping: within the tested H3 neighborhood, crisis-label strictness appears to be the decisive lever because the passing p95 surface preserved crisis/high_vol separation while the looser p85 surface collapsed high_vol into crisis. The docs also keep the limitation explicit: the attached evidence does not fully isolate whether `vol_window = 120` and `trend_flat_epsilon = 0.01` are individually necessary. Because the emitted harness still uses the base-field hypothesis identity `RG09-H1`, the companion suite identifies this as an H3 successor surface evaluated through the base harness, not as proof that H1 passed.
+**Current release context:** `VERSION.md` is at **6.2.2**. Companion documents and the Resolution Ledger now record **WS-1**, **WS-2**, **WS-3**, and **II-0A** as **complete**, with the strict-H3 RG-09 **task-validity reference anchor** frozen at `run_bundles/rg09_reference_v1` (reproduction + drift checks in the implementation repository). Phase II comparison language keeps the **XGBoost incumbent** as the explicit baseline boundary—**not** the reference anchor. **`VERSION.md` 6.2.2** also captures companion-document synchronization, release-docs/DOCX CI repair, and manifest planning from an explicit **6.2.1** base. Historical RG-09 lines—including H1/H2/H4 attempts and the strict H3 successor PASS at `runs/rg09_h3_granularity` with **86 admissible episodes** and the nearby p85 `FAIL_EXCHANGEABLE_TASKS` sensitivity control—remain valid governed context in the ledger and in earlier `VERSION.md` entries; they are not erased, but the **6.2.2** audit baseline leads with reference-anchor freeze and II-0A companion completion.
 
 ## 2.1 What Works vs What Does Not Yet Exist
 
@@ -355,13 +355,13 @@ The managed suite DOCMAP below covers the bumpable companion set. The white pape
 
 | Document | Version | Role |
 |---|---:|---|
-| README.md | 4.18.12 | Suite overview, current status, and navigation |
-| Implementation Plan | 6.4.32 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.21 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Core | 1.2.19 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Meta-Learning Architecture Vision | 1.2.20 | High-level architectural vision and system framing |
-| Resolution Ledger | 1.0.40 | Resolution ledger and workflow state dashboard |
-| VERSION.md | 4.18.28 | Canonical release ledger |
+| README.md | 6.2.2 | Suite overview, current status, and navigation |
+| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
+| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
+| VERSION.md | 6.2.2 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
@@ -373,6 +373,7 @@ MarketMind follows Semantic Versioning (`MAJOR.MINOR.PATCH`). See `VERSION.md` f
 
 | Release | Date | Highlights |
 |---|---|---|
+| 6.2.2 | April 2026 | Companion sync and release-docs/DOCX CI repair; **WS-1**/**WS-2**/**WS-3** and **II-0A** recorded complete; strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1`; explicit **XGBoost incumbent** boundary; manifest planning from **6.2.1** base; companion stamps **6.5.5 / 1.4.26 / 1.2.24 / 1.3.5 / 1.0.51**. |
 | 4.18.28 | April 2026 | Strict H3 successor surface at `runs/rg09_h3_granularity` recorded as a `PASS` with `trainer_commitment_unlocked = true`; nearby p85 sensitivity control failed with `FAIL_EXCHANGEABLE_TASKS` after collapsing `high_vol` into `crisis`; RG-09 current posture is reopened on the stricter H3 surface; companion stamps **6.4.32 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.40**. |
 | 4.18.27 | April 2026 | Proper H2 cross-sectional run recorded alongside H4: H4 remained a `FAIL_NONREPRODUCIBLE` rescue failure, while H2 was reproducible enough to evaluate but stayed below threshold statistically; RG-09 closed for this phase as a promotable path; companion stamps **6.4.31 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.39**. |
 | 4.18.26 | April 2026 | Executed H4 market-class rescue attempt recorded at `runs/rg09_h4_market_class_risk`: `NEEDS_MORE_EVIDENCE` / `FAIL_NONREPRODUCIBLE` on the narrowed 7-entity risk basket; RG-09 terminated for this phase as a promotable path; companion stamps **6.4.30 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.38**. |
@@ -383,7 +384,7 @@ MarketMind follows Semantic Versioning (`MAJOR.MINOR.PATCH`). See `VERSION.md` f
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*MarketMind README v4.18.12 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · VERSION.md 4.18.28*
+*MarketMind README v6.2.2 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · VERSION.md 6.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

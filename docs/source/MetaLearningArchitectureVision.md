@@ -3,9 +3,9 @@
 **Meta-Learning Architecture Vision**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.2.20 · April 2026 · Proprietary
+Version 1.3.5 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -590,7 +590,7 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 | Strategy layer | Optional imports tolerated; StrategyRegistry raises actionable errors; dual feature path (ADR-001) in `materialize_features`. |
 | Test architecture | `conftest` thinned; reusable `_plugins` for seeds, data, hardware, and stats. |
 
-## 13.2 Post-3.6.0 Additions (through v4.8.0 companion baseline, March 2026)
+## 13.2 Post-3.6.0 Additions (through **`VERSION.md` 6.2.2** companion baseline, April 2026)
 
 | Area | Update |
 |---|---|
@@ -601,8 +601,8 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 | Feature-path integrity | 4.3.0 closed the single-path governed feature execution lock and expanded the canonical op floor. |
 | Governed strategy slices | 4.4.0 landed `stat_arb_pairs` on the trusted path; 4.5.x materially advanced the governed momentum package spine and bundle-facing reporting. |
 | Signal identity and governance substrate | 4.5.0–4.5.4 added SignalCatalog with stable `slot_index`, `screening_report.json`, stricter governed statistical-validity/cost artifacts, DataLineageGate, artifact-registry-owned hashing/canonicalization boundaries, evidence-backed canonical-frame CI reporting, and Phase I-E companion-doc closure. |
-| Documentation baseline | **4.18.5** carries forward **MLN-02-AMD-01** (Level 2 `crisis` severity gate per Architecture Vision §4.2; **RG09-V12** in `rg09_gate_spec.md`), closes **OI-43** (governed RG-09 replay fixture for II-0A entry), implements the bounded **II-0A** harness/gate path (**4.18.2**), closes **OI-39** at **4.18.5** (`paper_trade_sim_spec.md`), and aligns the II-0 empirical `meta_validity_report_research.json` research scaffold to Appendix B.1 unavailable-field expectations (non-promotable). Prior baseline **4.17.0** closed MOM-020 on the governed momentum comparison lane. Companion suite stamps advance per §14 DOCMAP (Implementation Plan **6.4.26**, Technical Roadmap **1.4.21**, Core **1.2.19**, this document **1.2.20**, Resolution Ledger **1.0.21**, README **4.18.5**). Phase I-A through I-F remain closed on the canonical path. |
-| Remaining Phase I-G / II boundary items | **RG-09** empirical closure (**PARTIAL**; replay fixture satisfied, **II-0A** harness implemented, II-0 empirical research scaffold at **4.18.5**; promotion-level empirical decision still open), governed momentum follow-ons (**`OI-34`**, **`OI-32`**), Phase II normative locks (**MLN-01**–**07**), and **OI-15** golden-vector work are tracked in Resolution Ledger **v1.0.32**. |
+| Documentation baseline | Prior milestones through **4.18.5** remain true as substrate history (**MLN-02-AMD-01**, **OI-43**, bounded **II-0A** harness path, **OI-39**, II-0 empirical research scaffold). The **`VERSION.md` 6.2.2** companion advance records **WS-1 / WS-2 / WS-3** and **II-0A** completion in companion truth, freezes the strict-H3 RG-09 **task-validity reference anchor** at `run_bundles/rg09_reference_v1`, and keeps the Phase II **challenger-vs-incumbent** comparison boundary explicit: predicates for allocator comparison reference the **XGBoost incumbent**, not the RG-09 reference anchor. Companion suite stamps advance per §14 DOCMAP (Implementation Plan **6.5.5**, Technical Roadmap **1.4.26**, Core **1.2.24**, this document **1.3.5**, Resolution Ledger **1.0.51**, README **6.2.2**). Phase I-A through I-F remain closed on the canonical path. |
+| Remaining Phase I-G / II boundary items | **RG-09** promotion-level empirical closure may still be tracked as **PARTIAL** where the ledger distinguishes reference-anchor diagnostics from allocator promotion evidence; governed momentum follow-ons (**`OI-34`**, **`OI-32`**), Phase II normative locks (**MLN-01**–**07**), and **OI-15** golden-vector work remain active where open in Resolution Ledger **v1.0.51**. |
 
 ---
 
@@ -610,6 +610,7 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Release | Date | Architecture Vision impact |
 |---|---|---|
+| 1.3.5 | April 2026 | Companion-sync to **`VERSION.md` 6.2.2**: title-page, §13.2, DOCMAP, and SOURCE_STAMP advanced; **WS-1 / WS-2 / WS-3** and **II-0A** recorded complete in companion truth; **§13.2** documents the frozen RG-09 reference anchor path and incumbent-vs-anchor boundary. |
 | 1.2.20 | April 2026 | Companion-sync: documentation baseline advanced to **4.18.5** / **1.0.21**; **OI-39** closed; II-0A harness and II-0 empirical meta-validity scaffold treated as implemented; §13.2 and DOCMAP updated; full RG-09 empirical closure remains **PARTIAL**. |
 | 1.2.19 | March 2026 | §4.2 **MLN-02-AMD-01:** Level 2 `crisis` is `vol_hi AND severity_flag` (PIT-safe expanding `vol_score_raw` percentile ≥ p90, **RG09-V12** ⚑ VALIDATE); explicit BOCPD-as-segmentation-primitive note; historical crisis frequency tagged ⚑ VALIDATE. Companion stamps → **4.18.0** / **6.4.23** / **1.0.19**. |
 | 1.2.18 | March 2026 | Companion stamp sync: DOCMAP/SOURCE_STAMP to **4.17.0** / **6.4.22** / **1.0.18**; §13.2 documentation-baseline rows updated so MOM-020 is closed rather than listed as a remaining boundary item; no architectural thesis change. |
@@ -628,19 +629,19 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Architecture Vision | 1.2.20 | High-level architectural vision and system framing |
-| Implementation Plan | 6.4.29 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.21 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Core | 1.2.19 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Resolution Ledger | 1.0.40 | Resolution ledger and workflow state dashboard |
-| README.md | 4.18.12 | Suite overview, current status, and navigation |
-| VERSION.md | 4.18.28 | Canonical release ledger |
+| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
+| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
+| README.md | 6.2.2 | Suite overview, current status, and navigation |
+| VERSION.md | 6.2.2 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Meta-Learning Architecture Vision v1.2.20 · April 2026 · Companion to Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
+*Meta-Learning Architecture Vision v1.3.5 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

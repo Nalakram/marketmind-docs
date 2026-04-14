@@ -7,7 +7,7 @@
 <!-- MM:BEGIN:TITLEPAGE -->
 Version 1.0.0 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Governed doctrine for point-in-time access, dataset visibility, universe membership, vintage handling, and lineage discipline*

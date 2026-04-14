@@ -3,9 +3,9 @@
 **Technical Roadmap & Feature Plan**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.4.21 · April 2026 · Proprietary
+Version 1.4.26 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Strategic build order, research sequencing, and go/no-go checkpoints*
@@ -30,7 +30,7 @@ This inventory separates what is real today from what is governed future scope.
 |---|---|---|
 | Canonical research substrate | PIT-safe orchestration, governed bundle emission, lineage, statistical-validity artifacts, and cost assumptions are real | Later phases must extend this substrate rather than fork it |
 | Governed strategies and signals | `stat_arb_pairs`, materially advanced momentum, SignalCatalog, and stable `slot_index` exist | Broader governed breadth and signal-factory lifecycle remain later work |
-| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, CI discipline, and bundle-local immutable evaluation surfaces are mature on the trusted path | MetaTask-era evidence and meta-validity reporting are not built |
+| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, CI discipline, and bundle-local immutable evaluation surfaces are mature on the trusted path; companion truth through **`VERSION.md` 6.2.2** records **II-0A** workstreams complete with a frozen RG-09 task-validity reference anchor | Promotable `meta_validity_report.json` gate path on allocator runs and full MetaTask-era promotion evidence remain future scope |
 | Meta-learning contracts | Runtime shape and proof burden are documented in the companion suite | Context encoder, task generator, trainer, allocator, and rollout control are still unbuilt |
 | Execution realism | Governed execution assumptions exist as artifacts | TCA loops, paper/live control flow, broker integration, and low-latency paths remain conditional |
 
@@ -281,6 +281,7 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 | Release | Date | Technical Roadmap impact |
 |---|---|---|
+| 1.4.26 | April 2026 | Companion-sync to **`VERSION.md` 6.2.2** (Implementation Plan **6.5.5**, Core **1.2.24**, Architecture Vision **1.3.5**, Ledger **1.0.51**, README **6.2.2**): companion truth records **WS-1 / WS-2 / WS-3** and **II-0A** complete; strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1`; Phase II baseline comparison remains explicit against the **XGBoost incumbent** (not the reference anchor). Roadmap guardrails unchanged. |
 | 1.4.21 | April 2026 | Companion-sync: title-page and stamps advanced through **4.18.5** (Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**, README/VERSION **4.18.5**); **OI-39** closed; RG-09 II-0A harness and II-0 empirical research scaffold treated as implemented at **4.18.2** / **4.18.5**; full RG-09 empirical closure remains **PARTIAL**. |
 | 1.4.20 | March 2026 | Companion-sync: title-page and stamps advanced through **4.18.0** (Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**, README/VERSION **4.18.0**); MLN-02-AMD-01 crisis redefinition is part of the active baseline. Roadmap sequencing otherwise unchanged. |
 | 1.4.19 | March 2026 | Companion-sync: title-page and stamps advanced through **4.17.0** (Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**, README/VERSION **4.17.0**); MOM-020 closure is now part of the active baseline rather than a parallel/open comparison track. Roadmap sequencing otherwise unchanged. |
@@ -296,7 +297,7 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Technical Roadmap v1.4.21 · April 2026 · Companion to Implementation Plan v6.4.32 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · Resolution Ledger v1.0.40 · README.md 4.18.12 · VERSION.md 4.18.28*
+*Technical Roadmap v1.4.26 · April 2026 · Companion to Implementation Plan v6.5.5 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

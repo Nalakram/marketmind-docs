@@ -1,7 +1,7 @@
 <!--
-  MRL_VERSION: 1.0.40
-  CODEBASE_VERSION: 4.18.28
-  LAST_UPDATED: 2026-04-05
+  MRL_VERSION: 1.0.51
+  CODEBASE_VERSION: 6.2.2
+  LAST_UPDATED: 2026-04-14
   MAINTAINER: Mark / MindForgeLabs
   SOURCE: Populated from MarketMind_ProjectState_v4_4_0.html
   STATUS_COUNTS_AUTO: false
@@ -20,9 +20,9 @@
 **Resolution Ledger**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.0.40 · April 2026 · Proprietary
+Version 1.0.51 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.4.32 · Technical Roadmap v1.4.21 · Meta-Learning Core v1.2.19 · Meta-Learning Architecture Vision v1.2.20 · README.md 4.18.12 · VERSION.md 4.18.28
+Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · README.md 6.2.2 · VERSION.md 6.2.2
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -133,7 +133,9 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 
 ## 1.5 Program execution posture — RG-09 H3 successor rescue, sensitivity control, and live promotable posture
 
-**RG-09 remains `PARTIAL` (not `CLOSED`).** This section records what the evidence does and does **not** justify after the historical H1 failure, the unsuccessful H4 and proper H2 successor surfaces, and the later executed H3 strict-granularity successor surface that passed. It also supersedes earlier draft closeout language that treated RG-09 as dead for this phase: the current governed posture is that RG-09 is again a **promotable** decision path, but only on the stricter H3 successor surface documented below.
+**RG-09 remains `PARTIAL` (not `CLOSED`)** where the ledger still tracks promotion-level empirical closure separately from diagnostic harness completion. **`VERSION.md` 6.2.2** records companion alignment after CI confirmation: **WS-1**, **WS-2**, **WS-3**, and **II-0A** are registered **complete** in companion truth; the **strict-H3 RG-09 task-validity reference anchor** is frozen at `run_bundles/rg09_reference_v1` with reproduction and drift workflows. Phase II **challenger-vs-incumbent** language keeps the **XGBoost incumbent** baseline explicit—**not** the reference-anchor bundle.
+
+This section records what the evidence does and does **not** justify after the historical H1 failure, the unsuccessful H4 and proper H2 successor surfaces, and the later executed H3 strict-granularity successor surface that passed. It also supersedes earlier draft closeout language that treated RG-09 as dead for this phase: the current governed posture is that RG-09 is again a **promotable** decision path, but only on the stricter H3 successor surface documented below.
 
 ### What the evidence says
 
