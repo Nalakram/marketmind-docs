@@ -468,8 +468,7 @@ True frontier ideas remain later, non-default expansion:
 
 - [`risk_protocol.md`](risk_protocol.md) — RiskFn Protocol and allocator-to-risk boundary.
 - [`signal_generation_protocol.md`](signal_generation_protocol.md) — signal admission, expansion, and retirement policy.
-- [`signal_universe_expansion_policy.md`](signal_universe_expansion_policy.md) — conditions for growing the narrow governed base; expansion gates; Phase IV as serious expansion home.
-- [`alt_data_admissibility.md`](alt_data_admissibility.md) — PIT, provenance, and replay contract for non-standard data sources (evaluation eligibility, not signal admission).
+- **Signal-universe expansion policy and alt-data admissibility (v4.16.0):** Published with **OI-37** and **OI-38** closure; full text lives in the implementation repository (`docs/src/` paths in ledger). In this docs export, see [ResolutionLedger.md](ResolutionLedger.md) (entries **OI-37**, **OI-38**) and [signal_generation_protocol.md](signal_generation_protocol.md) for related governed signal-universe rules.
 - [`task_validity_pilot_report.md`](task_validity_pilot_report.md) — first task-validity / non-exchangeability evidence surface.
 - [`paper_trade_sim_spec.md`](paper_trade_sim_spec.md) — Phase III handoff spec for paper-trading realism.
 

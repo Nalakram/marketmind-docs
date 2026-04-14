@@ -1,3 +1,6 @@
+# Sphinx (local HTML build; regenerate with sphinx-build, do not commit)
+docs/_build/
+
 # === AI coding assistants ===
 .claude/
 .codex/
