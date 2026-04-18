@@ -9,7 +9,6 @@ Attributes
 
 .. autoapisummary::
 
-   srcPy.pipeline.core.pipeline_core_base.StepRegistry
    srcPy.pipeline.core.pipeline_core_base.InT
    srcPy.pipeline.core.pipeline_core_base.OutT
    srcPy.pipeline.core.pipeline_core_base.Engine
@@ -43,11 +42,6 @@ Classes
 
 Module Contents
 ---------------
-
-.. py:data:: StepRegistry
-   :type:  Any
-   :value: Ellipsis
-
 
 .. py:class:: StepRegistry
 
@@ -114,7 +108,7 @@ Module Contents
 
 
 
-.. py:class:: ErrorCode
+.. py:class:: ErrorCode(*args, **kwds)
 
    Bases: :py:obj:`enum.Enum`
 

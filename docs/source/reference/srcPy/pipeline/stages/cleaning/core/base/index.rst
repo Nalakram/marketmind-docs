@@ -4,14 +4,6 @@ srcPy.pipeline.stages.cleaning.core.base
 .. py:module:: srcPy.pipeline.stages.cleaning.core.base
 
 
-Attributes
-----------
-
-.. autoapisummary::
-
-   srcPy.pipeline.stages.cleaning.core.base.PolarsDataFrame
-
-
 Exceptions
 ----------
 
@@ -32,11 +24,6 @@ Classes
 
 Module Contents
 ---------------
-
-.. py:data:: PolarsDataFrame
-   :type:  Any
-   :value: Ellipsis
-
 
 .. py:class:: PolarsDataFrame
 

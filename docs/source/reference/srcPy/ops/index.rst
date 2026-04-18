@@ -44,7 +44,6 @@ Functions
    srcPy.ops.hash_dataframe_deterministic
    srcPy.ops.versioned_key
    srcPy.ops.configure_logger
-   srcPy.ops.multi_tier_cache
    srcPy.ops.get_logger
    srcPy.ops.get_logging
    srcPy.ops.get_metrics
@@ -130,7 +129,7 @@ Package Contents
 
 
 
-.. py:class:: HashAlgorithm
+.. py:class:: HashAlgorithm(*args, **kwds)
 
    Bases: :py:obj:`enum.Enum`
 
@@ -352,6 +351,7 @@ Package Contents
 
 
 .. py:function:: multi_tier_cache(ttl = 60, version = 'v1', persist_large_objects = False, key_fn = None, redis_client=None, l2_type = 'memfd', check_l4_on_miss = False)
+   :no-index:
 
 .. py:class:: FastAPIMiddleware(app, service_name = 'api', slo_error_budget = 0.01)
 
