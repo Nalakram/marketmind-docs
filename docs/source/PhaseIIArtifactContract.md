@@ -5,9 +5,9 @@
 **Phase II Artifact Contract**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.0.0 · April 2026 · Proprietary
+Version 1.0.3 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.2 · VERSION.md 7.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Governed contract for required Phase II artifact surfaces, minimum evidence payloads, and fail-closed completeness rules*
@@ -15,8 +15,6 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 *Audience: Internal engineering, technical stakeholders*
 
 <!-- MM:BEGIN:DOCBODY -->
-
-# Phase II Artifact Contract
 
 # 1. Purpose
 
@@ -42,6 +40,14 @@ Every governed Phase II run that is offered as validation, shadow-entry evidence
 
 If any of the three is absent, the run is incomplete and may not be used as governed Phase II evidence.
 
+As of `VERSION.md` 7.0.0, each artifact in the governed triple must also carry a required top-level `content_hash` object. The hash is non-recursive: it is computed over the canonical JSON document with the `content_hash` field omitted.
+
+| `content_hash` field | Requirement |
+|---|---|
+| `algorithm` | `sha256` |
+| `canonicalization` | `json.sort_keys.no_ws.omit_content_hash.v1` |
+| `value` | `sha256:<64 lowercase hex characters>` |
+
 # 4. `task_manifest.json`
 
 `task_manifest.json` is the task-pool evidence surface. It records what the system believed the tasks were when the run was executed.
@@ -57,6 +63,7 @@ Minimum required content:
 | `pit_boundary` | Governed task boundary |
 | `signal_ids_hash` | Deterministic signal-set identity for the task |
 | `signal_set_version` | Versioned signal-set surface used by the run |
+| `content_hash` | Required non-recursive canonical hash for the artifact payload |
 
 This artifact does not redefine PIT semantics. It declares which boundary was used; the meaning of that boundary is owned by the Data Governance Charter.
 
@@ -77,8 +84,16 @@ Minimum required fields:
 | `plasticity_metric` | Evidence that new-task adaptation still works while retaining prior knowledge |
 | `baseline_comparison` | Explicit incumbent comparison surface; see Section 7 |
 | `pit_compliance_flag` | Derived from enforcement (e.g., DataLineageGate / PIT invariants); must not be a self-declared field |
+| `confidence_calibration` | Governed confidence-calibration object with schema/version, reporting gate (`PASS|FAIL|INSUFFICIENT`), ECE payload, reliability reference, recalibration status, and routing-pilot boundary metadata |
+| `threshold_references` | Canonical threshold-reference block; stored `state` and `current_expression` must match the governing register row |
+| `content_hash` | Required non-recursive canonical hash for the artifact payload |
 
 Additional fields may exist, but omission of any field above is a contract failure for governed Phase II evidence.
+
+`confidence_calibration` is fail-closed on governed paths:
+- if calibration is measured and status indicates `PASS`, ECE must be a finite numeric value and non-negative;
+- if calibration is not measured on-path, emit explicit `INSUFFICIENT` with reason;
+- malformed or contradictory calibration payloads are contract failures.
 
 The following field name is not part of the governed contract and must not be used as a substitute:
 
@@ -99,6 +114,7 @@ Minimum expectation:
 | Borrow / funding assumptions | Declared where relevant |
 | Latency / fill assumptions | Declared where relevant |
 | Shared comparison context | Sufficient to prove that challenger and baseline used the same execution realism assumptions |
+| Content hash | Required non-recursive canonical hash for the artifact payload |
 
 Missing execution assumptions is not a documentation gap. It is a governed evidence failure.
 
@@ -172,6 +188,8 @@ The dependency chain is:
 | MLN-07 | Threshold validation depends on evidence being present in the governed artifact set |
 | GATE-II-01 | Phase II cannot honestly pass without complete, internally consistent evidence surfaces |
 
+**Implementation note (7.0.0):** **MLN-06** is hardened for the **contract and emission** slice: `emit_phase2_artifacts` / `phase2_artifact_contract.py` enforce the governed triple with cross-document validation, required non-recursive content hashes, and canonical triple validation. **MLN-07** threshold references on governed meta evidence now bind ID, state, current expression, usage role, and gate-criticality, and shell validation compares stored state/expression against the canonical register row.
+
 No Phase II promotion narrative is valid if the required artifacts are absent, contradictory, or unverifiable.
 
 # 11. Immutability
@@ -198,9 +216,13 @@ The following conditions fail the contract:
 | Missing `execution_assumptions.json` | Run is not governed Phase II evidence |
 | Missing `baseline_comparison` | Fail |
 | Missing `pit_compliance_flag` | Fail |
+| Missing or malformed `confidence_calibration` | Fail |
+| Missing or malformed `content_hash` on any governed artifact | Fail |
+| `confidence_calibration.ece.status == PASS` with non-finite, non-numeric, or negative ECE | Fail |
 | Inconsistent task or signal identity across artifacts | Fail |
 | Crisis evidence reported without declared assumption/version state | Fail |
 | Threshold-backed claim without threshold reference where required | Fail or downgrade per Threshold Governance Register rules |
+| Threshold reference state or expression differs from canonical register | Fail |
 
 # 13. Scope Boundary
 

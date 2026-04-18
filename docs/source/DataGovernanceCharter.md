@@ -7,7 +7,7 @@
 <!-- MM:BEGIN:TITLEPAGE -->
 Version 1.0.0 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.2 · VERSION.md 7.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Governed doctrine for point-in-time access, dataset visibility, universe membership, vintage handling, and lineage discipline*
@@ -15,8 +15,6 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 *Audience: Internal engineering, technical stakeholders*
 
 <!-- MM:BEGIN:DOCBODY -->
-
-# Data Governance Charter
 
 # 1. Purpose
 

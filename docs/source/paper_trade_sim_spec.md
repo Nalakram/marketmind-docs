@@ -1,32 +1,33 @@
-# Paper Trade Simulation Spec
+# Paper-trading simulation requirements (OI-39 — closed v4.18.5)
+
+**Status:** Phase I-G handoff notes — not a production contract. **Phase III remains conditional** on prior gates and governance.
 
 ## Purpose
 
-Define the minimum simulation realism required before allocator validation can become execution-serious.
+Capture the dimensions a future **paper-trading simulation** should respect so that research evidence is not confused with live readiness. This document does **not** implement execution, routing, or broker connectivity.
 
-## Phase Relationship
+## Realism dimensions (to be specified in a later design pass)
 
-- Phase I-G defines the requirements.
-- Phase II may prepare handoff assumptions without implementing the full system.
-- Phase III is the first phase allowed to build the full paper-trading realism stack.
+- **Latency and partial fills** — order acknowledgment delay, queue position, and realistic fill ratios for the asset class under test.
+- **Fees and slippage** — explicit friction model (per-share, bps, minimum ticket) tied to instrument and venue assumptions.
+- **Borrow / short constraints** — where applicable, availability and rate shocks for short-side simulation.
+- **Corporate actions** — splits, dividends, and halts at least at a schematic level for equity-like surfaces.
+- **Session boundaries** — exchange hours, auction phases, and stale-quote handling for intraday paths.
 
-## Required Simulation Surfaces
+## Utility-after-frictions framing
 
-- slippage and market-impact assumptions,
-- liquidity and participation constraints,
-- fill and partial-fill semantics,
-- rebalance cadence assumptions,
-- operator-visible incident and kill-switch hooks.
+Decision quality should be assessed **after** applying the friction model: utility (e.g., net PnL, risk-adjusted return under constraints) must be computed on **post-friction** paths so that “paper alpha” is not overstated relative to deployable edge.
 
-## Guardrails
+## Explicit out-of-scope statements
 
-- Paper-trading implementation is not Phase I-F work.
-- Simulation realism is necessary for credibility but remains conditional on allocator validation and product need.
-- Broker connectivity is not implied by this specification.
+- **Broker connectivity** — live or paper **API integration**, credential handling, and order routing are **out of scope** for this starter spec and for the RG-09 empirical-closure lane.
+- **Promotable allocator code** — no training, allocation, or promotion semantics are implied here.
 
-## Expected Outputs
+## Phase III conditionality
 
-- versioned simulation assumptions,
-- calibration inputs and acceptance notes,
-- handoff boundary to broker/operator work,
-- explicit list of realism gaps that remain out of scope.
+Full paper-trading **productization** belongs to **Phase III** and remains **conditional**: it must not be interpreted as Phase II trainer readiness, GATE-II-01 readiness, or closure of MLN items.
+
+## Related governance items
+
+- **OI-39** — paper-trading simulation requirements (this note seeds the requirement space).
+- **RG-09** — empirical closure remains in the II-0 evidence lane; broker simulation is not part of that closure.

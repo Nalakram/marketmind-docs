@@ -3,18 +3,17 @@
 **Technical Roadmap & Feature Plan**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.4.26 · April 2026 · Proprietary
+Version 1.4.31 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.10 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.3 · VERSION.md 7.2.3
 <!-- MM:END:TITLEPAGE -->
+
 
 *Strategic build order, research sequencing, and go/no-go checkpoints*
 
 *Audience: Internal engineering, technical stakeholders*
 
 <!-- MM:BEGIN:DOCBODY -->
-
-# Technical Roadmap & Feature Plan
 
 # Purpose
 
@@ -30,9 +29,11 @@ This inventory separates what is real today from what is governed future scope.
 |---|---|---|
 | Canonical research substrate | PIT-safe orchestration, governed bundle emission, lineage, statistical-validity artifacts, and cost assumptions are real | Later phases must extend this substrate rather than fork it |
 | Governed strategies and signals | `stat_arb_pairs`, materially advanced momentum, SignalCatalog, and stable `slot_index` exist | Broader governed breadth and signal-factory lifecycle remain later work |
-| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, CI discipline, and bundle-local immutable evaluation surfaces are mature on the trusted path; companion truth through **`VERSION.md` 6.2.2** records **II-0A** workstreams complete with a frozen RG-09 task-validity reference anchor | Promotable `meta_validity_report.json` gate path on allocator runs and full MetaTask-era promotion evidence remain future scope |
-| Meta-learning contracts | Runtime shape and proof burden are documented in the companion suite | Context encoder, task generator, trainer, allocator, and rollout control are still unbuilt |
+| Validation discipline | Leakage-aware tests, DSR/PBO framing, deterministic artifact expectations, CI discipline, and bundle-local immutable evaluation surfaces are mature on the trusted path | Full promotable meta-learner gate path is not built |
+| Meta-learning contracts | Runtime shape and proof burden are documented; MLN-01/02/03 contract slices are implemented (canonical MetaTask/task identity, regime vocabulary lock, confidence attenuation contract) | Context encoder, trainer, allocator, and rollout control are still unbuilt |
 | Execution realism | Governed execution assumptions exist as artifacts | TCA loops, paper/live control flow, broker integration, and low-latency paths remain conditional |
+
+**Current release context:** Companion docs align with **`VERSION.md` 7.2.3** / Resolution Ledger **v1.0.52**. Earlier H1, H4, and proper H2 RG-09 evidence surfaces remain documented, but the authoritative **live promotable** posture is the strict H3 successor surface at `runs/rg09_h3_granularity`, recorded as `PASS` with `trainer_commitment_unlocked = true`. **Phase I-G is closed** in README / Implementation Plan truth; **RG-09** / **OI-59** are **II-0** / **non-blocking** follow-on. **Corrected-surface OI-59** is a separate constructibility-only lane (MLN-07 disposition: **`THR-RG09-V20`** superseded; **`THR-RG09-V21`** active; see Architecture Vision §13.2 and Threshold Governance Register §10 / `oi59_mln07_threshold_decision_memo.md`). II-0B is complete as the governed non-promotable artifact lane, and II-0C is complete as a **non-promotable pilot harness**: canonical MetaTask scaffolding, deterministic reference-only encoder stub, XGBoost incumbent comparison plumbing, II-0C wrapper metadata on the unchanged II-0B lane, research-only report shells, frozen reference inputs for drift replay, and fail-closed checks for task identity, governed baseline key discipline, and baseline/shared parity before emission. The suite treats H3 as a successor surface evaluated through the base harness, not as proof that the original H1 surface passed or as the incumbent allocator baseline.
 
 ## 1.2 What Remains Hypothetical
 
@@ -46,7 +47,7 @@ This inventory separates what is real today from what is governed future scope.
 ## 2.1 Execution Plan
 
 1. Hold the I-F closure boundary.
-2. I-G empirical and protocol foundation.
+2. ~~I-G empirical and protocol foundation.~~ **Closed** (companion truth, Ledger v1.0.52); active bridge is **II-0** (especially **II-0B** scaffolding).
 3. II-0 scaffolding and research harness.
 4. II-A through II-E validation-gated build.
 5. III-A through III-C conditional execution realism.
@@ -85,7 +86,7 @@ This inventory separates what is real today from what is governed future scope.
 
 ## 2.5 Report-driven sequencing (March 2026 synthesis)
 
-The heaviest **current** obligation sits in **I-G** (policy freeze, task validity, survivability semantics, breadth rules) and **II-0** (honest benchmark, harnesses, pilots). **II-D is not a short epilog** after II-C: it is where **structured post-allocator conditioning** and **deployment-layer realism** convert allocator intent into **governed capital expression**. **Phase III** and **Phase IV** remain **conditional** even when deployment-layer arguments are strong—documentation must not read as “III/IV are next” without that guard.
+The heaviest **current** obligation sits in **II-0** (honest benchmark, harnesses, pilots, **II-0B** artifact/contract scaffolding) while **I-G** remains a **frozen** policy/phase baseline (companion closure at Ledger v1.0.52). **II-D is not a short epilog** after II-C: it is where **structured post-allocator conditioning** and **deployment-layer realism** convert allocator intent into **governed capital expression**. **Phase III** and **Phase IV** remain **conditional** even when deployment-layer arguments are strong—documentation must not read as “III/IV are next” without that guard.
 
 **Fall backs (explicit):**
 
@@ -109,22 +110,26 @@ The forward thesis is **not** “build a smarter return predictor.” It is to b
 | Determinism boundary cleanup | ML entry without explicit reproducibility creates governance debt |
 | Coverage / CI truthfulness | Quality bars must match what CI really measures |
 
-## 3.2 Next: Land I-G Protocol and Empirical Foundation
+## 3.2 I-G protocol and empirical foundation (closed in companion truth)
 
-| Priority | Deliverable | Why It Matters |
+| Priority | Deliverable | Status |
 |---|---|---|
-| P1 | Frozen baseline policy | Keeps the null hypothesis honest |
-| P2 | Task-validity / non-exchangeability pilot | Decides whether meta-learning is structurally justified |
-| P3 | RiskFn Protocol and Signal Generation Protocol | Freezes runtime policy before code spreads assumptions |
-| P4 | Context-encoder upgrade criteria | Prevents silent architecture drift mid-program |
-| P5 | Alternative-data admissibility and signal-universe expansion policy | Keeps future breadth governed rather than opportunistic |
+| P1 | Frozen baseline policy | **Done** (I-G frozen) |
+| P2 | Task-validity / non-exchangeability pilot | **Live anchor:** strict H3 `PASS` (Resolution Ledger §1.5); **RG-09** / **OI-59** follow-on is **II-0** |
+| P3 | RiskFn Protocol and Signal Generation Protocol | **Done** |
+| P4 | Context-encoder upgrade criteria | **Done** |
+| P5 | Alternative-data admissibility and signal-universe expansion policy | **Done** |
+
+**Next focus:** §3.3 **II-0** (especially **II-0C**), not reopening I-G because of ledger **PARTIAL**/**OPEN** rows.
+
+**II-0B closure companion note:** See Implementation Plan §4 / **II-0B** — *closure posture (Wave 3 seam review resolved)* for **II-0B COMPLETE** on the non-promotable artifact-and-contract lane, canonical `pysrc/pipeline` rollout, explicit orchestration-layer fail-closed evidence usability, governed-consumer threshold summary visibility, borrowed-threshold lineage framing, stale pre-hash evidence retirement, and **GATE-II DEFERRED** with **II-0C next**.
 
 ## 3.3 Then: Build II-0 Non-Promotable Harnesses
 
 | Priority | Deliverable | Gate |
 |---|---|---|
-| H1 | Frozen baseline/challenger harness | Baseline is frozen and comparison is mechanically repeatable |
-| H2 | Task diagnostics and reference-run scaffolding | First valid task-diagnostics pass exists |
+| H1 | Frozen RG-09 reference anchor | Complete: strict-H3 reference hash is frozen and reproduction drift CI is confirmed |
+| H2 | Task diagnostics and reference-run scaffolding | Complete: WS-2 diagnostic and WS-3 integration report are `ALL_PASS` |
 | H3 | `task_manifest.json` / `meta_validity_report.json` scaffolds | Pilot artifacts emit reproducibly |
 | H4 | Minimal experiment shells | Harness remains explicitly non-promotable |
 
@@ -158,9 +163,9 @@ If any stop condition is confirmed, the roadmap records the failure and re-scope
 
 | Subphase | Purpose | Deliverables |
 |---|---|---|
-| II-0A | Baseline & validity harness | frozen baseline harness, task-validity diagnostics, non-exchangeability pilot harness, holdout scaffolding |
-| II-0B | Artifact & contract scaffolding | `task_manifest.json` scaffold, `meta_validity_report.json` scaffold, threshold registry hooks, deterministic reference-run hooks |
-| II-0C | Pilot ML scaffolds | encoder stub, MetaTask generator scaffold, pilot comparison runners, research-only shells around later MLC surfaces |
+| II-0A | Baseline & validity harness | **Complete:** frozen RG-09 reference anchor, task-validity diagnostic, WS-3 integration report, CI-confirmed reproduction guardrail |
+| II-0B | Artifact & contract scaffolding | **Complete (non-promotable lane):** governed triple with required non-recursive `content_hash`, shell semantic validation, threshold state/expression register reconciliation, canonical `pysrc/pipeline` rollout under `phase2_ii0b_governed_non_promotable/`, explicit orchestration-layer fail-closed evidence usability, reviewer-facing threshold-governance summaries, honest borrowed-threshold lineage framing, deterministic seed lineage, and explicit exclusion of stale pre-hash root triples from current governed evidence |
+| II-0C | Pilot ML scaffolds | **Complete non-promotable pilot harness:** canonical MetaTask adapter, deterministic reference-only encoder stub, XGBoost incumbent comparison guardrail, governed II-0B artifact wrapper, research-only report shells (`ii0c_pilot_report.json`, `ii0c_dry_run_summary.json`, plus dual-written `phase2_ii0c_scaffold_non_promotable.json`), frozen reference replay inputs, and fail-closed identity plus baseline/shared parity checks before emission |
 
 ## 4.2 Phase II Subphases
 
@@ -204,6 +209,7 @@ If any stop condition is confirmed, the roadmap records the failure and re-scope
 
 - `MetaTask` is the primary learning unit once Phase II begins.
 - `regime_id` is primary identity; `regime_class` is the 5-class derived vocabulary used for curriculum and reporting.
+- `task_id` is deterministic and includes `signal_ids_hash`; key-material changes require governed migration.
 - `theta_meta`, `theta_task_prime`, and `theta_day_prime` are distinct lifecycle objects.
 - Dynamic-K uses fixed-slot masking rather than dynamic output heads.
 - `confidence_scalar` is **post-sizing attenuation by default**; **uncertainty-aware routing** is a **Phase II-0 pilot** and only graduates with **earned** evidence (Implementation Plan · Appendix D).
@@ -281,8 +287,14 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 | Release | Date | Technical Roadmap impact |
 |---|---|---|
-| 1.4.26 | April 2026 | Companion-sync to **`VERSION.md` 6.2.2** (Implementation Plan **6.5.5**, Core **1.2.24**, Architecture Vision **1.3.5**, Ledger **1.0.51**, README **6.2.2**): companion truth records **WS-1 / WS-2 / WS-3** and **II-0A** complete; strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1`; Phase II baseline comparison remains explicit against the **XGBoost incumbent** (not the reference anchor). Roadmap guardrails unchanged. |
-| 1.4.21 | April 2026 | Companion-sync: title-page and stamps advanced through **4.18.5** (Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**, README/VERSION **4.18.5**); **OI-39** closed; RG-09 II-0A harness and II-0 empirical research scaffold treated as implemented at **4.18.2** / **4.18.5**; full RG-09 empirical closure remains **PARTIAL**. |
+| 1.4.31 | April 2026 | **II-0C pilot harness completion:** §1.1 and §4.1 now record research-only report shells, frozen reference replay, governed baseline purity checks, baseline/shared parity fail-closed wiring, and explicit non-promotable pilot semantics while preserving **GATE-II DEFERRED** and the XGBoost incumbent baseline. |
+| 1.4.30 | April 2026 | **II-0C scaffold dry-run sync:** §1.1 and §4.1 now record the non-promotable II-0C scaffold lane, canonical MetaTask adapter, deterministic reference-only encoder stub, XGBoost incumbent comparison guardrail, unchanged governed II-0B artifact path, and fail-closed identity binding across public entrypoints while preserving **GATE-II DEFERRED**. |
+| 1.4.29 | April 2026 | **II-0B orchestration hard-gate sync:** §1.1, §3.2, and §4.1 now record that canonical `pysrc/pipeline` orchestration fails closed when governed II-0B evidence is non-usable and that the orchestration lane’s borrowed `THR-RG09-V03` / `THR-RG09-V17` references are reviewer-visible lineage, not native policy. |
+| 1.4.28 | April 2026 | **II-0B completion sync:** §3.2 now points next-focus sequencing to **II-0C**; §4.1 records canonical `pysrc/pipeline` rollout of governed II-0B evidence, reviewer-visible threshold-governance consumer summaries, and explicit retirement of stale pre-hash root triples from current governed evidence while preserving the non-promotable boundary. |
+| 1.4.27 | April 2026 | **II-0B 7.0.0 hardening sync:** Phase II-0 subphase map now records governed triple content hashes, shell semantic validation, threshold state/expression reconciliation, and non-promotable hardening while preserving the not-exit-ready posture. |
+| 1.4.26 | April 2026 | **II-0A completion sync:** H1/H2 roadmap checkpoints and Phase II-0 subphase map now mark the strict-H3 RG-09 reference anchor, WS-2 diagnostic, WS-3 integration report, and CI-confirmed reproduction guardrail as complete. |
+| 1.4.22 | April 2026 | **Phase I-G closure** in companion truth: §1 release context and §2.1 sequencing mark I-G **closed** (Ledger **v1.0.46**); §2.5 shifts primary obligation to **II-0**; §3.2 retitled to closed I-G with **II-0** next focus; title-page stamps to **README/VERSION 4.19.2**, Implementation Plan **6.5.3**, Resolution Ledger **v1.0.46**; OI-59 context uses MLN-07 **THR-RG09-V21** disposition (supersedes **V20** narrative where still cited historically). |
+| 1.4.21 | April 2026 | Companion-sync: stamps aligned to **`VERSION.md` 4.18.34** / Resolution Ledger **1.0.44** / Implementation Plan **6.4.34** / Architecture Vision **1.2.23**; **4.18.34** propagates **`THR-RG09-V20`** memo/register disposition pointers. Release context distinguishes strict-H3 promotable posture vs corrected-surface OI-59 (**`HOLD_PENDING_THRESHOLD_REVIEW`**, **`THR-RG09-V20`** **`PROVISIONAL`** under **MLN-07**). Earlier entries recorded the H3 successor `PASS` at `runs/rg09_h3_granularity`. No sequencing change to the roadmap guardrail. |
 | 1.4.20 | March 2026 | Companion-sync: title-page and stamps advanced through **4.18.0** (Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**, README/VERSION **4.18.0**); MLN-02-AMD-01 crisis redefinition is part of the active baseline. Roadmap sequencing otherwise unchanged. |
 | 1.4.19 | March 2026 | Companion-sync: title-page and stamps advanced through **4.17.0** (Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**, README/VERSION **4.17.0**); MOM-020 closure is now part of the active baseline rather than a parallel/open comparison track. Roadmap sequencing otherwise unchanged. |
 | 1.4.18 | March 2026 | Companion-sync: Phase I-F closed at **4.12.2**; title-page and stamps advanced through **4.16.0** (Implementation Plan **6.4.21**, Resolution Ledger **1.0.17**, README/VERSION **4.16.0**). Roadmap sequencing unchanged since the **4.12.2** edition. |
@@ -297,7 +309,7 @@ The roadmap still depends on the fuller v2.0 reference set rather than a thin al
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Technical Roadmap v1.4.26 · April 2026 · Companion to Implementation Plan v6.5.5 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
+*Technical Roadmap v1.4.31 · April 2026 · Companion to Implementation Plan v6.5.10 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.3 · VERSION.md 7.2.3*
 
 <!-- MM:END:SOURCE_STAMP -->
 

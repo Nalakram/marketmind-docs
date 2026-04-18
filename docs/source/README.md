@@ -1,15 +1,9 @@
-**MarketMind**
-
-────────────────────────────────
-
-**Algorithmic Trading Platform**
-
-README & Technical Overview
+# MarketMind README
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 6.2.2 · April 2026 · Proprietary
+Version 7.2.3 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.10 · Technical Roadmap v1.4.31 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · VERSION.md 7.2.3
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
@@ -18,14 +12,9 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 
 - [1. Overview](#1-overview)
   - [1.1 North Star](#11-north-star)
-  - [1.2 Strategic Pillars](#12-strategic-pillars)
-  - [1.3 What Works Today](#13-what-works-today)
-  - [1.4 What Is Planned](#14-what-is-planned)
-  - [1.5 Core Document Split](#15-core-document-split)
-- [2. Current Status & Roadmap](#2-current-status--roadmap)
-  - [2.1 What Works vs What Does Not Yet Exist](#21-what-works-vs-what-does-not-yet-exist)
-  - [2.2 Phase View](#22-phase-view)
-  - [2.3 Working Pipeline](#23-working-pipeline)
+  - [1.2 What Exists Today](#12-what-exists-today)
+  - [1.3 What Is Still Experimental](#13-what-is-still-experimental)
+- [2. Working Pipeline](#2-working-pipeline)
 - [3. System Skeleton](#3-system-skeleton)
   - [3.1 Current Architecture](#31-current-architecture)
   - [3.2 Proposed Meta-Learning Runtime](#32-proposed-meta-learning-runtime)
@@ -33,139 +22,93 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 - [4. Architecture Overview](#4-architecture-overview)
   - [4.1 Key Architectural Ideas](#41-key-architectural-ideas)
   - [4.2 Operational Guarantees](#42-operational-guarantees)
+  - [4.3 Validation-First Meta-Learning Framing](#43-validation-first-meta-learning-framing)
+- [5. Getting Started](#5-getting-started)
+  - [5.1 Run the Current Pipeline](#51-run-the-current-pipeline)
+  - [5.2 Common Tasks](#52-common-tasks)
+  - [5.3 Main Source Areas](#53-main-source-areas)
+  - [5.4 Practical Repo Truth](#54-practical-repo-truth)
+- [6. Quality, Testing, and Governance](#6-quality-testing-and-governance)
+  - [6.1 Testing Standards](#61-testing-standards)
+  - [6.2 Promotion Mindset](#62-promotion-mindset)
+- [7. Companion Documents](#7-companion-documents)
+- [8. Canonical Release Ledger](#8-canonical-release-ledger)
 
 # 1. Overview
 
-MarketMind is a production-minded algorithmic trading research and execution system built around one durable thesis: markets are non-stationary, so long-lived edge comes from maintaining many weak, diverse signals and recombining them as regimes shift. The current platform already provides the governed substrate required to test that thesis honestly: point-in-time data handling, leakage-aware validation, deterministic artifacts, statistical gatekeeping, and canonical bundle provenance. What it does **not** yet provide is a proven meta-learning allocator. That allocator is the intended future system center of gravity, but it remains a governed hypothesis under validation rather than a subsystem the project is pretending to have already earned.
+MarketMind is a production-minded algorithmic trading research and execution system built around one durable thesis: markets are non-stationary, so long-lived edge comes from maintaining many weak, diverse signals and recombining them as regimes shift.
 
-This distinction is now explicit across the companion suite. The revised Meta-Learning Core and Meta-Learning Architecture Vision establish a new framing:
+The current platform already provides the governed substrate required to test that thesis honestly: point-in-time data handling, leakage-aware validation, deterministic artifacts, statistical gatekeeping, and canonical bundle provenance. What it does **not** yet provide is a proven meta-learning allocator. That allocator is the intended future system center of gravity, but it remains a governed hypothesis under validation rather than a subsystem the project is pretending to have already earned.
+
+This distinction matters. MarketMind is not trying to win by hand-waving around “AI for trading.” It is trying to build a system that can:
+
+- produce auditable research artifacts,
+- reject weak or non-reproducible results,
+- preserve point-in-time correctness,
+- and only promote more adaptive machinery when it actually beats simpler alternatives under realistic constraints.
+
+The companion documents frame the project around a few core questions:
 
 - **Architectural claim:** a meta-learning allocator is the preferred architecture for adaptive signal recombination across regime-indexed, non-exchangeable market tasks.
-- **Null hypothesis:** a simpler regime-conditioned XGBoost allocator matches or exceeds the proposed architecture once cost, robustness, and operational burden are counted.
+- **Null hypothesis:** a simpler regime-conditioned baseline can match or exceed the proposed allocator once cost, robustness, and operational burden are counted.
 - **Five claims to prove:** task non-exchangeability, adaptation usefulness, encoder coherence, proxy alignment, and continual robustness.
-- **Promotion boundary:** the architecture is promoted only if it beats the baseline and satisfies the full empirical acceptance hierarchy.
-- **Kill boundary:** the program is abandoned if the baseline wins, adaptation fails to add statistically meaningful value, embeddings remain incoherent, or held-out crisis generalization fails.
+- **Promotion boundary:** the allocator is promoted only if it beats the relevant baseline and satisfies the required empirical acceptance criteria.
+- **Kill boundary:** the adaptive-learning path is abandoned if the simpler system wins or the required evidence does not materialize.
 
-The result is a documentation suite that is intentionally more disciplined than the earlier “Phase II is the obvious next build” framing. MarketMind still aims at a Meta-Policy Allocator, but only through a validation-first path that is willing to let the simpler system win.
-
-The roadmap now makes the pre-build foundation explicit. Phase I-F closes truthfulness and interface seams. Phase I-G freezes the research world, policy, and proof burden. Phase II-0 builds only the minimum non-promotable harnesses needed to test those decisions honestly. Phase II is the first phase allowed to build promotable adaptive-learning machinery.
+That gives the repo a cleaner identity: the current product is the governed research substrate, while the adaptive allocator is the product candidate.
 
 ## 1.1 North Star
 
-The long-term product vision still has three primitives:
+The long-term system vision still has three primitives:
 
 | Primitive | Role | Current State |
 |---|---|---|
-| Signal Factory | Governed engine that creates, versions, screens, promotes, and retires candidate signals and strategy slices | Partially implemented through `StrategyRegistry`, SignalCatalog substrate, screening artifacts, and governed strategy slices |
-| Regime-Indexed Curriculum | Historical task distribution built from regime-bounded episodes with support/query semantics and crisis-aware holdouts | Specified in v2.0 docs, not yet implemented |
+| Signal Factory | Governed engine that creates, catalogs, screens, promotes, and retires candidate signals and strategy slices | Partially implemented through `StrategyRegistry`, SignalCatalog substrate, screening artifacts, and governed strategy slices |
+| Regime-Indexed Curriculum | Historical task distribution built from regime-bounded episodes with support/query semantics and crisis-aware holdouts | Specified in companion docs; canonical task identity, regime vocabulary, and confidence-contract slices exist in code, while the full curriculum runtime still remains ahead |
 | Meta-Policy Allocator | Adaptive allocation layer that emits `allocation_weights` and `confidence_scalar` across the active signal set | Specified and validation-gated, not yet implemented |
 
 Those primitives still define the system skeleton, but they no longer imply implementation maturity. Only the substrate portions that truly exist today are described as delivered.
 
-## 1.2 Strategic Pillars
+## 1.2 What Exists Today
 
-The following design pillars remain non-negotiable whether the final promoted allocator is a meta-learner or the simpler baseline:
-
-1. **Meta-policy as product candidate.** Signals and strategies are raw material; the durable product thesis is adaptive recombination, not any single standalone alpha.
-2. **Governance first.** No signal, model, or allocator update is promoted without reproducible evidence and fail-closed gates.
-3. **Constraint-aware portfolio construction.** Cost, turnover, and risk realism are part of the truth criterion, not optional overlays.
-4. **Regime-indexed adaptation.** Tasks are regime episodes, not IID samples; if adaptation cannot be measured safely under that structure, the architecture should not be promoted.
-5. **Breadth at scale.** A governed platform prefers many weak, diverse edges over a few brittle ones, with lifecycle controls to retire decay rather than narrate around it.
-6. **Operational trust.** Point-in-time correctness, determinism tiers, and artifact lineage are required for any claim that matters.
-7. **Execution realism.** Execution assumptions are part of the governed artifact set; anything that only works with unrealistic fills or zero costs is not considered a working result.
-
-## 1.3 What Works Today
-
-The implemented platform is strongest where research truthfulness matters most. Companion and ledger truth are current through **`VERSION.md` 6.2.2** (Resolution Ledger **v1.0.51**); prior **4.18.x** milestones remain documented in `VERSION.md` history; the Phase I-F-2 planning-surface milestone remains **4.9.0**, and Phase I-E engineering delivery remains anchored at **`4.5.4`** in the version ledger. MarketMind already has:
+The implemented platform is strongest where research truthfulness matters most. MarketMind already has:
 
 - a canonical bundle-producing orchestration path,
-- PIT-safe daily source adaptation on the governed path,
-- governed single-path feature execution through the canonical planner/executor route,
-- a live governed `stat_arb_pairs` vertical slice,
-- a materially advanced governed momentum substrate,
-- SignalCatalog with stable `slot_index` identity,
-- governed `screening_report.json`, `execution_assumptions.json`, and `stat_validity_report.json` artifacts,
-- DataLineageGate and artifact-registry-owned hashing/canonicalization boundaries,
-- reconstructible bundle lineage through the canonical artifact registry,
-- and a mature Python testing stack with determinism tiers, leakage/property tests, strict typing, and CI discipline.
+- point-in-time-safe data access on the governed path,
+- governed feature execution through a canonical planner / executor route,
+- artifact registry identity and run-state management,
+- **II-0A complete**: WS-1 froze the strict-H3 RG-09 reference anchor, WS-2 delivered the task-validity diagnostic, and WS-3 registered the integrated `ALL_PASS` task-validity report after CI confirmation,
+- **II-0B complete on the non-promotable artifact-and-contract lane**: the governed artifact triple carries required non-recursive `content_hash` blocks, the ML evidence shell re-checks artifact-level semantics and surfaces threshold-governance summaries, canonical `pysrc/pipeline` orchestration now fails closed unless governed II-0B evidence is structurally usable under `phase2_ii0b_governed_non_promotable/`, borrowed `THR-RG09-V03` / `THR-RG09-V17` references are framed as reviewer-visible lineage rather than native orchestration policy, and stale pre-hash root triples are explicitly retired from current governed evidence,
+- **II-0C non-promotable pilot harness**: the pilot / dry-run path exercises canonical MetaTask scaffolding, a deterministic reference-only encoder stub, XGBoost incumbent comparison plumbing, and II-0C wrapper metadata through the unchanged governed II-0B artifact lane; both entrypoints fail closed on task-identity drift, baseline/shared parity drift, or extra keys inside governed `baseline_comparison`; research-only shells `ii0c_pilot_report.json` and `ii0c_dry_run_summary.json` record reviewer-visible semantics (dry-run also dual-writes `phase2_ii0c_scaffold_non_promotable.json` for path-based collectors) without claiming promotable Phase II evidence,
+- governed strategy slices such as `stat_arb_pairs` and momentum work,
+- screening, statistical-validity, and execution-assumptions artifact surfaces,
+- leakage-aware tests, determinism discipline, and CI gates,
+- and companion documents that separate current truth from future intent.
 
-That is already a meaningful product substrate. It means MarketMind can generate truthful artifacts about strategy behavior and gate decisions today. It does **not** mean the system already has a validated meta-policy allocator, production live execution stack, or empirical evidence that the v2.0 architecture beats the simpler baseline.
+In other words, the repo already has serious infrastructure. What is missing is not basic engineering hygiene. What is missing is the evidence required to justify a more ambitious allocator.
 
-## 1.4 What Is Planned
+## 1.3 What Is Still Experimental
 
-The remaining roadmap is intentionally ordered by evidence:
+Several important ideas are intentionally still treated as unearned:
 
-1. Finish Phase I-F honestly.
-2. Freeze research protocols and proof burden in Phase I-G.
-3. Build non-promotable harnesses in Phase II-0.
-4. Build only the justified parts of Phase II.
-5. Keep Phases III and IV conditional.
+- the meta-learning allocator itself,
+- encoder-driven task adaptation,
+- advanced uncertainty-aware routing behavior,
+- execution-serious deployment layers,
+- and broad signal-factory automation at scale.
 
-> **Guardrail.**  
-> Phase I-F freezes system truth.  
-> Phase I-G freezes research policy, protocols, and proof burden.  
-> Phase II-0 implements only the minimum scaffolding needed to test those decisions honestly.  
-> Phase II is the first phase allowed to build promotable adaptive-learning machinery.  
-> Phase III is the first phase allowed to become execution-serious.  
-> Phase IV is the first phase allowed to become signal-factory-serious.  
-> Neither I-G nor II-0 may quietly become full Phase II.
+The project is deliberately structured so those remain future-facing until the evidence says otherwise.
 
-## 1.5 Core Document Split
+Phase II-0B remains scaffolding rather than allocator readiness even after closure of the artifact-and-contract lane. Its current value is that later Phase II evidence is more auditable, reproducible, and fail-closed at the canonical orchestration layer; the borrowed RG-09 threshold references on this lane are reviewer-visibility lineage only, not native orchestration policy. It does not authorize trainer commitment, allocator promotion, broker wiring, or execution-serious rollout.
 
-The v2.0 suite deliberately splits the meta-learning topic across two source-of-truth documents:
+Phase II-0C is a **complete non-promotable pilot harness** (research wiring and reviewer shells only). It preserves **GATE-II DEFERRED**, keeps the XGBoost incumbent as the comparison baseline, uses the existing governed II-0B evidence lane without a second artifact path, and ships a frozen reference input bundle for drift replay. It does not prove encoder quality, trainer readiness, allocator superiority, or promotable Phase II behavior.
 
-- **Meta-Learning Core** owns empirical proof burden, workstreams, acceptance hierarchy, failure playbooks, threshold handling, and promotion/rollback/kill rules.
-- **Meta-Learning Architecture Vision** owns runtime shape, interfaces, invariants, and validation-gated defaults.
-
-If the two documents appear to disagree, Core governs on evidence and proof requirements while Architecture Vision governs on interface shape and non-negotiable runtime contracts.
-
-# 2. Current Status & Roadmap
-
-> **Release docs workflow.** For any release version `X.Y.Z`, the canonical end-to-end entrypoint for building and verifying the DOCX suite is:
->
-> ```powershell
-> .\docs\release-docs.ps1 all X.Y.Z
-> ```
-
-**Current release context:** `VERSION.md` is at **6.2.2**. Companion documents and the Resolution Ledger now record **WS-1**, **WS-2**, **WS-3**, and **II-0A** as **complete**, with the strict-H3 RG-09 **task-validity reference anchor** frozen at `run_bundles/rg09_reference_v1` (reproduction + drift checks in the implementation repository). Phase II comparison language keeps the **XGBoost incumbent** as the explicit baseline boundary—**not** the reference anchor. **`VERSION.md` 6.2.2** also captures companion-document synchronization, release-docs/DOCX CI repair, and manifest planning from an explicit **6.2.1** base. Historical RG-09 lines—including H1/H2/H4 attempts and the strict H3 successor PASS at `runs/rg09_h3_granularity` with **86 admissible episodes** and the nearby p85 `FAIL_EXCHANGEABLE_TASKS` sensitivity control—remain valid governed context in the ledger and in earlier `VERSION.md` entries; they are not erased, but the **6.2.2** audit baseline leads with reference-anchor freeze and II-0A companion completion.
-
-## 2.1 What Works vs What Does Not Yet Exist
-
-| What Works ✅ | What Does Not Yet Exist ❌ |
-|---|---|
-| End-to-end governed path: canonical orchestration → backtesting → gates → bundle artifacts | Validated `MetaTask` / `TaskRegistry` / `reptile_trainer.py` stack |
-| PIT enforcement at the canonical boundary and governed daily source path | Production `meta_policy.py` allocator driving paper or live orders |
-| Single-path governed feature execution on the trusted planner/executor route | `meta_validity_report.json` gate path on real runs |
-| Canonical artifact registry with CAS identity, RunRegistry, and reconstructible bundles | Live broker integration, paper-trading promotion flow, or low-latency inference runtime |
-| Governed `stat_arb_pairs` slice and a closed Phase I governed momentum slice on the canonical path | Evidence that the meta-learning architecture beats the regime-conditioned XGBoost baseline |
-| Data-lineage, statistical-validity, and execution-assumptions enforcement on governed bundles | A finished Signal Factory automation loop with governed promotion/retirement |
-
-## 2.2 Phase View
-
-| Phase | Focus | Status | Notes |
-|---|---|---|---|
-| 0 | Validation substrate | Complete | Gates, bundles, determinism framing, leakage-safe research substrate |
-| I-A | PIT core and canonical backtest-boundary enforcement | Delivered | DataView boundary and PIT-safe backtest seam are real |
-| I-B | Governed source adaptation | Delivered | File, Yahoo daily, and FRED approximation seam are landed |
-| I-C | Canonical governed feature execution | Delivered | Governed feature work is locked to the trusted path |
-| I-D | First governed strategy vertical slice | Delivered | `stat_arb_pairs` runs end-to-end on the canonical path |
-| I-E | Gate completeness and governance breadth | Closed | SignalCatalog substrate, lineage/stat-validity/cost hardening, canonical storage/gate ownership, and the Phase I momentum slice are closed through `4.5.4` |
-| I-F | Architecture closure and truthfulness audit | Open | Narrow closure phase for truthfulness, interface seams, determinism, and canonical-path verification |
-| I-G | Empirical & protocol foundation | New | Freezes research policy, protocols, threshold handling, and proof burden before promotable ML buildout |
-| II-0 | ML scaffolding & research harness | New | Non-promotable bridge phase for reproducible diagnostics, artifacts, and report scaffolding |
-| II | Validation-gated meta-learning build | Not started | First promotable adaptive-learning phase; still evidence-gated rather than assumed buildout |
-| III | Execution realism & conditional deployment | Conditional | First execution-serious phase; only if allocator validation and product need justify it |
-| IV | Signal Factory and scale-out | Conditional | First signal-factory-serious phase; only if allocator validation and governance maturity justify it |
-| IV+ | Frontier extensions | Later | Vision-level expansion, not default near-term roadmap |
-
-Neither Phase I-G nor Phase II-0 may quietly become full Phase II.
-
-## 2.3 Working Pipeline
+# 2. Working Pipeline
 
 The current governed platform is already useful because a single command can produce an auditable bundle:
 
 ```bash
-python -m srcPy.bridge.java_entry tests/fixtures/sample_spy.csv --fast-sma 5 --slow-sma 10
+python -m pysrc.bridge.java_entry tests/fixtures/sample_spy.csv --fast-sma 5 --slow-sma 10
 ```
 
 Representative outputs include:
@@ -173,11 +116,13 @@ Representative outputs include:
 - `plan.json` for run configuration and plan identity
 - `env_fingerprint.json` for interpreter, git, system, and dependency evidence
 - `dataset_manifest.json` for data provenance and lineage
+- `cleaning_plan.json` for normalized governed cleaning specs, step identity, determinism tier, and registry fingerprint
+- `cleaning_report.json` for executed cleaning steps, mutation summaries, validation outcomes, and fallback events
 - `preprocessing_report.json` for pipeline diagnostics
 - `splits_manifest.json` for train/test split details
-- `gate_result.json` for PASS/FAIL reasoning
+- `gate_result.json` for PASS / FAIL reasoning
 
-From Phase II-0 forward, pilot runs may emit scaffolded `task_manifest.json` and `meta_validity_report.json`. From Phase II onward, those artifacts become part of the promotable gate path whenever the meta-learning stack is exercised.
+That is a meaningful product surface by itself. The platform can already emit evidence-rich bundles, not just backtest output.
 
 # 3. System Skeleton
 
@@ -185,31 +130,50 @@ From Phase II-0 forward, pilot runs may emit scaffolded `task_manifest.json` and
 
 Today, the real platform is best summarized as:
 
-<p align="center">
-  <img src="_static/assets/diagrams/current-architecture.svg" alt="Current architecture diagram showing Sources flowing through PIT-safe adapters, canonical feature planner and executor, backtesting engines, statistical and governance gates, and into canonical bundles with artifact registry and RunRegistry." width="100%">
-</p>
+```mermaid
+flowchart LR
+    A[Sources] --> B[PIT-safe adapters]
+    B --> C[Canonical feature planner / executor]
+    C --> D[Backtesting engines]
+    D --> E[Statistical and governance gates]
+    E --> F[Canonical bundles]
+    F --> G[Artifact Registry]
+    F --> H[RunRegistry]
+```
 
-That path is the trusted substrate on which later Phase II work must be built. It is already meaningful on its own because it enforces lineage, policy, and current-state truthfulness.
+That path is the trusted substrate on which later adaptive-learning work must be built. It is already meaningful on its own because it enforces lineage, policy, and current-state truthfulness.
 
 ## 3.2 Proposed Meta-Learning Runtime
 
 If the empirical program succeeds, the intended runtime shape becomes:
 
-<p align="center">
-  <img src="_static/assets/diagrams/meta-learning-runtime.svg" alt="Proposed meta-learning runtime diagram showing DataView as of T, feature operations and regime context, context encoder producing regime embedding z, signal library and active slot mask, meta-policy producing allocation weights and confidence scalar, sizing function, post-sizing confidence attenuation, and risk and execution layers." width="720">
-</p>
+```mermaid
+flowchart TD
+    A["DataView.as_of(T)"] --> B["Feature ops + regime context"]
+    B --> C["Context encoder"]
+    C --> D["regime_embedding z"]
+    D --> E["Signal library / active slot mask"]
+    E --> F["Meta-policy"]
+    F --> G["allocation_weights + confidence_scalar"]
+    G --> H["SizingFn"]
+    H --> I["Post-sizing confidence attenuation"]
+    I --> J["Structured post-allocator conditioning"]
+    J --> K[Risk and execution layers]
+```
 
 Several points matter here:
 
 - `MetaTask` is the canonical learning unit, not “strategy” or “signal.”
-- `regime_id` is the primary high-granularity task identity; `regime_class` is the coarser 5-class projection used for curriculum and reporting.
-- `theta_meta`, `theta_task_prime`, and `theta_day_prime` are distinct lifecycle objects and may not be collapsed casually in prose or code.
-- Dynamic signal coverage uses fixed-slot masking rather than dynamic heads, so replay, gating, and promotion stay comparable.
-- `confidence_scalar` is a post-sizing attenuation term only unless a later ADR changes that rule.
+- `regime_id` is the primary high-granularity task identity, while `regime_class` is the coarser projection used for curriculum and reporting.
+- `theta_meta`, `theta_task_prime`, and `theta_day_prime` are distinct lifecycle objects and should not be collapsed casually in prose or code.
+- Dynamic signal coverage uses fixed-slot masking so replay, gating, and promotion remain comparable.
+- `confidence_scalar` defaults to post-sizing attenuation rather than magical control over the whole system.
 
 ## 3.3 Why the Allocator Is Not Yet the Product
 
-The allocator is the intended product candidate, but not the current product reality. Today’s value is the governed research substrate:
+The allocator is the intended product candidate, but not the current product reality.
+
+Today’s value is the governed research substrate:
 
 - it can produce trustworthy bundles,
 - it can prevent obvious leakage and provenance failures,
@@ -222,9 +186,10 @@ That “tell the truth before scaling up” posture is one of MarketMind’s cor
 
 ## 4.1 Key Architectural Ideas
 
-Several platform ideas remain important even before the Phase II stack exists:
+Several platform ideas remain important even before the adaptive-learning stack exists:
 
 - **Registry-driven plugin pipelines.** Cleaning, feature, strategy, and validation surfaces are composed through typed registries rather than ad hoc wiring.
+- **Single front-door orchestration.** `py.pipeline.orchestrator` owns governed run order, identity, manifests, and artifact stitching while stage packages own their own execution runtimes.
 - **Functional core / imperative shell.** Strategy logic and feature transforms are pushed toward pure computation while I/O, clocks, broker interaction, and mutable execution state stay outside that core.
 - **Canonical IR pipeline.** The long-term target remains a staged pipeline from MarketData → Features → Alpha → Targets → Orders → Fills → Ledger.
 - **Artifact provenance.** Canonical hashing and immutable artifact identity ensure promotion claims can be reconstructed and audited.
@@ -242,64 +207,46 @@ These guarantees remain non-negotiable regardless of the final allocator:
 
 ## 4.3 Validation-First Meta-Learning Framing
 
-The proposed Phase II design is not just “adaptive weighting with fancier names.” It changes the unit of learning and therefore the type of evidence required:
+The proposed adaptive-learning design is not just “adaptive weighting with fancier names.” It changes the unit of learning and therefore the type of evidence required:
 
-- tasks are regime-bounded episodes with support/query semantics,
+- tasks are regime-bounded episodes with support / query semantics,
 - encoder quality becomes a first-class validation topic,
 - inner-loop gain must be demonstrated rather than assumed,
 - proxy alignment must be tested because the training loss is not identical to the reporting metric,
 - and continual-learning controls must preserve robustness rather than merely enable frequent updates.
 
-That is why Phase II is described as a governed validation program plus implementation effort, not as a straightforward feature build.
+# 5. Getting Started
 
-# 5. Engineering Use
-
-## 5.1 Install
+## 5.1 Run the Current Pipeline
 
 ```bash
-pip install -e .
+python -m pysrc.bridge.java_entry tests/fixtures/sample_spy.csv --fast-sma 5 --slow-sma 10
 ```
 
-or
-
-```bash
-poetry install
-```
-
-## 5.2 Run Common Tasks
+## 5.2 Common Tasks
 
 ```bash
 pytest tests/python/
 ```
 
 ```bash
-mypy srcPy/
-```
-
-For the narrower Phase I-F wiring-verification gate, the canonical strict-typing check is:
-
-```bash
-mypy srcPy/strategies/momentum/ \
-     srcPy/strategies/pipeline_strategy.py \
-     srcPy/artifact_registry/ \
-     srcPy/cli/gate.py \
-     --strict
+mypy pysrc/
 ```
 
 ```bash
-python -m srcPy.cli.gate validate <bundle_dir>
+python -m pysrc.cli.gate validate <bundle_dir>
 ```
 
 ## 5.3 Main Source Areas
 
 | Path | Purpose |
 |---|---|
-| `srcPy/artifact_registry/` | Canonical CAS storage and RunRegistry |
-| `srcPy/backtesting/` | Engines, validation, storage/report seams |
-| `srcPy/cli/` | Gate CLI and related entrypoints |
-| `srcPy/pipeline/` | Canonical orchestration and stage execution |
-| `srcPy/registry/` | SignalCatalog and screening/report substrate |
-| `srcPy/strategies/` | Governed strategy implementations and registry surfaces |
+| `pysrc/artifact_registry/` | Canonical CAS storage and RunRegistry |
+| `pysrc/backtesting/` | Engines, validation, storage/report seams |
+| `pysrc/cli/` | Gate CLI and related entrypoints |
+| `pysrc/pipeline/` | Canonical orchestration and stage execution |
+| `pysrc/registry/` | SignalCatalog and screening/report substrate |
+| `pysrc/strategies/` | Governed strategy implementations and registry surfaces |
 | `tests/python/` | Unit, integration, and property tests |
 | `docs/src/` | Markdown source for the companion suite |
 
@@ -309,11 +256,11 @@ The codebase is substantially more mature than an “experimental trading repo�
 
 - strategy registration and governed bundle production,
 - artifact registry identity and run state management,
-- splits, purge/embargo discipline, and leakage-focused property testing,
+- splits, purge / embargo discipline, and leakage-focused property testing,
 - statistical validity and execution assumptions on the canonical gate path,
 - and the beginning of governed signal-identity infrastructure through SignalCatalog and `slot_index`.
 
-The main missing pieces are not basic engineering hygiene. They are the Phase II learning stack, live execution scope, and the evidence required to justify either of those expansions.
+The main missing pieces are not basic engineering hygiene. They are the adaptive-learning stack, broader execution scope, and the evidence required to justify either of those expansions.
 
 # 6. Quality, Testing, and Governance
 
@@ -322,7 +269,7 @@ The main missing pieces are not basic engineering hygiene. They are the Phase II
 - New tests must carry determinism tier markers (`d0`–`d3`).
 - Randomized tests must use the deterministic seed fixture rather than ad hoc seeding.
 - The suite expects strict typing, precise exception handling, and no debug `print()` in production code.
-- Governance-sensitive outputs should aim for D0 or clearly justified D1/D2 behavior depending on artifact type.
+- Governance-sensitive outputs should aim for D0 or clearly justified D1 / D2 behavior depending on artifact type.
 
 ## 6.2 Promotion Mindset
 
@@ -333,59 +280,35 @@ MarketMind’s governance model is built around a few recurring questions:
 3. Has it **beaten the relevant baseline** under realistic constraints rather than by narrative force?
 4. If it fails, do the artifacts make rollback or kill decisions straightforward?
 
-That mindset applies equally to runtime code, gate policy, and documentation. The companion suite is part of the governed product surface, not marketing copy.
+That mindset applies equally to runtime code, gate policy, and documentation.
 
 # 7. Companion Documents
 
-This README is the suite entrypoint, not the full specification. Each companion document has a distinct role:
+This README is the suite entrypoint, not the full specification.
 
-- **README.md:** suite entrypoint, practical repo truth, current-state framing, and navigation
-- **Implementation Plan:** detailed delivery path, prerequisites, phase gates, and required Phase II artifacts
-- **Technical Roadmap:** capability inventory, dependency-aware sequencing, and research plus engineering checkpoints
-- **Meta-Learning Core:** empirical validation program, acceptance hierarchy, failure playbooks, and promotion/rollback/kill logic
-- **Meta-Learning Architecture Vision:** runtime contracts, system shape, and validation-gated defaults
-- **Resolution Ledger:** blockers, gates, normative locks, threshold-resolution items, and program state tracking
-- **WhitePaper.md:** externally oriented narrative companion aligned to the same semantics but less operationally dense
-
-# 8. Document Map
-
-The managed suite DOCMAP below covers the bumpable companion set. The white paper is intentionally maintained outside that manifest because it serves a different editorial role even though it must remain semantically aligned.
+- **README.md** — suite entrypoint, practical repo truth, current-state framing, and navigation
+- **Implementation Plan** — executable implementation path, deliverables, and gate structure
+- **Technical Roadmap** — strategic build order and dependency-aware roadmap
+- **Meta-Learning Core** — empirical validation program and acceptance hierarchy
+- **Meta-Learning Architecture Vision** — runtime shape, interfaces, and validation-gated defaults
+- **Resolution Ledger** — workflow state, normative locks, and decision tracking
 
 <!-- MM:BEGIN:DOCMAP -->
 
 | Document | Version | Role |
 |---|---:|---|
-| README.md | 6.2.2 | Suite overview, current status, and navigation |
-| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
-| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
-| VERSION.md | 6.2.2 | Canonical release ledger |
+| README.md | 7.2.3 | Suite overview, current status, and navigation |
+| Implementation Plan | 6.5.10 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.31 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Core | 1.2.25 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Meta-Learning Architecture Vision | 1.3.6 | High-level architectural vision and system framing |
+| Resolution Ledger | 1.0.52 | Resolution ledger and workflow state dashboard |
+| VERSION.md | 7.2.3 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
-# 9. Versioning & Changelog
+# 8. Canonical Release Ledger
 
-MarketMind follows Semantic Versioning (`MAJOR.MINOR.PATCH`). See `VERSION.md` for detailed release notes and `docs/releases/` for per-release manifest truth.
-
-<!-- MM:BEGIN:RECENT_CHANGES key="README" window=5 -->
-
-| Release | Date | Highlights |
-|---|---|---|
-| 6.2.2 | April 2026 | Companion sync and release-docs/DOCX CI repair; **WS-1**/**WS-2**/**WS-3** and **II-0A** recorded complete; strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1`; explicit **XGBoost incumbent** boundary; manifest planning from **6.2.1** base; companion stamps **6.5.5 / 1.4.26 / 1.2.24 / 1.3.5 / 1.0.51**. |
-| 4.18.28 | April 2026 | Strict H3 successor surface at `runs/rg09_h3_granularity` recorded as a `PASS` with `trainer_commitment_unlocked = true`; nearby p85 sensitivity control failed with `FAIL_EXCHANGEABLE_TASKS` after collapsing `high_vol` into `crisis`; RG-09 current posture is reopened on the stricter H3 surface; companion stamps **6.4.32 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.40**. |
-| 4.18.27 | April 2026 | Proper H2 cross-sectional run recorded alongside H4: H4 remained a `FAIL_NONREPRODUCIBLE` rescue failure, while H2 was reproducible enough to evaluate but stayed below threshold statistically; RG-09 closed for this phase as a promotable path; companion stamps **6.4.31 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.39**. |
-| 4.18.26 | April 2026 | Executed H4 market-class rescue attempt recorded at `runs/rg09_h4_market_class_risk`: `NEEDS_MORE_EVIDENCE` / `FAIL_NONREPRODUCIBLE` on the narrowed 7-entity risk basket; RG-09 terminated for this phase as a promotable path; companion stamps **6.4.30 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.38**. |
-| 4.18.25 | April 2026 | Resolution Ledger **1.0.37**: **RG-09** PARTIAL **§1.5** posture; **RG-14** registers **RG09-H2**; **GATE-II-01** lock reaffirmed; **II-0B** execution emphasis. |
-| 4.18.9 | April 2026 | **OI-50** closed: yfinance multi-instrument `data/rg09/` + manifest v2 + official v2 fixture; generator `independent_instruments`; companion stamps **6.4.29 / 1.4.21 / 1.2.19 / 1.2.20 / 1.0.25**. |
-
-<!-- MM:END:RECENT_CHANGES -->
-
-<!-- MM:BEGIN:SOURCE_STAMP -->
-
-*MarketMind README v6.2.2 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · VERSION.md 6.2.2*
-
-<!-- MM:END:SOURCE_STAMP -->
+Release history and release manifests live in `VERSION.md` and `docs/releases/`. This README stays focused on current system behavior and companion-document roles.
 
 <!-- MM:END:DOCBODY -->

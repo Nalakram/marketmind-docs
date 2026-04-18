@@ -5,9 +5,9 @@
 **Phase II Research Execution Playbook**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.0.0 · April 2026 · Proprietary
+Version 1.0.2 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.2 · VERSION.md 7.2.2
 <!-- MM:END:TITLEPAGE -->
 
 *Operational ordering and failure-handling playbook for Phase II-0 entry and the first governed execution loop*
@@ -15,8 +15,6 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 *Audience: Internal engineering, technical stakeholders*
 
 <!-- MM:BEGIN:DOCBODY -->
-
-# Phase II Research Execution Playbook
 
 # 1. Purpose
 
@@ -51,31 +49,32 @@ Before Phase II-0 work begins, confirm all entry conditions below.
 
 If any entry condition is not met, the run does not start. The correct response is "not ready," not improvisation.
 
-# 4. Resolution Order / MLN Sequence
+# 4. Resolution Order / MLN Sequence (normative — Core v2.0.0)
 
-Phase II work proceeds in the following order:
+Phase II normative locks (**MLN-01**–**MLN-07**) are defined in Meta-Learning Core and the Resolution Ledger. Conceptual sequencing:
 
-1. MLN-01 — Task non-exchangeability
-2. MLN-02 — Adaptation usefulness
-3. MLN-03 — Encoder coherence
-4. MLN-04 — Proxy alignment / routing validity
-5. MLN-05 — Continual learning stability
-6. MLN-06 — Artifact contract sufficiency
-7. MLN-07 — Threshold validation
+1. **MLN-01** — MetaTask / regime-episode task unit (task non-exchangeability discipline)
+2. **MLN-02** — Regime vocabulary / adaptation usefulness
+3. **MLN-03** — Confidence / calibration contract (post-sizing attenuation default)
+4. **MLN-04** — Dynamic-K fixed-slot masking (`MAX_SIGNALS` = 64)
+5. **MLN-05** — Frozen inference boundary (`theta_day_prime` live; no intraday gradients)
+6. **MLN-06** — Phase II artifact contract (governed triple: `task_manifest.json`, `meta_validity_report.json`, `execution_assumptions.json`)
+7. **MLN-07** — Threshold-resolution governance (no silent `VALIDATE` → fixed policy)
+
+**Implementation truth (4.18.34):** **MLN-01** through **MLN-06** are **CLOSED** in-repo with canonical modules and governed emission paths; see `docs/MLN-04-05-06-closeout-note.md` (joint closeout for MLN-04/05/06) and `docs/MLN-03-closure-note.md`. **MLN-07** remains **OPEN** until threshold governance is complete for promotable Phase II under **GATE-II-01** (including **`THR-RG09-V20`** on corrected-surface OI-59; disposition memo `docs/rg09/oi59_mln07_threshold_decision_memo.md`).
 
 Operational note:
 
-- MLN-06 and MLN-07 must be established at Phase II-0 entry before executing MLN-01–05
-- This does not change conceptual dependency ordering
+- The **governed artifact emission path** (MLN-06) and **threshold register** (MLN-07) must be **honest** before treating outcomes as promotable. That is **evidence order**, not a claim that calendar-time work must finish MLN-06 before MLN-04/05 in every harness.
 
 Operational interpretation:
 
-| Step | Why it is first |
+| Step | Why it matters |
 |---|---|
 | `MLN-01` | Without a governed task object, later evidence has no stable unit of analysis |
 | `MLN-06` | Without governed artifacts, validation claims are not auditable |
 | `MLN-07` | Without threshold identity, provisional values drift into silent policy |
-| `MLN-02` to `MLN-05` | These refine runtime meaning only after the evidence and threshold surfaces are honest |
+| `MLN-02` to `MLN-05` | Refine runtime and contract semantics once the task unit and artifact surfaces exist |
 
 # 5. Execution Loop
 

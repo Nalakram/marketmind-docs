@@ -1,6 +1,9 @@
 # Sphinx (local HTML build; regenerate with sphinx-build, do not commit)
 docs/_build/
 
+# Local Python environment for doc builds
+.venv/
+
 # === AI coding assistants ===
 .claude/
 .codex/

@@ -3,14 +3,14 @@
 **Meta-Learning Architecture Vision**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.3.5 · April 2026 · Proprietary
+Version 1.3.6 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Resolution Ledger v1.0.52 · README.md 7.2.2 · VERSION.md 7.2.2
 <!-- MM:END:TITLEPAGE -->
+
 
 <!-- MM:BEGIN:DOCBODY -->
 
-# Meta-Learning Architecture Vision
 
 # Purpose
 
@@ -129,7 +129,7 @@ The following components represent proto-meta-learning infrastructure that is al
 
 | Field | Type | Description |
 |---|---|---|
-| `task_id` | str | `HMAC-SHA256(regime_id + t0 + t1 + signal_ids_hash)`. Deterministic, content-addressed. Immutable after creation. |
+| `task_id` | str | `HMAC-SHA256(key_material, regime_id + t0 + t1 + signal_ids_hash)`. Deterministic, content-addressed. Immutable after creation. |
 | `regime_id` | str | Compositional Level 1: `trend_{hi|lo|flat}__vol_{hi|med|lo}__bocpd_{stable|transition|cp}` |
 | `regime_class` | str | 5-class Level 2 projection: `{bull, bear, sideways, high_vol, crisis}` |
 | `regime_embedding` | Optional[np.ndarray] | float32[64]. None until context encoder trained (Phase II ML-1). |
@@ -148,7 +148,7 @@ The following components represent proto-meta-learning infrastructure that is al
 
 **Sizing defaults (validation-gated).** `n_support = 20–40` bars; `n_query = 10–20` bars; `purge_window = max(horizon, 5)` bars; `embargo_window = 2` bars daily, `ceil(0.05 × episode_len)` intraday. These are initial operating values only.
 
-**task_id note.** The inclusion of `signal_ids_hash` in the task_id hash is required for dynamic-K stability. `task_generator.py` is the only permitted constructor.
+**task_id note.** The inclusion of `signal_ids_hash` in the task_id hash is required for dynamic-K stability. Current governed key material is empty (`b""`) with explicit key-version metadata; key/message changes require governed migration. `task_generator.py` is the only permitted constructor.
 
 ## 4.2 Regime Taxonomy
 
@@ -195,7 +195,7 @@ The following components represent proto-meta-learning infrastructure that is al
 
 **SizingFn Protocol.** The SizingFn signature is not changed in Phase II. A protocol version bump to accept confidence explicitly is deferred to Phase III unless the post-sizing approach proves insufficient.
 
-**Calibration.** `confidence_scalar` is supervised against a bounded realized-quality target and calibrated via isotonic regression or Platt scaling on a held-out calibration set after core model training. Recalibrated nightly. ECE and realized-quality correlation are reported in `meta_validity_report.json` and monitored per Section 8.
+**Calibration.** `confidence_scalar` is supervised against a bounded realized-quality target and calibrated via isotonic regression or Platt scaling on a held-out calibration set after core model training. Recalibrated nightly. ECE and realized-quality correlation are reported in `meta_validity_report.json` and monitored per Section 8. Governed artifact emission is fail-closed: malformed calibration payloads are rejected, and paths without calibration measurement emit explicit `INSUFFICIENT` calibration status.
 
 **Routing (explicitly non-default).** **Uncertainty-aware routing**—treating some states as reject/route zones—is a **Phase II-0 pilot hypothesis**, not part of the default inference contract. Default behavior remains **post-sizing attenuation** only unless Core §2.5.2 promotion criteria are met and an **ADR** updates defaults.
 
@@ -298,6 +298,7 @@ Emitted by the MetaLearner gate (ML-6). Added to run_bundle from Phase II forwar
 | `crisis_episode_ic` | dict[str, float] | Per-episode IC on held-out crisis episodes |
 | `forgetting_delta` | float | IC degradation on older held-out tasks |
 | `confidence_ece` | float | Expected calibration error |
+| `confidence_calibration` | dict | Governed calibration block (`mln03.confidence_calibration.v1`) including reporting gate, method status, reliability reference, recalibration state, and routing-pilot boundary metadata |
 | `net_allocation_sharpe` | float | Walk-forward Sharpe using meta-policy weights, net of TC |
 | `signal_set_version` | int | Active signal set version at evaluation time |
 | `anti_goodhart_gap` | float | Ratio: held-out crisis IC / in-distribution test IC |
@@ -590,19 +591,23 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 | Strategy layer | Optional imports tolerated; StrategyRegistry raises actionable errors; dual feature path (ADR-001) in `materialize_features`. |
 | Test architecture | `conftest` thinned; reusable `_plugins` for seeds, data, hardware, and stats. |
 
-## 13.2 Post-3.6.0 Additions (through **`VERSION.md` 6.2.2** companion baseline, April 2026)
+## 13.2 Post-3.6.0 Additions (through v4.8.0 companion baseline, March 2026)
 
 | Area | Update |
 |---|---|
-| Canonical artifact storage | ADR-002 accepted: `srcPy/artifact_registry/` designated canonical. LocalCAS and RunRegistry are the canonical storage primitives. |
+| Canonical artifact storage | ADR-002 accepted: `py/artifact_registry/` designated canonical. LocalCAS and RunRegistry are the canonical storage primitives. |
 | Reconstructible bundles | `bundle_manifest.json` is the contract for run-bundle reconstructibility; gate and run pipeline use it for verification and promotion. |
 | Domain-qualified identity | Canonical identity uses `cas.v1:b3-256` and `attest.v1:jcs-sha256`. |
 | PIT orchestration and source adaptation | 4.1.0 delivered the PIT orchestration boundary; 4.2.0 extended PIT guarantees into governed daily source adapters. |
 | Feature-path integrity | 4.3.0 closed the single-path governed feature execution lock and expanded the canonical op floor. |
+| Governed cleaning and run composition | **4.19.0** hardens stage ownership: cleaning now has one canonical namespace (`py.pipeline.stages.cleaning`), declarative `pipeline.cleaning` specs, registry-bound executable identity, fail-closed governed provider seams, and emitted `cleaning_plan.json` / `cleaning_report.json` artifacts; `py.pipeline.orchestrator` is the governed dataprep front door and `py.bridge.dataprep_orchestrator` is reduced to a deprecating forward-only bridge. |
 | Governed strategy slices | 4.4.0 landed `stat_arb_pairs` on the trusted path; 4.5.x materially advanced the governed momentum package spine and bundle-facing reporting. |
 | Signal identity and governance substrate | 4.5.0–4.5.4 added SignalCatalog with stable `slot_index`, `screening_report.json`, stricter governed statistical-validity/cost artifacts, DataLineageGate, artifact-registry-owned hashing/canonicalization boundaries, evidence-backed canonical-frame CI reporting, and Phase I-E companion-doc closure. |
-| Documentation baseline | Prior milestones through **4.18.5** remain true as substrate history (**MLN-02-AMD-01**, **OI-43**, bounded **II-0A** harness path, **OI-39**, II-0 empirical research scaffold). The **`VERSION.md` 6.2.2** companion advance records **WS-1 / WS-2 / WS-3** and **II-0A** completion in companion truth, freezes the strict-H3 RG-09 **task-validity reference anchor** at `run_bundles/rg09_reference_v1`, and keeps the Phase II **challenger-vs-incumbent** comparison boundary explicit: predicates for allocator comparison reference the **XGBoost incumbent**, not the RG-09 reference anchor. Companion suite stamps advance per §14 DOCMAP (Implementation Plan **6.5.5**, Technical Roadmap **1.4.26**, Core **1.2.24**, this document **1.3.5**, Resolution Ledger **1.0.51**, README **6.2.2**). Phase I-A through I-F remain closed on the canonical path. |
-| Remaining Phase I-G / II boundary items | **RG-09** promotion-level empirical closure may still be tracked as **PARTIAL** where the ledger distinguishes reference-anchor diagnostics from allocator promotion evidence; governed momentum follow-ons (**`OI-34`**, **`OI-32`**), Phase II normative locks (**MLN-01**–**07**), and **OI-15** golden-vector work remain active where open in Resolution Ledger **v1.0.51**. |
+| Documentation baseline | **4.18.32** carries forward the earlier H1, H4, and proper H2 RG-09 evidence surfaces but now records the executed strict H3 successor surface at `runs/rg09_h3_granularity` as `PASS` with `trainer_commitment_unlocked = true` on fixture `sha256:d38639a4f2cb8be5e0c57cd1fdaa3750b8a26336b93dd907a6b0f2b9d289e11c`. The harness still emits the base-field hypothesis identity `RG09-H1`, so the suite treats this as an H3 successor surface evaluated through the base harness rather than as proof that H1 passed. A nearby p85 sensitivity control failed with `FAIL_EXCHANGEABLE_TASKS` after collapsing `high_vol` into `crisis`. The strongest supported lesson remains narrow: within the tested H3 neighborhood, stricter crisis labeling preserved the crisis/high_vol separation required for non-exchangeability. **4.18.33** documents the corrected-surface OI-59 lane in the next row; **4.18.34** propagates **`THR-RG09-V20`** register fields (memo as current MLN-07 disposition artifact, **`HOLD_PENDING_THRESHOLD_REVIEW`** pointer). |
+| Corrected-surface OI-59 (distinct lane) | Corrected-surface **OI-59** is **constructibility-only** and held at **`HOLD_PENDING_THRESHOLD_REVIEW`** (Experiment 5 Branch B closed as a rescue family under the current recipe). **`THR-RG09-V20`** is **`PROVISIONAL`**, **gate-critical**, and under **MLN-07** review; **no further corrected-branch experiments** are authorized until governance resolves scope/identity. Do not conflate this lane with the strict-H3 promotable posture in the row above. |
+| II-0A reference anchor | **II-0A COMPLETE** is now supportable: WS-1 froze the strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1/`, WS-2 delivered `pysrc.validation.task_validity`, WS-3 emitted `task_validity_report.json` with `all_pass=true`, and CI has been confirmed green. This anchor governs task-validity and harness reproducibility only; the XGBoost incumbent remains the Phase II challenger comparison baseline. |
+| II-0B artifact-contract hardening | **7.0.0** hardens the non-promotable governed evidence surface: required non-recursive `content_hash` blocks on the artifact triple, shell semantic validation, seed-lineage consistency, PIT/hash consistency, baseline/shared-context parity, and threshold state/expression reconciliation against the canonical register. This is scaffold hardening only, not allocator readiness. |
+| Remaining Phase I-G / II boundary items | The strict H3 successor surface has reopened RG-09 as a promotable path and now has a frozen II-0A reference anchor, but **GATE-II-01** and corrected-surface OI-59 boundaries remain separate from full promotable Phase II closure. **MLN-01** through **MLN-07** are **CLOSED** in-repo with canonical modules and governed disposition surfaces (see `docs/MLN-04-05-06-closeout-note.md`, `docs/MLN-03-closure-note.md`, and Resolution Ledger). Earlier H4 and proper H2 predecessor surfaces remain documented as unsuccessful. **OI-15** and other non-RG-09 boundary items remain tracked in Resolution Ledger **v1.0.52**. |
 
 ---
 
@@ -610,8 +615,13 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Release | Date | Architecture Vision impact |
 |---|---|---|
-| 1.3.5 | April 2026 | Companion-sync to **`VERSION.md` 6.2.2**: title-page, §13.2, DOCMAP, and SOURCE_STAMP advanced; **WS-1 / WS-2 / WS-3** and **II-0A** recorded complete in companion truth; **§13.2** documents the frozen RG-09 reference anchor path and incumbent-vs-anchor boundary. |
-| 1.2.20 | April 2026 | Companion-sync: documentation baseline advanced to **4.18.5** / **1.0.21**; **OI-39** closed; II-0A harness and II-0 empirical meta-validity scaffold treated as implemented; §13.2 and DOCMAP updated; full RG-09 empirical closure remains **PARTIAL**. |
+| 1.3.6 | April 2026 | Companion sync for **II-0B 7.0.0 hardening**: §13.2 adds the artifact-contract hardening row for required content hashes, shell semantic validation, threshold state/expression reconciliation, and non-promotable scaffold boundaries. No architectural thesis change. |
+| 1.3.5 | April 2026 | Companion sync for **II-0A COMPLETE**: §13.2 adds the frozen RG-09 reference anchor row and updates remaining-boundary language while preserving the XGBoost incumbent comparison-baseline separation. No architectural thesis change. |
+| 1.3.0 | April 2026 | Minor architecture-baseline release for **4.19.0**: §13.2 adds the governed cleaning/runtime-ownership row for the single cleaning namespace, declarative `pipeline.cleaning` specs, emitted cleaning artifacts, and `py.pipeline.orchestrator` as the governed front door while the bridge becomes forward-only. No architectural thesis change. |
+| 1.2.23 | April 2026 | §13.2 documentation-baseline row extended for **4.18.34**: **`THR-RG09-V20`** register propagation (MLN-07 memo as current disposition artifact, **`HOLD_PENDING_THRESHOLD_REVIEW`** pointer); DOCMAP/SOURCE_STAMP to **4.18.34** / Implementation Plan **6.4.34**. No architectural thesis change. |
+| 1.2.22 | April 2026 | Companion doc truthfulness sync: §13.2 adds **corrected-surface OI-59** row (constructibility-only, **`HOLD_PENDING_THRESHOLD_REVIEW`**, **`THR-RG09-V20`** **`PROVISIONAL`**/**gate-critical**, no further corrected-branch experiments until **MLN-07**); clarifies strict-H3 promotable posture vs OI-59; DOCMAP/SOURCE_STAMP to **4.18.33** / Implementation Plan **6.4.33** / Ledger **1.0.44**. No architectural thesis change. |
+| 1.2.21 | April 2026 | Companion-sync: **4.18.30** / **1.0.42**; §13.2 updated so **MLN-01**–**MLN-06** are recorded as CLOSED in-repo while **MLN-07** and **GATE-II-01** remain open for promotable Phase II; DOCMAP and SOURCE_STAMP updated. No architectural thesis change. |
+| 1.2.20 | April 2026 | Companion-sync: documentation baseline advanced through **4.18.28** / **1.0.40**; §13.2 updated so earlier H4 and proper H2 predecessor surfaces remain documented while the strict H3 successor surface is treated as the current live promotable RG-09 posture; DOCMAP and SOURCE_STAMP updated. No architectural thesis change. |
 | 1.2.19 | March 2026 | §4.2 **MLN-02-AMD-01:** Level 2 `crisis` is `vol_hi AND severity_flag` (PIT-safe expanding `vol_score_raw` percentile ≥ p90, **RG09-V12** ⚑ VALIDATE); explicit BOCPD-as-segmentation-primitive note; historical crisis frequency tagged ⚑ VALIDATE. Companion stamps → **4.18.0** / **6.4.23** / **1.0.19**. |
 | 1.2.18 | March 2026 | Companion stamp sync: DOCMAP/SOURCE_STAMP to **4.17.0** / **6.4.22** / **1.0.18**; §13.2 documentation-baseline rows updated so MOM-020 is closed rather than listed as a remaining boundary item; no architectural thesis change. |
 | 1.2.17 | March 2026 | Companion stamp sync: DOCMAP/SOURCE_STAMP to **4.16.0** / **6.4.21** / **1.0.17**; §13.2 documentation-baseline rows updated for **OI-37**/**OI-38** closure and current ledger; no architectural thesis change. |
@@ -629,19 +639,19 @@ Topics explicitly deferred from Phase II. Phase II architecture decisions mainta
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
-| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
-| README.md | 6.2.2 | Suite overview, current status, and navigation |
-| VERSION.md | 6.2.2 | Canonical release ledger |
+| Meta-Learning Architecture Vision | 1.3.6 | High-level architectural vision and system framing |
+| Implementation Plan | 6.5.9 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.30 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Core | 1.2.25 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Resolution Ledger | 1.0.52 | Resolution ledger and workflow state dashboard |
+| README.md | 7.2.2 | Suite overview, current status, and navigation |
+| VERSION.md | 7.2.2 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Meta-Learning Architecture Vision v1.3.5 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
+*Meta-Learning Architecture Vision v1.3.6 · April 2026 · Companion to Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Resolution Ledger v1.0.52 · README.md 7.2.2 · VERSION.md 7.2.2*
 
 <!-- MM:END:SOURCE_STAMP -->
 

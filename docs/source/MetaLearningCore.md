@@ -3,9 +3,9 @@
 **Meta-Learning Core**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.2.24 · April 2026 · Proprietary
+Version 1.2.25 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.10 · Technical Roadmap v1.4.31 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.3 · VERSION.md 7.2.3
 <!-- MM:END:TITLEPAGE -->
 
 *Research agenda supplement — task definition, training mechanics, empirical validation program, and acceptance criteria*
@@ -14,19 +14,17 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 
 <!-- MM:BEGIN:DOCBODY -->
 
-# Meta-Learning Core
-
 <!-- MM:BEGIN:DOCMAP -->
 
 | Document | Version | Role |
 |---|---:|---|
-| Meta-Learning Core | 1.2.24 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
-| Implementation Plan | 6.5.5 | Executable implementation path, deliverables, and phase gates |
-| Technical Roadmap | 1.4.26 | Strategic build order and dependency-aware roadmap |
-| Meta-Learning Architecture Vision | 1.3.5 | High-level architectural vision and system framing |
-| Resolution Ledger | 1.0.51 | Resolution ledger and workflow state dashboard |
-| README.md | 6.2.2 | Suite overview, current status, and navigation |
-| VERSION.md | 6.2.2 | Canonical release ledger |
+| Meta-Learning Core | 1.2.25 | Research supplement defining task schema, inner/outer loop mechanics, curriculum, and acceptance criteria |
+| Implementation Plan | 6.5.10 | Executable implementation path, deliverables, and phase gates |
+| Technical Roadmap | 1.4.31 | Strategic build order and dependency-aware roadmap |
+| Meta-Learning Architecture Vision | 1.3.6 | High-level architectural vision and system framing |
+| Resolution Ledger | 1.0.52 | Resolution ledger and workflow state dashboard |
+| README.md | 7.2.3 | Suite overview, current status, and navigation |
+| VERSION.md | 7.2.3 | Canonical release ledger |
 
 <!-- MM:END:DOCMAP -->
 
@@ -35,6 +33,8 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 # 0. Decision Framing
 
 *This section is the front door. Read it before any other section. It defines what the architecture claims, what can falsify it, and what governs the decision to kill it.*
+
+**Current companion baseline:** `VERSION.md` **7.2.3** / Resolution Ledger **1.0.52**. Earlier unsuccessful H4 and proper H2 predecessor surfaces remain part of the governed record, but the strict H3 successor surface now has a frozen RG-09 reference anchor at `run_bundles/rg09_reference_v1/`. WS-1, WS-2, and WS-3 are complete, the task-validity integration report is `ALL_PASS`, and II-0A is supportable for harness reproducibility. II-0B is complete on the non-promotable artifact-and-contract lane: governed triples require non-recursive `content_hash` blocks, shell semantic validation, threshold state/expression reconciliation against the canonical register, canonical orchestration now fails closed unless governed II-0B evidence is structurally usable, and borrowed `THR-RG09-V03` / `THR-RG09-V17` references on that lane are framed as reviewer-visible lineage rather than native orchestration policy. II-0C is complete as a **non-promotable pilot harness**: canonical MetaTask scaffolding, deterministic reference-only encoder stub, XGBoost incumbent comparison plumbing, unchanged II-0B governed artifact path, research-only report shells, frozen reference replay inputs, and fail-closed checks for task identity plus baseline/shared parity before emission. This does not change the Phase II null hypothesis: the XGBoost incumbent comparison baseline remains the relevant challenger predicate target, not the RG-09 task-validity anchor. **Corrected-surface OI-59** remains a separate, constructibility-only lane; see Architecture Vision §13.2 and Implementation Plan §1.2.
 
 ## 0.1 Architectural Claim
 
@@ -128,14 +128,15 @@ The following components represent proto-meta-learning infrastructure that is al
 
 **What it is.** A MetaTask is a regime-bounded learning episode. It is the atomic unit of both training and evaluation in the meta-learning system.
 
-**Who creates it.** `task_generator.py` (ML-2). No other component may construct MetaTask objects.
+**Who creates it.** `build_meta_task(...)` in `py/meta_learning/task_generator.py` is the canonical governed constructor. Governed paths must not construct `MetaTask(...)` directly.
 
 **Where it lives.** `TaskRegistry` (`task_registry.py`, ML-1 prerequisite). Indexed by `(regime_id, t0)`.
 
 **When it changes.** Never mutated after creation. Append-only registry. Any re-construction requires a new `task_id`.
 
 **Invariants.**
-- `task_id` = `HMAC-SHA256(regime_id + t0 + t1 + signal_ids_hash)` — deterministic, content-addressed.
+- `task_id` = `HMAC-SHA256(key_material, regime_id + t0 + t1 + signal_ids_hash)` — deterministic, content-addressed.
+- current governed key material is empty (`b""`) with explicit key version metadata; changing key material or message layout invalidates historical IDs unless a governed migration is declared.
 - `pit_boundary` must equal the last timestamp of the support set. No feature or label may be computed using data beyond `pit_boundary`.
 - `signal_ids` and `signal_mask` must be stored as an ordered, deterministic sequence so replay, EWC anchors, and gate runs remain comparable across dynamic-K changes.
 - `support_set` and `query_set` must be temporally disjoint with a purge gap of at least H bars (label horizon) and an embargo gap E (default E=0 for daily; E=ceil(0.05 × episode_len) for intraday).
@@ -162,6 +163,8 @@ MetaTask:
 | `regime_class` | Coarse curriculum bucket: `{bull, bear, sideways, high_vol, crisis}`. Used for sampling distribution and curriculum balance enforcement. |
 | `regime_id` | High-granularity composite label: trend direction × realized vol quintile × BOCPD run-length state. Used for task identity, context encoder input, and TaskRegistry indexing. |
 | `pit_boundary` | The point-in-time boundary for a task. No information from after this timestamp may appear in the task's features, labels, or regime label. |
+
+Default governed projection for `regime_class` is severity-gated: `crisis := vol_hi AND severity_flag`. BOCPD-gated crisis remains reference-only for diagnostics and side-by-side checks, not default class projection semantics.
 
 ## 2.3 Parameter Objects
 
@@ -214,7 +217,7 @@ Training uses a differentiable surrogate (pairwise ranking or soft-sort Spearman
 
 | Artifact | Schema | Required from |
 |---|---|---|
-| `meta_validity_report.json` | v1: `{inner_loop_gain_by_regime, context_encoder_clustering_score, crisis_episode_ic, forgetting_test_result, proxy_ic_correlation, overall_result: PASS/FAIL}` | Phase II onward; every nightly training run |
+| `meta_validity_report.json` | v1 includes adaptation, encoder, crisis, forgetting, proxy alignment, and `confidence_calibration` (`schema_version`, `reporting_gate`, `ece`, reliability and recalibration fields; fail-closed if malformed) | Phase II onward; every nightly training run |
 | `gate_result.json` | Existing schema; add `meta_learner_gate` block | Phase II onward |
 | `task_manifest.json` | `{task_id, regime_class, t0, t1, signal_ids_hash, pit_boundary}` per task used in training run | Phase II onward |
 
@@ -440,23 +443,23 @@ The following deliverables must be in place before Phase II training infrastruct
 
 | Deliverable | File | Why Required | Effort |
 |---|---|---|---|
-| MetaTask dataclass | `srcPy/meta/task.py` | Defines task schema (§2.1). All subsequent meta-learning code depends on this contract. | 2 hrs |
-| TaskRegistry | `srcPy/meta/task_registry.py` | Stores historical tasks indexed by regime_id and t0. Required for curriculum and outer-loop batch sampling. | 3 hrs |
+| MetaTask dataclass | `py/meta/task.py` | Defines task schema (§2.1). All subsequent meta-learning code depends on this contract. | 2 hrs |
+| TaskRegistry | `py/meta/task_registry.py` | Stores historical tasks indexed by regime_id and t0. Required for curriculum and outer-loop batch sampling. | 3 hrs |
 | BOCPD implementation | (orchestrator regime service — file path TBD at Phase II implementation; must not be placed inside feature graph ops) | BOCPD regime service provides canonical PIT-safe regime labels and task-boundary signals to RegimeLabeler. Service placement is governed by AQ-04 (CLOSED). Must not be implemented as a graph op in the feature execution path. | 4–6 hrs |
-| Signal embedding field on Signal ABC | `srcPy/registry/signal_abc.py` | `signal_embedding: Optional[np.ndarray] = None` until context encoder is online. | 1 hr |
-| Regime label pipeline | `srcPy/meta/regime_labeler.py` | Assigns `regime_class` to each historical bar from current-knowledge variables only. | 3–4 hrs |
+| Signal embedding field on Signal ABC | `py/registry/signal_abc.py` | `signal_embedding: Optional[np.ndarray] = None` until context encoder is online. | 1 hr |
+| Regime label pipeline | `py/meta/regime_labeler.py` | Assigns `regime_class` to each historical bar from current-knowledge variables only. | 3–4 hrs |
 
 ## 5.6 Phase II Build Order
 
 | Priority | Deliverable | File | Description | Effort |
 |---|---|---|---|---|
-| ML-1 | Context Encoder | `srcPy/meta/context_encoder.py` | 2-layer MLP: `c_t → z in R^64`. Pre-train as regime classifier; fine-tune jointly. | 8–12 hrs |
-| ML-2 | MetaTask Generator | `srcPy/meta/task_generator.py` | Builds MetaTask objects from DataView. Enforces PIT and dynamic-K invariants. | 6–8 hrs |
-| ML-3 | Reptile Trainer | `srcPy/meta/reptile_trainer.py` | Nightly outer loop with differentiable IC surrogate. Logs inner-loop gain by task and regime bucket. | 12–16 hrs |
-| ML-4 | Meta-Policy Network | `srcPy/meta/meta_policy.py` | `z + IC_vec + portfolio_state → allocation_weights + confidence_scalar + regime_class`. | 8–10 hrs |
-| ML-5 | EWC + Crisis Replay | `srcPy/meta/continual.py` | EWC penalty on stratified anchor set plus crisis replay buffer. | 6–8 hrs |
+| ML-1 | Context Encoder | `py/meta/context_encoder.py` | 2-layer MLP: `c_t → z in R^64`. Pre-train as regime classifier; fine-tune jointly. | 8–12 hrs |
+| ML-2 | MetaTask Generator | `py/meta/task_generator.py` | Builds MetaTask objects from DataView. Enforces PIT and dynamic-K invariants. | 6–8 hrs |
+| ML-3 | Reptile Trainer | `py/meta/reptile_trainer.py` | Nightly outer loop with differentiable IC surrogate. Logs inner-loop gain by task and regime bucket. | 12–16 hrs |
+| ML-4 | Meta-Policy Network | `py/meta/meta_policy.py` | `z + IC_vec + portfolio_state → allocation_weights + confidence_scalar + regime_class`. | 8–10 hrs |
+| ML-5 | EWC + Crisis Replay | `py/meta/continual.py` | EWC penalty on stratified anchor set plus crisis replay buffer. | 6–8 hrs |
 | ML-6 | MetaLearner Gate | `marketmind_gate/gates/meta_learner.py` | Promotion gate: all Section 6 criteria. Emits `meta_validity_report.json`. | 4–6 hrs |
-| ML-7 | ChampionChallenger Reframe | `srcPy/strategies/pipeline_strategy.py` | Shadow mode, capped blend, and promotion checks for meta-policy rollout. | 3–4 hrs |
+| ML-7 | ChampionChallenger Reframe | `py/strategies/pipeline_strategy.py` | Shadow mode, capped blend, and promotion checks for meta-policy rollout. | 3–4 hrs |
 
 ---
 
@@ -761,12 +764,130 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 ---
 
+# Appendix A — Threshold Resolution Table
+
+*Each `⚑ VALIDATE` placeholder in this document is assigned a resolution milestone, an evidence source, and a responsible owner.*
+
+## A.1 Resolution Tiers
+
+| Tier | Resolve by | Rationale |
+|---|---|---|
+| **Tier 1** | Before ML-3 build | These thresholds govern the training infrastructure itself. |
+| **Tier 2** | Before Stage 1 shadow | These thresholds govern gate pass/fail for promotion to live shadow. |
+| **Tier 3** | Before Stage 2 blend | These thresholds govern live capital exposure. |
+
+## A.2 Threshold Resolution Registry
+
+| Threshold name | Current placeholder | Section | Why unresolved | Evidence source needed | Tier | Status |
+|---|---|---|---|---|---|---|
+| `inner_loop_gain_mean` | > 0.005 IC | §6.1, §4.3 | No finance-specific meta-learning precedent | K-sweep experiment on MarketMind task pool | 1 | Open |
+| `proxy_IC_pearson_r` | > 0.6 | §6.1, §4.4 | Correlation floor is literature-approximate | Proxy alignment experiment on MarketMind data | 1 | Open |
+| `within_regime_cosine` | > 0.6 | §6.1 | No finance precedent | Context encoder clustering test on regime-labeled task pool | 1 | Open |
+| `cross_regime_cosine` | < 0.3 | §6.1 | Same | Same | 1 | Open |
+| `adaptation_K_max` | <= 10 steps | §6.1, Lock 3 | Latency budget not yet measured | Wall-clock sweep on MarketMind hardware | 1 | Open |
+| `forgetting_IC_floor` | < 15% degradation | §6.3, §11.1, Lock 6 | EWC calibration unresolved | Sequential monthly update experiment | 1 | Open |
+| `plasticity_gain_floor` | > 0.003 IC | §4.5, Lock 6 | No published baseline | Same as forgetting experiment | 1 | Open |
+| `min_task_count_bull` | 50 | §10.2 | Regime frequency not yet measured | Compute regime episode counts from full historical data | 1 | Open |
+| `min_task_count_bear` | 50 | §10.2 | Same | Same | 1 | Open |
+| `min_task_count_sideways` | 50 | §10.2 | Same | Same | 1 | Open |
+| `min_task_count_high_vol` | 30 | §10.2 | Same | Same | 1 | Open |
+| `min_task_count_crisis` | 20 | §10.2 | Crisis periods are rare | Same | 1 | Open |
+| `shadow_exit_days` | >= 15 consecutive days | §8.1 | No backtested shadow-mode precedent | Shadow-mode simulation on walk-forward data | 2 | Open |
+| `stage2_exit_days` | >= 30 consecutive days | §8.1 | Same | Same | 2 | Open |
+| `net_sharpe_gate` | > 0.5 walk-forward | §6.2 | Minimum bar not grounded in MarketMind baseline | Baseline Workstream 1 results | 2 | Open |
+| `confidence_ECE_threshold` | Unset | §2.5.1, §11.1 | No calibration experiment yet | Held-out calibration set fit | 2 | Open |
+| `confidence_quality_corr_floor` | Unset | §11.1 | No realized-quality label defined yet | Define training target and measure on held-out data | 2 | Open |
+| `blend_alpha_cap` | 0.3 | §8.1 | Initial cap is conservative | Stage 1 shadow-mode IC correlation with incumbent | 3 | Open |
+| `turnover_alert_multiplier` | 1.5× baseline | §8.1 | Baseline turnover not yet measured | Measure incumbent turnover in shadow period | 3 | Open |
+| `IC_divergence_alpha_reduction` | > 0.05 daily IC gap | §8.1 | Threshold is heuristic | Shadow-mode IC variance distribution | 3 | Open |
+| `live_IC_demotion_trigger` | > 20% drop over 5 days | §8.1, §9.2 | Needs joint calibration with risk committee | Stage 1 IC variance | 3 | Open |
+| `gross_exposure_deviation_cap` | `⚑ VALIDATE` | §8.1 | Requires risk-committee sign-off | Risk committee; exposure policy | 3 | Open |
+| `sector_factor_drift_limit` | `⚑ VALIDATE` | §8.1 | Same | Same | 3 | Open |
+| `operational_burden_thresholds` | Multiple | §9.3.1 | Operational history does not exist pre-deployment | 30-day shadow-mode operational log | 3 | Open |
+| `compute_burden_cap` | > 5× EnsemblePipelineStrategy | §9.3.1 | Actual cost depends on hardware and task pool size | Profile nightly training on target hardware | 2 | Open |
+
+## A.3 Resolution Rules
+
+- A Tier 1 threshold that is not resolved before ML-3 implementation begins is a process violation.
+- A Tier 2 threshold that is not resolved before Stage 1 entry is a gate failure.
+- A Tier 3 threshold that is not resolved before Stage 2 entry is a hard stop.
+- When a threshold is resolved, update this table, update the relevant section in-line, and remove the `⚑ VALIDATE` flag from that section.
+
+---
+
+# References
+
+**Meta-Learning Algorithms**
+
+Finn, Chelsea, Abbeel, Pieter & Levine, Sergey (2017). "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks." ICML.
+
+Nichol, Alex, Achiam, Joshua & Schulman, John (2018). "On First-Order Meta-Learning Algorithms." arXiv:1803.02999.
+
+Finn, Chelsea et al. (2019). "Online Meta-Learning." ICML.
+
+Antoniou, Antreas, Edwards, Harrison & Storkey, Amos (2019). "How to Train Your MAML." ICLR.
+
+Raghu, Aniruddh, Raghu, Maithra, Bengio, Samy & Vinyals, Oriol (2020). "Rapid Learning or Feature Reuse? Towards Understanding the Effectiveness of MAML." ICLR.
+
+Rajeswaran, Aravind et al. (2019). "Meta-Learning with Implicit Gradients." NeurIPS.
+
+Snell, Jake, Swersky, Kevin & Zemel, Richard (2017). "Prototypical Networks for Few-Shot Learning." NeurIPS.
+
+Yin, Mingzhang et al. (2020). "Meta-Learning without Memorization." ICLR.
+
+Genewein, Tim et al. (2023). "Memory-Based Meta-Learning on Non-Stationary Distributions." ICML.
+
+Vilalta, Ricardo & Drissi, Youssef (2002). "A Perspective View and Survey of Meta-Learning." Artificial Intelligence Review 18(2), 77-95.
+
+**Continual Learning & Catastrophic Forgetting**
+
+Kirkpatrick, James, Pascanu, Razvan, Rabinowitz, Neil et al. (2017). "Overcoming Catastrophic Forgetting in Neural Networks." PNAS 114(13), 3521-3526.
+
+Huszar, Ferenc (2018). "Note on the Quadratic Penalties in Elastic Weight Consolidation." PNAS.
+
+Schwarz, Jonathan et al. (2018). "Progress & Compress: A Scalable Framework for Continual Learning." ICML.
+
+Javed, Khurram & White, Martha (2019). "Meta-Learning Representations for Continual Learning." NeurIPS.
+
+Lopez-Paz, David & Ranzato, Marc'Aurelio (2017). "Gradient Episodic Memory for Continual Learning." NeurIPS.
+
+**Curriculum Learning & Task Sampling**
+
+Schaul, Tom, Quan, John, Antonoglou, Ioannis & Silver, David (2016). "Prioritized Experience Replay." ICLR.
+
+Bengio, Yoshua, Louradour, Jerome, Collobert, Ronan & Weston, Jason (2009). "Curriculum Learning." ICML.
+
+Yao, Huaxiu et al. (2021). "Meta-learning with an Adaptive Task Scheduler." NeurIPS.
+
+Wang, Jin et al. (2024). "Towards Task Sampler Learning for Meta-Learning." IJCV 132, 5534-5564.
+
+**Regime Detection & Change-Point Models**
+
+Adams, Ryan P. & MacKay, David J.C. (2007). "Bayesian Online Changepoint Detection." arXiv:0710.3742.
+
+Hamilton, James D. (1989). "A New Approach to the Economic Analysis of Nonstationary Time Series." Econometrica 57(2), 357-384.
+
+Ang, Andrew & Bekaert, Geert (2002). "International Asset Allocation with Regime Shifts." Review of Financial Studies 15(4), 1137-1187.
+
+**Context Encoding & Neural Processes**
+
+Mishra, Nikhil, Rohaninejad, Mostafa, Chen, Xi & Abbeel, Pieter (2018). "A Simple Neural Attentive Meta-Learner (SNAIL)." ICLR.
+
+Garnelo, Marta, Rosenbaum, Dan, Maddison, Chris et al. (2018). "Neural Processes." ICML Workshop.
+
+**Differentiable Ranking & Learning to Rank**
+
+Blondel, Mathieu et al. (2020). "Fast Differentiable Sorting and Ranking." ICML.
+
+<!-- MM:END:DOCBODY -->
+
 <!-- MM:BEGIN:RECENT_CHANGES key="MetaLearningCore" window=3 -->
 
 | Release | Date | Meta-Learning Core impact |
 |---|---|---|
-| 1.2.24 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **`VERSION.md` 6.2.2**, Implementation Plan **6.5.5**, Resolution Ledger **1.0.51**, Architecture Vision **1.3.5**; baseline framing now records the frozen strict-H3 RG-09 reference anchor at `run_bundles/rg09_reference_v1` and the explicit **XGBoost incumbent** comparison boundary; no change to Core proof obligations or acceptance hierarchy. |
-| 1.2.19 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.5**, Implementation Plan **6.4.26**, Resolution Ledger **1.0.21**; no Core semantics change. |
+| 1.2.25 | April 2026 | Companion sync for **II-0B 7.0.0 hardening**: baseline paragraph and stamps now record required governed artifact `content_hash`, shell semantic validation, threshold state/expression reconciliation, and the continued non-promotable scaffold boundary. No Core thesis change. |
+| 1.2.24 | April 2026 | Companion sync for **II-0A COMPLETE**: baseline paragraph and stamps now record WS-1 / WS-2 / WS-3 complete, frozen strict-H3 RG-09 reference anchor, `ALL_PASS` task-validity integration, and the preserved XGBoost incumbent comparison-baseline boundary. No Core thesis change. |
+| 1.2.19 | April 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.28**, Implementation Plan **6.4.32**, Resolution Ledger **1.0.40**; current-state framing now reflects the H4 and proper H2 predecessor surfaces plus the strict H3 successor surface as the live promotable RG-09 posture; no Core thesis change. |
 | 1.2.18 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.18.0**, Implementation Plan **6.4.23**, Resolution Ledger **1.0.19**; no Core semantics change. |
 | 1.2.17 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.17.0**, Implementation Plan **6.4.22**, Resolution Ledger **1.0.18**; no Core semantics change. |
 | 1.2.16 | March 2026 | Companion stamp sync: DOCMAP and SOURCE_STAMP aligned to **VERSION.md 4.16.0**, Implementation Plan **6.4.21**, Resolution Ledger **1.0.17**; no Core semantics change. |
@@ -780,7 +901,7 @@ These identifiers must be emitted in `task_manifest.json` and linked from the ni
 
 <!-- MM:BEGIN:SOURCE_STAMP -->
 
-*Source: This document v1.2.24 · April 2026 · Companion to Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Architecture Vision v1.3.5 · Resolution Ledger v1.0.51 · README.md 6.2.2 · VERSION.md 6.2.2*
+*Source: This document v1.2.25 · April 2026 · Companion to Implementation Plan v6.5.10 · Technical Roadmap v1.4.31 · Meta-Learning Architecture Vision v1.3.6 · Resolution Ledger v1.0.52 · README.md 7.2.3 · VERSION.md 7.2.3*
 
 <!-- MM:END:SOURCE_STAMP -->
 

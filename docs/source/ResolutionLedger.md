@@ -1,7 +1,7 @@
 <!--
-  MRL_VERSION: 1.0.51
-  CODEBASE_VERSION: 6.2.2
-  LAST_UPDATED: 2026-04-14
+  MRL_VERSION: 1.0.52
+  CODEBASE_VERSION: 7.2.2
+  LAST_UPDATED: 2026-04-17
   MAINTAINER: Mark / MindForgeLabs
   SOURCE: Populated from MarketMind_ProjectState_v4_4_0.html
   STATUS_COUNTS_AUTO: false
@@ -20,14 +20,12 @@
 **Resolution Ledger**
 
 <!-- MM:BEGIN:TITLEPAGE -->
-Version 1.0.51 · April 2026 · Proprietary
+Version 1.0.52 · April 2026 · Proprietary
 
-Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · Meta-Learning Core v1.2.24 · Meta-Learning Architecture Vision v1.3.5 · README.md 6.2.2 · VERSION.md 6.2.2
+Companion documents: Implementation Plan v6.5.9 · Technical Roadmap v1.4.30 · Meta-Learning Core v1.2.25 · Meta-Learning Architecture Vision v1.3.6 · README.md 7.2.2 · VERSION.md 7.2.2
 <!-- MM:END:TITLEPAGE -->
 
 <!-- MM:BEGIN:DOCBODY -->
-
-# Resolution Ledger
 
 ---
 
@@ -40,16 +38,16 @@ Companion documents: Implementation Plan v6.5.5 · Technical Roadmap v1.4.26 · 
 | OI    | 9    | 1       | 0       | 1        | 42     | 0          | 53    |
 | RG    | 7    | 5       | 0       | 1        | 1      | 0          | 14    |
 | MLC   | 0    | 0       | 0       | 8        | 0      | 0          | 8     |
-| MLN   | 7    | 0       | 0       | 0        | 0      | 0          | 7     |
+| MLN   | 0    | 0       | 0       | 0        | 7      | 0          | 7     |
 | ADR   | 0    | 0       | 0       | 0        | 9      | 0          | 9     |
 | GATE  | 0    | 0       | 0       | 1        | 12     | 0          | 13    |
 | SI    | 0    | 0       | 0       | 0        | 0      | 0          | 0     |
 | AQ    | 4    | 0       | 0       | 0        | 4      | 0          | 8     |
 | SA    | 0    | 0       | 0       | 0        | 0      | 0          | 0     |
 | MOM   | 1    | 0       | 0       | 12       | 11     | 0          | 24    |
-| **∑** | **27** | **6** | **0** | **23**  | **79** | **0**      | **135** |
+| **∑** | **20** | **6** | **0** | **23**  | **86** | **0**      | **135** |
 
-*MLN: 7 entries — Phase II normative locks and threshold-governance items are now opened to match the v2.0 meta-learning contracts and proof burden.*
+*MLN: 7 entries total — **7 CLOSED** / **0 OPEN** as of **4.19.2**; **MLN-01**–**MLN-07** are closed in-repo with canonical modules and governed disposition surfaces (see `docs/MLN-04-05-06-closeout-note.md`, `docs/MLN-03-closure-note.md`, and `docs/rg09/oi59_mln07_threshold_decision_memo.md`).*
 *SA: 0 entries — stat_arb research gaps preserved as RG-01..08 for ID stability; SA prefix used for new stat_arb items going forward.*
 
 ## 1.2 Blocking Hotlist
@@ -59,16 +57,9 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | ID       | Title                                      | Status  | Phase | Gate(s)       | Depends On         |
 |----------|--------------------------------------------|---------|-------|---------------|--------------------|
 | OI-15    | 3-language golden-vector CI harness        | OPEN    | I-E   | —             | OI-13              |
-| MLN-01   | MetaTask and regime-episode contract       | OPEN    | II    | GATE-II-01    | OI-22              |
-| MLN-02   | Regime vocabulary and 5-class projection   | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-03   | confidence_scalar default + routing pilot  | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-04   | Dynamic-K fixed-slot masking contract      | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-05   | Frozen inference boundary                  | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-06   | Phase II artifact contract                 | OPEN    | II    | GATE-II-01    | MLN-01             |
-| MLN-07   | Threshold-resolution governance            | OPEN    | II    | GATE-II-01    | MLN-06             |
 | RG-04    | stat_arb regime-conditional performance    | PARTIAL | II    | —             | AQ-03              |
-| RG-09    | meta-learning — task non-exchangeability pilot | PARTIAL | I-G | GATE-II-01    | AQ-04              |
-| OI-59    | RG-09 corrected-surface segmentation redesign after horizon-overlap feasibility collapse | OPEN | I-G | — | RG-09 |
+
+*Phase I-G closure (ledger v1.0.46): **RG-09** and **OI-59** remain **PARTIAL/OPEN** in the count matrix but use **`blocking: NO`** and **`phase: II-0`** in their YAML entries—they are **not** I-G halt items. I-G phase closure is recorded in **README.md** and **Implementation Plan** companion docs.*
 
 ## 1.3 Phase Gate Readiness
 
@@ -78,7 +69,7 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | GATE-I-D | I-D   | 0                  | 0                  | CLOSED      |
 | GATE-I-E | I-E   | 0                  | 0                  | CLOSED      |
 | GATE-I-F | I-F   | 0                  | 0                  | CLOSED      |
-| GATE-II  | II    | 8+                 | 0                  | DEFERRED    |
+| GATE-II  | II    | 5+                 | 0                  | DEFERRED    |
 
 ## 1.4 Phase I-E Status — End of Thread
 
@@ -87,15 +78,15 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | Gate | Status | Evidence |
 |---|---|---|
 | GATE-I-E-01 | CLOSED | OI-02 disposition table recorded in this ledger; canonical storage ownership verified |
-| GATE-I-E-03 | CLOSED ⚠️ | Momentum coverage confirmed at 97.5% line / 87.8% branch for `srcPy/strategies/momentum/`; full-repo global threshold run was not executed in this thread and remains explicitly unverified |
+| GATE-I-E-03 | CLOSED ⚠️ | Momentum coverage confirmed at 97.5% line / 87.8% branch for `py/strategies/momentum/`; full-repo global threshold run was not executed in this thread and remains explicitly unverified |
 | GATE-I-E-04 | CLOSED | 10/10 D2 replay tests passed; `canonical_frame.py` evidence model updated truthfully to Python-only D2 |
 
 ### Coverage Numbers Confirmed In This Thread
 
 | Scope | Line | Branch | Target | Result |
 |---|---|---|---|---|
-| `srcPy/strategies/momentum/` | 97.5% | 87.8% | 85% / 75% | ✅ Passes |
-| Full repo (`srcPy/`) | Not run | Not run | 90% / 90% | ⚠️ Unverified |
+| `py/strategies/momentum/` | 97.5% | 87.8% | 85% / 75% | ✅ Passes |
+| Full repo (`py/`) | Not run | Not run | 90% / 90% | ⚠️ Unverified |
 
 ### OI / MOM Closures Confirmed In This Thread
 
@@ -127,15 +118,13 @@ Entries where `blocking: YES` AND `status ∈ {OPEN, PARTIAL}`. Sorted by phase.
 | OI-10 | pytest.mark.net mislabel | CLOSED — local-filesystem tests no longer hide behind a misleading net-only classification; closed at v4.9.0 |
 | OI-16 | artifact_registry import migration | Not independently re-verified in this thread; canonical entry remains closed by earlier audit |
 | OI-17 | _FEATURE_OPS retirement | CLOSED — direct governed `_FEATURE_OPS` execution retirement accepted on the canonical path at v4.9.0 |
-| OI-27 | generate_signal() type boundary follow-through | CLOSED — confirmed by scoped strict mypy run on `srcPy/strategies/momentum/` + `srcPy/strategies/pipeline_strategy.py` (20 source files, 0 issues) |
+| OI-27 | generate_signal() type boundary follow-through | CLOSED — confirmed by scoped strict mypy run on `py/strategies/momentum/` + `py/strategies/pipeline_strategy.py` (20 source files, 0 issues) |
 | OI-30 | pytest tempdir Windows issue | Not confirmed in this thread |
 | MOM-020 | CSMOM/TSMOM/dual variant comparison report | CLOSED — child-owned `cpcv_path_scores.json` emitted; parent comparison is hash-validating and non-generative; shared PBO emitted via `comparison_stat_validity.json` |
 
 ## 1.5 Program execution posture — RG-09 H3 successor rescue, sensitivity control, and live promotable posture
 
-**RG-09 remains `PARTIAL` (not `CLOSED`)** where the ledger still tracks promotion-level empirical closure separately from diagnostic harness completion. **`VERSION.md` 6.2.2** records companion alignment after CI confirmation: **WS-1**, **WS-2**, **WS-3**, and **II-0A** are registered **complete** in companion truth; the **strict-H3 RG-09 task-validity reference anchor** is frozen at `run_bundles/rg09_reference_v1` with reproduction and drift workflows. Phase II **challenger-vs-incumbent** language keeps the **XGBoost incumbent** baseline explicit—**not** the reference-anchor bundle.
-
-This section records what the evidence does and does **not** justify after the historical H1 failure, the unsuccessful H4 and proper H2 successor surfaces, and the later executed H3 strict-granularity successor surface that passed. It also supersedes earlier draft closeout language that treated RG-09 as dead for this phase: the current governed posture is that RG-09 is again a **promotable** decision path, but only on the stricter H3 successor surface documented below.
+**RG-09 remains `PARTIAL` (not `CLOSED`).** This section records what the evidence does and does **not** justify after the historical H1 failure, the unsuccessful H4 and proper H2 successor surfaces, and the later executed H3 strict-granularity successor surface that passed. It also supersedes earlier draft closeout language that treated RG-09 as dead for this phase: the current governed posture is that RG-09 is again a **promotable** decision path, but only on the stricter H3 successor surface documented below.
 
 ### What the evidence says
 
@@ -177,6 +166,10 @@ This section records what the evidence does and does **not** justify after the h
   - **Class-distribution highlights:** `crisis rows = 2441`; `high_vol rows = 10462`; `crisis label agreement rate = 0.9454366631647182`
   - **Fold pattern:** fold 0 `overall_pass=true`, `statistical_pass=true`, `structural_pass=true`, `functional_pass=true`; fold 1 `overall_pass=true`, `statistical_pass=true`, `structural_pass=true`, `functional_pass=true`
   - **Governed interpretation:** the H3 strict successor surface passed and currently defines the live promotable RG-09 posture
+- On the **widened H1 cross-sectional expansion** surface and the **bounded one-axis episode-construction recovery** probe, the authoritative emitted facts say the following:
+  - **Precondition-failure baseline:** `runs/rg09_h1_cross_sectional_expansion/` — `gate_executed=false`, `decision=null`, `fail_codes=[FAIL_INSUFFICIENT_EPISODES]`, `admissible_episode_count=0`, dominant boundary exclusion `HORIZON_OVERLAP` on the widened basket (`fixture_sha256:07b28854ab30099bbe548ea77ec677122290c9412b6f451bd88fdb8ed781bfa9`); threshold surfaces unchanged from the pilot config on that attempt.
+  - **One-axis recovery rerun (boundary recovery v2 only; pilot `episode_construction` still `stable_span` per THR-RG09-V18):** `runs/rg09_h1_recovery_one_axis_boundary_v2/` — restored honest gate eligibility: `gate_executed=true`, `admissible_episode_count=143`, but **`decision=NEEDS_MORE_EVIDENCE`** with **`fail_codes=[FAIL_NONREPRODUCIBLE]`** and empirical closure **fail-closed**.
+  - **Governed interpretation:** this rerun is **predecessor / lane-evidence only**. It does **not** replace the **strict H3** live promotable anchor, does **not** authorize further **H1 geometry-recovery** iteration, and does **not** justify casual **RG09-H2 / RG09-H4** successor churn unless a later run can name a **concrete governed decision** it would change. `run_config_resolved.json` carries **`segmentation_provenance`** so pilot episode-construction (THR-RG09-V18) stays distinguished from **boundary_recovery_mode** overlays.
 - On the nearby **H3 negative sensitivity control** with looser crisis labeling, the authoritative emitted facts say the following:
   - **Evaluated control surface:** `crisis_vol_score_percentile = 85.0`
   - **Negative-control gate outcome:** `decision = FAIL_KILL`
@@ -186,6 +179,7 @@ This section records what the evidence does and does **not** justify after the h
   - **Negative-control class-distribution highlights:** `admissible_episode_count = 86`; `crisis rows = 12903`; `high_vol rows = 0`; `crisis label agreement rate = 0.7115810179493484`
   - **Governed interpretation:** the looser threshold broadens crisis enough to absorb high_vol, collapses task separation, and yields exchangeable tasks
 - On the **live corrected multi-instrument basket** (`fixture_sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`), **pre-statistical** feasibility dominates: **zero** admissible episodes under the current task recipe, with **`HORIZON_OVERLAP`** excluding the overwhelming majority of candidate episodes; one-axis geometry loosening on the **existing segmentation** does **not** restore admissibility. So the **current corrected surface + current segmentation + current support/query recipe** is **not** a viable gate input surface until admissibility is recovered (**OI-59** boundary-treatment / contingent redesign lanes) or a **separately governed** task-definition change is authorized.
+- **OI-59 Experiment 5 · Branch B (packing semantics), v4.18.31:** Apples-to-apples constructibility diagnostic on the same corrected basket (`fixtures/rg09/v2/rg09_fixture_v2.parquet`) against **Experiment 2 Variant B** (`runs/oi59_experiment5_branch_b_v2_corrected/`, emitter `py/meta/rg09_oi59_task_definition.py`, schema `rg09.oi59_task_definition.v2`). Both **tail-greedy** and **head-greedy** packing variants stayed **`PARTIAL_RECOVERY`**: admissible count **130** per variant, but **`feasible_task_ratio ≈ 0.01036`**, far below the then-inherited ratio-floor threshold tracked at that time as **`THR-RG09-V20`** (`PROVISIONAL` pre-disposition state). The two variants were **identical on compared metrics**, so **packing direction is not a rescue lever**. **Conclusion:** packing semantics **reshape the candidate pool** but **do not solve corrected-branch sparsity** against the inherited ratio gate. **Branch B is closed** as a falsified rescue family under the current recipe. **Merged Experiment 5 program decision:** **`HOLD_PENDING_THRESHOLD_REVIEW`**—not **`CONTINUE_WITH_NEW_DEFINITION`**, not a project kill. Prior **Branch A**-class evidence already flags threshold governance as **not sufficiently lane-specific**; Branch B adds that packing is at most a **weak** materiality signal. **Next governance fork:** whether **`THR-RG09-V20`** (`feasible_segment_ratio >= 0.10`) is a **governed, corrected-surface-specific** recovery bar under **MLN-07**, or an **inherited** threshold without proper identity/scope—ending only in **(a)** threshold **confirmed** for this lane (then the current corrected recipe is likely **structurally inadequate** against that bar) or **(b)** threshold **not** lane-specific / requires review (then **pause interpretation** until **MLN-07** resolves). The emitted **MLN-06** triple remains **`non_promotable` / constructibility-only**; it is **not** RG-09 statistical re-entry, **not** a gate unlock, and **not** trainer-commitment evidence.
 - **Episode `regime_class` attribution:** diagnostics on boundary-recovery segments showed large mismatch between **first-bar** labels and the per-bar class distribution inside long segments (mixed raw classes under a single hysteresis token). Harness **majority (`mode`) labeling** for episode `regime_class` under **active** boundary-recovery modes (v1/v2/v3; not baseline) is **plumbing** to align the episode label with the segment’s bars; it does **not** change null families, the separability statistic, or pilot thresholds. It **does** remove a spurious collapse of between-class spread driven by mislabeled episode rows when interpreting separability on that lane.
 
 ### What the evidence does **not** say
@@ -201,6 +195,8 @@ This section records what the evidence does and does **not** justify after the h
 - **Conclusion:** RG-09 now does justify continued governed follow-through on the executed strict H3 successor surface. The lane is **reopened / rescued as a promotable path** under that stricter H3 surface, while H1, H4, and proper H2 remain documented as earlier unsuccessful predecessor surfaces.
 - **Strongest supported lesson:** Within the tested H3 neighborhood, crisis-label strictness appears to be the decisive lever; the passing p95 surface preserves crisis/high_vol separation, while the looser p85 surface collapses high_vol into crisis and fails kill.
 - **Bounded program emphasis** remains **Phase II-0B** artifact-and-contract scaffolding (task manifest, meta-validity, execution assumptions, MLN sequence), but RG-09 should now be tracked against the strict H3 successor surface rather than against the earlier failed rescue attempts.
+- **Phase I-G closure (ledger posture, v1.0.46):** Phase **I-G** is **closed** for protocol-and-empirical-foundation purposes: governed RG-09 protocols and the II-0A bounded harness are published; the **strict H3** successor surface is the documented **live promotable** empirical anchor (§1.5). **RG-09** (PARTIAL) and **OI-59** (OPEN) remain on the books for **II-0** follow-on and corrected-surface work but are **`blocking: NO`**—they do **not** appear in §1.2 and do **not** keep Phase I-G open in README / Implementation Plan truth.
+- **RG-09 hypothesis-run freeze (H1 family):** no further **H1-family** empirical reruns are justified for program closure; the widened H1 recovery probe already delivered the honest signal (gate re-entry with **non-reproducible** governed outcome). **Successor hypotheses (H2/H4):** run only when the decision delta is explicit—default program center of gravity returns to **II-0B / Phase II-0 validation surfaces**, not additional RG-09 lane rescue.
 - **Exploratory follow-up discipline:** H3 is no longer merely exploratory in this posture because the strict H3 successor surface passed. Any later neighboring H3 variants beyond the documented strict surface still require the same artifact-bound discipline, and the p85 control already provides one nearby negative sensitivity anchor.
 
 ---
@@ -267,7 +263,7 @@ adr_status:       ACCEPTED
 decision_date:    "2026-02-xx"
 options_considered: [Option-A-single-canonical, Option-B-dual-system]
 decision:         >
-  srcPy/artifact_registry/ designated canonical (content-addressable, BLAKE3,
+  py/artifact_registry/ designated canonical (content-addressable, BLAKE3,
   atomic writes, integrity verify). backtesting/storage/ scoped or retired.
   bundle_manifest.json is the run-bundle reconstructibility contract.
 consequences:
@@ -285,7 +281,7 @@ summary: >
   name/version) undermined provenance joinability, anti-Goodhart gates, crisis
   replay, and snapshot/rollback governance. Single canonical system designated.
 acceptance_criteria:
-  - srcPy/artifact_registry/ designated canonical with BLAKE3 CAS
+  - py/artifact_registry/ designated canonical with BLAKE3 CAS
   - bundle_manifest.json schema v1 frozen
   - domain-qualified hash ID format frozen
 evidence_needed:
@@ -345,9 +341,9 @@ adr_status:       ACCEPTED
 decision_date:    "2026-03-09"
 options_considered: [three-layer-canonical, single-orchestrator, dual-path]
 decision:         >
-  Three-layer structure: srcPy/bridge/java_entry.py (Java-facing adapter),
-  srcPy/pipeline/orchestrator.py (canonical bundle-producing engine),
-  srcPy/backtesting/orchestration/suite_runner.py (suite coordinator).
+  Three-layer structure: py/bridge/java_entry.py (Java-facing adapter),
+  py/pipeline/orchestrator.py (canonical bundle-producing engine),
+  py/backtesting/orchestration/suite_runner.py (suite coordinator).
   run_pipeline.py is now a compatibility shim.
 consequences:
   - "Phase I-D integration tests written against pipeline/orchestrator.py"
@@ -390,14 +386,14 @@ adr_status:       ACCEPTED
 decision_date:    "2026-03-10"
 options_considered: [purpose-bound-canonical, bare-hex, unified-hash]
 decision:         >
-  Canonical hashing package under srcPy/ops/hashing/. HashPurpose→algorithm
+  Canonical hashing package under py/ops/hashing/. HashPurpose→algorithm
   bindings are load-time constants. HashRef 8-field envelope mandatory in all
   persistent contexts; bare hex banned. Composite preimage locked as
   SystemInvariant.DOMAIN_SEPARATED_PREIMAGE. D-tier taxonomy: D3=Bitwise,
   D2=Semantic, D1=Topological, D0=None/Debug.
 consequences:
   - "All primitives capped at D2 until 3-language golden-vector CI harness wired (OI-15)"
-  - "srcPy/ops/artifact_registry.py import sites must migrate to srcPy/artifact_registry/ (OI-16)"
+  - "py/ops/artifact_registry.py import sites must migrate to py/artifact_registry/ (OI-16)"
   - "Pre-ADR-007 D0-Bitwise labelling superseded"
   - "OI-13, OI-14, OI-15, OI-16 opened"
 opened_on:        "v3.8.0"
@@ -415,7 +411,7 @@ acceptance_criteria:
   - HashRef 8-field envelope enforced in all persistent hash contexts
   - HashPurpose→algorithm bindings are load-time constants
   - D-tier taxonomy (D0..D3) adopted repo-wide in gate language
-  - 9 primitive stubs scaffold generated under srcPy/ops/hashing/
+  - 9 primitive stubs scaffold generated under py/ops/hashing/
 evidence_needed:
   - adr-decision
   - code
@@ -731,7 +727,7 @@ phase_links:      []
 gate_section:     "I-E exit"
 pass_condition: >
   All backtesting/storage/ call sites and tests have been migrated to
-  srcPy/artifact_registry/ or explicitly marked retired-with-rationale.
+  py/artifact_registry/ or explicitly marked retired-with-rationale.
   No new artifact writes going to old path.
 fail_mode:        HALT
 opened_on:        "v4.4.0"
@@ -754,7 +750,7 @@ evidence_needed:
 impact: >
   Dual artifact path violates ADR-002. Provenance joinability and crisis replay
   are compromised while old path remains live.
-resolution: "Closed at v4.5.4. Implementation ownership now lives in srcPy/artifact_registry/, with backtesting/storage/bundle_writer.py and artifact_store.py retired-with-rationale shims, artifacts.py and sanitization.py retired compatibility shims, registry_store.py a documented retired placeholder, and test imports migrated to the canonical path."
+resolution: "Closed at v4.5.4. Implementation ownership now lives in py/artifact_registry/, with backtesting/storage/bundle_writer.py and artifact_store.py retired-with-rationale shims, artifacts.py and sanitization.py retired compatibility shims, registry_store.py a documented retired placeholder, and test imports migrated to the canonical path."
 ```
 
 ### GATE-I-E-02 · DataLineageGate implemented and wired
@@ -791,7 +787,7 @@ evidence_needed:
 impact: >
   Without DataLineageGate, PIT boundary enforcement is incomplete at the
   dataset-provenance level — leaks can occur downstream of the gate.
-resolution: "Closed at v4.5.1. DataLineageGate is implemented on the canonical governed path in srcPy/cli/gate.py, validates dataset_manifest lineage fields, fail-closes on missing PIT lineage, and records warning-only stale-download evidence."
+resolution: "Closed at v4.5.1. DataLineageGate is implemented on the canonical governed path in py/cli/gate.py, validates dataset_manifest lineage fields, fail-closes on missing PIT lineage, and records warning-only stale-download evidence."
 ```
 
 ### GATE-I-E-03 · momentum package Phase I slice delivered
@@ -822,7 +818,7 @@ summary: >
   Coverage target: 85% line / 75% branch. MOM-020 (CSMOM vs TSMOM comparison)
   must be complete before Phase II entry.
 acceptance_criteria:
-  - srcPy/strategies/momentum/ ships with momentum, momentum_tsmom, momentum_dual variants
+  - py/strategies/momentum/ ships with momentum, momentum_tsmom, momentum_dual variants
   - AlphaIR output present; task_embedding zero-stub (np.zeros(64, float32))
   - all OI-MOM items with Blocking Phase I-E resolved
   - coverage ≥85% line / ≥75% branch
@@ -897,7 +893,7 @@ blocks:           []
 related:          [ADR-002]
 summary: >
   ADR-002 consequence. All backtesting/storage/ call sites and tests must be
-  migrated to srcPy/artifact_registry/ or marked retired-with-rationale.
+  migrated to py/artifact_registry/ or marked retired-with-rationale.
   Primary I-E deliverable.
 acceptance_criteria:
   - all call sites in backtesting/storage/ audited and catalogued
@@ -911,18 +907,18 @@ evidence_needed:
 impact: >
   Dual artifact path violates ADR-002 provenance contract. Blocks GATE-I-E-01
   and Phase I-E exit.
-resolution: "Closed at v4.5.4. Real BundleWriter and BundleBacktestArtifactStore ownership moved into srcPy/artifact_registry/, all remaining backtesting/storage files are now retired compatibility shims or placeholders with explicit rationale, and the legacy test import surface was migrated to the canonical artifact-registry helpers."
+resolution: "Closed at v4.5.4. Real BundleWriter and BundleBacktestArtifactStore ownership moved into py/artifact_registry/, all remaining backtesting/storage files are now retired compatibility shims or placeholders with explicit rationale, and the legacy test import surface was migrated to the canonical artifact-registry helpers."
 ```
 
 Storage disposition recorded for the `OI-02` closeout:
 
 | Legacy path | Disposition | Canonical owner / note |
 |---|---|---|
-| `srcPy/backtesting/storage/bundle_writer.py` | `RETIRED-WITH-RATIONALE` shim | Delegates to `srcPy/artifact_registry/bundle_writer.py` |
-| `srcPy/backtesting/storage/artifact_store.py` | `RETIRED-WITH-RATIONALE` shim | Delegates to `srcPy/artifact_registry/artifact_store.py` |
-| `srcPy/backtesting/storage/artifacts.py` | Compatibility shim | Canonical helpers live in `srcPy/artifact_registry/artifacts.py` |
-| `srcPy/backtesting/storage/sanitization.py` | Compatibility shim | Canonical helpers live in `srcPy/artifact_registry/sanitization.py` |
-| `srcPy/backtesting/storage/registry_store.py` | Retired placeholder | No live implementation remains in the legacy namespace |
+| `py/backtesting/storage/bundle_writer.py` | `RETIRED-WITH-RATIONALE` shim | Delegates to `py/artifact_registry/bundle_writer.py` |
+| `py/backtesting/storage/artifact_store.py` | `RETIRED-WITH-RATIONALE` shim | Delegates to `py/artifact_registry/artifact_store.py` |
+| `py/backtesting/storage/artifacts.py` | Compatibility shim | Canonical helpers live in `py/artifact_registry/artifacts.py` |
+| `py/backtesting/storage/sanitization.py` | Compatibility shim | Canonical helpers live in `py/artifact_registry/sanitization.py` |
+| `py/backtesting/storage/registry_store.py` | Retired placeholder | No live implementation remains in the legacy namespace |
 
 ### OI-03 · DataLineageGate
 
@@ -979,7 +975,7 @@ blocks:           [MOM-020]
 related:          [OI-07, OI-27, OI-28]
 summary: >
   Core slice now lives on the ADR-009 package spine at
-  srcPy/strategies/momentum/. MomentumStrategy, AlphaIR, explicit registry
+  py/strategies/momentum/. MomentumStrategy, AlphaIR, explicit registry
   wiring, PIT guard enforcement, variant-specific feature planning,
   momentum-specific entry/artifact serialization, and trade-intent unwrapping
   via AlphaIR.signal have landed. Momentum graph ops (XSecRank, VolScale,
@@ -990,7 +986,7 @@ summary: >
   generate_signal() type-boundary follow-through is separately closed under
   OI-27 for the I-F wiring audit.
 acceptance_criteria:
-  - srcPy/strategies/momentum/ ships with momentum, momentum_tsmom, momentum_dual variants
+  - py/strategies/momentum/ ships with momentum, momentum_tsmom, momentum_dual variants
   - AlphaIR output present; task_embedding zero-stub (np.zeros(64, float32))
   - all OI-MOM items with Blocking Phase I-E resolved
   - coverage >=85% line / >=75% branch
@@ -1024,7 +1020,7 @@ depends_on:       []
 blocks:           []
 related:          [OI-24]
 summary: >
-  srcPy/pipeline/stages/market_data/sources/* in omit list. Revisit once
+  py/pipeline/stages/market_data/sources/* in omit list. Revisit once
   file.py is wired into main test suite. Omit rules should reflect actual
   coverage intent, not historical accidents.
 acceptance_criteria:
@@ -1100,7 +1096,7 @@ depends_on:       [ADR-007]
 blocks:           [OI-14, OI-15]
 related:          [ADR-007]
 summary: >
-  srcPy/ops/hashing/* — 9 NotImplementedError stubs across canonical.py,
+  py/ops/hashing/* — 9 NotImplementedError stubs across canonical.py,
   cas.py, preimage.py, equality.py and supporting modules per ADR-007
   invariants. All primitives remain capped at D2 until implemented and until
   OI-15 (3-language harness) is wired. ops_custom.py branch gap (76%) is
@@ -1211,11 +1207,11 @@ depends_on:       []
 blocks:           []
 related:          [ADR-007]
 summary: >
-  srcPy/ops/artifact_registry.py import sites must migrate to
-  srcPy/artifact_registry/. Structural cleanup only — no behavioral or
+  py/ops/artifact_registry.py import sites must migrate to
+  py/artifact_registry/. Structural cleanup only — no behavioral or
   contract change. Required for canonical path verification (F-2).
 acceptance_criteria:
-  - all import sites migrated from srcPy/ops/artifact_registry to srcPy/artifact_registry/
+  - all import sites migrated from py/ops/artifact_registry to py/artifact_registry/
   - no remaining imports from old path
   - all existing tests still pass
 evidence_needed:
@@ -1223,7 +1219,7 @@ evidence_needed:
 impact: >
   Stale import paths create ambiguity in canonical path verification (OI-20/F-2).
   Low risk individually; must be clean before Phase I-F wiring audit.
-resolution: "Closed at v4.5.4 by audit. No srcPy.ops.artifact_registry import sites remain; canonical ownership is now exclusively srcPy.artifact_registry/."
+resolution: "Closed at v4.5.4 by audit. No py.ops.artifact_registry import sites remain; canonical ownership is now exclusively py.artifact_registry/."
 ```
 
 ### OI-17 · _FEATURE_OPS direct execution retirement
@@ -1340,7 +1336,7 @@ evidence_needed:
   - code
   - tests
 impact: ~
-resolution: "Delivered v4.5.0. SignalCatalog in srcPy/registry/ with slot_index contract frozen."
+resolution: "Delivered v4.5.0. SignalCatalog in py/registry/ with slot_index contract frozen."
 ```
 
 ### OI-26 · screening_report.json — first-class bundle artifact
@@ -1423,8 +1419,8 @@ resolution: >
   Resolved by replacing the generate_signal() return type accommodation with a
   read-only SignalEnvelope protocol property in pipeline_strategy.py. The
   MomentumStrategy override now types cleanly. Confirmed in this thread:
-  mypy --strict on srcPy/strategies/momentum/ plus
-  srcPy/strategies/pipeline_strategy.py (20 source files, 0 issues, v4.5.4).
+  mypy --strict on py/strategies/momentum/ plus
+  py/strategies/pipeline_strategy.py (20 source files, 0 issues, v4.5.4).
 ```
 
 ### OI-28 · momentum flat file → package spine migration (on ADR-009 acceptance)
@@ -1446,14 +1442,14 @@ blocks:           []
 related:          [ADR-009, OI-08]
 summary: >
   The originally delivered flat file has now been migrated to the ADR-009
-  package spine. srcPy/strategies/momentum.py is replaced by
-  srcPy/strategies/momentum/ with strategy.py, alpha_ir.py, exceptions.py,
+  package spine. py/strategies/momentum.py is replaced by
+  py/strategies/momentum/ with strategy.py, alpha_ir.py, exceptions.py,
   plans/, entry.py, artifacts/, validation/, and control/ stub wiring.
   Import paths, tests, registry seams, and coverage configuration were updated
   alongside the migration.
 acceptance_criteria:
   - ADR-009 accepted (prerequisite)
-  - srcPy/strategies/momentum.py replaced by srcPy/strategies/momentum/ package
+  - py/strategies/momentum.py replaced by py/strategies/momentum/ package
   - all modules placed per ADR-009 §D2 topology table
   - test directory structure matches ADR-009 Consequences test path spec
   - pyproject.toml omit updated from flat-file momentum.py handling to package-path handling
@@ -1591,7 +1587,7 @@ impact: >
   Removes ambiguity between base-class StrategySignal and momentum AlphaIR
   returns; unblocks follow-on I-F work that depends on a stable contract.
 resolution: >
-  Closed: srcPy/strategies/pipeline_strategy.py defines
+  Closed: py/strategies/pipeline_strategy.py defines
   StrategySignal = Union[..., "AlphaIR"]; MomentumStrategy.generate_signal
   returns AlphaIR without override suppression; scoped mypy --strict passes.
   Production governed crash-trigger **source adapter** (enable_crash_override)
@@ -1654,7 +1650,7 @@ blocks:           []
 related:          [MOM-010, OI-08]
 summary: >
   Phase I-E locks the governed stat_validity_report.json contract at schema
-  v1 so it matches srcPy.cli.gate and the canonical validator/report path.
+  v1 so it matches py.cli.gate and the canonical validator/report path.
   The originally proposed v2 additions (cpcv, fdr, regime_ic blocks) are
   deferred into a separate follow-on item rather than silently drifting the
   live contract.
@@ -1691,9 +1687,9 @@ depends_on:       [OI-08]
 blocks:           []
 related:          [AQ-07]
 summary: >
-  AlphaIR Phase I home is srcPy/strategies/momentum/alpha_ir.py per ADR-009 §D2
+  AlphaIR Phase I home is py/strategies/momentum/alpha_ir.py per ADR-009 §D2
   (updated from original momentum.py flat-file location). Migration target at Phase II
-  remains srcPy/backtesting/contracts/. ADR (AQ-07) must cover: version bump, new
+  remains py/backtesting/contracts/. ADR (AQ-07) must cover: version bump, new
   frozen-contract entry, bundle-manifest schema update, and cross-language
   Java/C++ awareness. Silent migration creates provenance gaps in downstream
   task library joining. [LOCATION UPDATED by ADR-009 §D2]
@@ -1859,7 +1855,7 @@ depends_on:       []
 blocks:           [OI-08]
 related:          []
 summary: >
-  Confirm whether momentum uses srcPy/preprocessor/splits.py (PurgedKFold;
+  Confirm whether momentum uses py/preprocessor/splits.py (PurgedKFold;
   100% coverage) or requires a new PurgedCombinatorialSplitter for
   CPCV(6,2) path generation.
 acceptance_criteria:
@@ -1900,7 +1896,7 @@ evidence_needed:
   - code
   - tests
 impact: Momentum validation report is incomplete without v2 gate blocks.
-resolution: "Closed at v4.5.4 by explicit scope lock. The governed momentum path now emits schema_version v1 to match srcPy.cli.gate and the canonical statistical validator/report path, and the deferred v2 extension work is opened separately as OI-32."
+resolution: "Closed at v4.5.4 by explicit scope lock. The governed momentum path now emits schema_version v1 to match py.cli.gate and the canonical statistical validator/report path, and the deferred v2 extension work is opened separately as OI-32."
 ```
 
 ```yaml
@@ -1952,12 +1948,12 @@ blocks:           [OI-08]
 related:          [ADR-009]
 summary: >
   Placement resolved by ADR-009 §D2 (ACCEPTED 2026-03-19): ConvergenceError
-  lives in srcPy/strategies/momentum/exceptions.py (momentum-local). The
+  lives in py/strategies/momentum/exceptions.py (momentum-local). The
   exception class, subclass relationship, and distinct catch ordering in
   momentum entry wiring are now implemented and covered by focused tests.
   Broader governed-path closeout remains tied to OI-08.
 acceptance_criteria:
-  - ConvergenceError defined in srcPy/strategies/momentum/exceptions.py
+  - ConvergenceError defined in py/strategies/momentum/exceptions.py
   - ConvergenceError is a MaterializationError subclass
   - orchestrator handles ConvergenceError distinctly from generic MaterializationError
   - unit test in test_exceptions.py covers ConvergenceError message contract
@@ -1986,12 +1982,12 @@ blocks:           [OI-08]
 related:          [ADR-009]
 summary: >
   Placement resolved by ADR-009 §D2 (ACCEPTED 2026-03-19): CostGateRejection
-  lives in srcPy/strategies/momentum/exceptions.py. ADR-009 block lifted;
+  lives in py/strategies/momentum/exceptions.py. ADR-009 block lifted;
   implementation now unblocked. Exit code mapping to Appendix D.1 remains
   open — confirm whether REJECTED maps to exit code 1 (FAIL) with reason code
   or requires a new exit code.
 acceptance_criteria:
-  - CostGateRejection defined in srcPy/strategies/momentum/exceptions.py
+  - CostGateRejection defined in py/strategies/momentum/exceptions.py
   - exit code mapping for REJECTED documented against Appendix D.1
   - if new exit code required, Appendix D.1 updated
   - gate CLI handles REJECTED code correctly
@@ -1999,7 +1995,7 @@ evidence_needed:
   - doc-update
   - code
 impact: Gate CLI exits with incorrect or ambiguous code without exit code mapping.
-resolution: "Closed at v4.5.4. Governed momentum cost-gate rejections now emit gate_result.json through the canonical srcPy.cli.gate surface with reason_code COST_GATE_REJECTED, and the canonical CLI remains in the Appendix D.1 generic fail bucket (exit code 1) rather than inventing a new numeric code."
+resolution: "Closed at v4.5.4. Governed momentum cost-gate rejections now emit gate_result.json through the canonical py.cli.gate surface with reason_code COST_GATE_REJECTED, and the canonical CLI remains in the Appendix D.1 generic fail bucket (exit code 1) rather than inventing a new numeric code."
 ```
 
 ```yaml
@@ -2161,8 +2157,8 @@ acceptance_criteria:
   - OI-16 (import site migration) closed
   - no integration path bypasses PIT boundary
   - scoped strict typing passes for the I-F deliverables:
-    srcPy/strategies/momentum/, srcPy/strategies/pipeline_strategy.py,
-    srcPy/artifact_registry/, and srcPy/cli/gate.py
+    py/strategies/momentum/, py/strategies/pipeline_strategy.py,
+    py/artifact_registry/, and py/cli/gate.py
   - OI-27 closed for the PipelineStrategy.generate_signal() base return contract
   - OI-20 closed
 evidence_needed:
@@ -2267,7 +2263,7 @@ evidence_needed:
 impact: Phase II ML components cannot be implemented without locked interface contracts.
 resolution: >
   Closed at v4.11.0. OI-22 published the Phase II stub contract package under
-  srcPy/meta_learning/ and the companion document at
+  py/meta_learning/ and the companion document at
   docs/contracts/phase_ii_interface_contracts.md. OI-41 published the
   governing Signal Reliability Layer prose/schema surface via
   docs/src/signal_reliability_schema_v0_1_1.md and
@@ -2322,7 +2318,7 @@ resolution: >
 
 ### F-6 worklog (coverage / CI truthfulness)
 
-**2026-03-22 — `--no-cov` and subset runs (for OI-24 / GATE-I-F-06):** Default `pytest` **addopts** in `pyproject.toml` enable `--cov=srcPy` and `--cov-fail-under=90`. Running a **narrow** subset (e.g. single file) still applies those coverage gates, so the run can **fail on coverage** even when all executed tests pass. This matches the **Phase I-C retrospective** addopts friction: **config/environment effect**, not a code defect. **Convention:** use `pytest --no-cov` (or `-p no:cov`) when validating a subset locally unless measuring full-suite coverage. Documented in **AGENTS.md §6.4**; F-6 should either adopt this as the canonical agent convention or record an explicit rationale in CI/docs config.
+**2026-03-22 — `--no-cov` and subset runs (for OI-24 / GATE-I-F-06):** Default `pytest` **addopts** in `pyproject.toml` enable `--cov=py` and `--cov-fail-under=90`. Running a **narrow** subset (e.g. single file) still applies those coverage gates, so the run can **fail on coverage** even when all executed tests pass. This matches the **Phase I-C retrospective** addopts friction: **config/environment effect**, not a code defect. **Convention:** use `pytest --no-cov` (or `-p no:cov`) when validating a subset locally unless measuring full-suite coverage. Documented in **AGENTS.md §6.4**; F-6 should either adopt this as the canonical agent convention or record an explicit rationale in CI/docs config.
 
 ### GATE-I-F-06 · F-6 Coverage / CI truthfulness audit
 
@@ -2359,8 +2355,8 @@ evidence_needed:
 impact: Silently excluded strategy code undermines the 90% threshold guarantee.
 resolution: >
   Closed at v4.12.2. The F-6 audit removed dead omit entries
-  (`srcPy/trading.py`, `srcPy/simulation.py`, `srcPy/utils/backtester_bt.py`),
-  returned the live `srcPy.pipeline.stages.market_data.exceptions` seam to
+  (`py/trading.py`, `py/simulation.py`, `py/utils/backtester_bt.py`),
+  returned the live `py.pipeline.stages.market_data.exceptions` seam to
   coverage scope, removed residual `pytest.mark.net` labels from local-only
   tests, aligned AGENTS.md to the canonical `fail_under = 90` line /
   `80%` branch thresholds, and changed CI from misleading unused env vars to
@@ -2431,9 +2427,9 @@ summary: >
   graph-resolved ops receive PIT-safe DataView-backed inputs. Confirm feature
   code cannot bypass PIT boundary. Confirm gate-relevant artifacts emit
   through canonical bundle-producing path. For typing, I-F only requires the
-  canonical path to be clean end-to-end: srcPy/strategies/momentum/,
-  srcPy/strategies/pipeline_strategy.py, srcPy/artifact_registry/, and
-  srcPy/cli/gate.py. Broader pre-existing strategy-subtree strict-mypy debt is
+  canonical path to be clean end-to-end: py/strategies/momentum/,
+  py/strategies/pipeline_strategy.py, py/artifact_registry/, and
+  py/cli/gate.py. Broader pre-existing strategy-subtree strict-mypy debt is
   tracked separately and must not silently inflate the I-F acceptance bar.
 acceptance_criteria:
   - at least one trusted integration test exercises canonical path end-to-end
@@ -2441,7 +2437,7 @@ acceptance_criteria:
   - import sites migrated (OI-16 closed)
   - gate-relevant artifact emission verified via canonical bundle path
   - strict mypy passes on:
-    mypy srcPy/strategies/momentum/ srcPy/strategies/pipeline_strategy.py srcPy/artifact_registry/ srcPy/cli/gate.py --strict
+    mypy py/strategies/momentum/ py/strategies/pipeline_strategy.py py/artifact_registry/ py/cli/gate.py --strict
   - OI-27 closed for the PipelineStrategy.generate_signal() type boundary
 evidence_needed:
   - code
@@ -2529,11 +2525,11 @@ evidence_needed:
 impact: Phase II ML components cannot be implemented without these contracts.
 resolution: >
   Closed at v4.11.0. Published the five stub files:
-  srcPy/meta_learning/__init__.py,
-  srcPy/meta_learning/contracts/__init__.py,
-  srcPy/meta_learning/contracts/meta_task.py,
-  srcPy/meta_learning/contracts/task_registry.py, and
-  srcPy/meta_learning/contracts/encoder_contracts.py. Companion contract
+  py/meta_learning/__init__.py,
+  py/meta_learning/contracts/__init__.py,
+  py/meta_learning/contracts/meta_task.py,
+  py/meta_learning/contracts/task_registry.py, and
+  py/meta_learning/contracts/encoder_contracts.py. Companion contract
   documentation published at docs/contracts/phase_ii_interface_contracts.md.
   The F-2 strict mypy surface was re-run for closure review; the pandas
   import-untyped failures are pre-existing OI-33 debt confirmed via local mypy
@@ -2679,12 +2675,12 @@ depends_on:       []
 blocks:           []
 related:          [OI-33, GATE-I-F-02]
 summary: >
-  The root package bootstrap in srcPy/__init__.py assigns builtins.OPS and
+  The root package bootstrap in py/__init__.py assigns builtins.OPS and
   builtins.spec_draw directly, which triggers strict mypy attr-defined errors
   on the governed F-2 surface. This is outside the F-4 deliverable set and is
   tracked separately as non-blocking I-F debt.
 acceptance_criteria:
-  - strict mypy no longer reports attr-defined at srcPy/__init__.py lines 37 and 46
+  - strict mypy no longer reports attr-defined at py/__init__.py lines 37 and 46
   - any fix is documented as root-package bootstrap debt, not F-4 contract work
 evidence_needed:
   - code
@@ -2950,7 +2946,7 @@ impact: >
   Resolves the null-distribution correctness defect entirely and restores the
   RG-09 H1 statistical lane as a valid governed decision surface.
 resolution: >
-  Closed at v4.18.13. `_statistic_for_family` in srcPy/meta/rg09_harness.py now
+  Closed at v4.18.13. `_statistic_for_family` in py/meta/rg09_harness.py now
   dispatches the regime separability statistic uniformly across
   shuffled_regime, shuffled_label, and matched_exchangeable_window. The gate
   spec was updated to record the uniform statistical lane, and the existing
@@ -3002,7 +2998,7 @@ impact: >
   is structurally positive but statistically underpowered.
 resolution: >
   Closed at v4.18.14. Added a directional-underpowered NEEDS_MORE_EVIDENCE
-  branch to srcPy/meta/rg09_harness.py using existing fold-level null-family
+  branch to py/meta/rg09_harness.py using existing fold-level null-family
   summaries (`real_statistic > null_mean` across all folds / families) plus
   positive functional directionality. Updated docs/rg09/rg09_gate_spec.md to
   reserve FAIL_KILL for confirmed collapse and to expand NEEDS_MORE_EVIDENCE for
@@ -3177,7 +3173,7 @@ related:          [RG-09, OI-52, OI-56]
 summary: >
   The current gap is governed-specification scope, not a harness bug. The gate
   spec describes matched_exchangeable_window as a volatility/duration-matched
-  exchangeable-window null, but the implemented generator in srcPy/meta/rg09_nulls.py
+  exchangeable-window null, but the implemented generator in py/meta/rg09_nulls.py
   performs a simpler episode-level support/query reassignment. This mismatch must
   be resolved before successor interpretation treats the three-family statistical
   surface as equally motivated across all three null families.
@@ -3231,7 +3227,7 @@ impact: >
 resolution: >
   Closed at v4.18.23. Added governed config field `null_draw_count` to
   docs/rg09/rg09_pilot_config_v1.json and the power_a variant, and updated
-  srcPy/meta/rg09_harness.py so `_evaluate_fold` reads draw count from config
+  py/meta/rg09_harness.py so `_evaluate_fold` reads draw count from config
   rather than deriving it from episode count. docs/rg09/rg09_gate_spec.md now
   states that each family/fold comparison uses configured `null_draw_count`
   draws, and docs/src/ThresholdGovernanceRegister.md transitions
@@ -3246,16 +3242,16 @@ id:               OI-59
 type:             OI
 title:            RG-09 corrected-surface episode segmentation redesign after horizon-overlap feasibility collapse
 status:           OPEN
-blocking:         YES
+blocking:         NO
 gates:            []
-phase:            I-G
-phase_links:      []
+phase:            II-0
+phase_links:      [II-0]
 opened_on:        "v4.18.24"
 resolved_on:      ~
 owner:            unassigned
-depends_on:       [RG-09]
+depends_on:       []
 blocks:           []
-related:          [RG-09, OI-54, OI-57, OI-58]
+related:          [RG-09, OI-54, OI-57, OI-58, MLN-07]
 summary: >
   The corrected RG-09 v2 surface is now honest on fold construction but remains
   non-constructible on the current task recipe. The corrected-surface
@@ -3264,6 +3260,9 @@ summary: >
   `HORIZON_OVERLAP` remains dominant under tested support/query relaxations on
   the current segmentation. Open a governed successor lane for segmentation
   redesign only after the existing recipe has been shown structurally non-viable.
+  **Ledger posture (v1.0.46):** tracked under **Phase II-0**; **not** an I-G
+  blocking item (`blocking: NO`). Corrected-surface lane remains
+  constructibility-only and separate from the strict-H3 promotable anchor.
 acceptance_criteria:
   - corrected-surface feasibility evidence for fixture `sha256:421b8a...` is recorded and tied to the live surface, not the stale stacked artifact
   - one-axis geometry sensitivity on the existing segmentation is recorded before any segmentation redesign candidate is evaluated
@@ -3280,7 +3279,62 @@ impact: >
   Restores a governed path to executable RG-09 successor work after the
   corrected-surface diagnostics showed that the current task recipe, not fold
   geometry, is the active execution blocker.
-resolution: ~
+resolution: >
+  Open as of v4.18.29. The executed Experiment 2 merge-only redesign on the
+  corrected surface achieved PARTIAL_RECOVERY but remained INSUFFICIENT for
+  renewed RG-09 evaluation. Emitted artifacts restored admissible episodes from
+  zero to `35` on `A_exact_identity_merge` and `54` on
+  `B_regime_class_compatible_merge`, with `HORIZON_OVERLAP` reduced by
+  `93.66%` and `94.31%` respectively, but the best
+  `feasible_segment_ratio = 0.025777` stayed below the then-inherited `0.10` recovery
+  threshold. Merge-only redesign is therefore evidenced as insufficient on its
+  own. Variant B is the governed partial-recovery baseline for follow-on work,
+  hysteresis variants add no gain over that baseline, and the next lane remains
+  boundary-treatment redesign with the current task recipe and artifact triple
+  (`task_manifest.json`, `meta_validity_report.json`,
+  `execution_assumptions.json`) preserved. The corrected branch is not treated
+  as statistically re-entered.
+  v4.18.31 records **Experiment 5 Branch B** (governed packing-semantics
+  task-definition diagnostic only; **no** RG-09 statistics). On the v2
+  corrected surface (`fixture_sha256:421b8a39057c840aa4e7c5fbd6d35603e137920c0039fcff2c595fcad9f84636`),
+  apples-to-apples against **Experiment 2 Variant B**, both **B1** (tail-greedy)
+  and **B2** (head-greedy) non-overlapping packings remained
+  **`PARTIAL_RECOVERY`**: admissible count **130** per variant, but
+  **`feasible_task_ratio ≈ 0.01036`**, far below the then-inherited **`0.10`** bar.
+  **B1 and B2 were identical on all compared metrics**, so **packing direction
+  is not a material lever**. **Branch B is closed as a falsified rescue
+  family** under the current recipe: packing semantics **reshape the candidate
+  pool** but **do not solve corrected-branch sparsity** relative to the
+  governed feasible-segment ratio requirement.
+  **Merged Experiment 5 program decision (historical):** **`HOLD_PENDING_THRESHOLD_REVIEW`**.
+  This is **not** **`CONTINUE_WITH_NEW_DEFINITION`** and **not** a project kill.
+  Branch A–class evidence already documents that threshold governance is not
+  sufficiently lane-specific; Branch B adds that packing semantics yields at
+  most a **weak** constructibility signal versus baseline and does **not**
+  recover the corrected branch under inherited classification rules.
+  **MLN-07 threshold-scope disposition (recorded):** inherited
+  **`feasible_segment_ratio >= 0.10`** is superseded for corrected-lane scope.
+  `THR-RG09-V20` is retained as deprecated lineage and
+  **`THR-RG09-V21`** is the active corrected-lane threshold with
+  **`feasible_segment_ratio >= 0.025`**.
+  **OI-59 remains OPEN but narrowed**: threshold scope is resolved, while this
+  lane remains constructibility-only and non-promotable, with no RG-09
+  statistical re-entry, gate/trainer unlock, or OI-59 closure by threshold
+  change alone.
+  Representative emission: `runs/oi59_experiment5_branch_b_v2_corrected/`
+  (`oi59_task_definition_report.json`, `oi59_task_definition_diagnostic.md`,
+  plus MLN-06 triple). The triple stays **`non_promotable`** /
+  **constructibility-only**; it must **not** be read as RG-09 statistical
+  re-entry, gate unlock, or trainer-commitment evidence.
+  MLN-07 review packet for this lane:
+  `docs/rg09/oi59_mln07_threshold_review_packet.md`.
+  MLN-07 decision memo for disposition workflow:
+  `docs/rg09/oi59_mln07_threshold_decision_memo.md`.
+  Discoverability: active threshold **`THR-RG09-V21`** and superseded lineage
+  **`THR-RG09-V20`** in `docs/src/ThresholdGovernanceRegister.md` §10 and
+  `py/meta/threshold_register.mln07.v1.json`; current disposition memo as above.
+  **No further packing-semantics iterations are authorized** under the current
+  recipe without a new governed lane decision.
 ```
 
 ```yaml
@@ -3459,7 +3513,7 @@ depends_on:       []
 blocks:           []
 related:          [OI-20, OI-24, OI-27]
 summary: >
-  The historical strict-mypy backlog in srcPy/strategies/ extends well beyond
+  The historical strict-mypy backlog in py/strategies/ extends well beyond
   the canonical path required for Phase I-F. Current examples include
   migrated_strategies.py and adaptive_strategy_engine.py. This debt is real and
   should be tracked, but it must not silently raise the F-2 wiring-verification
@@ -3484,9 +3538,9 @@ id:               RG-09
 type:             RG
 title:            meta-learning — task non-exchangeability pilot
 status:           PARTIAL
-blocking:         YES
+blocking:         NO
 gates:            [GATE-II-01]
-phase:            I-G
+phase:            II-0
 phase_links:      [II-0, II]
 opened_on:        "v4.4.0"
 resolved_on:      ~
@@ -3510,6 +3564,49 @@ summary: >
   v4.13.0. MLC-0 full service contract compatibility beyond this subset is
   explicitly deferred to Phase II-0A integration (no blocking ambiguity on the
   published pilot subset).
+  **Ledger posture (v1.0.46):** Phase **I-G** is **closed** for
+  protocol-and-harness foundation purposes; the **strict H3** successor surface
+  (§1.5) is the live promotable empirical anchor. This item stays **PARTIAL** for
+  program accounting and **GATE-II-01** remains the trainer-path prerequisite,
+  but **RG-09 is not an I-G-blocking workstream** (`blocking: NO`, **phase
+  II-0**); remaining pilot follow-on is **II-0** scoped.
+  **II-0A WS-2 diagnostic posture (v1.0.49):** the general-purpose
+  task-validity diagnostic harness is now implemented at
+  `pysrc/validation/task_validity.py` with schema
+  `schemas/task_validity_report.schema.json` and synthetic controls at
+  `tests/fixtures/bundles/valid_synthetic/` and
+  `tests/fixtures/bundles/injected_leakage/`. This records WS-2 readiness only:
+  it does **not** run the diagnostic against the frozen RG-09 reference bundle,
+  does **not** record a real RG-09 diagnostic result, and does **not** close this
+  PARTIAL item. WS-3 still owns the join-point verification and any formal
+  registration against WS-1 artifacts.
+  **RG-09 Reference Anchor Frozen (v1.0.50):** the strict-H3 successor surface is
+  now frozen as `run_bundles/rg09_reference_v1/` with manifest
+  `run_bundles/rg09_reference_v1/rg09_reference_manifest.json`, surface_role
+  `rg09_task_validity_anchor`, source `strict-H3`, and artifact hash
+  `sha256:caac0778c33c580e90e992bc612c9a1447241f5009fb0603f7ced79bd7618f5d`
+  over the reference payload excluding the manifest and downstream
+  `task_validity_report.json`. The WS-2 diagnostic version `1.0.0` was run
+  against the frozen bundle and emitted
+  `run_bundles/rg09_reference_v1/task_validity_report.json` with
+  `all_pass=true`; TV-01, TV-02, and TV-03 all passed. Control posture:
+  positive control `valid_synthetic` PASS; negative control `injected_leakage`
+  PASS by detecting the injected `tomorrow_return` leakage. Reproduction wiring
+  is present at `scripts/reproduce_rg09_reference.py` and
+  `.github/workflows/rg09_reference_drift.yml`; local clean reproduction passed
+  and local perturbation of `vol_window` failed with a hash/diff report. This is
+  the RG-09 task-validity anchor for II-0 harness reproducibility and is **NOT**
+  the Phase II allocator incumbent comparison baseline (XGBoost). Challenger-vs-
+  incumbent predicates in II-0B must reference the XGBoost incumbent, not this
+  RG-09 reference anchor.
+  **II-0A completion signal (v1.0.51):** WS-1, WS-2, and WS-3 are now all
+  complete. The RG-09 reference drift CI has been externally confirmed green,
+  so the II-0A join point is supportable as `II-0A COMPLETE`: RG-09 reference
+  hash available, diagnostic integration `ALL_PASS`, ledger updated, and
+  downstream II-0B / II-0C sequencing may proceed under the baseline-identity
+  guardrail above. II-0C-01 full dry-run work remains dependent on II-0B schemas
+  and predicates; this completion does not authorize conflating the RG-09 anchor
+  with the XGBoost incumbent comparison baseline.
 acceptance_criteria:
   - regime episode boundary conditions defined and documented
   - BOCPD regime service placement resolved (AQ-04 CLOSED) and cold-start
@@ -3643,6 +3740,26 @@ resolution: >
   and the H2 brief is revised so execution is gated first by corrected-surface
   admissibility recovery while breadth expansion stays frozen. OI-57 remains a
   pre-interpretation caveat rather than a pre-execution blocker.
+  v4.18.29 then records the executed OI-59 Experiment 2 merge-only redesign on
+  the live corrected surface as a bounded constructibility result rather than as
+  renewed RG-09 statistical evidence. The emitted redesign artifacts classify
+  the overall result as PARTIAL_RECOVERY and the Phase II-0 result as
+  INSUFFICIENT: admissible episodes recover from the Experiment 1 structural
+  failure baseline of zero to `35` on `A_exact_identity_merge` and `54` on
+  `B_regime_class_compatible_merge`, while `HORIZON_OVERLAP` falls by `93.66%`
+  and `94.31%` respectively. However, no merge-only variant clears the governed
+  recovery bar because the best feasible segment ratio remains `0.025777`,
+  below the locked `0.10` threshold required for
+  `RECOVERED_FOR_NEXT_STAGE`. Variant B strictly dominates Variant A on
+  admissible count, feasible-segment ratio, and residual `HORIZON_OVERLAP`,
+  while the hysteresis variants (`C T8/T16/T32`) add no further gain over
+  Variant B. The corrected branch is therefore improved but still not a valid
+  RG-09 gate-input surface, should not be treated as statistically re-entered,
+  and continues on the boundary-treatment redesign lane with Variant B as the
+  follow-on baseline. The locked Experiment 2 recovery rule remains unchanged:
+  `admissible >= 30`, `feasible_segment_ratio >= 0.10`, at least a `50%`
+  reduction in `HORIZON_OVERLAP`, and no PIT/fold/contamination violations are
+  all required for `RECOVERED_FOR_NEXT_STAGE`.
   Prior OI-47 segmented-single-source v2 attempts remain superseded for
   cross-sectional evidence by OI-50/OI-51.
   This finding does not block Phase II-0B artifact-and-contract scaffolding or
@@ -3703,7 +3820,31 @@ resolution: >
   from v4.18.26-v4.18.27 that treated RG-09 as dead for this phase is
   superseded by the executed H3 successor evidence. The attached evidence does
   not fully isolate whether window=120 and epsilon=0.01 are individually
-  necessary.
+  necessary. v1.0.49 then records the II-0A WS-2 task-validity diagnostic
+  harness as completed for synthetic positive/negative controls only:
+  `validate_task()` emits schema-valid `task_validity_report` payloads with
+  TV-01 permutation p-value evidence, TV-02 feature lookahead leakage evidence,
+  and TV-03 split-manifest purge/embargo evidence. The negative control
+  intentionally injects `tomorrow_return` lookahead leakage and fails TV-02.
+  This is a harness-readiness artifact for WS-3 consumption, not an RG-09
+  reference-bundle result and not a Resolution Ledger closeout. v1.0.50 then
+  freezes and registers the strict-H3 RG-09 reference anchor at
+  `run_bundles/rg09_reference_v1/` with artifact hash
+  `sha256:caac0778c33c580e90e992bc612c9a1447241f5009fb0603f7ced79bd7618f5d`,
+  manifest role `rg09_task_validity_anchor`, diagnostic version `1.0.0`, and
+  integration result `ALL_PASS` in
+  `run_bundles/rg09_reference_v1/task_validity_report.json`. The ledger
+  preserves the identity boundary: this anchor is for task-validity and harness
+  reproducibility only, not the XGBoost incumbent comparison baseline for II-0B
+  challenger predicates. v1.0.51 records the companion sync after external CI
+  confirmation: WS-1 COMPLETE, WS-2 COMPLETE, WS-3 COMPLETE, and II-0A COMPLETE
+  are now supportable. Downstream II-0B may consume the RG-09 reference hash
+  while keeping challenger-vs-incumbent predicates pointed at the XGBoost
+  incumbent comparison baseline. v1.0.52 records II-0B artifact-contract
+  hardening from VERSION.md 7.0.0: governed triples require content_hash,
+  shell validation re-checks artifact-level semantics, threshold references are
+  reconciled against canonical register state/expression, and the lane remains
+  non-promotable scaffolding rather than allocator readiness.
 ```
 
 ```yaml
@@ -4162,13 +4303,13 @@ resolution: ~
 id:               MLN-01
 type:             MLN
 title:            MetaTask contract — regime episode is the primary task unit
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      [I-F]
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.28"
 owner:            unassigned
 depends_on:       [OI-22]
 blocks:           [MLC-0, MLC-3, MLC-6]
@@ -4190,7 +4331,12 @@ evidence_needed:
 impact: >
   Phase II cannot begin honestly if different documents and components disagree
   on what a task is.
-resolution: ~
+resolution: >
+  Implemented and closure-noted in `docs/MLN-01-closure-note.md`: frozen canonical
+  MetaTask semantics with single governed builder (`build_meta_task`), deterministic
+  task_id including signal_ids_hash, explicit empty-key HMAC key-version contract,
+  PIT and split geometry checks, append-only in-memory TaskRegistry duplicate
+  rejection, and bridge lowering through canonical task semantics.
 ```
 
 ### MLN-02 · Regime vocabulary and 5-class projection
@@ -4199,13 +4345,13 @@ resolution: ~
 id:               MLN-02
 type:             MLN
 title:            Regime vocabulary — regime_id primary, 5-class projection secondary
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      []
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.28"
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-0, MLC-1, MLC-2, MLC-6]
@@ -4236,19 +4382,12 @@ impact: >
   severity gate; task-pool sufficiency and holdout manifest versioning apply
   per MLN-02-AMD-01 contract consequence register.
 resolution: >
-  Crisis redefined at Level 2 as severity-gated subset of high_vol:
-  crisis := vol_hi AND severity_flag, where severity_flag derives from
-  PIT-safe expanding vol_score_raw percentile at p90 (assumption RG09-V12;
-  ⚑ VALIDATE). bocpd_cp removed from the Level 2 crisis projection rule.
-  bocpd_cp remains a Level 1 regime_id dimension and is unchanged.
-  Architecture Vision §4.2 amended: crisis row updated, BOCPD-primitive
-  statement added. Backward compatibility preserved: Level 1 regime_id
-  unchanged, 5-class vocabulary unchanged, MetaTask schema unchanged.
-  Contract consequences documented in MLN-02-AMD-01. Anti-Goodhart manifest
-  re-evaluation required before GATE-II-01. Validation deferred to Phase II-0A;
-  BOCPD-gated rule is the reference condition for pilot comparison.
-  Evidence: DIAG-001, DIAG-002.
-  MLN-01 (MetaTask contract) must be CLOSED before this entry is CLOSED.
+  Implemented and closure-noted in `docs/MLN-02-closure-note.md`: canonical
+  `regime_vocabulary.py` is the single source for 5-class vocabulary and
+  validation, default crisis projection is severity-gated (`vol_hi AND
+  severity_flag`), BOCPD-gated projection remains reference-only, and projection
+  rule version metadata is wired into RG-09 outputs and diagnostics. MetaTask
+  construction/replay validates regime_class and task-facing regime_id tokens.
 ```
 
 ### MLN-03 · Confidence routing contract
@@ -4257,13 +4396,13 @@ resolution: >
 id:               MLN-03
 type:             MLN
 title:            confidence_scalar — post-sizing attenuation default; routing pilot governed
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      [II-0]
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.28"
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-4, MLC-6, MLC-7]
@@ -4285,7 +4424,13 @@ evidence_needed:
 impact: >
   Without this lock, different implementations can silently assign different
   semantics to confidence and invalidate comparisons.
-resolution: ~
+resolution: >
+  Implemented and closure-noted in `docs/MLN-03-closure-note.md`: canonical
+  confidence contract enforces scalar-in-[0,1], attenuation-only default,
+  non-leveraging exposure invariant, and explicit non-default routing gate.
+  Governed emission now carries a machine-checked confidence_calibration block
+  with fail-closed validation and explicit INSUFFICIENT fallback for paths where
+  calibration measurement is unavailable.
 ```
 
 ### MLN-04 · Dynamic-K fixed-slot masking contract
@@ -4294,13 +4439,13 @@ resolution: ~
 id:               MLN-04
 type:             MLN
 title:            Dynamic-K contract — MAX_SIGNALS=64 fixed-slot masking
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      []
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.30"
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-0, MLC-4, MLC-6]
@@ -4320,7 +4465,10 @@ evidence_needed:
 impact: >
   Dynamic-K replay compatibility and artifact comparability depend on this
   contract being explicit before implementation begins.
-resolution: ~
+resolution: >
+  Closed in-repo: `py/meta_learning/dynamic_k_contract.py` enforces MAX_SIGNALS=64,
+  MetaTask slot binding, and SignalCatalog slot caps; governed `meta_validity_report.json`
+  carries a validated `signal_surface` block. See `docs/MLN-04-05-06-closeout-note.md`.
 ```
 
 ### MLN-05 · Frozen inference boundary
@@ -4329,13 +4477,13 @@ resolution: ~
 id:               MLN-05
 type:             MLN
 title:            Frozen inference boundary — theta_day_prime live, no gradients intraday
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      []
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.30"
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-3, MLC-4, MLC-7]
@@ -4353,7 +4501,11 @@ evidence_needed:
 impact: >
   This boundary determines latency, determinism, and operational safety
   assumptions across the whole Phase II program.
-resolution: ~
+resolution: >
+  Closed in-repo: `py/meta_learning/inference_boundary.py` plus optional
+  `inference_boundary` audit block on governed `meta_validity_report.json`
+  (`previous_live_theta_day_prime_ref` fail-closed on failed/skipped training).
+  See `docs/MLN-04-05-06-closeout-note.md`.
 ```
 
 ### MLN-06 · Phase II artifact contract
@@ -4362,13 +4514,13 @@ resolution: ~
 id:               MLN-06
 type:             MLN
 title:            Phase II artifact contract — meta_validity_report and task_manifest required
-status:           OPEN
+status:           CLOSED
 blocking:         YES
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      []
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.18.30"
 owner:            unassigned
 depends_on:       [MLN-01]
 blocks:           [MLC-6, MLC-7]
@@ -4389,7 +4541,12 @@ evidence_needed:
 impact: >
   Promotion and rollback claims are not auditable without the Phase II artifact
   contract being explicit before implementation.
-resolution: ~
+resolution: >
+  Closed for the governed **emission and validation** slice: `emit_phase2_artifacts` in
+  `py/meta/phase2_artifact_contract.py` emits the governed triple with cross-document
+  validation; MLN-03/04/05 bindings merge on `meta_validity_report.json`. Full promotable
+  program closure depends on **GATE-II-01**; **MLN-07** is closed at v4.19.1. See
+  `docs/MLN-04-05-06-closeout-note.md` and `docs/src/PhaseIIArtifactContract.md`.
 ```
 
 ### MLN-07 · Threshold-resolution governance
@@ -4398,13 +4555,13 @@ resolution: ~
 id:               MLN-07
 type:             MLN
 title:            Threshold governance — unresolved values remain VALIDATE, not silent policy
-status:           OPEN
-blocking:         YES
+status:           CLOSED
+blocking:         NO
 gates:            [GATE-II-01]
 phase:            II
 phase_links:      [I-F]
 opened_on:        "v4.5.3"
-resolved_on:      ~
+resolved_on:      "v4.19.1"
 owner:            unassigned
 depends_on:       [MLN-06]
 blocks:           [MLC-3, MLC-5, MLC-6]
@@ -4425,7 +4582,16 @@ evidence_needed:
 impact: >
   Without this lock, the program can drift from evidence-gated research into
   undocumented policy-by-assumption.
-resolution: ~
+resolution: >
+  Closed at v4.19.1 with recorded threshold-scope disposition for the OI-59
+  corrected lane. Register identity/state discipline is now explicitly
+  propagated through supersession linkage (`THR-RG09-V20` -> `THR-RG09-V21`) and
+  updated governance artifacts. This closure records threshold-scope resolution
+  only; it does not convert corrected-lane constructibility artifacts into
+  promotable RG-09 statistical evidence and does not by itself close OI-59.
+  Discoverability (OI-59 lane): `docs/rg09/oi59_mln07_threshold_decision_memo.md`
+  and `docs/rg09/oi59_mln07_threshold_review_packet.md` with active threshold
+  `THR-RG09-V21` and superseded lineage `THR-RG09-V20`.
 ```
 
 ## Phase II ML Component Backlog (MLC-0 through MLC-7)
@@ -5789,7 +5955,7 @@ depends_on:       [OI-08]
 blocks:           [MOM-001]
 related:          [MOM-001, MLC-0]
 summary: >
-  AlphaIR lives in momentum.py in Phase I; migrates to srcPy/backtesting/contracts/
+  AlphaIR lives in momentum.py in Phase I; migrates to py/backtesting/contracts/
   at Phase II. ADR (MOM-001) must cover: version bump, new frozen-contract entry,
   bundle-manifest schema update, cross-language Java/C++ awareness. Silent move
   creates provenance gaps in downstream task library joining.
@@ -5861,7 +6027,7 @@ phase_links:      [I-F]
 adr_status:       ACCEPTED
 decision_date:    "2026-03-19"
 options_considered:
-  - D1-A-srcPy-canonical
+  - D1-A-py-canonical
   - D1-B-migrate-to-marketmind
   - D2-A-flat-file-momentum.py
   - D2-B-package-spine-Phase-I
@@ -5870,10 +6036,10 @@ options_considered:
   - D4-A-no-entry-py
   - D4-B-entry-py-Phase-I
 decision: >
-  D1: srcPy/ is canonical import root. marketmind/ is the Poetry project name
+  D1: py/ is canonical import root. marketmind/ is the Poetry project name
   only — not an importable package path. No migration required. Stat_arb v5 spec
   annotated with reconciliation note.
-  D2: Package spine in Phase I. srcPy/strategies/momentum/ replaces flat
+  D2: Package spine in Phase I. py/strategies/momentum/ replaces flat
   momentum.py. plans/ subtree for variant FeaturePlan builders. entry.py,
   artifacts/, validation/, control/ (Phase III stub) introduced.
   D3: Momentum Ops (XSecRank, VolScale, ResidualOLS, ResidualKF, IndustryScore)
@@ -5882,8 +6048,8 @@ decision: >
   wrapper. Owns Steps 3-8 of execution chain. OrchestratorHooks=None enables
   unit testing without full platform context.
 consequences:
-  - "All path references use srcPy/ — marketmind/ never used as directory path"
-  - "srcPy/strategies/momentum.py replaced by srcPy/strategies/momentum/ package"
+  - "All path references use py/ — marketmind/ never used as directory path"
+  - "py/strategies/momentum.py replaced by py/strategies/momentum/ package"
   - "MomentumStrategy in strategy.py; AlphaIR in alpha_ir.py; exceptions in exceptions.py"
   - "plans/ subtree: xsec.py, tsmom.py, dual.py, residual.py; industry/ensemble/ml are stubs"
   - "artifacts/ subtree: signal_card.py, stat_validity.py"
@@ -5906,7 +6072,7 @@ related:          [ADR-001, ADR-002, ADR-007, MOM-001, MOM-013, MOM-014, MOM-015
 summary: >
   Resolves four structural questions required before Momentum Spec v1.3 can be
   written and before a coding agent can begin implementation. D1 canonicalizes
-  srcPy/ as the importable root (not marketmind/). D2 establishes the momentum
+  py/ as the importable root (not marketmind/). D2 establishes the momentum
   package spine in Phase I with plans/ variant builders, artifacts/, validation/,
   and a Phase III control/ stub. D3 places momentum Ops in the platform
   preprocessor (ops_custom.py) consistent with stat_arb. D4 introduces entry.py
@@ -5916,7 +6082,7 @@ summary: >
 acceptance_criteria:
   - stat_arb v5 spec §3.1 carries reconciliation note per §D1
   - Momentum Spec v1.3 drafted incorporating R1–R7 from ADR-009 Readiness Gate
-  - srcPy/strategies/momentum/ package structure matches §D2 topology
+  - py/strategies/momentum/ package structure matches §D2 topology
   - entry.py responsibility boundary table reflected in v1.3 §2.6
   - test directory structure per §Consequences committed
   - MOM-015 implementation complete (OrchestratorHooks Protocol in pipeline_strategy.py)
@@ -5930,7 +6096,7 @@ impact: >
   Structural decisions made implicitly during implementation will require
   costly migration if not locked in advance.
 resolution: >
-  Accepted 2026-03-19. All four decisions confirmed by Mark: D1 (srcPy/ canonical
+  Accepted 2026-03-19. All four decisions confirmed by Mark: D1 (py/ canonical
   import root, no migration), D2 (momentum/ package spine in Phase I), D3 (momentum
   ops in ops_custom.py per stat_arb precedent), D4 (entry.py in Phase I as thin
   orchestration wrapper). Momentum Spec v1.3 is now unblocked.

@@ -1,8 +1,8 @@
 # MarketMind Documentation
 
-Read the Docs for `marketmind-docs` is the publication layer for canonical documentation exported from the private `MarketMind` repository. The published surface is centered on the April 2026 companion suite: the external overview, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, governance registers, Phase II contract/playbook docs, and supporting protocol appendices.
+Read the Docs for `marketmind-docs` is the publication layer for canonical documentation **mirrored** from the `MarketMind` repository. Companion Markdown under `docs/source/` is copied from `MarketMind/docs/src/`; the release ledger at the repo root is `VERSION.md` (same file as MarketMind for the aligned release). The published surface follows the current companion suite (README, white paper, implementation plan, roadmap, meta-learning specifications, resolution ledger, governance registers, Phase II contract/playbook, protocols, specifications, and appendices).
 
-Older secondary pages remain published but are intentionally out of scope for this sync. Governance/legal documents, contributor guidance, and the API reference remain available alongside the refreshed companion suite.
+Older secondary pages (governance/legal stubs, contributor guides, tutorials) remain published alongside the mirrored suite; they are **not** sourced from `MarketMind/docs/src/` unless noted otherwise.
 
 ## Published Sections
 
@@ -33,6 +33,10 @@ Older secondary pages remain published but are intentionally out of scope for th
 - [Signal Generation Protocol](signal_generation_protocol.md)
 - [Task Validity Pilot Report](task_validity_pilot_report.md)
 - [Paper Trade Simulation Spec](paper_trade_sim_spec.md)
+- [Formatting Spec](FormattingSpec.md)
+- [Signal universe expansion policy](signal_universe_expansion_policy.md)
+- [Signal reliability schema (v0.1.1)](signal_reliability_schema_v0_1_1.md)
+- [Alt-data admissibility](alt_data_admissibility.md)
 
 ### Governance and Legal
 
@@ -94,6 +98,10 @@ RiskFn Protocol <risk_protocol.md>
 Signal Generation Protocol <signal_generation_protocol.md>
 Task Validity Pilot Report <task_validity_pilot_report.md>
 Paper Trade Simulation Spec <paper_trade_sim_spec.md>
+Formatting Spec <FormattingSpec.md>
+Signal universe expansion policy <signal_universe_expansion_policy.md>
+Signal reliability schema (v0.1.1) <signal_reliability_schema_v0_1_1.md>
+Alt-data admissibility <alt_data_admissibility.md>
 ```
 
 ```{toctree}
