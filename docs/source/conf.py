@@ -22,12 +22,19 @@ copyright = "2025-2026, Mark Wuenschel"
 
 
 def extract_release(version_text: str) -> str:
-    match = re.search(
-        r"^##\s*Version\s*([0-9]+\.[0-9]+\.[0-9]+)",
-        version_text,
+    """Latest ``## Version M.m.p`` heading in VERSION.md (ledger is newest-first)."""
+    pattern = re.compile(
+        r"^##\s*Version\s+([0-9]+\.[0-9]+\.[0-9]+)",
         re.MULTILINE,
     )
-    return match.group(1) if match else "0.0.0"
+    matches = pattern.findall(version_text)
+    if not matches:
+        return "0.0.0"
+
+    def _semver_key(v: str) -> tuple[int, int, int]:
+        return tuple(int(p) for p in v.split(".", 2))
+
+    return max(matches, key=_semver_key)
 
 
 VERSION_PATH = ROOT_DIR / "VERSION.md"
